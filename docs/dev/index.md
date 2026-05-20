@@ -1,9 +1,9 @@
 ---
-apiBaseUrl: https://status.awmc.team
-statBaseUrl: https://stat.awmc.team
-awmcApiBaseUrl: https://api.awmc.team
-assetsApiBaseUrl: https://assets.awmc.team
-chartPreviewBaseUrl: https://v.awmc.team
+apiBaseUrl: https://status.awmc.cc
+statBaseUrl: https://stat.awmc.cc
+awmcApiBaseUrl: https://api.awmc.cc
+assetsApiBaseUrl: https://assets.awmc.cc
+chartPreviewBaseUrl: https://v.awmc.cc
 ---
 
 # 💻 开发者中心

@@ -14,7 +14,7 @@ export default defineConfig({
       { 
         async: '', 
         defer: '', 
-        src: 'https://s.awmc.team/script.js', 
+        src: 'https://s.awmc.cc/script.js', 
         'data-website-id': '0f856a4e-ed22-4f01-9071-74c373477974' 
       }
     ],
@@ -29,7 +29,7 @@ export default defineConfig({
   ],
 
   sitemap: {
-    hostname: 'https://wiki.awmc.team' // 开启 Sitemap 自动生成功能
+    hostname: 'https://wiki.awmc.cc' // 开启 Sitemap 自动生成功能
   },
 
   locales: {
@@ -148,7 +148,7 @@ export default defineConfig({
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
-      { icon: 'maildotru', link: 'mailto:awmc@awmc.team' }
+      { icon: 'maildotru', link: 'mailto:awmc@awmc.cc' }
     ],
     footer: {
       message: 'Released under the MIT License.',

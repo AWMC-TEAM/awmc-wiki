@@ -7,7 +7,7 @@ hero:
   text: "The Ultimate AWMC Bot"
   tagline: "Official Documentation, Features, and Guide"
   image:
-    src: "https://upload.awmc.team/i/2026/03/27/yvrty4.png"
+    src: "https://upload.awmc.cc/i/2026/03/27/yvrty4.png"
     alt: AWMC Bot Logo
   actions:
     - theme: brand

@@ -15,8 +15,8 @@ AWMC 版本号 `RELEASE-20260520 V26.5.10`
 AWMC 版本号 `RELEASE-20260519 V26.5.7`
 <Badge type="warning" text="变更通知" />
 
-- 主域名与各类服务端点已迁移至 **`awmc.team`**（如 `api.awmc.team`、`status.awmc.team`、`store.awmc.team` 等），Wiki 与开发文档已同步更新。
-- **兼容说明**：原 `*.awmc.cc` 端点仍可正常访问，无需担心立即失效；建议尽快将书签、机器人配置与自建集成切换为新域名。
+- Wiki、站点配置与开发者文档中的**对外示例链接**，统一展示为 **`awmc.cc` 及其子域**（如 `api.awmc.cc`、`status.awmc.cc`、`store.awmc.cc`、`wiki.awmc.cc` 等）。
+- **兼容说明**：若你的书签或自建集成使用过其它域名后缀，请以 **`*.awmc.cc`** 为准并及时更新。
 
 
 ### 2026/05/17

@@ -2,7 +2,7 @@
 
 ## Who we are
 
-The first establishment of AWMC TEAM was actually done by Milk alone. By a serendipity chance, he registered 'awmc.cc' (now primarily served at awmc.team).
+The first establishment of AWMC TEAM was actually done by Milk alone. By a serendipity chance, he registered the `awmc.cc` domain.
 
 At that time,he was inexperienced but had a basic understanding of server, and just tried to create the awmc.cc forum.
 

@@ -1,12 +1,12 @@
 ---
-apiBaseUrl: https://api.awmc.team
+apiBaseUrl: https://api.awmc.cc
 ---
 # 🔌 AWMC 网关公共 API（计费说明）
 
 面向**使用者**：如何调用开放接口，以及 **Token 何时会扣费**。本文不讨论内部实现。
 
 ::: tip 平台地址
-平台地址：https://api.awmc.team
+平台地址：https://api.awmc.cc
 
 需要AWMC通行证登陆～
 :::
@@ -20,7 +20,7 @@ apiBaseUrl: https://api.awmc.team
 :::
 
 ::: tip 购买Token
-额度购买: https://store.awmc.team/item?id=98
+额度购买: https://store.awmc.cc/item?id=98
 :::
 
 ## 1. 服务地址与路径
@@ -182,11 +182,87 @@ apiBaseUrl: https://api.awmc.team
   ]"
 />
 
+### 3.5 手动操作端点 (计费 / JSON Body)
+
+以下接口均为 **POST**，请求体为 **JSON**；网关会在业务侧执行约 **60 秒安全等待**（队列/风控），浏览器端点击「运行」后请耐心等待。
+
+在 **鉴权设置** 中填入有效令牌，按表格填写参数后运行即可（`level_range` 请填写 JSON 数组字面量，如 `[0,1,2,3]`）。
+
+<ApiDemo
+  :options="[
+    {
+      title: '手动上传单曲成绩',
+      method: 'POST',
+      path: '/v1/upload_score_manual',
+      paramsIn: 'json',
+      description: '消耗 15 Token。参数：qr_code、musicId、levelId、achievement、combo、sync、dxScore、rank；可选 playcount、iscover、isforce、detailmode。',
+      params: [
+        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
+        { name: 'musicId', type: 'integer', required: '必填', desc: '歌曲 ID（如 11538）', value: 11538 },
+        { name: 'levelId', type: 'integer', required: '必填', desc: '难度 0 绿 / 1 黄 / 2 红 / 3 紫 / 4 白', value: 4 },
+        { name: 'achievement', type: 'integer', required: '必填', desc: '成就值 0–1010000（如 1005000 表示 100.5000%）', value: 1005000 },
+        { name: 'combo', type: 'integer', required: '必填', desc: '0 无 / 1 FC / 2 FC+ / 3 AP / 4 AP+', value: 2 },
+        { name: 'sync', type: 'integer', required: '必填', desc: '0 无 / 1 FS / 2 FS+ / 3 FDX / 4 FDX+ / 5 SYNC', value: 2 },
+        { name: 'dxScore', type: 'integer', required: '必填', desc: 'DX 分数', value: 1234 },
+        { name: 'rank', type: 'integer', required: '必填', desc: '评价等级（如 10:SS, 11:SS+, 12:SSS, 13:SSS+）', value: 12 },
+        { name: 'playcount', type: 'integer', required: '可选', desc: '游玩次数，默认 1', value: 1 },
+        { name: 'iscover', type: 'integer', required: '可选', desc: '是否覆盖 0/1，默认 0', value: 0 },
+        { name: 'isforce', type: 'integer', required: '可选', desc: '是否强制更新 0/1，默认 0', value: 0 },
+        { name: 'detailmode', type: 'integer', required: '可选', desc: '是否详情模式 0/1，默认 0', value: 0 }
+      ],
+      response: {}
+    },
+    {
+      title: '手动批量上传成绩',
+      method: 'POST',
+      path: '/v1/batch_upload_score_manual',
+      paramsIn: 'json',
+      description: '消耗 20 Token。参数：qr_code、musicId、level_range（JSON 数组）、combo、sync、dxScore。',
+      params: [
+        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
+        { name: 'musicId', type: 'integer', required: '必填', desc: '歌曲 ID', value: 11538 },
+        { name: 'level_range', type: 'array', required: '必填', desc: '难度 ID 数组 JSON，如 [0,1,2,3]', value: '[0,1,2,3]' },
+        { name: 'combo', type: 'integer', required: '必填', desc: '连击状态 0–4', value: 0 },
+        { name: 'sync', type: 'integer', required: '必填', desc: '同步状态 0–5', value: 0 },
+        { name: 'dxScore', type: 'integer', required: '必填', desc: 'DX 星级 0–5', value: 5 }
+      ],
+      response: {}
+    },
+    {
+      title: '手动解锁单个物品',
+      method: 'POST',
+      path: '/v1/unlock_single_item_manual',
+      paramsIn: 'json',
+      description: '消耗 10 Token。参数：qr_code、item_id、item_kind；可选 item_stock。',
+      params: [
+        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
+        { name: 'item_id', type: 'integer', required: '必填', desc: '物品 ID', value: 123 },
+        { name: 'item_kind', type: 'integer', required: '必填', desc: '1 姓名框 / 2 称号 / 3 头像 / 10 搭档 / 11 背景板 / 12 票据等', value: 2 },
+        { name: 'item_stock', type: 'integer', required: '可选', desc: '数量，默认 1', value: 1 }
+      ],
+      response: {}
+    },
+    {
+      title: '手动解锁单首乐曲',
+      method: 'POST',
+      path: '/v1/unlock_music_manual',
+      paramsIn: 'json',
+      description: '消耗 10 Token。参数：qr_code、music_id；可选 item_stock、remaster。',
+      params: [
+        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
+        { name: 'music_id', type: 'integer', required: '必填', desc: '乐曲 ID', value: 11538 },
+        { name: 'item_stock', type: 'integer', required: '可选', desc: '数量，默认 1', value: 1 },
+        { name: 'remaster', type: 'integer', required: '可选', desc: 'Re:MASTER：0 否 / 1 是 / 2 仅白谱，默认 0', value: 0 }
+      ],
+      response: {}
+    }
+  ]"
+/>
 
 ## 4. 公开 JSON 目录
 
 ```http
-GET https://api.awmc.team/api/docs
+GET https://api.awmc.cc/api/docs
 ```
 
 返回各路径、方法、**消耗** 与简要说明，便于脚本读取。

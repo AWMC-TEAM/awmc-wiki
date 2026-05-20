@@ -4,7 +4,7 @@ import { ref, onMounted, computed } from 'vue'
 const props = defineProps({
   baseUrl: {
     type: String,
-    default: 'https://stat.awmc.team'
+    default: 'https://stat.awmc.cc'
   }
 })
 

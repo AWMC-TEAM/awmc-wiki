@@ -17,6 +17,16 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
+  /**
+   * 请求参数位置：
+   * - query: 所有参数（除 path params）拼到 query（默认，兼容旧用法）
+   * - json:  参数（除 path params）作为 JSON body 发送（适合 POST/PUT/PATCH/DELETE）
+   * - auto: GET/HEAD -> query，其它方法 -> json
+   */
+  paramsIn: {
+    type: String,
+    default: 'query'
+  },
   response: {
     type: Object,
     default: null
@@ -46,7 +56,7 @@ const currentApi = computed(() => {
     base = props.options[activeOptionIndex.value]
   }
 
-  const finalBaseUrl = props.baseUrl || base.baseUrl || frontmatter.value.apiBaseUrl || 'https://status.awmc.team'
+  const finalBaseUrl = props.baseUrl || base.baseUrl || frontmatter.value.apiBaseUrl || 'https://status.awmc.cc'
 
   return {
     title: props.title || base.title || '未命名接口',
@@ -58,6 +68,7 @@ const currentApi = computed(() => {
     baseUrl: finalBaseUrl,
     description: props.description || base.description || '',
     params: props.params.length > 0 ? props.params : (base.params || []),
+    paramsIn: base.paramsIn || props.paramsIn || 'query',
     response: props.response || base.response || {},
     isImage: props.isImage || base.isImage || false
   }
@@ -84,7 +95,7 @@ import { watchEffect } from 'vue'
 watchEffect(() => {
   const vals = {}
   currentApi.value.params.forEach(p => {
-    vals[p.name] = p.value || ''
+    vals[p.name] = p.value !== undefined && p.value !== null ? p.value : ''
   })
   paramValues.value = vals
 })
@@ -96,9 +107,19 @@ const copyUrl = () => {
   setTimeout(() => copySuccess.value = false, 2000)
 }
 
+const resolveParamsIn = () => {
+  const method = String(currentApi.value.method || 'GET').toUpperCase()
+  const mode = String(currentApi.value.paramsIn || 'query').toLowerCase()
+  if (mode === 'auto') {
+    return method === 'GET' || method === 'HEAD' ? 'query' : 'json'
+  }
+  return mode === 'json' ? 'json' : 'query'
+}
+
 const getFullUrl = () => {
   let url = currentApi.value.baseUrl + currentApi.value.path
   const query = new URLSearchParams()
+  const paramsIn = resolveParamsIn()
   
     // 简单的路径参数替换 (例如 /api/:id)
     Object.keys(paramValues.value).forEach(key => {
@@ -106,12 +127,39 @@ const getFullUrl = () => {
       if (url.includes(`:${key}`)) {
         url = url.replace(`:${key}`, paramValues.value[key])
       } else {
-        query.append(key, paramValues.value[key])
+        if (paramsIn === 'query') query.append(key, paramValues.value[key])
       }
     })
 
   const queryString = query.toString()
   return queryString ? `${url}?${queryString}` : url
+}
+
+const coerceJsonBodyValue = (raw) => {
+  if (raw === '' || raw === null || raw === undefined) return undefined
+  const s = String(raw).trim()
+  if (s === '') return undefined
+  if ((s.startsWith('[') && s.endsWith(']')) || (s.startsWith('{') && s.endsWith('}'))) {
+    try {
+      return JSON.parse(s)
+    } catch {
+      return raw
+    }
+  }
+  if (/^-?\d+$/.test(s)) return Number(s)
+  if (/^-?\d+\.\d+$/.test(s)) return Number(s)
+  return raw
+}
+
+const getJsonBody = () => {
+  const body = {}
+  let url = currentApi.value.baseUrl + currentApi.value.path
+  Object.keys(paramValues.value).forEach(key => {
+    if (url.includes(`:${key}`)) return
+    const coerced = coerceJsonBodyValue(paramValues.value[key])
+    if (coerced !== undefined) body[key] = coerced
+  })
+  return body
 }
 
 const runRequest = async () => {
@@ -137,6 +185,7 @@ const runRequest = async () => {
   }
 
   try {
+    const paramsIn = resolveParamsIn()
     const url = getFullUrl()
     const options = {
       method: currentApi.value.method,
@@ -149,6 +198,12 @@ const runRequest = async () => {
     if (authToken.value) {
       options.headers['Authorization'] = `Bearer ${authToken.value}`
       localStorage.setItem('awmc_auth_token', authToken.value)
+    }
+
+    // 非 query 模式时发送 JSON body（避免 GET/HEAD 带 body）
+    const method = String(currentApi.value.method || 'GET').toUpperCase()
+    if (paramsIn === 'json' && method !== 'GET' && method !== 'HEAD') {
+      options.body = JSON.stringify(getJsonBody())
     }
     
     const response = await fetch(url, options)
@@ -204,7 +259,7 @@ const formatMethod = (method) => {
         </div>
 
         <!-- 鉴权部分 (仅针对 awmc-api 场景) -->
-        <div v-if="currentApi.baseUrl.includes('api.awmc.team')" class="auth-section">
+        <div v-if="currentApi.baseUrl.includes('api.awmc.cc')" class="auth-section">
           <div class="section-title">鉴权设置 (Authorization)</div>
           <div class="auth-box">
             <span class="auth-prefix">Bearer</span>
@@ -238,7 +293,9 @@ const formatMethod = (method) => {
         </div>
 
         <!-- 参数部分 -->
-        <div class="section-title">请求参数 (Query)</div>
+        <div class="section-title">
+          请求参数 ({{ resolveParamsIn() === 'json' ? 'JSON Body' : 'Query' }})
+        </div>
         <table class="params-table">
           <thead>
             <tr>

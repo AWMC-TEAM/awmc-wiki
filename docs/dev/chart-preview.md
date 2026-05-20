@@ -1,5 +1,5 @@
 ---
-chartPreviewBaseUrl: https://v.awmc.team
+chartPreviewBaseUrl: https://v.awmc.cc
 ---
 
 # 🎵 谱面预览
@@ -32,7 +32,7 @@ chartPreviewBaseUrl: https://v.awmc.team
 
 <ApiDemo
   openInNewTab
-  baseUrl="https://v.awmc.team"
+  baseUrl="https://v.awmc.cc"
   :options="[
     {
       title: '谱面预览',
