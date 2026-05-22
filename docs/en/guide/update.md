@@ -2,6 +2,13 @@
 
 ## May 2026
 
+### 2026/05/23
+AWMC Version `BETA-20260523`
+<Badge type="danger" text="Bug Fix" />
+
+- Temporarily disabled Mai Mileage feature
+- Fixed ticket API
+
 ### 2026/05/22
 AWMC Version `BETA-20260522 V26.5.12`
 <Badge type="tip" text="New Feature" />
@@ -13,10 +20,7 @@ AWMC Version `BETA-20260522 V26.5.12`
 AWMC Version `BETA-20260522-C2 V26.5.13`
 <Badge type="danger" text="Bug Fix" />
 
-- For `itemKind=13` (Mai Mileage), input now requires quantity only; ID is no longer required
-- Mai Mileage quantity upper limit increased to `99999`
-- ID is now hidden in confirmation and success messages for Mai Mileage scenarios
-- `package.json` version bumped to `1.9.2`
+- Fixed bot issues
 
 ### 2026/05/20
 AWMC Version `RELEASE-20260520 V26.5.10`
