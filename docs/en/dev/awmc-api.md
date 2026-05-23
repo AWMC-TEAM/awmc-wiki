@@ -259,6 +259,28 @@ Fill in a valid token in **Auth Settings**, enter parameters as shown in the tab
   ]"
 />
 
+### 3.6 Delete Single Score (Billed / JSON Body)
+
+Delete the score record of a specified song. This endpoint uses **JSON Body** parameters.
+
+<ApiDemo
+  :options="[
+    {
+      title: 'Manual Delete Single Score',
+      method: 'POST',
+      path: '/v1/delete_score_manual',
+      paramsIn: 'json',
+      description: 'Delete the score record of a specified song. Params: qr_code, musicId, levelId.',
+      params: [
+        { name: 'qr_code', type: 'string', required: 'Required', desc: 'QR code text', value: '' },
+        { name: 'musicId', type: 'integer', required: 'Required', desc: 'Song ID', value: 11538 },
+        { name: 'levelId', type: 'integer', required: 'Required', desc: 'Difficulty ID: 0 Basic / 1 Advanced / 2 Expert / 3 Master / 4 Re:Master', value: 4 }
+      ],
+      response: {}
+    }
+  ]"
+/>
+
 ## 4. Public JSON Directory
 
 ```http

@@ -3,6 +3,12 @@
 ## May 2026
 
 ### 2026/05/23
+AWMC Version `RELEASE-20260523 V26.5.13`
+<Badge type="tip" text="New Feature" />
+
+- API added new endpoint `/v1/delete_score_manual`
+- Bot added delete score feature
+
 AWMC Version `BETA-20260523`
 <Badge type="danger" text="Bug Fix" />
 

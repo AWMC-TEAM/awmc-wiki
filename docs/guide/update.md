@@ -3,6 +3,12 @@
 ## 2026 年 5 月
 
 ### 2026/05/23
+AWMC 版本号 `RELEASE-20260523 V26.5.13`
+<Badge type="tip" text="功能追加" />
+
+- API 新增端点 `/v1/delete_score_manual`
+- Bot 新增删除成绩功能
+
 AWMC 版本号 `BETA-20260523`
 <Badge type="danger" text="修复" />
 

@@ -259,6 +259,28 @@ apiBaseUrl: https://api.awmc.cc
   ]"
 />
 
+### 3.6 删除单曲成绩 (计费 / JSON Body)
+
+删除指定乐曲的成绩记录。该接口使用 **JSON Body** 传参。
+
+<ApiDemo
+  :options="[
+    {
+      title: '手动删除单曲成绩',
+      method: 'POST',
+      path: '/v1/delete_score_manual',
+      paramsIn: 'json',
+      description: '删除指定乐曲的成绩记录。参数：qr_code、musicId、levelId。',
+      params: [
+        { name: 'qr_code', type: 'string', required: '必填', desc: '用户二维码文本', value: '' },
+        { name: 'musicId', type: 'integer', required: '必填', desc: '乐曲 ID', value: 11538 },
+        { name: 'levelId', type: 'integer', required: '必填', desc: '难度 ID：0 Basic / 1 Advanced / 2 Expert / 3 Master / 4 Re:Master', value: 4 }
+      ],
+      response: {}
+    }
+  ]"
+/>
+
 ## 4. 公开 JSON 目录
 
 ```http
