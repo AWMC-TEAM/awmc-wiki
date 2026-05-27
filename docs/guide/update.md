@@ -3,6 +3,17 @@
 ## 2026 年 5 月
 
 ### 2026/05/27
+AWMC 版本号 `RELEASE-20260527 V26.5.19`
+<Badge type="tip" text="功能追加" />
+
+- 新增 `wife` 表情包生成功能
+
+<Badge type="danger" text="修复" />
+
+- 修复定数错误与浮点数精度问题
+- 修复宴会场被统计入 B50 的问题
+- 修复其他宴会场相关问题
+
 AWMC 版本号 `RELEASE-20260527 V26.5.18`
 <Badge type="tip" text="功能追加" />
 
