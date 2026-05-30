@@ -2,6 +2,12 @@
 
 ## 2026 年 5 月
 
+### 2026/05/30
+AWMC 版本号 `ALPHA-20260530 V26.6.0` [AWMC V2]
+<Badge type="tip" text="功能追加" />
+
+- Bot 支持落雪查分器
+
 ### 2026/05/27
 AWMC 版本号 `RELEASE-20260527 V26.5.19`
 <Badge type="tip" text="功能追加" />
