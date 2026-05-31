@@ -3,6 +3,11 @@
 ## 2026 年 6 月
 
 ### 2026/06/01
+AWMC 版本号 `ALPHA-20260601 V26.6.0.63` [AWMC V2]
+<Badge type="tip" text="功能追加" />
+
+- 新增 `地板` 查询指令 — 查看 B35/B15 地板，支持按难度/定数筛选、查他人，别名 `b50地板`/`rating地板`
+
 AWMC 版本号 `ALPHA-20260601 V26.6.0.62` [AWMC V2]
 <Badge type="warning" text="优化" />
 
