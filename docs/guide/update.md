@@ -3,6 +3,11 @@
 ## 2026 年 6 月
 
 ### 2026/06/01
+AWMC 版本号 `ALPHA-20260601 V26.6.0.67` [AWMC V2]
+<Badge type="danger" text="修复" />
+
+- 修复已知问题
+
 AWMC 版本号 `ALPHA-20260601 V26.6.0.65-66` [AWMC V2]
 <Badge type="danger" text="修复" />
 
