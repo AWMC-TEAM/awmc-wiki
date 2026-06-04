@@ -1,7 +1,7 @@
 ---
 apiBaseUrl: https://status.awmc.team
 statBaseUrl: https://stat.awmc.team
-awmcApiBaseUrl: https://api.awmc.team
+awmcApiBaseUrl: https://api.awmc.cc
 assetsApiBaseUrl: https://assets.awmc.team
 chartPreviewBaseUrl: https://v.awmc.team
 ---

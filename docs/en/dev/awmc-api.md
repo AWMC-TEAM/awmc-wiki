@@ -1,12 +1,12 @@
 ---
-apiBaseUrl: https://api.awmc.team
+apiBaseUrl: https://api.awmc.cc
 ---
 # AWMC Gateway Public API (Billing Info)
 
 For **users**: How to call the open APIs, and **when Tokens will be charged**. This document does not discuss internal implementation.
 
 ::: tip Platform URL
-Platform URL: https://api.awmc.team
+Platform URL: https://api.awmc.cc
 
 Requires AWMC Passport login.
 :::
@@ -284,7 +284,7 @@ Delete the score record of a specified song. This endpoint uses **JSON Body** pa
 ## 4. Public JSON Directory
 
 ```http
-GET https://api.awmc.team/api/docs
+GET https://api.awmc.cc/api/docs
 ```
 
 Returns paths, methods, **consumption**, and brief descriptions for each endpoint, convenient for script consumption.
