@@ -6,7 +6,7 @@ AWMC provides static resource APIs for developers to directly access game-relate
 
 All of the static resources can be reached via:
 
-`https://assets.awmc.team`
+`https://assets.awmc.cc`
 
 ## 2. 资源分类
 
@@ -15,7 +15,7 @@ All of the static resources can be reached via:
 获取指定 ID 的曲绘图片。
 
 <ApiDemo 
-  baseUrl="https://assets.awmc.team"
+  baseUrl="https://assets.awmc.cc"
   :isImage="true"
   :options="[
     {

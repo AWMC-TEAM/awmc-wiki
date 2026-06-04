@@ -20,7 +20,7 @@ apiBaseUrl: https://api.awmc.cc
 :::
 
 ::: tip 购买Token
-额度购买: https://store.awmc.team/item?id=98
+额度购买: https://store.awmc.cc/item?id=98
 :::
 
 ## 1. 服务地址与路径

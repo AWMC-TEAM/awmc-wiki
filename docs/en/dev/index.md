@@ -1,16 +1,13 @@
 ---
-apiBaseUrl: https://status.awmc.team
-statBaseUrl: https://stat.awmc.team
+apiBaseUrl: https://status.awmc.cc
 awmcApiBaseUrl: https://api.awmc.cc
-assetsApiBaseUrl: https://assets.awmc.team
-chartPreviewBaseUrl: https://v.awmc.team
+assetsApiBaseUrl: https://assets.awmc.cc
+chartPreviewBaseUrl: https://v.awmc.cc
 ---
 
 # Developer Center
 
 <br>
-<StatChart :baseUrl="$frontmatter.statBaseUrl" />
-
 Welcome to the AWMC Developer Center. We provide developers with various APIs and tools to help you build your own maimai applications or integration services.
 
 ## Status API (Base URL: `{{ $frontmatter.apiBaseUrl }}`)

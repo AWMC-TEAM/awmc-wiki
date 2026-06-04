@@ -1,10 +1,10 @@
 ---
-apiBaseUrl: https://status.awmc.team
+apiBaseUrl: https://status.awmc.cc
 ---
 
 # Status API (Uptime Kuma)
 
-AWMC TEAM uses [Uptime Kuma](https://status.awmc.team) to monitor the operational status of all services. We provide public API endpoints for developers to access real-time service status data.
+AWMC TEAM uses [Uptime Kuma](https://status.awmc.cc) to monitor the operational status of all services. We provide public API endpoints for developers to access real-time service status data.
 
 ::: info No API Key Required
 All APIs listed on this page are **public endpoints**. You do not need any API Key or authentication to make requests directly from a browser or script.
@@ -33,7 +33,7 @@ This endpoint retrieves the status page title, announcements (Incidents), mainte
 />
 
 - **Endpoint**: `GET /api/status-page/[slug]`
-- **Full Example**: `https://status.awmc.team/api/status-page/maimai`
+- **Full Example**: `https://status.awmc.cc/api/status-page/maimai`
 
 ### Announcements & Incidents
 
@@ -101,7 +101,7 @@ Since the base endpoint does not include real-time status, you need to call the 
 />
 
 - **Endpoint**: `GET /api/status-page/heartbeat/[slug]`
-- **Full Example**: `https://status.awmc.team/api/status-page/heartbeat/maimai`
+- **Full Example**: `https://status.awmc.cc/api/status-page/heartbeat/maimai`
 
 ### Response Example (JSON)
 
@@ -310,8 +310,8 @@ async function fetchStatus() {
     await fetchUserISP()
     
     const [baseRes, hbRes] = await Promise.all([
-      fetch('https://status.awmc.team/api/status-page/maimai'),
-      fetch('https://status.awmc.team/api/status-page/heartbeat/maimai')
+      fetch('https://status.awmc.cc/api/status-page/maimai'),
+      fetch('https://status.awmc.cc/api/status-page/heartbeat/maimai')
     ])
     
     const baseData = await baseRes.json()

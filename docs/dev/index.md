@@ -1,16 +1,13 @@
 ---
-apiBaseUrl: https://status.awmc.team
-statBaseUrl: https://stat.awmc.team
+apiBaseUrl: https://status.awmc.cc
 awmcApiBaseUrl: https://api.awmc.cc
-assetsApiBaseUrl: https://assets.awmc.team
-chartPreviewBaseUrl: https://v.awmc.team
+assetsApiBaseUrl: https://assets.awmc.cc
+chartPreviewBaseUrl: https://v.awmc.cc
 ---
 
 # 💻 开发者中心
 
 <br>
-<StatChart :baseUrl="$frontmatter.statBaseUrl" />
-
 欢迎来到 AWMC 开发者中心。我们为开发者提供了多种接口和工具，帮助你构建属于自己的舞萌应用或集成服务。
 
 ## 📊 Status API (基准地址: `{{ $frontmatter.apiBaseUrl }}`)

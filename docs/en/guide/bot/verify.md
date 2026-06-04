@@ -20,4 +20,4 @@ If your group meets the above criteria, please [send us an email](mailto:awmc@aw
 > In the body, include the arcade address + a screenshot of the group info page.
 
 ## Paid Authorization
-If your group is a personal hobby group or rhythm game community group, please visit https://store.awmc.team/ to purchase group authorization.
+If your group is a personal hobby group or rhythm game community group, please visit https://store.awmc.cc/ to purchase group authorization.

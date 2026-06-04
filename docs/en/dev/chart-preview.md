@@ -1,5 +1,5 @@
 ---
-chartPreviewBaseUrl: https://v.awmc.team
+chartPreviewBaseUrl: https://v.awmc.cc
 ---
 
 # Chart Preview
@@ -32,7 +32,7 @@ Click "Open in new tab" in the component below to open the preview page with the
 
 <ApiDemo
   openInNewTab
-  baseUrl="https://v.awmc.team"
+  baseUrl="https://v.awmc.cc"
   :options="[
     {
       title: 'Chart Preview',

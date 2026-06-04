@@ -20,7 +20,7 @@ Business requests must include in the request header:
 :::
 
 ::: tip Purchase Tokens
-Buy quota: https://store.awmc.team/item?id=98
+Buy quota: https://store.awmc.cc/item?id=98
 :::
 
 ## 1. Service URL and Paths

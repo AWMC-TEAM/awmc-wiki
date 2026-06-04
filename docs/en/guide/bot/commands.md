@@ -12,7 +12,7 @@
 
 The plugin uses the following link by default in **cooldown prompts**, **unbind card guides**, and similar scenarios (configurable):
 
-- **Priority Authorization / General Store**: https://store.awmc.team/
+- **Priority Authorization / General Store**: https://store.awmc.cc/
 
 
 ### 2.2 What is "Priority Authorization"?
