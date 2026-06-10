@@ -48,6 +48,22 @@ AWMC 版本号 `ALPHA-20260601 V26.6.0.61` [AWMC V2]
 - 修复批量下载可能造成的问题
 - 修复 .adx 格式会额外添加一个 .zip
 
+[v26.6.1 - Pre]
+
+### 2026/06/10
+<Badge type="tip" text="功能追加" />
+
+- 新项目 download.awmc.cc 下载站上线
+- 更新舞萌DX2026
+
+<Badge type="warning" text="优化" />
+
+- 迁移了很多数据到新的服务器
+
+<Badge type="danger" text="修复" />
+
+- 修复已知问题
+
 ## 2026 年 5 月
 
 ### 2026/05/31
