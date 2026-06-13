@@ -7,8 +7,8 @@ hero:
   text: "Building the Ultimate maimai Platform"
   tagline: "Official Documentation, Features, and Usage Guide"
   image:
-    src: "/images/dlx_normal.png"
-    alt: AWMC Bot Logo
+    src: "/images/logo_light.png"
+    alt: AWMC Logo
   actions:
     - theme: brand
       text: Get Started
