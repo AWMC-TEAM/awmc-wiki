@@ -2,6 +2,16 @@
 
 ## 2026 年 6 月
 
+### 2026/06/13
+AWMC 版本号 `PRE-20260613 V26.6.3` [AWMC V2]
+<Badge type="tip" text="功能追加" />
+- 下载站 https://download.awmc.cc 上线
+- 舞萌定数更新
+- 群人数上限增加到3000人
+<Badge type="danger" text="修复" />
+- 修复下载站的若干问题
+- 修复部分完成表显示问题
+
 ### 2026/06/01
 AWMC 版本号 `ALPHA-20260601 V26.6.0.67` [AWMC V2]
 <Badge type="danger" text="修复" />
