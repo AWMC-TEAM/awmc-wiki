@@ -21,6 +21,17 @@ export default defineConfig({
     [
       'script',
       {
+        defer: '',
+        src: 'https://s.awmc.cc/recorder.js',
+        'data-website-id': '0f856a4e-ed22-4f01-9071-74c373477974',
+        'data-sample-rate': '0.15',
+        'data-mask-level': 'moderate',
+        'data-max-duration': '300000'
+      }
+    ],
+    [
+      'script',
+      {
         src: '//js.llk.hk',
         'data-site-id': '4f76f700',
         async: ''
