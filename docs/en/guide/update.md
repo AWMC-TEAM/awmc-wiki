@@ -1,5 +1,20 @@
 # Changelog
 
+## June 2026
+
+### 2026/06/15
+<Badge type="tip" text="New Feature" />
+
+- **猜歌积分排行** / **猜歌积分周榜** — View total and weekly song-guess / jacket-guess score rankings in the group (merged forward format)
+- **弱项处方** (`弱项处方单` / `底力处方` / `练习推荐`) — Weakness prescription image; supports @someone
+- **b50风险** (`B50风险` / `b50风险预警` / `风险预警`) — B50 risk warning image; supports @someone
+- **对战战绩** (`headtohead` / `h2h` / `对决战绩`) — Head-to-Head comparison chart with a group member
+- **目标rating** (`rating沙盘` / `目标分` / `推分沙盘`) — Rating sandbox text plan, e.g. `目标rating 16000`
+
+<Badge type="warning" text="Optimization" />
+
+- Advanced tutorial docs updated with the new commands above
+
 ## May 2026
 
 ### 2026/05/23
