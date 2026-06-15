@@ -71,6 +71,15 @@ Use <kbd>Ctrl+F</kbd> to search for specific topics.
 | `ginfo` | Single song global stats + pie chart |
 | `分数线` | Calculate TAP/GREAT tolerance for a given achievement rate |
 
+### Analysis / Score Push / Head-to-Head
+
+| Main Command | Aliases | Usage | Description |
+|--------------|---------|-------|-------------|
+| `弱项处方` | `弱项处方单` `底力处方` `练习推荐` | `弱项处方` / `弱项处方@someone` | Weakness prescription image |
+| `b50风险` | `B50风险` `b50风险预警` `风险预警` | `b50风险` / `b50风险@someone` | B50 risk warning image |
+| `对战战绩` | `headtohead` `h2h` `对决战绩` | `对战战绩@friend` | Head-to-Head comparison chart |
+| `目标rating` | `rating沙盘` `目标分` `推分沙盘` | `目标rating 16000` / `目标rating 15500@someone` | Rating sandbox text plan |
+
 ### Floor
 
 | Command | Description |
@@ -161,6 +170,8 @@ PC = Play Count, the number of times each song has been played on arcade machine
 | `友人对战` | Friend score battle |
 | `潘排名` / `我的白潘排名` etc. | Group ranking for specific song difficulty |
 | `猜歌` / `猜曲绘` | Group song-guessing mini-game |
+| `猜歌积分排行` | View total song-guess / jacket-guess score ranking in the group (merged forward format) |
+| `猜歌积分周榜` | View this week's score ranking in the group (merged forward format) |
 | `开启mai猜歌` / `关闭mai猜歌` | **Group admin**: Toggle guessing game |
 
 ## 9. Alias System
