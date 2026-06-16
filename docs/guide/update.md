@@ -17,51 +17,37 @@
 
 ### 2026/06/13
 AWMC 版本号 `PRE-20260613 V26.6.3` [AWMC V2]
+
 <Badge type="tip" text="功能追加" />
+
 - 下载站 https://download.awmc.cc 上线
 - 舞萌定数更新
-- 群人数上限增加到3000人
+- 群人数上限增加到 3000 人
+
 <Badge type="danger" text="修复" />
+
 - 修复下载站的若干问题
 - 修复部分完成表显示问题
-- 防止用户不刷新网页的东西。
+- 防止用户不刷新网页的东西
 
-### 2026/06/01
-AWMC 版本号 `ALPHA-20260601 V26.6.0.67` [AWMC V2]
+### 2026/06/10
+<Badge type="tip" text="功能追加" />
+
+- 新项目 download.awmc.cc 下载站上线
+- 更新舞萌 DX 2026
+
+<Badge type="warning" text="优化" />
+
+- 迁移了很多数据到新的服务器
+
 <Badge type="danger" text="修复" />
 
 - 修复已知问题
 
-AWMC 版本号 `ALPHA-20260601 V26.6.0.65-66` [AWMC V2]
-<Badge type="danger" text="修复" />
-
-- 修复等级进度兼容未知同步类型（如 `fs=sync`），`_parse_level_plan` 同时支持 `combo_rank`/`sync_rank` 等内部值
-- `舞舞` 改为等价 `fdx`（FSD/FDX 及以上）
-
-AWMC 版本号 `ALPHA-20260601 V26.6.0.64` [AWMC V2]
-<Badge type="tip" text="功能追加" />
-
-- 支持中文简称进度查询：`13将`（sss）、`14+极`（fc）、`13神`（ap）、`13舞舞`（fsd）、`13者`（bbb），支持分页筛选和 @他人查询
-
-AWMC 版本号 `ALPHA-20260601 V26.6.0.63` [AWMC V2]
-<Badge type="tip" text="功能追加" />
-
-- 新增 `地板` 查询指令 — 查看 B35/B15 地板，支持按难度/定数筛选、查他人，别名 `b50地板`/`rating地板`
-
-AWMC 版本号 `ALPHA-20260601 V26.6.0.62` [AWMC V2]
-<Badge type="warning" text="优化" />
-
-- 日报/周报/月报/存档对比统一视觉重写（B50 背景、毛玻璃面板、B50 提升布局修复、页脚栏）
-
-AWMC 版本号 `ALPHA-20260601 V26.6.0.61` [AWMC V2]
-<Badge type="danger" text="修复" />
-
-- 修复 B50 与游玩详情 DX 星数计算偏差 — `dxScore()` 改为浮点百分比直接比较阈值，不再 `int()` 截断
-
 ### 2026/06/04
 <Badge type="tip" text="功能追加" />
 
-- 新项目上线：舞萌DX谱面下载站！
+- 新项目上线：舞萌 DX 谱面下载站
 
 <Badge type="warning" text="优化" />
 
@@ -74,19 +60,43 @@ AWMC 版本号 `ALPHA-20260601 V26.6.0.61` [AWMC V2]
 
 [v26.6.1 - Pre]
 
-### 2026/06/10
-<Badge type="tip" text="功能追加" />
-
-- 新项目 download.awmc.cc 下载站上线
-- 更新舞萌DX2026
-
-<Badge type="warning" text="优化" />
-
-- 迁移了很多数据到新的服务器
+### 2026/06/01
+AWMC 版本号 `ALPHA-20260601 V26.6.0.67` [AWMC V2]
 
 <Badge type="danger" text="修复" />
 
 - 修复已知问题
+
+AWMC 版本号 `ALPHA-20260601 V26.6.0.65-66` [AWMC V2]
+
+<Badge type="danger" text="修复" />
+
+- 修复等级进度兼容未知同步类型（如 `fs=sync`），`_parse_level_plan` 同时支持 `combo_rank`/`sync_rank` 等内部值
+- `舞舞` 改为等价 `fdx`（FSD/FDX 及以上）
+
+AWMC 版本号 `ALPHA-20260601 V26.6.0.64` [AWMC V2]
+
+<Badge type="tip" text="功能追加" />
+
+- 支持中文简称进度查询：`13将`（sss）、`14+极`（fc）、`13神`（ap）、`13舞舞`（fsd）、`13者`（bbb），支持分页筛选和 @他人查询
+
+AWMC 版本号 `ALPHA-20260601 V26.6.0.63` [AWMC V2]
+
+<Badge type="tip" text="功能追加" />
+
+- 新增 `地板` 查询指令 — 查看 B35/B15 地板，支持按难度/定数筛选、查他人，别名 `b50地板`/`rating地板`
+
+AWMC 版本号 `ALPHA-20260601 V26.6.0.62` [AWMC V2]
+
+<Badge type="warning" text="优化" />
+
+- 日报/周报/月报/存档对比统一视觉重写（B50 背景、毛玻璃面板、B50 提升布局修复、页脚栏）
+
+AWMC 版本号 `ALPHA-20260601 V26.6.0.61` [AWMC V2]
+
+<Badge type="danger" text="修复" />
+
+- 修复 B50 与游玩详情 DX 星数计算偏差 — `dxScore()` 改为浮点百分比直接比较阈值，不再 `int()` 截断
 
 ## 2026 年 5 月
 
@@ -275,6 +285,7 @@ AWMC 版本号 `BETA-20260514 V26.5.5`
 - Status页面移除了对NET的检测。
 
 ## 2026 年 4 月
+
 ### 2026/04/04
 AWMC 版本号 `RELEASE-20260403 V26.4.03`
 <Badge type="danger" text="修复" />

@@ -170,8 +170,12 @@ PC = Play Count, the number of times each song has been played on arcade machine
 | `友人对战` | Friend score battle |
 | `潘排名` / `我的白潘排名` etc. | Group ranking for specific song difficulty |
 | `猜歌` / `猜曲绘` | Group song-guessing mini-game |
-| `猜歌积分排行` | View total song-guess / jacket-guess score ranking in the group (merged forward format) |
-| `猜歌积分周榜` | View this week's score ranking in the group (merged forward format) |
+| `猜歌积分排行` | Total song-guess / jacket-guess score ranking in the group |
+| `猜歌积分日榜` | Today's score ranking |
+| `猜歌积分周榜` | This week's score ranking |
+| `猜歌积分月榜` | This month's score ranking |
+| `猜歌积分年榜` | This year's score ranking |
+| `猜歌积分赛季榜` | Current season score ranking (by quarter, e.g. 2026-S2) |
 | `开启mai猜歌` / `关闭mai猜歌` | **Group admin**: Toggle guessing game |
 
 ## 9. Alias System

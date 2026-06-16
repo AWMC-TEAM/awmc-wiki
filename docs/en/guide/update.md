@@ -15,6 +15,89 @@
 
 - Advanced tutorial docs updated with the new commands above
 
+### 2026/06/13
+AWMC Version `PRE-20260613 V26.6.3` [AWMC V2]
+
+<Badge type="tip" text="New Feature" />
+
+- Download site https://download.awmc.cc launched
+- maimai constant table updated
+- Group member limit increased to 3000
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed several download site issues
+- Fixed some completion table display issues
+- Prevented UI issues when users don't refresh the page
+
+### 2026/06/10
+<Badge type="tip" text="New Feature" />
+
+- New project download.awmc.cc download site launched
+- Updated maimai DX 2026
+
+<Badge type="warning" text="Optimization" />
+
+- Migrated much data to new servers
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed known issues
+
+### 2026/06/04
+<Badge type="tip" text="New Feature" />
+
+- New project launched: maimai DX chart download site
+
+<Badge type="warning" text="Optimization" />
+
+- Optimized score fetching with new caching
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed issues caused by batch downloads
+- Fixed .adx format incorrectly adding an extra .zip
+
+[v26.6.1 - Pre]
+
+### 2026/06/01
+AWMC Version `ALPHA-20260601 V26.6.0.67` [AWMC V2]
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed known issues
+
+AWMC Version `ALPHA-20260601 V26.6.0.65-66` [AWMC V2]
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed level progress compatibility with unknown sync types (e.g. `fs=sync`); `_parse_level_plan` now supports internal values like `combo_rank`/`sync_rank`
+- `舞舞` now equivalent to `fdx` (FSD/FDX and above)
+
+AWMC Version `ALPHA-20260601 V26.6.0.64` [AWMC V2]
+
+<Badge type="tip" text="New Feature" />
+
+- Chinese shorthand progress queries: `13将` (sss), `14+极` (fc), `13神` (ap), `13舞舞` (fsd), `13者` (bbb); supports pagination and @someone queries
+
+AWMC Version `ALPHA-20260601 V26.6.0.63` [AWMC V2]
+
+<Badge type="tip" text="New Feature" />
+
+- Added `地板` command — view B35/B15 floor, filter by difficulty/constant, query others; aliases `b50地板`/`rating地板`
+
+AWMC Version `ALPHA-20260601 V26.6.0.62` [AWMC V2]
+
+<Badge type="warning" text="Optimization" />
+
+- Unified visual rewrite for daily/weekly/monthly reports and archive comparison (B50 background, frosted glass panels, B50 improvement layout fix, footer bar)
+
+AWMC Version `ALPHA-20260601 V26.6.0.61` [AWMC V2]
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed B50 vs play detail DX star calculation — `dxScore()` now compares thresholds with float percentages directly instead of `int()` truncation
+
 ## May 2026
 
 ### 2026/05/23
@@ -89,6 +172,7 @@ AWMC Version `BETA-20260514 V26.5.5`
 - Removed NET detection from the Status page
 
 ## April 2026
+
 ### 2026/04/04
 AWMC Version `RELEASE-20260403 V26.4.03`
 <Badge type="danger" text="Bug Fix" />
