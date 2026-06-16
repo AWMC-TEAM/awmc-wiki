@@ -1,5 +1,11 @@
 # AWMC BOT 基础教程
 
+::: danger 功能维护通知
+**部分功能维护中**，预计于 **6 月 19 日 23:00** 结束。
+
+详情请查阅：[AWMC 论坛公告](https://awmc.cc/threads/179/)
+:::
+
 ::: info
 如果您有详细教程，欢迎通过文章底部的的 GitHub编辑 递交Pull Request！
 :::

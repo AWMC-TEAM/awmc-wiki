@@ -1,5 +1,11 @@
 # AWMC BOT Basic Tutorial
 
+::: danger Maintenance Notice
+**Some features are currently under maintenance**, expected to end on **June 19 at 23:00**.
+
+For details, see: [AWMC Forum Announcement](https://awmc.cc/threads/179/)
+:::
+
 ::: info
 If you have a detailed tutorial to contribute, feel free to submit a Pull Request via the GitHub edit link at the bottom of the page!
 :::
