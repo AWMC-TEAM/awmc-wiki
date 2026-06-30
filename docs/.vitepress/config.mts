@@ -82,7 +82,7 @@ export default defineConfig({
               items: [
                 {text: '服务协议与隐私政策', link: '/guide/bot/terms'},
                 { text: '基础教程', link: '/guide/bot/intro' },
-                { text: '进阶教程', link: '/guide/bot/advanced' },
+                { text: '指令帮助', link: '/guide/bot/advanced' },
                 { text: '术语解释', link: '/guide/bot/explain' },
                 { text: '指令调用', link: '/guide/bot/commands'},
                 { text: '授权获取', link: '/guide/bot/verify'},
@@ -153,7 +153,7 @@ export default defineConfig({
               items: [
                 { text: 'Terms of Service & Privacy', link: '/en/guide/bot/terms' },
                 { text: 'Basic Tutorial', link: '/en/guide/bot/intro' },
-                { text: 'Advanced Tutorial', link: '/en/guide/bot/advanced' },
+                { text: 'Command Reference', link: '/en/guide/bot/advanced' },
                 { text: 'Terminology', link: '/en/guide/bot/explain' },
                 { text: 'Commands', link: '/en/guide/bot/commands' },
                 { text: 'Authorization', link: '/en/guide/bot/verify' }

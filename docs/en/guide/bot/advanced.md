@@ -1,218 +1,332 @@
-# AWMC BOT Advanced Tutorial
+# AWMC BOT Command Reference
 
 ::: tip
 Use <kbd>Ctrl+F</kbd> to search for specific topics.
 :::
 
-## 1. Basics & Help
+This page is split into two bots: the **Transport Bot** handles account binding, B50 uploads, tickets, and card redemption; the **Query Bot** handles song lookup, score charts, constant tables, and group interactions.
+
+---
+
+## 1. Transport Bot (MaiBot)
+
+Command prefix is shown as `/`; match your Koishi prefix configuration. Account binding accepts **SGID text** or **official account web URLs**.
+
+### 1.1 Help & Info
 
 | Command | Description |
 |---------|-------------|
-| `帮助maimaiDX` / `帮助maimaidx` | Send help image |
-| `项目地址maimaiDX` | Project GitHub link |
-| `更新maimai数据` | **Super admin**: Update local song library/charts/aliases |
-| `今日mai` / `今日舞萌` / `今日运势` | Daily fortune + recommended song |
-| `mai什么` / `mai什么歌` | Random song recommendation (supports score-push intent) |
-| `给个绿14+` etc. | Random draw by difficulty/type |
-| `查看排名` / `查看排行` | Global Rating leaderboard |
+| `/mai` / `/mai help` | View all commands; add `--advanced` for tickets, collectibles, travel distance, etc. |
+| `/maiping` | Test arcade connection |
+| `/maiqueue [Ref_ID]` | Check ticket recharge queue (optional Ref_ID for a single entry) |
+| `/mai状态` / `/mymai` | Binding status, tickets, and priority; add `--expired` for expired tickets |
+| `/mai地图 [QR or URL]` | Provinces/regions played on the account |
+| `/mai查询opt <version>` | Mai2 option file download URL, e.g. `/mai查询opt 1.40` |
+
+### 1.2 Account Binding
+
+| Command | Description |
+|---------|-------------|
+| `/mai绑定 [QR or URL]` | Bind maimai DX account; interactive guide if no args |
+| `/mai解绑` | Unbind maimai DX (subject to rebind cooldown) |
+| `/mai解绑卡` / `maiunbindkey` | Unbind during cooldown using **unbind card quota** (SGID verification + confirmation) |
+
+### 1.3 Diving Fish B50
+
+| Command | Description |
+|---------|-------------|
+| `/mai绑定水鱼 <token>` | Bind Diving Fish token for B50 upload |
+| `/mai解绑水鱼` | Unbind Diving Fish token (maimai DX binding kept) |
+| `/mai上传B50` / `maiu` | Upload B50 to Diving Fish |
+| `/maiua [QR or Lxns code]` | Upload B50 to both Diving Fish and Lxns (SGID once) |
+
+### 1.4 Lxns B50
+
+| Command | Description |
+|---------|-------------|
+| `/mai绑定落雪 <Token>` | Bind Lxns token (third-party import in profile) |
+| `/mai解绑落雪` | Unbind Lxns token (maimai DX binding kept) |
+| `/mai上传落雪b50` / `maiul` | Upload B50 to Lxns |
+
+### 1.5 Account Security
+
+| Command | Description |
+|---------|-------------|
+| `/mai锁定` | Lock account to prevent others from logging in |
+| `/mai解锁` / `/mai逃离` / `mai逃离小黑屋` | Unlock (only accounts locked via `/mai锁定`) |
+| `/mai保护模式 [on\|off]` | Toggle protection mode; auto-lock when account goes offline |
+
+### 1.6 Priority & Card Redemption
+
+When **priorityCooldown** is enabled, some commands have cooldowns; redeeming cards shortens or removes them.
+
+| Command | Description |
+|---------|-------------|
+| `/mai兑换卡密 [card]` | Redeem card; paste after command within time limit (`MAI-` prefix) |
+| `/mai取消群组优先` | Cancel group priority in current group (**group card redeemer** only) |
+| `/mai群组优先换绑` | Start group priority migration from **source group** |
+| `/mai群组优先换入` / `mai群组优先换绑完成` | Complete migration in **target group** |
+
+#### Card Types
+
+| Type | Where to redeem | Description |
+|------|-----------------|-------------|
+| **Personal** | DM or group | **Global** priority cooldown for bound account |
+| **Group** | **Must be in target group** | Bound to group; members get no cooldown **in that group** (not in DM) |
+| **Unbind** | DM or group | Requires `/mai绑定`; adds unbind quota for `/mai解绑卡` during cooldown |
+
+### 1.7 Advanced (Tickets, Collectibles, etc.)
+
+::: danger Warning
+Issuing tickets carries risks. Proceed with caution. AWMC TEAM is not responsible for negative effects.
+
+See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaimer), Section 10.
+:::
+
+| Command | Description |
+|---------|-------------|
+| `/mai发票 [multiplier] [target]` | Issue function ticket (multiplier 2–6, default 2); 4x+ may fail |
+| `/mai修改版本号 [QR or target]` | Change game version (cached) |
+| `/mai获取收藏品 [SGID or @user]` | Interactive collectible fetch |
+| `/mai上传乐曲成绩 [@user]` | Interactive single-song score upload |
+| `/mai删除成绩 [@user]` | Interactive single-song score delete |
+
+---
+
+## 2. Query Bot (maimaiDX)
+
+> Regular user commands only; no admin commands. Advanced variants and group-admin features are in [2.11 Advanced](#211-advanced).
+
+### 2.1 Basics
+
+| Command | Description |
+|---------|-------------|
+| `帮助maimaiDX` | Send help image |
+| `项目地址maimaiDX` | Project info |
+| `今日mai` | Daily fortune + recommended song |
+| `主题` | View or switch score chart theme |
+| `查看排名` | Global Rating leaderboard |
 | `我的排名` | Your Rating ranking |
-| `主题` / `theme` | Switch B50 image theme |
 
-## 2. Song Search
-
-| Command | Description |
-|---------|-------------|
-| `查歌 <keyword>` | Search by song name |
-| `定数查歌` | Search by constant range |
-| `bpm查歌` | Search by BPM |
-| `曲师查歌` | Search by artist |
-| `谱师查歌` | Search by charter |
-| `<alias>是什么歌` | Reverse lookup by alias, generates detailed info image (chart tags, constant changes, preview links, etc.) |
-| `id12345` | View song details by ID (chart tags, constant changes, preview links, etc.) |
-| `谱面12345紫` | Chart preview link |
-| `提取曲绘 <ID>` | Extract jacket art image |
-
-## 3. Score Charts (B50 Series)
-
-### Regular
+### 2.2 Song Search
 
 | Command | Description |
 |---------|-------------|
-| `b50` | Standard B50 (B35 + B15 grouped) |
-| `ab50` / `a50` | Top 50 without grouping |
-| `合作b50` / `合作a50` | @friend duo B50 |
-| `lxb50` / `落雪b50` | Force Lxns data source B50 |
+| `查歌 <keyword>` | Search by name / alias |
+| `定数查歌 <constant>` | Search by constant |
+| `bpm查歌 <bpm>` | Search by BPM |
+| `曲师查歌 <artist>` | Search by artist |
+| `谱师查歌 <charter>` | Search by charter |
+| `<alias>是什么歌` | Lookup by alias |
+| `id <song ID>` | Song details |
+| `谱面<ID><difficulty>` | Chart preview: green / yellow / red / purple / white |
+| `提取曲绘 <song ID>` | Extract jacket art |
+| `mai什么` | Random song |
+| `mai什么推分` | Random score-push song |
+| `来个<level>` | Random song at level |
+| `来个dx<level>` / `来个sd<level>` | Random DX / standard |
+| `来个<difficulty><level>` | e.g. `来个紫14+` |
 
-### Filters / Variants
+### 2.3 Aliases
+
+| Command | Description |
+|---------|-------------|
+| `<song>有什么别名` | View aliases |
+| `id<song ID>有什么别名` | Aliases by ID |
+| `添加别名 <ID> <alias>` | Submit alias |
+| `添加本地别名 <ID> <alias>` | Local-only alias |
+| `同意别名 <Tag>` | Vote on alias |
+| `当前投票` | Ongoing alias votes |
+
+### 2.4 Scores
+
+| Command | Description |
+|---------|-------------|
+| `b50` | B50 chart |
+| `ab50` | Top 50 without grouping |
+| `刷新b50` | Force refresh cache |
+| `合作b50` | Duo B50 comparison |
+| `合作a50` | Duo top-50 comparison |
+| `我有多菜` | Rating comparison chart |
+| `我在群里有多菜` | Group Rating comparison |
+| `minfo` | Personal play info |
+| `ginfo` | Group play info |
+| `分数线` | Score line calculator |
+| `友人对战` | Random friend battle (optional rating gap, e.g. `友人对战 300`) |
+
+#### Group Single-Song Ranking
+
+| Command | Description |
+|---------|-------------|
+| `<song>排名` | Group ranking for song |
+| `我的<song>排名` | Your group ranking |
+| `<song>排名 <N>` | Top N |
+
+Prefix difficulty before song name, e.g. `白潘排名`.
+
+### 2.5 Constant / Completion / Progress
+
+| Command | Description |
+|---------|-------------|
+| `<level>定数表` | Constant table, e.g. `13+定数表` |
+| `<level>完成表` | Completion table, e.g. `13+ap完成表` |
+| `<plate>完成表` | Plate completion table |
+| `<plate>进度` | Plate progress |
+| `<level><achievement>进度` | Level progress, e.g. `13+sss进度` |
+| `<level><plate>进度` | e.g. `13将进度`, `14+极进度` |
+| `我要上<score>分` | Score-push recommendations |
+| `我要在<level>上<score>分` | Level-specific recommendations |
+| `<level>分数列表` | Score list for level |
+
+Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
+
+### 2.6 Song Guessing
+
+| Command | Description |
+|---------|-------------|
+| `猜歌` | Text guessing |
+| `猜曲绘` | Jacket guessing |
+| `猜曲子` | Audio guessing |
+| `查加倍卡` | View your multiplier cards |
+| `猜歌积分排行` | Total points leaderboard |
+| `猜歌积分日榜` / `周榜` / `月榜` / `年榜` / `赛季榜` | Period leaderboards |
+| `猜歌历史日榜` / `周榜` / `月榜` / `年榜` / `赛季榜` | Historical period boards |
+
+### 2.7 Play Count (PC)
+
+| Command | Description |
+|---------|-------------|
+| `更新pc数` | Bind arcade QR and sync PC |
+| `我的pc数` | Personal PC stats |
+| `pc排行` | PC leaderboard |
+| `pc数 <song>` | PC for a song |
+| `pc50` | PC-based B50 |
+| `pca50` | PC-based top 50 |
+
+### 2.8 Lxns Score Checker
+
+| Command | Description |
+|---------|-------------|
+| `lxbind` | OAuth bind Lxns |
+| `lxunbind` | Unbind Lxns |
+| `lxb50` | B50 from Lxns source |
+| `数据源` | Current data source |
+| `数据源 水鱼` / `数据源 落雪` | Switch personal source |
+
+::: info
+B50 uses Diving Fish or Lxns per preference; some features fall back to Diving Fish when Lxns lacks support.
+:::
+
+### 2.9 Chart Impressions
+
+| Command | Description |
+|---------|-------------|
+| `谱面印象 <song>` | View impressions |
+| `写谱面印象 <song> <text>` | Post impression |
+| `回复谱面印象 <ID> <text>` | Reply |
+| `点赞谱面印象 <ID>` | Like |
+
+::: tip
+`查歌` (by ID or alias) **automatically includes** impressions, tags, constant changes, and preview links.
+:::
+
+### 2.10 AWMC BREAK
+
+| Command | Description |
+|---------|-------------|
+| `AWMC签到` | Daily check-in for BREAK |
+| `我的AWMC` | Account status and usage |
+| `AWMC帮助` | BREAK system help |
+
+> First actual score-API request per day is free; each later request costs 1 BREAK (cache hits are free).
+
+### 2.11 Advanced
+
+Advanced query-bot commands and variants.
+
+#### B50 Variants
 
 | Command | Description |
 |---------|-------------|
 | `紫b50` / `13+b50` / `Master b50` etc. | Filter B50 by difficulty |
 | `紫ab50` etc. | Filter ab50 by difficulty |
-| `镜代b50` etc. | Filter B50 by version era |
-| `l镜代b50` / `l爽代b35` etc. | Recalculate B50/B35 with past version constants |
+| `镜代b50` etc. | Filter by version era |
+| `l镜代b50` / `l爽代b35` etc. | Recalculate with past constants |
 | `dx2026b35` | Colorful era B35 |
 | `fcb50` / `fcallb50` | FC-oriented B50 |
 | `apb50` / `apallb50` | AP-oriented B50 |
 | `拟合b50` / `拟合b50全部` | Sort by fitted constant |
-| `寸b50` / `寸ab50` | Edge-cut scores (exactly on rating boundary) |
-| `锁血b50` / `锁血ab50` | Minimum-threshold scores (exactly on rating floor) |
+| `寸b50` / `寸ab50` | Edge-cut scores |
+| `锁血b50` / `锁血ab50` | Minimum-threshold scores |
 | `越级b50` / `越级ab50` | Skill-jump scores |
-| `理想b50` / `理想ab50` | Ideal B50 if all ratings upgraded by one tier |
-| `含金量` / `含水量` | Score value/dilution analysis chart |
+| `理想b50` / `理想ab50` | Ideal B50 after +1 rating tier |
+| `含金量` / `含水量` | Value / dilution analysis |
 
-### Analysis / Comparison
+#### Analysis / Score Push / Head-to-Head
 
-| Command | Description |
-|---------|-------------|
-| `我有多菜` | Rating distribution bar chart |
-| `底力分析` | B50 tag radar + bar chart, for reference only |
-| `minfo` / `info` | Single song difficulty play details |
-| `ginfo` | Single song global stats + pie chart |
-| `分数线` | Calculate TAP/GREAT tolerance for a given achievement rate |
+| Main | Aliases | Example | Description |
+|------|---------|---------|-------------|
+| `弱项处方` | `弱项处方单` `底力处方` `练习推荐` | `弱项处方@someone` | Weakness prescription image |
+| `b50风险` | `B50风险` `b50风险预警` | `b50风险@someone` | B50 risk warning |
+| `对战战绩` | `headtohead` `h2h` | `对战战绩@friend` | Head-to-Head chart |
+| `目标rating` | `rating沙盘` `推分沙盘` | `目标rating 16000` | Rating sandbox plan |
+| `底力分析` | — | `底力分析` | Tag radar + bar chart |
 
-### Analysis / Score Push / Head-to-Head
-
-| Main Command | Aliases | Usage | Description |
-|--------------|---------|-------|-------------|
-| `弱项处方` | `弱项处方单` `底力处方` `练习推荐` | `弱项处方` / `弱项处方@someone` | Weakness prescription image |
-| `b50风险` | `B50风险` `b50风险预警` `风险预警` | `b50风险` / `b50风险@someone` | B50 risk warning image |
-| `对战战绩` | `headtohead` `h2h` `对决战绩` | `对战战绩@friend` | Head-to-Head comparison chart |
-| `目标rating` | `rating沙盘` `目标分` `推分沙盘` | `目标rating 16000` / `目标rating 15500@someone` | Rating sandbox text plan |
-
-### Floor
+#### Floor
 
 | Command | Description |
 |---------|-------------|
-| `地板` | View overall B35/B15 rating floor |
-| `地板 14+` | View floor for 14+ charts in B50 |
-| `地板 紫13` / `地板 master` | Filter by difficulty level + constant |
-| `b50地板` / `rating地板` | Same as above (aliases) |
-| `地板 @someone` | Check someone else's floor |
+| `地板` | Overall B35/B15 floor |
+| `地板 14+` | Floor for 14+ in B50 |
+| `地板 紫13` / `地板 master` | Filter by difficulty + constant |
+| `b50地板` / `rating地板` | Aliases |
+| `地板 @someone` | Someone else's floor |
 
-## 4. Constant Tables / Completion Tables / Progress
+#### Chinese Shorthand Progress
 
-| Command | Description |
-|---------|-------------|
-| `14定数表` | View constant table (lv7–15) |
-| `14完成表` / `14ap完成表` etc. | Personal completion table overlay |
-| `真极完成表` / `舞神完成表` etc. | Plate completion table (supports pagination) |
-| `真极进度` | Plate completion progress |
-| `14 SSS 进度` etc. | Check progress by level + rating |
-| `14 分数列表` | Score list for specified level |
-| `我要上100分` etc. | Score-push recommendation charts (old/new charts) |
-| `更新定数表` / `更新完成表` | **Super admin**: Regenerate base images |
-
-### Chinese Shorthand Progress
-
-The original `level rating progress` pattern now supports Chinese plate shorthand:
-
-| Example | Equivalent to | Condition |
-|---------|---------------|-----------|
+| Example | Equivalent | Condition |
+|---------|------------|-----------|
 | `13将` / `13将进度` | `13 sss进度` | Achievement ≥100% |
-| `14+极` | `14+ fc进度` | FC and above |
-| `13神` | `13 ap进度` | AP and above |
-| `13舞舞` | `13 fsd进度` | FSD and above |
+| `14+极` | `14+ fc进度` | FC+ |
+| `13神` | `13 ap进度` | AP+ |
+| `13舞舞` | `13 fsd进度` | FSD+ |
 | `13者` | `13 bbb进度` | Achievement ≥80% |
 
-**Output**: Text summary (completed X/Y songs, unfinished/unplayed count) + completion table image.
+Also: `13将 未完成`, `13将 2`, `13将 @someone`.
 
-Also supports `13将 未完成`、`13将 2` for pagination filtering, and `13将 @someone` to query others.
+#### Data Storage & Reports
 
-## 5. Data Storage & Reports
-
-::: warning Note
-Must first **enable data storage**.
+::: warning
+Must **enable data storage** first.
 :::
 
 | Command | Description |
 |---------|-------------|
-| `立即存储数据` | Manually save a snapshot |
+| `立即存储数据` | Manual snapshot |
 | `关闭存储数据` | Disable auto storage |
-| `存储历史` | View historical archive IDs |
-| `查看存档 <ID>` | View snapshot details |
-| `日报` / `周报` / `月报` | Past 1/7/30 day score report chart |
-| `对比存档 <oldID> <newID>` | Compare two snapshots |
-| `今日吃分推荐` | Personalized score-push suggestions based on history (text) |
-| `牌子统计` | Plate achievement statistics |
+| `存储历史` | Archive IDs |
+| `查看存档 <ID>` | Snapshot details |
+| `日报` / `周报` / `月报` | 1/7/30 day reports |
+| `对比存档 <old> <new>` | Compare snapshots |
+| `今日吃分推荐` | Personalized push suggestions |
+| `牌子统计` | Plate statistics |
 
-## 6. Lxns Data Source
-
-| Command | Description |
-|---------|-------------|
-| `lxbind` / `绑定落雪` | OAuth bind Lxns score checker |
-| `lxunbind` / `解绑落雪` | Unbind |
-| `数据源 水鱼` / `数据源 落雪` | Switch default B50 data source |
-
-::: info Note
-B50 series automatically uses Diving Fish or Lxns based on user preference. Some features (fitted constant, value analysis, etc.) fall back to Diving Fish when Lxns is unsupported.
-:::
-
-## 7. Play Count (PC)
-
-PC = Play Count, the number of times each song has been played on arcade machines.
+#### Group Extras
 
 | Command | Description |
 |---------|-------------|
-| `更新pc数 <QR code>` | Log in at arcade and sync PC |
-| `我的pc数` | Personal PC Top list |
-| `pc排行` | PC leaderboard |
-| `pc数 <song ID>` | PC for a specific song |
-| `pc50` / `pca50` | B50 chart sorted by PC |
+| `群聊rating排行榜` | Group Rating board |
+| `群吃分榜` / `群寸止榜` / `群锁血榜` | Group leaderboards |
+| `开启mai猜歌` / `关闭mai猜歌` | **Group admin**: toggle guessing |
+| `开启别名推送` / `关闭别名推送` | **Group admin**: alias push |
 
-## 8. Group Interactions
+#### Appendix: QQ Poke
 
-| Command | Description |
-|---------|-------------|
-| `我在群里有多菜` | Group Rating comparison |
-| `群聊rating排行榜` | Group Rating leaderboard |
-| `群吃分榜` / `群寸止榜` / `群锁血榜` | Various group leaderboards |
-| `友人对战` | Friend score battle |
-| `潘排名` / `我的白潘排名` etc. | Group ranking for specific song difficulty |
-| `猜歌` / `猜曲绘` | Group song-guessing mini-game |
-| `猜歌积分排行` | Total song-guess / jacket-guess score ranking in the group |
-| `猜歌积分日榜` | Today's score ranking |
-| `猜歌积分周榜` | This week's score ranking |
-| `猜歌积分月榜` | This month's score ranking |
-| `猜歌积分年榜` | This year's score ranking |
-| `猜歌积分赛季榜` | Current season score ranking (by quarter, e.g. 2026-S2) |
-| `开启mai猜歌` / `关闭mai猜歌` | **Group admin**: Toggle guessing game |
+The bot reacts to QQ pokes. With admin rights it may **mute** randomly (up to 1 day). Poke with caution.
 
-## 9. Alias System
+---
 
-| Command | Description |
-|---------|-------------|
-| `添加别名` | Submit alias to official library |
-| `添加本地别名` | Locally-effective alias only |
-| `同意别名 <Tag>` | Vote to approve alias |
-| `当前投票` | View ongoing alias vote |
-| `<song>有什么别名` | View aliases for a song (plain text) |
-| `开启别名推送` / `关闭别名推送` | **Group admin**: Toggle alias push for the group |
-| `更新别名库` | **Super admin**: Sync alias library |
+## Contact & Feedback
 
-## 10. Chart Impressions (PMYX)
-
-| Command | Description |
-|---------|-------------|
-| `谱面印象 <ID>` | View chart impressions |
-| `写谱面印象` | Post an impression |
-| `回复谱面印象` | Reply to someone's impression |
-| `点赞谱面印象` | Like an impression |
-
-::: tip
-When using `查歌` (by ID or alias), chart impressions, tags, constant changes, and preview links are **automatically included** as a merged forward message.
-:::
-
-## Appendix: About "Poke"
-
-The BOT responds to QQ's poke feature. If the BOT has admin privileges, it may trigger a random-duration **mute** (up to 1 day). Poke with caution.
-
-## Appendix: Tickets
-
-::: danger Warning
-Issuing tickets carries risks. Proceed with caution. AWMC TEAM is not responsible for any negative effects.
-
-See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaimer), Section 10.
-:::
-
-Use `发票 [x]` to issue a function ticket to your game account. `[x]` is the ticket multiplier (integer 2-6, default 2). Tickets with 4x and above have a higher failure rate.
+- **QQ Group**: [1072033605](https://qm.qq.com/q/7157yt6n6w)
+- **Website**: https://awmc.cc
