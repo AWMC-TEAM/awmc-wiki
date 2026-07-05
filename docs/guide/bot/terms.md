@@ -212,7 +212,7 @@ AWMC TEAM不对用户使用上述服务可能造成的不良后果负责。
 * 联系人：MILK
 * QQ：3801477277
 * 邮箱：[awmc@awmc.cc](mailto:awmc@awmc.cc)
-* 状态页：https://up.awmc.cc
+* 状态页：https://up.wmc.pub/
 
 本协议最终解释权归AWMC TEAM所有。
 

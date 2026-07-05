@@ -210,6 +210,6 @@ If you have questions, please contact:
 * Contact: MILK
 * QQ: 3801477277
 * Email: [awmc@awmc.cc](mailto:awmc@awmc.cc)
-* Status Page: https://up.awmc.cc
+* Status Page: https://up.wmc.pub/
 
 The final interpretation of this agreement belongs to AWMC TEAM.
