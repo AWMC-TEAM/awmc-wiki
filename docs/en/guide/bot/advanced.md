@@ -196,12 +196,25 @@ Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
 
 | Command | Description |
 |---------|-------------|
-| `更新pc数` | Bind arcade QR and sync PC |
-| `我的pc数` | Personal PC stats |
-| `pc排行` | PC leaderboard |
-| `pc数 <song>` | PC for a song |
-| `pc50` | PC-based B50 |
-| `pca50` | PC-based top 50 |
+| `更新pc数` | Bind arcade QR and sync PC; completion message lists available commands |
+| `我的pc数` | Personal PC stats (total plays + top 15 songs) |
+| `pc排行` / `pc全部排行` / `PC全部排行` | All-users PC total ranking (text list, titled "PC全部排行 (N users)") |
+| `pc数 <song>` | PC for a specific song |
+| `pc50` | B50 sorted by play count (`pc:xx` on card corner) |
+| `pca50` | Your Rating B50's 50 songs re-sorted by PC (image) |
+| `游玩排行50` / `游玩PC50` / `PC游玩50` / `pc游玩50` | Top 50 most-played songs library-wide (not limited to B50, image) |
+
+#### Command Comparison
+
+| Command | What it does |
+|---------|--------------|
+| `游玩排行50` | Top 50 most-played songs overall (image) |
+| `pca50` | Your Rating B50 songs re-ordered by PC (image) |
+| `pc排行` | All-users PC total ranking (text) |
+
+::: info
+`游玩排行50` is not named `pc排行50` to avoid prefix conflict with `pc排行`. High-play songs like `sølips` or `Believe the Rainbow` appear here even if not in your B50.
+:::
 
 ### 2.8 Lxns Score Checker
 

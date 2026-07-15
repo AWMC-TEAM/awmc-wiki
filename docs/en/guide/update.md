@@ -1,6 +1,79 @@
 # Changelog
 
+## July 2026
+
+### 2026/07/15
+AWMC Version `RELEASE-20260715 V26.8.1` [AWMC V2]
+
+<Badge type="tip" text="New Feature" />
+
+- `maibindfish` / `mai绑定水鱼` now supports interactive binding without an argument. The Bot provides the Diving-Fish prober link and guides users to generate and copy an `Import-Token` from “Edit Profile”
+- The Bot keeps waiting after an invalid Shuiyu Token and allows up to three attempts per session; users can send “取消” to exit
+
+<Badge type="warning" text="Optimization" />
+
+- Submitted Shuiyu Tokens are recalled first; users are explicitly warned when recall fails
+- Successful binding only displays a masked Token and includes a traceable `REF_ID`
+- Shuiyu binding prompts, retries, and results now reply to the triggering message to reduce ambiguity in busy group chats
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed successful ticket operations being incorrectly reported as `FinishedException()`
+- Fixed the same false-success-error pattern in account, map, queue, and LXNS B50 flows
+
+### 2026/07/05
+<Badge type="tip" text="New Feature" />
+
+- **maiBot upgraded to V3**
+- **Official bot support**
+- **mai-queue** connected to [nearcade.com](https://nearcade.com)
+- Improved **B50 query** experience
+
+<Badge type="warning" text="Optimization" />
+
+- Download site: removed in-group verification, replaced with a queue system
+- Due to Shuiyu-related impact, a credit system now limits user API usage
+
+<Badge type="danger" text="Bug Fix" />
+
+- Fixed known download site issues
+- Fixed index download failures
+
 ## June 2026
+
+### 2026/06/30
+<Badge type="tip" text="New Feature" />
+
+- **游玩排行50** (`游玩PC50` / `PC游玩50` / `pc游玩50`) — Top 50 most-played songs library-wide (image), not limited to Rating B50
+
+<Badge type="warning" text="Optimization" />
+
+- `pc排行` title changed to "PC全部排行 (N users)"; shows all synced users, no longer mislabeled as in-group or capped at top 15; aliases `pc全部排行` / `PC全部排行`
+- `更新pc数` completion hints and `pca50` description updated to distinguish from `游玩排行50`
+
+### 2026/06/23
+AWMC Version `PRE-20260623 V26.6.4` [AWMC V2]
+
+<Badge type="tip" text="New Feature" />
+
+- **猜曲子** — New group mini-game: 4 stages, 30 seconds of voice per stage, instruments added progressively (drums → drums+bass → +other → +vocals)
+- Higher score for earlier correct guesses (10 / 9 / 7 / 5)
+- Super users can DM `更新猜曲音频`; `更新猜曲音频 -full` forces cache rebuild
+
+<Badge type="warning" text="Optimization" />
+
+- Guess-audio baking: trim before stem separation to prevent OOM; auto-fallback to ffmpeg when demucs fails; per-song async baking with interrupt support
+- Full `[GuessAudio]` logging across baking/start/stem pipeline; cache version auto-invalidates stale data
+- Song-guess scoring: daily / weekly / monthly / quarterly / season leaderboards; decreasing score; period settlement archive & history; per-entry settlement messages; combo & banquet filtering
+- B15 push recommendations: version detection updated to DX2026「丸」era; fallback to「镜彩」era when CiRCLE missing; multi-level fallback when B15 list is empty
+- PC count fetching migrated to sw-api `user/music` endpoint
+
+<Badge type="danger" text="Bug Fix" />
+
+- Guess-song four-stage mixing and stage file validation
+- Song-guess answer tolerance regex character class
+- Multiple B15 push recommendation filter defects
+- sw-api parsing when `code=0` and `msg` is JSON
 
 ### 2026/06/15
 <Badge type="tip" text="New Feature" />
