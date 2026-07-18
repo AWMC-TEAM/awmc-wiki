@@ -94,7 +94,7 @@ apiBaseUrl: https://api.wmc.pub
       params: [
         { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容（SGWCMAID... 或官方链接）', value: '' }
       ],
-      response: { code: 0, msg: '{\"userId\": 13699208, \"userData\": {}}' }
+      response: { code: 0, msg: '{&quot;userId&quot;: 13699208, &quot;userData&quot;: {}}' }
     },
     {
       title: '地区 / 段位',

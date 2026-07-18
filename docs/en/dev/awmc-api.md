@@ -94,7 +94,7 @@ All **POST** with body field **`qrcode`**.
       params: [
         { name: 'qrcode', type: 'string', required: 'Required', desc: 'QR text (SGWCMAID... or official URL)', value: '' }
       ],
-      response: { code: 0, msg: '{\"userId\": 13699208, \"userData\": {}}' }
+      response: { code: 0, msg: '{&quot;userId&quot;: 13699208, &quot;userData&quot;: {}}' }
     },
     {
       title: 'Region / rank',
