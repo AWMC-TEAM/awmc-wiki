@@ -1,12 +1,14 @@
 ---
-apiBaseUrl: https://api.awmc.cc
+apiBaseUrl: https://api.wmc.pub
 ---
 # AWMC Gateway Public API (Billing Info)
 
 For **end users**: how to call the public APIs and **when Tokens are charged**. This page does not cover internals.
 
 ::: tip Platform
-Platform: https://api.awmc.cc
+Platform: https://api.wmc.pub
+
+Docs: https://wiki.awmc.team/dev/awmc-api
 
 Sign in with your **AWMC passport (forum account)**, then create a `gw_` token in the dashboard (or use the login JWT).
 :::
@@ -191,7 +193,7 @@ All **POST** with body field **`qrcode`**.
 ## 4. Public JSON Catalog
 
 ```http
-GET https://api.awmc.cc/api/docs
+GET https://api.wmc.pub/api/docs
 ```
 
 Returns path, method, **cost**, and short descriptions for scripting.

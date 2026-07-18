@@ -1,6 +1,6 @@
 ---
 apiBaseUrl: https://status.awmc.cc
-awmcApiBaseUrl: https://api.awmc.cc
+awmcApiBaseUrl: https://api.wmc.pub
 assetsApiBaseUrl: https://assets.awmc.cc
 chartPreviewBaseUrl: https://v.awmc.cc
 ---
