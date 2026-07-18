@@ -25,11 +25,11 @@ chartPreviewBaseUrl: https://v.awmc.cc
 ## 🔌 AWMC 公共 API (基准地址: `{{ $frontmatter.awmcApiBaseUrl }}`)
 
 ::: info 💡 业务接口
-提供二维码解析、用户信息预览、成绩上传（水鱼/落雪）及功能票查询等业务接口。
+提供用户数据 / 谱面查询、发票充值与队列、成绩上传（水鱼 / 落雪）等业务接口（新版 `/v1/user/*`、`/v1/charge` 等）。
 :::
 
 - **鉴权方式**：<Badge type="warning" text="Bearer 令牌" /> (需在 Authorization 中携带)
-- **消耗规则**：部分接口根据业务逻辑扣除 Token，详见计费说明。
+- **消耗规则**：HTTP 成功且上游 `code === 0` 时扣 Token，详见计费说明。
 - **详细文档**：[点击查看 AWMC 公共 API 详情](/dev/awmc-api)
 
 ## 🖼️ Assets 静态资源 API (基准地址: `{{ $frontmatter.assetsApiBaseUrl }}`)
@@ -56,7 +56,7 @@ chartPreviewBaseUrl: https://v.awmc.cc
 你可以通过以下链接快速访问不同模块的开发文档：
 
 - [**舞萌状态 API**](/dev/status-api) - 获取服务实时在线状态、心跳记录及公告。
-- [**AWMC 公共 API**](/dev/awmc-api) - 二维码识别、成绩上传及业务功能调用。
+- [**AWMC 公共 API**](/dev/awmc-api) - 用户查询、发票充值队列、成绩上传（水鱼 / 落雪）。
 - [**Assets 静态资源 API**](/dev/assets-api) - 曲绘、资源图库等静态文件获取。
 - [**谱面预览**](/dev/chart-preview) - 浏览器内谱面预览与 Query 参数说明。
 - [**更多功能**] - 正在开发中，敬请期待...

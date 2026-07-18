@@ -2,6 +2,14 @@
 
 ## 2026 年 7 月
 
+### 2026/07/18
+<Badge type="warning" text="文档 / API" />
+
+- **AWMC 公共 API 网关换新上游**：开放路径改为 `/v1/health`、`/v1/user/*`、`/v1/charge`、`/v1/charge/queue`、`/v1/update-lx`、`/v1/update-fish`
+- `keychip` 由服务端注入；调用方只需传 `qrcode` 等业务字段
+- 计费以 HTTP 2xx 且上游 `code === 0` 为准；充值入队后绑定 mai `userId`，队列仅返回本人任务并脱敏
+- 旧路径（如 `/v1/get_preview`、`/v1/upload_b50`、手动成绩类等）已下线，详见 [开发者文档](/dev/awmc-api)
+
 ### 2026/07/16
 AWMC 版本号 `V26.8.5` [AWMC V2]
 

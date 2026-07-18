@@ -8,7 +8,7 @@ apiBaseUrl: https://api.awmc.cc
 ::: tip 平台地址
 平台地址：https://api.awmc.cc
 
-需要AWMC通行证登陆～
+使用 **AWMC 通行证（论坛账号）** 登录控制台，在个人中心生成 `gw_` 令牌或使用登录 JWT。
 :::
 
 ::: warning 🔐 鉴权
@@ -19,264 +19,171 @@ apiBaseUrl: https://api.awmc.cc
 - 浏览器登录后的 JWT，或在网站内生成的 **`gw_` 长期令牌**（勿泄露）。
 :::
 
-::: tip 购买Token
-额度购买: https://store.awmc.cc/item?id=98
+::: tip 购买 Token
+额度通过 **卡密兑换** 充入账户。卡密可在商店购买：https://store.awmc.cc/item?id=98  
+兑换：控制台个人中心，或 `POST /redeem`（需登录令牌）。
+:::
+
+::: info keychip
+机台 `keychip` 由网关服务端注入，**调用方无需也不应传递**。请求体只需提供业务参数（如 `qrcode`）。
 :::
 
 ## 1. 服务地址与路径
 
 所有业务路径接在 **网关根地址** 之后，前缀为 **`/v1`**。
 
-- **GET**：参数放在 URL Query，需 **URL 编码**。
-- **POST**：按各接口要求使用 Query 或 JSON Body；传 JSON 时加 `Content-Type: application/json`。
-
+- **GET**：一般无 Body（如健康检查、充值队列）。
+- **POST**：使用 **JSON Body**，请求头加 `Content-Type: application/json`。
+- 上游响应多为 `{ "code": 0, "msg": "..." }`；部分接口的 `msg` 为 **JSON 字符串**，需二次 `JSON.parse`。
 
 ## 2. Token 计费规则
 
-- 下表 **「消耗」** 表示：本次请求在 **HTTP 成功** 且 **业务判定成功** 时，从账户扣除的 Token 数量；**0** 表示不扣费。
-- 业务是否成功以响应 JSON 为准，常见如下：
+- 下表 **「消耗」**：本次请求在 **HTTP 2xx** 且上游业务成功（通常为 **`code === 0`**）时扣除的 Token；**0** 表示不扣费。
+- 余额不足返回 **403** `Insufficient balance`。
 
-| 接口 | 扣费前提（摘要） |
-|------|------------------|
-| `get_preview` | `UserID` 有效且不为 `-1` / `"-1"` |
-| `upload_b50` / `upload_lx_b50` | `UploadStatus === true` |
-| `get_charge` | `ChargeStatus === true` |
-| `mai_ping` | 成功形态（如 `returnCode === 1` 等），非 `result: "down"` 等失败形态 |
+| 方法 | 路径 | 消耗 | 说明 |
+|------|------|------|------|
+| GET | `/v1/health` | 0 | 上游健康检查 |
+| POST | `/v1/user/data` | 1 | 用户详细数据 |
+| POST | `/v1/user/region` | 1 | 地区 / 段位 |
+| POST | `/v1/user/music` | 2 | 全部谱面成绩（体积较大） |
+| POST | `/v1/user/charge` | 1 | 发票 / 票券查询（只读） |
+| GET | `/v1/charge/queue` | 0 | 本人充值队列（已过滤、脱敏） |
+| POST | `/v1/charge` | 10 | 发票充值入队 |
+| POST | `/v1/update-lx` | 5 | 上传成绩到落雪 LX |
+| POST | `/v1/update-fish` | 5 | 上传成绩到 DivingFish |
 
-- 余额不足时返回 **403**，需先增加账户余额。
+### 充值绑定与队列
 
+1. 调用 `POST /v1/charge` 时需提供 `qrcode` 与 `charge`。
+2. 入队成功后，网关会用同一 `qrcode` 请求 `user/data`（**不计费**），解析 `userId` 并与当前网关账号绑定。
+3. 之后 `GET /v1/charge/queue` **只返回**与你绑定的 `userId` 相关任务，并去除敏感字段 `qrToken`。
 
 ## 3. 开放接口调试
 
-直接在下方 **鉴权设置** 中填入有效令牌，然后输入参数即可在线测试接口。
+在下方 **鉴权设置** 中填入有效令牌，再填写参数测试。
 
-### 3.1 连通性测试 (mai_ping)
-
-<ApiDemo 
-  :options="[
-    {
-      title: '连通性测试',
-      method: 'GET',
-      path: '/v1/mai_ping',
-      description: '测试网关连通性，不产生扣费。',
-      response: { returnCode: 1, result: 'ok' }
-    }
-  ]"
-/>
-
-
-### 3.2 用户信息与任务提交 (计费)
-
-以下接口在业务成功时会产生 Token 消耗。
+### 3.1 健康检查（不计费）
 
 <ApiDemo 
   :options="[
     {
-      title: '用户信息预览',
+      title: '健康检查',
       method: 'GET',
-      path: '/v1/get_preview',
-      description: '获取用户信息预览，消耗 1 Token。',
-      params: [
-        { name: 'qr_text', type: 'string', required: '必填', desc: '二维码内容', value: '' }
-      ],
-      response: { UserID: '12345', UserName: 'Player', UploadStatus: true }
-    },
-    {
-      title: '水鱼 B50 任务',
-      method: 'POST',
-      path: '/v1/upload_b50',
-      description: '提交水鱼 B50 上传任务，消耗 5 Token。',
-      params: [
-        { name: 'qr_text', type: 'string', required: '必填', desc: '二维码内容', value: '' },
-        { name: 'fish_token', type: 'string', required: '必填', desc: '水鱼 Token', value: '' }
-      ],
-      response: { UploadStatus: true, task_id: 'task_xxx' }
-    },
-    {
-      title: '落雪 B50 任务',
-      method: 'POST',
-      path: '/v1/upload_lx_b50',
-      description: '提交落雪 B50 上传任务，消耗 5 Token。',
-      params: [
-        { name: 'qr_text', type: 'string', required: '必填', desc: '二维码内容', value: '' },
-        { name: 'lxns_code', type: 'string', required: '必填', desc: '15位落雪好友码', value: '' }
-      ],
-      response: { UploadStatus: true, task_id: 'task_xxx' }
-    },
-    {
-      title: '功能票查询',
-      method: 'GET',
-      path: '/v1/get_charge',
-      description: '查询功能票详情，消耗 1 Token。',
-      params: [
-        { name: 'qr_text', type: 'string', required: '必填', desc: '二维码内容', value: '' }
-      ],
-      response: { ChargeStatus: true, tickets: [] }
+      path: '/v1/health',
+      description: '探测上游是否可用，不产生扣费。',
+      response: { code: 0 }
     }
   ]"
 />
 
+### 3.2 用户查询（计费 / JSON Body）
 
-### 3.3 任务状态查询 (不计费)
-
-上传类任务提交后，请使用以下接口轮询进度。
+以下接口均为 **POST**，Body 字段 **`qrcode`**（二维码文本，如 `SGWCMAID...`）。
 
 <ApiDemo 
   :options="[
     {
-      title: '水鱼任务状态 (按用户)',
-      method: 'GET',
-      path: '/v1/get_b50_task_status',
-      description: '根据 mai_uid 查询水鱼任务状态。',
+      title: '用户详细数据',
+      method: 'POST',
+      path: '/v1/user/data',
+      paramsIn: 'json',
+      description: '消耗 1 Token。msg 常为 JSON 字符串，需二次解析；内含 userId、userData 等。',
       params: [
-        { name: 'mai_uid', type: 'string', required: '必填', desc: '用户 ID', value: '' }
-      ]
+        { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容（SGWCMAID... 或官方链接）', value: '' }
+      ],
+      response: { code: 0, msg: '{\"userId\": 13699208, \"userData\": {}}' }
     },
     {
-      title: '水鱼任务详情 (按ID)',
-      method: 'GET',
-      path: '/v1/get_b50_task_byid',
-      description: '根据 task_id 查询水鱼任务详情。',
+      title: '地区 / 段位',
+      method: 'POST',
+      path: '/v1/user/region',
+      paramsIn: 'json',
+      description: '消耗 1 Token。查询地区与段位信息；msg 可能需二次解析。',
       params: [
-        { name: 'task_id', type: 'string', required: '必填', desc: '任务 ID', value: '' }
-      ]
+        { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容', value: '' }
+      ],
+      response: { code: 0, msg: '{}' }
     },
     {
-      title: '落雪任务状态 (按用户)',
-      method: 'GET',
-      path: '/v1/get_lx_b50_task_status',
-      description: '根据 mai_uid 查询落雪任务状态。',
+      title: '全部谱面成绩',
+      method: 'POST',
+      path: '/v1/user/music',
+      paramsIn: 'json',
+      description: '消耗 2 Token。返回体积较大；msg 可能需二次解析。',
       params: [
-        { name: 'mai_uid', type: 'string', required: '必填', desc: '用户 ID', value: '' }
-      ]
+        { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容', value: '' }
+      ],
+      response: { code: 0, msg: '[]' }
     },
     {
-      title: '落雪任务详情 (按ID)',
-      method: 'GET',
-      path: '/v1/get_lx_b50_task_byid',
-      description: '根据 task_id 查询落雪任务详情。',
+      title: '发票 / 票券查询',
+      method: 'POST',
+      path: '/v1/user/charge',
+      paramsIn: 'json',
+      description: '消耗 1 Token。只读查询用户发票与票券信息。',
       params: [
-        { name: 'task_id', type: 'string', required: '必填', desc: '任务 ID', value: '' }
-      ]
+        { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容', value: '' }
+      ],
+      response: { code: 0 }
     }
   ]"
 />
 
-### 3.4 功能票获取 (计费)
-
-获取功能票（倍数票）。该接口使用 **Query** 传参，业务成功时消耗 **10 Token**。
+### 3.3 发票充值与队列
 
 <ApiDemo 
   :options="[
     {
-      title: '获取功能票（倍数票）',
+      title: '充值入队',
       method: 'POST',
-      path: '/v1/get_ticket',
-      description: '获取功能票（倍数票），Query：ticket_id、qr_text 等；业务成功时消耗 10 Token。',
+      path: '/v1/charge',
+      paramsIn: 'json',
+      description: '消耗 10 Token。加入发票充值队列；成功后会绑定 mai userId。请确认后再发送。',
       params: [
-        { name: 'qr_text', type: 'string', required: '建议必填', desc: '二维码内容', value: '' },
-        { name: 'ticket_id', type: 'string', required: '可选', desc: '功能票 ID（如有）', value: '' }
+        { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容', value: '' },
+        { name: 'charge', type: 'integer', required: '必填', desc: '充值张数 / 档位（按上游约定）', value: 5 }
       ],
-      response: { TicketStatus: true, ticket: {} }
+      response: { code: 0, boundMaiUserId: '13699208' }
+    },
+    {
+      title: '充值队列查询',
+      method: 'GET',
+      path: '/v1/charge/queue',
+      description: '不计费。仅返回当前账号已绑定 userId 的任务；不含 qrToken。未充值绑定过则 tasks 为空。',
+      response: { code: 0, tasks: [], workers: 1 }
     }
   ]"
 />
 
-### 3.5 手动操作端点 (计费 / JSON Body)
+### 3.4 成绩上传（计费 / JSON Body）
 
-以下接口均为 **POST**，请求体为 **JSON**；网关会在业务侧执行约 **60 秒安全等待**（队列/风控），浏览器端点击「运行」后请耐心等待。
-
-在 **鉴权设置** 中填入有效令牌，按表格填写参数后运行即可（`level_range` 请填写 JSON 数组字面量，如 `[0,1,2,3]`）。
-
-<ApiDemo
+<ApiDemo 
   :options="[
     {
-      title: '手动上传单曲成绩',
+      title: '上传到落雪 LX',
       method: 'POST',
-      path: '/v1/upload_score_manual',
+      path: '/v1/update-lx',
       paramsIn: 'json',
-      description: '消耗 15 Token。参数：qr_code、musicId、levelId、achievement、combo、sync、dxScore、rank；可选 playcount、iscover、isforce、detailmode。',
+      description: '消耗 5 Token。请确认后再发送。',
       params: [
-        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
-        { name: 'musicId', type: 'integer', required: '必填', desc: '歌曲 ID（如 11538）', value: 11538 },
-        { name: 'levelId', type: 'integer', required: '必填', desc: '难度 0 绿 / 1 黄 / 2 红 / 3 紫 / 4 白', value: 4 },
-        { name: 'achievement', type: 'integer', required: '必填', desc: '成就值 0–1010000（如 1005000 表示 100.5000%）', value: 1005000 },
-        { name: 'combo', type: 'integer', required: '必填', desc: '0 无 / 1 FC / 2 FC+ / 3 AP / 4 AP+', value: 2 },
-        { name: 'sync', type: 'integer', required: '必填', desc: '0 无 / 1 FS / 2 FS+ / 3 FDX / 4 FDX+ / 5 SYNC', value: 2 },
-        { name: 'dxScore', type: 'integer', required: '必填', desc: 'DX 分数', value: 1234 },
-        { name: 'rank', type: 'integer', required: '必填', desc: '评价等级（如 10:SS, 11:SS+, 12:SSS, 13:SSS+）', value: 12 },
-        { name: 'playcount', type: 'integer', required: '可选', desc: '游玩次数，默认 1', value: 1 },
-        { name: 'iscover', type: 'integer', required: '可选', desc: '是否覆盖 0/1，默认 0', value: 0 },
-        { name: 'isforce', type: 'integer', required: '可选', desc: '是否强制更新 0/1，默认 0', value: 0 },
-        { name: 'detailmode', type: 'integer', required: '可选', desc: '是否详情模式 0/1，默认 0', value: 0 }
+        { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容', value: '' },
+        { name: 'key', type: 'string', required: '必填', desc: '落雪相关密钥 / 好友码等（按上游要求）', value: '' },
+        { name: 'type', type: 'string', required: '必填', desc: '类型，如 maimai', value: 'maimai' }
       ],
-      response: {}
+      response: { code: 0 }
     },
     {
-      title: '手动批量上传成绩',
+      title: '上传到 DivingFish',
       method: 'POST',
-      path: '/v1/batch_upload_score_manual',
+      path: '/v1/update-fish',
       paramsIn: 'json',
-      description: '消耗 20 Token。参数：qr_code、musicId、level_range（JSON 数组）、combo、sync、dxScore。',
+      description: '消耗 5 Token。请确认后再发送。',
       params: [
-        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
-        { name: 'musicId', type: 'integer', required: '必填', desc: '歌曲 ID', value: 11538 },
-        { name: 'level_range', type: 'array', required: '必填', desc: '难度 ID 数组 JSON，如 [0,1,2,3]', value: '[0,1,2,3]' },
-        { name: 'combo', type: 'integer', required: '必填', desc: '连击状态 0–4', value: 0 },
-        { name: 'sync', type: 'integer', required: '必填', desc: '同步状态 0–5', value: 0 },
-        { name: 'dxScore', type: 'integer', required: '必填', desc: 'DX 星级 0–5', value: 5 }
+        { name: 'qrcode', type: 'string', required: '必填', desc: '二维码内容', value: '' },
+        { name: 'token', type: 'string', required: '必填', desc: '水鱼 Import-Token', value: '' }
       ],
-      response: {}
-    },
-    {
-      title: '手动解锁单个物品',
-      method: 'POST',
-      path: '/v1/unlock_single_item_manual',
-      paramsIn: 'json',
-      description: '消耗 10 Token。参数：qr_code、item_id、item_kind；可选 item_stock。',
-      params: [
-        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
-        { name: 'item_id', type: 'integer', required: '必填', desc: '物品 ID', value: 123 },
-        { name: 'item_kind', type: 'integer', required: '必填', desc: '1 姓名框 / 2 称号 / 3 头像 / 10 搭档 / 11 背景板 / 12 票据等', value: 2 },
-        { name: 'item_stock', type: 'integer', required: '可选', desc: '数量，默认 1', value: 1 }
-      ],
-      response: {}
-    },
-    {
-      title: '手动解锁单首乐曲',
-      method: 'POST',
-      path: '/v1/unlock_music_manual',
-      paramsIn: 'json',
-      description: '消耗 10 Token。参数：qr_code、music_id；可选 item_stock、remaster。',
-      params: [
-        { name: 'qr_code', type: 'string', required: '必填', desc: '二维码文本', value: '' },
-        { name: 'music_id', type: 'integer', required: '必填', desc: '乐曲 ID', value: 11538 },
-        { name: 'item_stock', type: 'integer', required: '可选', desc: '数量，默认 1', value: 1 },
-        { name: 'remaster', type: 'integer', required: '可选', desc: 'Re:MASTER：0 否 / 1 是 / 2 仅白谱，默认 0', value: 0 }
-      ],
-      response: {}
-    }
-  ]"
-/>
-
-### 3.6 删除单曲成绩 (计费 / JSON Body)
-
-删除指定乐曲的成绩记录。该接口使用 **JSON Body** 传参。
-
-<ApiDemo
-  :options="[
-    {
-      title: '手动删除单曲成绩',
-      method: 'POST',
-      path: '/v1/delete_score_manual',
-      paramsIn: 'json',
-      description: '删除指定乐曲的成绩记录。参数：qr_code、musicId、levelId。',
-      params: [
-        { name: 'qr_code', type: 'string', required: '必填', desc: '用户二维码文本', value: '' },
-        { name: 'musicId', type: 'integer', required: '必填', desc: '乐曲 ID', value: 11538 },
-        { name: 'levelId', type: 'integer', required: '必填', desc: '难度 ID：0 Basic / 1 Advanced / 2 Expert / 3 Master / 4 Re:Master', value: 4 }
-      ],
-      response: {}
+      response: { code: 0 }
     }
   ]"
 />
@@ -289,7 +196,6 @@ GET https://api.awmc.cc/api/docs
 
 返回各路径、方法、**消耗** 与简要说明，便于脚本读取。
 
-
 ## 5. 常见错误
 
 | HTTP | 说明 |
@@ -297,9 +203,11 @@ GET https://api.awmc.cc/api/docs
 | **401** | 令牌缺失或无效 |
 | **403** | 余额不足等 |
 | **404** | 路径或资源不存在 |
+| **500** | 转发失败 / 未配置上游等，见响应 `msg` |
 | **5xx** | 服务异常，可稍后重试 |
 
-
 ::: tip 建议
-先调用 **`/v1/mai_ping`**（不扣费）确认地址与令牌，再调用 **带消耗** 的接口；上传类务必保存 **`task_id`** 并用查询接口跟进。
+先调用 **`/v1/health`**（不扣费）确认地址与令牌；再调用查询类接口。  
+发起充值请用 **`/v1/charge`**，用 **`/v1/charge/queue`** 查看是否成功。  
+旧路径（如 `/v1/get_preview`、`/v1/upload_b50`）已移除，请改用上表新路径。
 :::

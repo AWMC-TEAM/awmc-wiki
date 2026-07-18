@@ -2,6 +2,14 @@
 
 ## July 2026
 
+### 2026/07/18
+<Badge type="warning" text="Docs / API" />
+
+- **AWMC public API gateway** now targets the new upstream: `/v1/health`, `/v1/user/*`, `/v1/charge`, `/v1/charge/queue`, `/v1/update-lx`, `/v1/update-fish`
+- `keychip` is injected server-side; callers only send fields such as `qrcode`
+- Billing requires HTTP 2xx and upstream `code === 0`; charge enqueue binds mai `userId`, and the queue is filtered/redacted per account
+- Legacy paths (`/v1/get_preview`, `/v1/upload_b50`, manual score APIs, etc.) are removed — see [developer docs](/en/dev/awmc-api)
+
 ### 2026/07/15
 AWMC Version `RELEASE-20260715 V26.8.1` [AWMC V2]
 

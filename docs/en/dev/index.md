@@ -25,11 +25,11 @@ Real-time monitoring of the operational status of maimai services provided by AW
 ## AWMC Public API (Base URL: `{{ $frontmatter.awmcApiBaseUrl }}`)
 
 ::: info Business API
-Provides QR code parsing, user info preview, score upload (Diving Fish / Lxns), and ticket query endpoints.
+User data / chart queries, charge enqueue & queue, and score upload (DivingFish / Lxns) via the new `/v1/user/*` and `/v1/charge` routes.
 :::
 
 - **Authentication**: <Badge type="warning" text="Bearer Token" /> (Must be included in Authorization header)
-- **Token Consumption**: Some endpoints deduct Tokens based on business logic. See billing details.
+- **Token Consumption**: Charged on HTTP success and upstream `code === 0`. See billing details.
 - **Documentation**: [View AWMC Public API Details](/en/dev/awmc-api)
 
 ## Assets Static Resource API (Base URL: `{{ $frontmatter.assetsApiBaseUrl }}`)
@@ -56,7 +56,7 @@ Preview maimai charts in the browser. Parameters correspond to Lxns song IDs, ch
 You can quickly access different module documentation via the following links:
 
 - [**Status API**](/en/dev/status-api) - Get real-time service status, heartbeat records, and announcements.
-- [**AWMC Public API**](/en/dev/awmc-api) - QR code recognition, score upload, and business function calls.
+- [**AWMC Public API**](/en/dev/awmc-api) - User queries, charge queue, score upload (DivingFish / Lxns).
 - [**Assets Static Resource API**](/en/dev/assets-api) - Jacket art, resource gallery, and other static file retrieval.
 - [**Chart Preview**](/en/dev/chart-preview) - In-browser chart preview and query parameter documentation.
 - [**More Features**] - Under development, stay tuned...
