@@ -5,8 +5,10 @@
 ### 2026/07/19
 <Badge type="tip" text="New Feature" />
 
-- **Letter board** (`舞萌开字母` / `开字母`) — multi-song title letter board; send a letter or alias during play, or use `开歌`; end with `不玩了`
-- Letter-complete titles award the completer (✅ 字母补齐); scoring lowered: open letter ≤2, complete 2–4, active solve 3–8
+- **Letter board timed settlement** — no in-round points/BREAK; after full clear, award by speed stars + contribution; elapsed shown as `xx.xxx` seconds
+- **Adaptive star caps** — default ≤30/45/60/90/180s; tighten from group history P35 (5★ between 15–30s); settlement shows active thresholds
+- **Settlement charts** — score / contribution / time boards; query with `开字母排行`, `开字母贡献榜`, `开字母时间榜` (per group; time board includes avatars)
+- `不玩了` reveals only — no speed/contribution rewards
 - **Guess answer rate limit** — 3 seconds per user globally (text / jacket / audio / chart / letter); over-limit reply: “嘿嘿，你的答案被我吃掉啦！”
 - **`舞萌状态` / `mais`** — “服务器失败率” chart from full account-operation logs (ticket / maiu / bind; `returnCode=0` counts as failure; empty buckets omitted) plus live Status API
 

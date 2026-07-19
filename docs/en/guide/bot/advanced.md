@@ -188,7 +188,10 @@ Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
 | `猜曲绘` | Jacket guessing |
 | `猜曲子` | Audio guessing |
 | `猜铺面` / `猜谱面` | Chart-video guessing (no BGM/background; with answer chime and countdown) |
-| `舞萌开字母` / `开字母` | Multi-song letter board (default 8 titles); send a letter or alias in play, or use `开歌`; end with `不玩了` |
+| `舞萌开字母` / `开字母` | Multi-song letter board (default 8 titles); timed settlement after full clear |
+| `开字母排行` / `开字母积分榜` | Group letter score board (image) |
+| `开字母贡献榜` | Group letter contribution board (image) |
+| `开字母时间榜` | Group best clear-time board (image, with avatars) |
 | `查加倍卡` | View your multiplier cards |
 | `猜歌积分排行` | Total points leaderboard |
 | `猜歌积分日榜` / `周榜` / `月榜` / `年榜` / `赛季榜` | Period leaderboards |
@@ -198,9 +201,12 @@ Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
 Requires `开启mai猜歌`. Mutually exclusive with other guess modes in the same group.
 
 - Send a single letter (e.g. `m`) or a title/alias; also `开字母 m` / `开歌 xxx`
-- Completing a title by letters awards the completer (✅ 字母补齐)
-- Points (lowered): open letter ≤ **2**; complete **2–4**; active solve **3–8**
-- `不玩了` / `结束开字母` ends the round and reveals remaining titles
+- Letter-complete titles credit the completer (✅ 字母补齐)
+- **No in-round points/BREAK**; settle after full clear by **speed stars + contribution**
+- Elapsed shown as `xx.xxx` seconds; star caps adapt from group history (default ≤30/45/60/90/180s; 5★ floor 15s)
+- Contribution weights: open letter ×1, complete ×3, solve ×4; no contribution → no reward
+- Settlement attaches score / contribution / time charts; also queryable via the commands above
+- `不玩了` / `结束开字母` reveals remaining titles **without** speed/contribution rewards
 :::
 
 ::: warning Answer rate limit
