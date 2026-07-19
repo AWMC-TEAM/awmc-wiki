@@ -187,10 +187,27 @@ Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
 | `猜歌` | Text guessing |
 | `猜曲绘` | Jacket guessing |
 | `猜曲子` | Audio guessing |
+| `猜铺面` / `猜谱面` | Chart-video guessing (no BGM/background; with answer chime and countdown) |
+| `舞萌开字母` / `开字母` | Multi-song letter board (default 8 titles); send a letter or alias in play, or use `开歌`; end with `不玩了` |
 | `查加倍卡` | View your multiplier cards |
 | `猜歌积分排行` | Total points leaderboard |
 | `猜歌积分日榜` / `周榜` / `月榜` / `年榜` / `赛季榜` | Period leaderboards |
 | `猜歌历史日榜` / `周榜` / `月榜` / `年榜` / `赛季榜` | Historical period boards |
+
+::: tip Letter board
+Requires `开启mai猜歌`. Mutually exclusive with other guess modes in the same group.
+
+- Send a single letter (e.g. `m`) or a title/alias; also `开字母 m` / `开歌 xxx`
+- Completing a title by letters awards the completer (✅ 字母补齐)
+- Points (lowered): open letter ≤ **2**; complete **2–4**; active solve **3–8**
+- `不玩了` / `结束开字母` ends the round and reveals remaining titles
+:::
+
+::: warning Answer rate limit
+One answer every **3 seconds** per user globally (text / jacket / audio / chart / letter). Over limit:
+
+`嘿嘿，你的答案被我吃掉啦！(x.x秒后才能发送新的答案）`
+:::
 
 ### 2.7 Play Count (PC)
 

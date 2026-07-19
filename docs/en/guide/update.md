@@ -2,6 +2,23 @@
 
 ## July 2026
 
+### 2026/07/19
+<Badge type="tip" text="New Feature" />
+
+- **Letter board** (`舞萌开字母` / `开字母`) — multi-song title letter board; send a letter or alias during play, or use `开歌`; end with `不玩了`
+- Letter-complete titles award the completer (✅ 字母补齐); scoring lowered: open letter ≤2, complete 2–4, active solve 3–8
+- **Guess answer rate limit** — 3 seconds per user globally (text / jacket / audio / chart / letter); over-limit reply: “嘿嘿，你的答案被我吃掉啦！”
+- **`舞萌状态` / `mais`** — “服务器失败率” chart from full account-operation logs (ticket / maiu / bind; `returnCode=0` counts as failure; empty buckets omitted) plus live Status API
+
+<Badge type="warning" text="Optimization" />
+
+- Unified storage MySQL sync: skip pack when unchanged; reuse unchanged files; startup sync runs in background
+- `我的AWMC` / admin `发票统计` show ticket `returnCode=0` and null/missing counts
+
+::: tip Docs
+See [Command Reference · Song Guessing](/en/guide/bot/advanced#26-song-guessing).
+:::
+
 ### 2026/07/18
 <Badge type="warning" text="Docs / API" />
 
