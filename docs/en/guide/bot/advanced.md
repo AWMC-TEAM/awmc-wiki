@@ -205,7 +205,7 @@ Requires `开启mai猜歌`. Mutually exclusive with other guess modes in the sam
 - **No in-round points/BREAK**; settle after full clear by **speed stars + contribution**
 - Elapsed shown as `xx.xxx` seconds; star caps adapt from group history (default ≤30/45/60/90/180s; 5★ floor 15s)
 - Contribution weights: open letter ×1, complete ×3, solve ×4; no contribution → no reward
-- Settlement attaches score / contribution / time charts; also queryable via the commands above
+- Settlement order: ① clear text (elapsed `xx.xxx`s + stars + pool) ② round split chart ③ final board; also queryable via the commands above
 - `不玩了` / `结束开字母` reveals remaining titles **without** speed/contribution rewards
 :::
 
