@@ -196,7 +196,13 @@ Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
 | `猜歌积分排行` | Total points leaderboard |
 | `猜歌积分日榜` / `周榜` / `月榜` / `年榜` / `赛季榜` | Period leaderboards |
 | `猜歌历史日榜` / `周榜` / `月榜` / `年榜` / `赛季榜` | Historical period boards |
-| `我的猜歌` / `猜歌数据` / `猜歌统计` | Personal 4-mode trend + recent correct-guess details (excludes letter board) |
+| `我的猜歌` / `猜歌数据` / `猜歌统计` | Personal 5-mode 30-day trend + points/count dual radar + mode cards & recent details; `我的猜歌 @user` for others |
+
+::: tip Personal guess stats
+- Five modes: text / jacket / audio / chart / letter (letter settlement counts under Letter)
+- Chart includes 30-day trend, mode cards, dual radar (points & counts), recent details; updates live after settlement
+- `@someone` views that member’s group stats, e.g. `我的猜歌 @Alice`; without at, shows yourself
+:::
 
 ::: tip Letter board
 Requires `开启mai猜歌`. Mutually exclusive with other guess modes in the same group.

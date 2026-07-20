@@ -4,7 +4,8 @@
 
 ### 2026/07/20
 
-- **我的猜歌** / `猜歌数据` / `猜歌统计` — Personal 4-mode (text / jacket / audio / chart) 30-day points trend and recent correct-guess details; excludes letter-board settlement points
+- **我的猜歌** / `猜歌数据` / `猜歌统计` — Personal 5-mode (text / jacket / audio / chart / letter) 30-day trend, dual radar (points & counts), mode cards & recent details; updates live after correct guesses and letter settlement
+- Supports `我的猜歌 @user` / `猜歌数据 @user` to view another member’s group stats (guessing must be enabled in the group)
 
 ### 2026/07/19
 <Badge type="tip" text="New Feature" />
