@@ -2,6 +2,10 @@
 
 ## July 2026
 
+### 2026/07/20
+
+- **我的猜歌** / `猜歌数据` / `猜歌统计` — Personal 4-mode (text / jacket / audio / chart) 30-day points trend and recent correct-guess details; excludes letter-board settlement points
+
 ### 2026/07/19
 <Badge type="tip" text="New Feature" />
 
