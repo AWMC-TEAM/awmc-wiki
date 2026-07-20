@@ -187,7 +187,7 @@ Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
 | `猜歌` | Text guessing |
 | `猜曲绘` | Jacket guessing |
 | `猜曲子` | Audio guessing |
-| `猜铺面` / `猜谱面` | Chart-video guessing (no BGM/background; with answer chime and countdown) |
+| `猜铺面` / `猜谱面` | Chart-video guessing (muted early phase, ending BGM; answer chime and countdown) |
 | `舞萌开字母` / `开字母` | Multi-song letter board (default 8 titles); timed settlement after full clear |
 | `开字母排行` / `开字母积分榜` | Group letter score board (image) |
 | `开字母贡献榜` | Group letter contribution board (image) |
@@ -202,6 +202,7 @@ Achievements: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
 - Five modes: text / jacket / audio / chart / letter (letter settlement counts under Letter)
 - Chart includes 30-day trend, mode cards, dual radar (points & counts), recent details; updates live after settlement
 - `@someone` views that member’s group stats, e.g. `我的猜歌 @Alice`; without at, shows yourself
+- In-group `我的AWMC` automatically attaches the group guess-stats image (failure does not block account status)
 :::
 
 ::: tip Letter board
@@ -212,16 +213,18 @@ Requires `开启mai猜歌`. Mutually exclusive with other guess modes in the sam
 - **No in-round points/BREAK**; settle after full clear by **speed stars + contribution**
 - Elapsed shown as `xx.xxx` seconds; star caps adapt from group history (default ≤30/45/60/90/180s; 5★ floor 15s)
 - Contribution weights: open letter ×1, complete ×3, solve ×4; no contribution → no reward
+- **Limited ×3**: for one week, settlement score & BREAK ×3; text/boards show “限时×3”; auto-reverts to 1×
 - Settlement order: ① clear text (elapsed `xx.xxx`s + stars + pool) ② round split chart ③ final board; also queryable via the commands above
+- **Text mode**: when contributors or short-window burst hits threshold, in-round boards fall back to plain text; clear settlement still forces images
+- Separate **2.5s/user** cooldown off-peak (independent of the global guess limit below); skipped in text mode
 - `不玩了` / `结束开字母` reveals remaining titles **without** speed/contribution rewards
 :::
 
 ::: warning Answer rate limit
-One answer every **3 seconds** per user globally (text / jacket / audio / chart / letter). Over limit:
+One answer every **2.5 seconds** per user globally (text / jacket / audio / chart). Over limit:
 
 `嘿嘿，你的答案被我吃掉啦！(x.x秒后才能发送新的答案）`
 :::
-
 ### 2.7 Play Count (PC)
 
 | Command | Description |
@@ -278,7 +281,7 @@ B50 uses Diving Fish or Lxns per preference; some features fall back to Diving F
 | Command | Description |
 |---------|-------------|
 | `AWMC签到` | Daily check-in for BREAK |
-| `我的AWMC` | Account status and usage |
+| `我的AWMC` | Account status and usage; in-group attaches guess-stats image |
 | `AWMC帮助` | BREAK system help |
 
 > First actual score-API request per day is free; each later request costs 1 BREAK (cache hits are free).

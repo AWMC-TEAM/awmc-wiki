@@ -81,7 +81,7 @@ https://wq.wahlap.net/qrcode/req/MAID....html
 | 指令 | 说明 |
 |---|---|
 | `AWMC签到` / `签到` | 每日签到 |
-| `我的AWMC` | 查看 BREAK、连续签到、调用统计、最近流水，以及发票成功/失败率与 `returnCode=0` 统计 |
+| `我的AWMC` | 查看 BREAK、连续签到、调用统计、最近流水，以及发票成功/失败率与 `returnCode=0` 统计；群内自动附带本群猜歌数据图 |
 | `AWMC帮助` | 查看价格与奖励说明 |
 | `转账BREAK @用户 数量` | 转账 |
 | `BREAK抽奖 [1-10]` | 抽奖；默认每次消耗 2 BREAK |

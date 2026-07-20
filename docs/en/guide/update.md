@@ -3,24 +3,31 @@
 ## July 2026
 
 ### 2026/07/20
+AWMC Version `V26.8.7` [AWMC V2]
 
-- **我的猜歌** / `猜歌数据` / `猜歌统计` — Personal 5-mode (text / jacket / audio / chart / letter) 30-day trend, dual radar (points & counts), mode cards & recent details; updates live after correct guesses and letter settlement
-- Supports `我的猜歌 @user` / `猜歌数据 @user` to view another member’s group stats (guessing must be enabled in the group)
-
-### 2026/07/19
 <Badge type="tip" text="New Feature" />
 
 - **Letter board timed settlement** — no in-round points/BREAK; after full clear, award by speed stars + contribution; elapsed shown as `xx.xxx` seconds
 - **Adaptive star caps** — default ≤30/45/60/90/180s; tighten from group history P35 (5★ between 15–30s); settlement shows active thresholds
-- **Settlement UX** — short text (elapsed `xx.xxx`s + stars + pool) → round split chart → final board; query with `开字母排行` / `开字母贡献榜` / `开字母时间榜`
-- `不玩了` reveals only — no speed/contribution rewards
-- **Guess answer rate limit** — 3 seconds per user globally (text / jacket / audio / chart / letter); over-limit reply: “嘿嘿，你的答案被我吃掉啦！”
-- **`舞萌状态` / `mais`** — “服务器失败率” chart from full account-operation logs (ticket / maiu / bind; `returnCode=0` counts as failure; empty buckets omitted) plus live Status API
+- **Settlement UX** — short text (elapsed `xx.xxx`s + stars + pool) → round split chart → final board; `不玩了` reveals only (no speed/contribution rewards)
+- **Letter limited ×3** — for one week, letter settlement score & BREAK ×3; text and boards show “限时×3”; auto-reverts to 1× after the event
+- **Letter boards** — `开字母排行` / `开字母贡献榜` / `开字母时间榜`
+- **我的猜歌** / `猜歌数据` / `猜歌统计` — personal 5-mode (text / jacket / audio / chart / letter) 30-day trend, dual radar, mode cards & recent details; `我的猜歌 @user` for others; group `我的AWMC` attaches the guess-stats image
+- **`舞萌状态` / `mais`** — “服务器失败率” chart from full account-operation logs (ticket / maiu / bind; `returnCode=0` = failure; empty buckets omitted) plus live Status API
+- **Guess-chart BGM** — precache ending-phase chart video with muxed BGM; rendering isolated from the online bot path
 
 <Badge type="warning" text="Optimization" />
 
-- Unified storage MySQL sync: skip pack when unchanged; reuse unchanged files; startup sync runs in background
+- **Guess answer rate limit** — 2.5 seconds per user globally (text / jacket / audio / chart); over-limit: “嘿嘿，你的答案被我吃掉啦！”
+- **Letter cooldown** — separate 2.5s/user cooldown off-peak (same tip text; independent of global guess limit); skipped in crowded text mode
+- **Letter text mode** — when contributors or short-window burst hits threshold, in-round boards fall back to plain text; clear settlement still forces images
+- **Guess-chart adaptive concurrency** — scale precache/backfill by load; throttle under load so the bot stays responsive
+- Unified storage MySQL sync: skip pack when unchanged; reuse unchanged files; startup sync in background
 - `我的AWMC` / admin `发票统计` show ticket `returnCode=0` and null/missing counts
+
+<Badge type="danger" text="Bug Fix" />
+
+- Guess-stats chart layout: trend legend/title on separate lines; radar labels pushed out to avoid overlap
 
 ::: tip Docs
 See [Command Reference · Song Guessing](/en/guide/bot/advanced#26-song-guessing).
