@@ -198,7 +198,83 @@ GET https://api.wmc.pub/api/docs
 
 返回各路径、方法、**消耗** 与简要说明，便于脚本读取。
 
-## 5. 常见错误
+## 5. 调用用量与失败率
+
+### 5.1 用量统计（需鉴权）
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/me/usage` | 本人调用明细分页（`limit` / `offset`） |
+| GET | `/me/usage/stats` | 本人日粒度统计；`days` 可选 `7` / `14` / `30`（默认 7） |
+
+### 5.2 失败率（半小时精度）
+
+| 方法 | 路径 | 鉴权 | 范围 |
+|------|------|------|------|
+| GET | `/usage/failure-rate` | **无需** | **全站** |
+| GET | `/me/usage/failure-rate` | Bearer 令牌 | 本人 |
+
+```http
+GET https://api.wmc.pub/usage/failure-rate
+GET https://api.wmc.pub/me/usage/failure-rate
+```
+
+- **窗口**：固定近 **7 天**
+- **精度**：固定 **30 分钟** 一桶（共 336 个点，空桶补 0）
+- **范围字段**：响应含 `scope`：`global`（全站）或 `user`（本人）
+- **写入字段**：调用日志会记录上游业务码 `upstreamCode`（优先解析响应体 `code`，其次 `returnCode` / `returncode`）
+
+**分类定义**
+
+| 字段 | 含义 |
+|------|------|
+| `codeZero` | `upstreamCode === 0`（业务成功） |
+| `businessFail` | HTTP 2xx 且存在 `upstreamCode` 且不为 0 |
+| `serverError` | `httpStatus === 0`（网关转发异常）或 `httpStatus >= 500` |
+| `clientError` | HTTP 4xx |
+| `successRate` | `codeZero / calls` |
+| `failureRate` | `(businessFail + serverError) / calls` |
+
+**响应示例（截断）**
+
+```json
+{
+  "scope": "global",
+  "days": 7,
+  "bucketMinutes": 30,
+  "since": "2026-07-14T06:00:00.000Z",
+  "until": "2026-07-21T05:30:00.000Z",
+  "series": [
+    {
+      "ts": "2026-07-14T06:00:00.000Z",
+      "bucketUnix": 1720936800,
+      "calls": 12,
+      "codeZero": 10,
+      "businessFail": 1,
+      "serverError": 1,
+      "clientError": 0,
+      "successRate": 0.8333,
+      "failureRate": 0.1667
+    }
+  ],
+  "summary": {
+    "calls": 1200,
+    "codeZero": 1100,
+    "businessFail": 50,
+    "serverError": 30,
+    "clientError": 20,
+    "successRate": 0.9167,
+    "failureRate": 0.0667
+  }
+}
+```
+
+::: tip 说明
+本接口上线前的历史日志可能没有 `upstreamCode`，这些记录不会计入 `codeZero` / `businessFail`，但仍可能因 HTTP 状态计入 `serverError` / `clientError`。  
+管理员另可使用 `GET /admin/usage/failure-rate`（与全站接口数据相同）。
+:::
+
+## 6. 常见错误
 
 | HTTP | 说明 |
 |------|------|

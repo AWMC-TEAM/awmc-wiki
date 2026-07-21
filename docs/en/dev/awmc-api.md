@@ -198,7 +198,83 @@ GET https://api.wmc.pub/api/docs
 
 Returns path, method, **cost**, and short descriptions for scripting.
 
-## 5. Common Errors
+## 5. Usage & Failure Rate
+
+### 5.1 Usage stats (auth required)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/me/usage` | Paginated call log (`limit` / `offset`) |
+| GET | `/me/usage/stats` | Daily aggregates; `days` = `7` / `14` / `30` (default 7) |
+
+### 5.2 Failure rate (30-minute buckets)
+
+| Method | Path | Auth | Scope |
+|--------|------|------|-------|
+| GET | `/usage/failure-rate` | **None** | **Site-wide** |
+| GET | `/me/usage/failure-rate` | Bearer token | Current user |
+
+```http
+GET https://api.wmc.pub/usage/failure-rate
+GET https://api.wmc.pub/me/usage/failure-rate
+```
+
+- **Window**: fixed last **7 days**
+- **Resolution**: fixed **30-minute** buckets (336 points; empty buckets filled with zeros)
+- **Scope field**: response includes `scope`: `global` (site-wide) or `user` (personal)
+- **Logged field**: `upstreamCode` from response body (`code`, else `returnCode` / `returncode`)
+
+**Definitions**
+
+| Field | Meaning |
+|-------|---------|
+| `codeZero` | `upstreamCode === 0` (business success) |
+| `businessFail` | HTTP 2xx with non-zero `upstreamCode` |
+| `serverError` | `httpStatus === 0` (forwarding error) or `httpStatus >= 500` |
+| `clientError` | HTTP 4xx |
+| `successRate` | `codeZero / calls` |
+| `failureRate` | `(businessFail + serverError) / calls` |
+
+**Sample response (truncated)**
+
+```json
+{
+  "scope": "global",
+  "days": 7,
+  "bucketMinutes": 30,
+  "since": "2026-07-14T06:00:00.000Z",
+  "until": "2026-07-21T05:30:00.000Z",
+  "series": [
+    {
+      "ts": "2026-07-14T06:00:00.000Z",
+      "bucketUnix": 1720936800,
+      "calls": 12,
+      "codeZero": 10,
+      "businessFail": 1,
+      "serverError": 1,
+      "clientError": 0,
+      "successRate": 0.8333,
+      "failureRate": 0.1667
+    }
+  ],
+  "summary": {
+    "calls": 1200,
+    "codeZero": 1100,
+    "businessFail": 50,
+    "serverError": 30,
+    "clientError": 20,
+    "successRate": 0.9167,
+    "failureRate": 0.0667
+  }
+}
+```
+
+::: tip Note
+Logs written before this feature may lack `upstreamCode`; they will not count toward `codeZero` / `businessFail`, but may still contribute to `serverError` / `clientError` via HTTP status.  
+Admins can also call `GET /admin/usage/failure-rate` (same data as the site-wide endpoint).
+:::
+
+## 6. Common Errors
 
 | HTTP | Meaning |
 |------|---------|
