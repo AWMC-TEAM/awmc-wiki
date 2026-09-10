@@ -114,7 +114,7 @@ Application method: Submit through our contact channels.
 
 ### 7.1 Free Service
 
-The basic features of this Service are provided free of charge.
+This Service is a community-driven **semi-nonprofit project**. Basic and core features are **permanently free**, and we **do not charge any mandatory fees**; not sponsoring will not affect the normal use of core features.
 
 ### 7.2 Paid Features
 
@@ -129,10 +129,19 @@ Specific availability is subject to actual offerings.
 
 * All paid content is non-refundable once completed without valid reason
 * Compensation or adjustments will be made for service unavailability due to technical failures
+* If sponsored benefits fail to take effect due to technical failures, please contact us for verification; adjustments or compensation will be made on a case-by-case basis
 
 ### 7.4 Sponsorship Nature
 
-Voluntary user sponsorship is considered development support and is not treated as mandatory paid service.
+Voluntary user sponsorship is considered development support and is not treated as mandatory paid service. Sponsorship can be stopped at any time, and stopping it will not affect your access to free core features.
+
+### 7.5 Fund Usage and Transparency
+
+Sponsorship income covers necessary operating costs such as servers, domains, and bandwidth, with part going to **charitable donations** and other community-benefiting causes. Specific income, expenses, and charity records are published on the official forum.
+
+### 7.6 Responsible Consumption
+
+We encourage **responsible consumption** - support us within your means and avoid impulsive spending. Users under 18 must obtain guardian consent before any sponsorship or payment.
 
 
 
@@ -178,11 +187,13 @@ Severe cases may be handled without prior notice.
 
 ## 10. Disclaimer
 
-The Service is provided "as is." We do not guarantee:
+The Service is provided "as is." **We provide no SLA (Service Level Agreement) commitment whatsoever**, including but not limited to uptime, response time, and time-to-recovery. We do not guarantee:
 
 * Service stability
 * Data accuracy
 * Third-party API availability
+
+Service features may be updated, changed, or discontinued at any time **without prior notice**.
 
 We are not responsible for issues caused by:
 
@@ -197,19 +208,15 @@ AWMC TEAM is not responsible for any adverse consequences resulting from the use
 
 ## 11. Service Changes and Interruptions
 
-Under the following circumstances:
-
-* System maintenance
-* Technical upgrades
-* Unexpected failures
-
-We will notify users through the official group and status page.
+We may perform system maintenance, technical upgrades, or respond to unexpected failures, and will **make reasonable efforts** to notify users through the official group and status page in advance. Emergency fixes, feature changes, or service discontinuation are made **without prior notice**.
 
 
 
 ## 12. Minor Protection
 
-Minors should use the Service with parental consent.
+Minors should use the Service with parental consent. Users under 18 must obtain guardian consent before any sponsorship or payment.
+
+We encourage responsible consumption - any purchase or sponsorship should be made within one's means.
 
 **All user-related purchases are non-refundable.**
 

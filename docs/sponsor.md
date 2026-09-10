@@ -68,9 +68,7 @@ AWMC 会把赞助收入的一部分用于**公益捐赠** —— 让这份支持
 
 如果您喜欢我们的服务的话，可以赞助我们喵呜~ 请我们打 1PC 嘛~
 
-### 方式一：爱发电（推荐）
-
-按月赞助，可持续支持，也能看到实时进度与目标。
+目前唯一的官方赞助渠道是**爱发电**：可以按月持续支持，也可以一次性打赏，还能看到实时进度与目标喵～
 
 ::: tip 推荐理由
 爱发电是**公开透明**的：有详细记录，按月支付，比一次性转账更能支撑长期运维。
@@ -84,18 +82,8 @@ AWMC 会把赞助收入的一部分用于**公益捐赠** —— 让这份支持
 
 当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://afdian.com/a/AWMC_TEAM)实时展示为准。
 
-### 方式二：收银台（微信 / 支付宝）
-
-适合一次性赞助，支持微信与支付宝。
-
-<p style="text-align:center;margin:1.5rem 0">
-  <a href="https://xarr.xiaxt.com/cashier/5edadfd5c8" target="_blank" rel="noopener" class="sponsor-btn">
-    💚 使用收银台赞助
-  </a>
-</p>
-
 ::: warning 赞助后想留名？
-由于订单较多，通过收银台赞助后如果需要出现在赞助名单中，请**携带订单号**在 [AWMC BBS 赞助名单帖](https://awmc.cc/threads/91/post-267) 下回复。
+由于订单较多，赞助后如果需要出现在赞助名单中，请**携带爱发电订单号**在 [AWMC BBS 赞助名单帖](https://awmc.cc/threads/91/post-267) 下回复。
 :::
 
 ## 赞助名单
@@ -103,6 +91,23 @@ AWMC 会把赞助收入的一部分用于**公益捐赠** —— 让这份支持
 所有赞助者的名单会在 [AWMC BBS 赞助名单帖](https://awmc.cc/threads/91/post-267) 中永久展示，排名不分先后。
 
 感谢每一位支持过 AWMC 的朋友 —— 无论金额大小 :heart:
+
+## 🙏 特别鸣谢
+
+AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支持，让我们的舞台越来越大、跑得越来越稳喵～
+
+<div class="thanks-grid">
+  <a class="thanks-card" href="https://hoshinoai.com.cn?referee=AWMC" target="_blank" rel="noopener">
+    <div class="thanks-name">沐泽万物</div>
+    <div class="thanks-desc">感谢沐泽万物为 AWMC 提供的服务与支持，为社区带来更多可能。</div>
+    <div class="thanks-link">hoshinoai.com.cn ↗</div>
+  </a>
+  <a class="thanks-card" href="https://console.cdn.speedonline.cloud/#/hello/7DE8ZCCK" target="_blank" rel="noopener">
+    <div class="thanks-name">SpeedOnline</div>
+    <div class="thanks-desc">感谢 SpeedOnline 的 CDN 加速支持，让谱面与图片的加载又快又稳。</div>
+    <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
+  </a>
+</div>
 
 ## 其他支持方式
 
@@ -148,5 +153,41 @@ AWMC 会把赞助收入的一部分用于**公益捐赠** —— 让这份支持
   border-color: var(--vp-c-brand-1);
   background-color: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
+}
+.thanks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.thanks-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--vp-c-border);
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+}
+.thanks-card:hover {
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+  transform: translateY(-2px);
+}
+.thanks-card .thanks-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.thanks-card .thanks-desc {
+  font-size: 0.95rem;
+  color: var(--vp-c-text-2);
+  margin-bottom: 0.6rem;
+}
+.thanks-card .thanks-link {
+  font-size: 0.85rem;
+  color: var(--vp-c-brand-1);
+  word-break: break-all;
 }
 </style>

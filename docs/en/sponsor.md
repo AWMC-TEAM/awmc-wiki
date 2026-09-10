@@ -66,9 +66,7 @@ None of this comes from sponsorship income. So don't be shy — come join in.
 
 Your support is more than welcome. If you enjoy what we do, feel free to treat us — even just one round of maimai! 🎮
 
-### Option 1: Afdian (Recommended)
-
-Monthly sponsorship — sustainable support with visible goals and progress.
+**Afdian** is our only official sponsorship channel: support us monthly or send a one-time tip, with goals and progress visible in real time.
 
 ::: tip Why Afdian?
 Afdian is **public and transparent**: every record is traceable, and recurring monthly support helps far more with long-term maintenance than one-off transfers.
@@ -82,18 +80,8 @@ Afdian is **public and transparent**: every record is traceable, and recurring m
 
 Goal progress, tiers and the sponsor list are all shown live on the [Afdian page](https://afdian.com/a/AWMC_TEAM).
 
-### Option 2: Cashier (WeChat Pay / Alipay)
-
-Best for one-time contributions.
-
-<p style="text-align:center;margin:1.5rem 0">
-  <a href="https://xarr.xiaxt.com/cashier/5edadfd5c8" target="_blank" rel="noopener" class="sponsor-btn">
-    💚 Sponsor via Cashier
-  </a>
-</p>
-
 ::: warning Want to be listed?
-Orders can be hard to match. If you sponsor via the cashier and want to appear in the sponsor list, please reply in the [AWMC BBS sponsor thread](https://awmc.cc/threads/91/post-267) **with your order number**.
+Orders can be hard to match. If you want to appear in the sponsor list, please reply in the [AWMC BBS sponsor thread](https://awmc.cc/threads/91/post-267) **with your Afdian order number**.
 :::
 
 ## Sponsor List
@@ -101,6 +89,23 @@ Orders can be hard to match. If you sponsor via the cashier and want to appear i
 Every sponsor is listed permanently in the [AWMC BBS sponsor thread](https://awmc.cc/threads/91/post-267), in no particular order.
 
 Thank you to everyone who has supported AWMC — every amount counts :heart:
+
+## 🙏 Special Thanks
+
+AWMC keeps growing thanks to the partners standing beside us. Thank you for making our stage bigger and our services more stable!
+
+<div class="thanks-grid">
+  <a class="thanks-card" href="https://hoshinoai.com.cn?referee=AWMC" target="_blank" rel="noopener">
+    <div class="thanks-name">沐泽万物 (HoshinoAI)</div>
+    <div class="thanks-desc">Thank you for the services and support you provide to AWMC.</div>
+    <div class="thanks-link">hoshinoai.com.cn ↗</div>
+  </a>
+  <a class="thanks-card" href="https://console.cdn.speedonline.cloud/#/hello/7DE8ZCCK" target="_blank" rel="noopener">
+    <div class="thanks-name">SpeedOnline</div>
+    <div class="thanks-desc">Thank you for the CDN acceleration that keeps charts and images loading fast.</div>
+    <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
+  </a>
+</div>
 
 ## Other Ways to Help
 
@@ -144,5 +149,41 @@ Thank you for loving AWMC. :heart:
   border-color: var(--vp-c-brand-1);
   background-color: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
+}
+.thanks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.thanks-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--vp-c-border);
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+}
+.thanks-card:hover {
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+  transform: translateY(-2px);
+}
+.thanks-card .thanks-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.thanks-card .thanks-desc {
+  font-size: 0.95rem;
+  color: var(--vp-c-text-2);
+  margin-bottom: 0.6rem;
+}
+.thanks-card .thanks-link {
+  font-size: 0.85rem;
+  color: var(--vp-c-brand-1);
+  word-break: break-all;
 }
 </style>

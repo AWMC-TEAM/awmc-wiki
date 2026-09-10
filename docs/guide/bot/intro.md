@@ -1,8 +1,20 @@
 # AWMC QueryBot 使用说明
 
+<div class="add-bot-banner">
+  <div class="add-bot-title">🤖 添加 AWMC Bot</div>
+  <div class="add-bot-text">欢迎添加机器人，或把它拉入你自己的群组，一起查分、排卡、猜歌喵～</div>
+  <a class="add-bot-btn" href="https://bot.q.qq.com/s/uYVc4fV6nK" target="_blank" rel="noopener">点击添加 AWMC Bot</a>
+</div>
+
 ::: tip ☕ 支持 AWMC
 AWMC 的全部服务永久免费，但维持运转需要真实成本。如果 AWMC 帮到了你，欢迎
 [赞助支持我们](https://afdian.com/a/AWMC_TEAM)，每一份心意都会让服务更稳定喵～
+:::
+
+::: danger ⚠️ QQ 机器人限制
+由于 QQ 机器人平台限制，如果想要使用**排卡**、**猜歌游戏**等群功能，需要群主在群管理中将 Bot 设置为「允许获取全部消息」，才能获得最佳体验。
+
+设置方法：[把 Bot 拉进自己的群](#add-to-group)。
 :::
 
 账号绑定、成绩上传、PC 同步、查分与 BREAK 互动现已合并在同一个 QueryBot 中，
@@ -344,19 +356,24 @@ qbind状态
 发送「切换兼容模式」或「标准模式」可恢复 Markdown 和快捷按钮。
 
 
+<a id="add-to-group"></a>
+
 ## 十一、把 Bot 拉进自己的群（群主/管理员）
 
-Bot 支持拉入其他 QQ 群使用。如果你是群主或管理员，希望 Bot 无需 @ 即可回复消息、
-正常游玩猜歌等功能，请按以下步骤设置：
+Bot 支持拉入其他 QQ 群使用。如果你是群主或管理员，希望 Bot 无需 @ 即可回复消息、正常游玩猜歌等功能，请按以下步骤设置。
 
-1. 点击 Bot 的个人主页，点击右上角设置按钮；
-2. 将 Bot 修改为「允许查看所有消息」。
-   注意：开启后其他 Bot 会重复读取群消息，可能造成重复回复；
-3. 允许 Bot 主动推送消息（保证猜歌等功能可用）；
+1. 打开 Bot 的个人主页，点击右上角的设置按钮。
+2. 把 Bot 修改为「允许查看所有消息」。
+3. 允许 Bot 主动推送消息，保证猜歌等功能可用。
 4. 如需 Bot 自动撤回消息，请在群管理中把 Bot 添加为管理员。
 
-如遇问题请联系负责管理员；
-午高峰和晚高峰可能会有所卡顿，请耐心等待。
+::: warning 开启「允许查看所有消息」的影响
+群里的其他 Bot 也会一并读取群消息，可能出现重复回复的情况。
+:::
+
+如遇问题请联系负责管理员。
+
+午高峰和晚高峰服务可能会有所卡顿，请耐心等待。
 
 
 ## 十二、更多指令
@@ -364,3 +381,45 @@ Bot 支持拉入其他 QQ 群使用。如果你是群主或管理员，希望 Bo
 - [完整指令帮助](/guide/bot/advanced)
 - [服务协议与隐私政策](/guide/bot/terms)
 - [术语解释](/guide/bot/explain)
+
+<style>
+.add-bot-banner {
+  margin: 1.25rem 0 1.75rem;
+  padding: 1.5rem 1.75rem;
+  text-align: center;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 10px;
+  background-color: var(--vp-c-brand-soft);
+}
+.add-bot-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+.add-bot-text {
+  margin: 0.5rem auto 1rem;
+  max-width: 34rem;
+  color: var(--vp-c-text-2);
+}
+.add-bot-banner .add-bot-btn,
+.vp-doc .add-bot-banner .add-bot-btn {
+  display: inline-block;
+  padding: 0.65rem 1.6rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  text-decoration: none !important;
+  color: var(--vp-c-white);
+  background-color: var(--vp-c-brand-1);
+  border: 1px solid var(--vp-c-brand-1);
+  transition: all 0.25s ease;
+}
+.add-bot-banner .add-bot-btn:hover,
+.vp-doc .add-bot-banner .add-bot-btn:hover {
+  color: var(--vp-c-white);
+  background-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+  transform: translateY(-1px);
+}
+</style>

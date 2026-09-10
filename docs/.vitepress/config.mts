@@ -89,6 +89,20 @@ export default defineConfig({
                 { text: '指令调用', link: '/guide/bot/commands'},
                 { text: '授权获取', link: '/guide/bot/verify'},
               ]
+            },
+            {
+              text: '❤️ 赞助支持',
+              items: [
+                { text: '赞助支持', link: '/sponsor' }
+              ]
+            }
+          ],
+          '/sponsor': [
+            {
+              text: '❤️ 赞助支持',
+              items: [
+                { text: '赞助支持', link: '/sponsor' }
+              ]
             }
           ],
           '/dev/': [
@@ -164,6 +178,20 @@ export default defineConfig({
                 { text: 'Terminology', link: '/en/guide/bot/explain' },
                 { text: 'Commands', link: '/en/guide/bot/commands' },
                 { text: 'Authorization', link: '/en/guide/bot/verify' }
+              ]
+            },
+            {
+              text: '❤️ Sponsor',
+              items: [
+                { text: 'Sponsor AWMC', link: '/en/sponsor' }
+              ]
+            }
+          ],
+          '/en/sponsor': [
+            {
+              text: '❤️ Sponsor',
+              items: [
+                { text: 'Sponsor AWMC', link: '/en/sponsor' }
               ]
             }
           ],
