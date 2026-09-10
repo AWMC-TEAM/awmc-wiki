@@ -12,6 +12,32 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 - **"Single-song-level B50" meaning** — Clarified that this feature filters the specified level or constant from the user's full scores, recalculates per-song Rating, and forms a conditional B50; it is not a single-song query, nor a list of the whole song library at that level.
 - **Command list completion** — Compared against source code and added `同步b50`, `年报`, class schedules, Diving Fish OAuth, queue cards, welfare pool, `dx2025b50`, `锐评风格`, plus admin commands for card codes, announcements, and QQ platform configuration.
 
+### 2026/09/10
+
+<Badge type="tip" text="New Feature" />
+
+- **Group management console** — Send `群管理` (aliases `管理后台` / `群后台`) to get a
+  one-time login link for the group's web panel. In the browser you can toggle group features,
+  view 1/7/30/90-day group statistics, manage arcade queues and weather, customize message
+  templates (super admin) and grant member roles. `后台身份` shows your current identity.
+  See [Group Console](/en/guide/bot/group-console).
+- **Sponsor leaderboard** — Added `赞助` / `赞助榜` / `本月赞助`, which reads Afdian's open
+  data to build the current-month sponsor leaderboard. Amounts are hidden by default; admins can
+  enable them with `BREAK配置 sponsor_show_amount 1`.
+- **Check-in bonus management** — Added `加成设置` / `加成管理` / `加成配置`; admins can add,
+  edit, toggle, and delete dynamic weekly / group / date / streak check-in bonus rules, and set a
+  global bonus with `设置全局签到加成`. Regular users can view active bonuses with `查看加成` /
+  `加成总览` / `加成列表`.
+- **Maintenance mode** — Added `维护模式 [开/关]` and `维护消息 <text>`; regular features are
+  intercepted during maintenance with a unified notice, while super admins can keep operating.
+- **Card-code store** — Added `卡密商店` / `BREAK商店` so users can see where to buy card codes
+  when their BREAK balance is low.
+- **Official QQ menu & command panels** — Added `设置QQ菜单`, `设置QQ面板` / `QQ面板列表` /
+  `QQ面板详情` / `删除QQ面板` to push the C2C bottom menu and c2c/group command panels.
+- **Queue & weather enhancements** — Queue cards now support Nearcade store autofill,
+  configurable query / report / predict templates, daily weather digests and severe-weather
+  alerts; the group console manages arcades and weather in one place.
+
 ## August 2026
 
 ### 2026/08/10

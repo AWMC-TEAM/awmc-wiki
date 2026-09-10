@@ -80,6 +80,25 @@ Afdian is **public and transparent**: every record is traceable, and recurring m
 
 Goal progress, tiers and the sponsor list are all shown live on the [Afdian page](https://afdian.com/a/AWMC_TEAM).
 
+## 🤖 Sponsor Leaderboard in the Bot
+
+Send this command to AWMC Bot:
+
+```text
+赞助
+```
+
+Aliases: `赞助榜`, `本月赞助`.
+
+The bot reads Afdian's open order data and builds a **current-month** sponsor leaderboard with
+names and ranks (🥇 / 🥈 / 🥉). Amounts are hidden by default to avoid public comparisons;
+admins can enable them with `BREAK配置 sponsor_show_amount 1`.
+
+::: tip Note
+The leaderboard only counts successful orders in the current month from Afdian's public data.
+When there are none, the bot replies "本月还没有公开赞助记录～".
+:::
+
 ::: warning Want to be listed?
 Orders can be hard to match. If you want to appear in the sponsor list, please reply in the [AWMC BBS sponsor thread](https://awmc.cc/threads/91/post-267) **with your Afdian order number**.
 :::

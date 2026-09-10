@@ -26,6 +26,24 @@ fails, please manually recall it immediately and do not forward credentials to
 others.
 :::
 
+## 0. Quick Start
+
+Follow this order on your first use and you can query scores within five minutes:
+
+1. **Add the bot** — Click "Add AWMC Bot" at the top of this page, or have a group owner
+   invite the bot to your group. Before using group features, allow the bot to read all
+   messages in group settings (see [Section XI](/en/guide/bot/intro#xi-add-the-bot-to-your-own-group-group-owner-admin)).
+2. **Agree to the terms** — Send `用户协议`, read the web page, and reply with the full
+   confirmation phrase.
+3. **Bind your maimai account** — Send `mai绑定` and submit a `SGWCMAID...` or official QR
+   link. No Diving Fish / Lxns binding is required to query scores (AWMC NET is the default
+   score database).
+4. **Query scores** — Send `b50`, `ab50`, or `我的pc数` to get started; see
+   [Command Reference](/en/guide/bot/advanced) for the full list.
+5. **Group management & queue cards** — Group owners / admins send `群管理` to open the
+   [Group Console](/en/guide/bot/group-console) for feature switches, group stats, arcade
+   queues and weather.
+
 ## I. First-Time Setup
 
 ### 1. Read and confirm the user agreement

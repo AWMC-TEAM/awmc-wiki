@@ -94,6 +94,7 @@ See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaim
 | `兑换卡密 [code]` | Redeem BREAK / double / FREEDOM card codes, auto-redeemed in group and private chat (aliases `redeem` / `兑换码`) |
 | `我的卡密` | View active card-code bonuses (aliases `卡密状态` / `我的加成`) |
 | `卡密商店` / `BREAK商店` | View currently redeemable or purchasable card codes |
+| `查看加成` / `加成总览` / `加成列表` | View active check-in bonuses (including admin-configured weekly / group / date / streak campaigns) |
 | `抽奖池` / `贡献榜` | View the current welfare pool and today's contributions |
 | `领取福利` / `领福利` | Claim eligible welfare pool rewards |
 | `贡献总榜` / `首富榜` | View cumulative contribution ranking |
@@ -136,6 +137,7 @@ data corruption; you bear the risk yourself. See
 | `主题` | View or switch score chart theme |
 | `查看排名` | Global Rating leaderboard |
 | `我的排名` | Your Rating ranking |
+| `赞助` / `赞助榜` / `本月赞助` | View this month's sponsor leaderboard (amounts hidden by default; see [Sponsor](/en/sponsor)) |
 
 ### 2.2 Song Search
 
@@ -588,6 +590,11 @@ users don't need them.
 | `关闭BREAK计费` / `开启BREAK计费` | Temporarily toggle BREAK billing |
 | `群成员记录` | View official QQ group member mapping records |
 | `后台身份` | View the identity recognized by the group management backend |
+| `群管理` / `管理后台` / `群后台` | Get a one-time login link for the group management console (see [Group Console](/en/guide/bot/group-console)) |
+| `设置全局签到加成 <percent> [start date] [end date]` | Set a global check-in bonus; `0` / `off` / `关闭` disables it immediately |
+| `加成设置` / `加成管理` / `加成配置` | Manage check-in bonus rules: `添加` / `编辑` / toggle / `删除` (weekly / group / date / streak) |
+| `维护模式 [开/关]` | Enable or disable global maintenance mode |
+| `维护消息 <text>` | Set the maintenance notice shown to users |
 
 #### Appendix: QQ Poke
 
