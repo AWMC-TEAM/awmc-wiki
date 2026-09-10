@@ -193,6 +193,8 @@ We are not responsible for issues caused by:
 Some services provided by this BOT (such as ticket issuance, B50 upload, etc.) may negatively affect your maimai account. You should be aware of this.
 AWMC TEAM is not responsible for any adverse consequences resulting from the use of the above services.
 
+**If you're scared, don't use it. If you use it, don't be scared. ~~Woof woof.~~**
+
 ## 11. Service Changes and Interruptions
 
 Under the following circumstances:
@@ -209,7 +211,7 @@ We will notify users through the official group and status page.
 
 Minors should use the Service with parental consent.
 
-**Purchases made by minors are non-refundable.**
+**All user-related purchases are non-refundable.**
 
 
 
@@ -229,3 +231,12 @@ If you have questions, please contact:
 * Status Page: https://up.wmc.pub/
 
 The final interpretation of this agreement belongs to AWMC TEAM.
+
+Please make sure you have carefully read the above agreement before using our
+Service. When the agreement is updated, you will be asked to review and confirm
+it again. If you agree to the above terms, enter the following text when the
+bot asks for confirmation:
+
+```
+我已认真阅读网页中的服务说明，并已了解AWMC服务可能带来的风险。我了解因使用本服务，造成舞萌DX官方账号遭到封禁，责任和AWMC无关。我确认发送二维码可能会对我的账号产生安全影响，并愿意接受这样的风险。在阅读说明后，我同意上述协议。
+```

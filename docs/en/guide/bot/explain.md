@@ -14,6 +14,22 @@ Sorted from highest to lowest, the top 35 <abbr title="Songs not updated in the 
 
 Adding their Ratings together gives you the <abbr title="Translated as 'DX Rating' in CN server after maimai DX 2025">DX Rating</abbr>.
 
+### B50 Filter Syntax
+
+When querying B50, the following filters are independent of each other:
+
+- `紫b50` / `白b50`: filter by chart difficulty, corresponding to Master / Re:MASTER.
+- `三星b50` / `四星b50`: filter by the DX star count of the result, 3 stars / 4 stars.
+- `3b50` / `4b50` / `13+b50`: filter by numeric level or constant; these numbers are not DX stars.
+- `紫13+b50` / `14.0b50`: combine chart difficulty with level/constant, meaning purple chart 13+ and constant 14.0 respectively.
+- `<condition>ab50`: e.g. `13+ab50`, filter by the same condition but without splitting B35/B15; directly take the 50 highest-Rating songs from the filtered results.
+
+Therefore, "single-song-level B50" usually means viewing your best results at a
+specific level, e.g. sending `13+b50`. The Bot filters that level from your
+full score history, recalculates each song's Rating, then forms the conditional
+B35/B15 by old/new version; it is not querying one song, nor is it listing the
+entire song library at that level.
+
 ### B40
 
 Full name: Best 40.

@@ -22,7 +22,7 @@ apiBaseUrl: https://api.wmc.pub
 :::
 
 ::: tip 购买 Token
-额度通过 **卡密兑换** 充入账户。卡密可在商店购买：https://store.awmc.cc/item?id=98  
+额度通过 **卡密兑换** 充入账户。卡密可在[爱发电商城](https://afdian.com/a/AWMC_TEAM?tab=shop)购买。  
 兑换：控制台个人中心，或 `POST /redeem`（需登录令牌）。
 :::
 

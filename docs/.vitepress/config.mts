@@ -185,6 +185,7 @@ export default defineConfig({
               text: '🔧 AWMC API',
               items: [
                 { text: 'AWMC Public API', link: '/en/dev/awmc-api' },
+                { text: 'AWMCNET Bot API', link: '/en/dev/awmcnet-api' },
                 { text: 'Quotas and Rate Limits', link: '/en/dev/quota' },
                 { text: 'Assets Static Resource API', link: '/en/dev/assets-api' }
               ]

@@ -32,6 +32,18 @@ User data / chart queries, charge enqueue & queue, and score upload (DivingFish 
 - **Token Consumption**: Charged on HTTP success and upstream business success (`returnCode===1`, or `0` for health/ping). Public paths stay mostly compatible with legacy `/v1/*`.
 - **Documentation**: [View AWMC Public API Details](/en/dev/awmc-api)
 
+## AWMCNET Bot API (Base URL: `https://net.wmc.pub`)
+
+::: info Score Mirror & Queries
+Score sync interfaces for QueryBot and score checkers, supporting full-snapshot
+submission in chunks with a shared `snapshot_id` to avoid timeouts from large
+score packages in one request.
+:::
+
+- **Authentication**: <Badge type="warning" text="Bot-Token" />
+- **Main Endpoints**: `POST /api/bot/sync`, `GET /api/bot/player/{qq}`
+- **Documentation**: [View AWMCNET Bot API Details](/en/dev/awmcnet-api)
+
 ## Assets Static Resource API (Base URL: `{{ $frontmatter.assetsApiBaseUrl }}`)
 
 ::: info Static Resources
@@ -66,6 +78,7 @@ You can quickly access different module documentation via the following links:
 
 - [**Status API**](/en/dev/status-api) - Get real-time service status, heartbeat records, and announcements.
 - [**AWMC Public API**](/en/dev/awmc-api) - User queries, charge queue, score upload (DivingFish / Lxns).
+- [**AWMCNET Bot API**](/en/dev/awmcnet-api) - Score mirroring, player queries, and chunked snapshot sync.
 - [**Assets Static Resource API**](/en/dev/assets-api) - Jacket art, resource gallery, and other static file retrieval.
 - [**Chart Preview**](/en/dev/chart-preview) - In-browser chart preview and query parameter documentation.
 - [**Chart Review & Analysis API**](/en/dev/chart-preview-api) - REST API for chart queries, comments, ratings, score submissions, and rankings.

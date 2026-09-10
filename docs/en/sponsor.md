@@ -75,12 +75,12 @@ Afdian is **public and transparent**: every record is traceable, and recurring m
 :::
 
 <p style="text-align:center;margin:1.5rem 0">
-  <a href="https://ifdian.net/a/AWMC_TEAM" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
+  <a href="https://afdian.com/a/AWMC_TEAM" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
     💛 Sponsor on Afdian
   </a>
 </p>
 
-Goal progress, tiers and the sponsor list are all shown live on the [Afdian page](https://ifdian.net/a/AWMC_TEAM).
+Goal progress, tiers and the sponsor list are all shown live on the [Afdian page](https://afdian.com/a/AWMC_TEAM).
 
 ### Option 2: Cashier (WeChat Pay / Alipay)
 

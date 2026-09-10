@@ -77,12 +77,12 @@ AWMC 会把赞助收入的一部分用于**公益捐赠** —— 让这份支持
 :::
 
 <p style="text-align:center;margin:1.5rem 0">
-  <a href="https://ifdian.net/a/AWMC_TEAM" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
+  <a href="https://afdian.com/a/AWMC_TEAM" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
     💛 前往爱发电赞助
   </a>
 </p>
 
-当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://ifdian.net/a/AWMC_TEAM)实时展示为准。
+当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://afdian.com/a/AWMC_TEAM)实时展示为准。
 
 ### 方式二：收银台（微信 / 支付宝）
 

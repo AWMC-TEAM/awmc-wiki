@@ -22,7 +22,7 @@ Send:
 :::
 
 ::: tip Buy Tokens
-Top up with **card codes** from the store: https://store.awmc.cc/item?id=98  
+Top up with **card codes** from the [Afdian shop](https://afdian.com/a/AWMC_TEAM?tab=shop).  
 Redeem in the console or via `POST /redeem`.
 :::
 
