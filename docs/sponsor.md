@@ -20,6 +20,43 @@ AWMC 的全部服务由社区成员利用业余时间维护，**不接受任何�
 感谢您对 AWMC 的喜爱与支持！Ciallo～(∠・ω< )⌒☆
 :::
 
+## 🙏 特别鸣谢
+
+AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支持，让我们的舞台越来越大、跑得越来越稳喵～
+
+<div class="thanks-grid">
+  <a class="thanks-card" href="https://hoshinoai.com.cn?referee=AWMC" target="_blank" rel="noopener">
+    <div class="thanks-name">沐泽万物</div>
+    <div class="thanks-desc">感谢沐泽万物为 AWMC 提供的服务与支持，为社区带来更多可能。</div>
+    <div class="thanks-link">hoshinoai.com.cn ↗</div>
+  </a>
+  <a class="thanks-card" href="https://console.cdn.speedonline.cloud/#/hello/7DE8ZCCK" target="_blank" rel="noopener">
+    <div class="thanks-name">SpeedOnline</div>
+    <div class="thanks-desc">感谢 SpeedOnline 的 CDN 加速支持，让谱面与图片的加载又快又稳。</div>
+    <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
+  </a>
+</div>
+
+## 爱发电赞助
+
+我们欢迎您的赞助，如果您愿意支持我们，欢迎打赏 nya！
+
+如果您喜欢我们的服务的话，可以赞助我们喵呜~ 请我们打 1PC 嘛~
+
+目前唯一的官方赞助渠道是**爱发电**：可以按月持续支持，也可以一次性打赏，还能看到实时进度与目标喵～
+
+::: tip 推荐理由
+爱发电是**公开透明**的：有详细记录，按月支付，比一次性转账更能支撑长期运维。
+:::
+
+<p style="text-align:center;margin:1.5rem 0">
+  <a href="https://afdian.com/a/AWMC_TEAM" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
+    💛 前往爱发电赞助
+  </a>
+</p>
+
+当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://afdian.com/a/AWMC_TEAM)实时展示为准。
+
 ## 我们提供什么
 
 | 服务 | 说明 |
@@ -42,12 +79,6 @@ AWMC 的全部服务由社区成员利用业余时间维护，**不接受任何�
 | 🔧 第三方服务 | 对象存储、图像识别等按量计费接口 |
 | 💛 公益捐赠 | 赞助收入的一部分，用于回馈社会，记录见 [AWMC 公益板块](https://bbs.wmc.pub/forums/awmc.16/) |
 
-::: tip 成本公示
-根据 AWMC BBS [赞助名单帖](https://awmc.cc/threads/91/post-267) 的公示，维持服务稳定运行需要 **¥1650.00 CNY**。
-
-具体的收支明细与定期公示，请以论坛原帖为准。
-:::
-
 ::: tip 你的支持，会转个弯回到大家身边
 每一笔赞助，都不只养活着服务器。
 
@@ -61,26 +92,6 @@ AWMC 会把赞助收入的一部分用于**公益捐赠** —— 让这份支持
 这些**不从赞助收入里出**。所以别客气，先来玩再说～
 
 👉 [前往 AWMC 福利姬板块](https://bbs.wmc.pub/forums/awmc.18/) 参与抽奖与活动
-
-## 赞助方式
-
-我们欢迎您的赞助，如果您愿意支持我们，欢迎打赏 nya！
-
-如果您喜欢我们的服务的话，可以赞助我们喵呜~ 请我们打 1PC 嘛~
-
-目前唯一的官方赞助渠道是**爱发电**：可以按月持续支持，也可以一次性打赏，还能看到实时进度与目标喵～
-
-::: tip 推荐理由
-爱发电是**公开透明**的：有详细记录，按月支付，比一次性转账更能支撑长期运维。
-:::
-
-<p style="text-align:center;margin:1.5rem 0">
-  <a href="https://afdian.com/a/AWMC_TEAM" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
-    💛 前往爱发电赞助
-  </a>
-</p>
-
-当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://afdian.com/a/AWMC_TEAM)实时展示为准。
 
 ## 🤖 在 Bot 里查看赞助榜
 
@@ -110,23 +121,6 @@ Bot 会读取爱发电开放数据，生成**当前自然月**的赞助榜，展
 所有赞助者的名单会在 [AWMC BBS 赞助名单帖](https://awmc.cc/threads/91/post-267) 中永久展示，排名不分先后。
 
 感谢每一位支持过 AWMC 的朋友 —— 无论金额大小 :heart:
-
-## 🙏 特别鸣谢
-
-AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支持，让我们的舞台越来越大、跑得越来越稳喵～
-
-<div class="thanks-grid">
-  <a class="thanks-card" href="https://hoshinoai.com.cn?referee=AWMC" target="_blank" rel="noopener">
-    <div class="thanks-name">沐泽万物</div>
-    <div class="thanks-desc">感谢沐泽万物为 AWMC 提供的服务与支持，为社区带来更多可能。</div>
-    <div class="thanks-link">hoshinoai.com.cn ↗</div>
-  </a>
-  <a class="thanks-card" href="https://console.cdn.speedonline.cloud/#/hello/7DE8ZCCK" target="_blank" rel="noopener">
-    <div class="thanks-name">SpeedOnline</div>
-    <div class="thanks-desc">感谢 SpeedOnline 的 CDN 加速支持，让谱面与图片的加载又快又稳。</div>
-    <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
-  </a>
-</div>
 
 ## 其他支持方式
 
