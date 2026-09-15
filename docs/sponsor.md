@@ -20,23 +20,6 @@ AWMC 的全部服务由社区成员利用业余时间维护，**不接受任何�
 感谢您对 AWMC 的喜爱与支持！Ciallo～(∠・ω< )⌒☆
 :::
 
-## 🙏 特别鸣谢
-
-AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支持，让我们的舞台越来越大、跑得越来越稳喵～
-
-<div class="thanks-grid">
-  <a class="thanks-card" href="https://hoshinoai.com.cn?referee=AWMC" target="_blank" rel="noopener">
-    <div class="thanks-name">沐泽万物</div>
-    <div class="thanks-desc">感谢沐泽万物为 AWMC 提供的服务与支持，为社区带来更多可能。</div>
-    <div class="thanks-link">hoshinoai.com.cn ↗</div>
-  </a>
-  <a class="thanks-card" href="https://console.cdn.speedonline.cloud/#/hello/7DE8ZCCK" target="_blank" rel="noopener">
-    <div class="thanks-name">SpeedOnline</div>
-    <div class="thanks-desc">感谢 SpeedOnline 的 CDN 加速支持，让谱面与图片的加载又快又稳。</div>
-    <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
-  </a>
-</div>
-
 ## 爱发电赞助
 
 我们欢迎您的赞助，如果您愿意支持我们，欢迎打赏 nya！
@@ -56,6 +39,28 @@ AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支
 </p>
 
 当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://afdian.com/a/AWMC_TEAM)实时展示为准。
+
+## 🙏 特别鸣谢
+
+AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支持，让我们的舞台越来越大、跑得越来越稳喵～
+
+<div class="thanks-grid">
+  <a class="thanks-card" href="https://hoshinoai.com.cn?referee=AWMC" target="_blank" rel="noopener">
+    <div class="thanks-name">沐泽万物</div>
+    <div class="thanks-desc">感谢沐泽万物为 AWMC 提供的服务与支持，为社区带来更多可能。</div>
+    <div class="thanks-link">hoshinoai.com.cn ↗</div>
+  </a>
+  <a class="thanks-card" href="https://console.cdn.speedonline.cloud/#/hello/7DE8ZCCK" target="_blank" rel="noopener">
+    <div class="thanks-name">SpeedOnline</div>
+    <div class="thanks-desc">感谢 SpeedOnline 的 CDN 加速支持，让谱面与图片的加载又快又稳。</div>
+    <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
+  </a>
+  <a class="thanks-card" href="https://www.qiyunip.com/index/index/cps/id/46589983" target="_blank" rel="noopener">
+    <div class="thanks-name">齐云代理</div>
+    <div class="thanks-desc">感谢齐云代理提供的网络代理与加速支持，让 AWMC 的连接更稳、更快。</div>
+    <div class="thanks-link">qiyunip.com ↗</div>
+  </a>
+</div>
 
 ## 我们提供什么
 

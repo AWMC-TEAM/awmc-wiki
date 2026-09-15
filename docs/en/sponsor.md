@@ -124,6 +124,11 @@ AWMC keeps growing thanks to the partners standing beside us. Thank you for maki
     <div class="thanks-desc">Thank you for the CDN acceleration that keeps charts and images loading fast.</div>
     <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
   </a>
+  <a class="thanks-card" href="https://www.qiyunip.com/index/index/cps/id/46589983" target="_blank" rel="noopener">
+    <div class="thanks-name">齐云代理 (Qiyun Proxy)</div>
+    <div class="thanks-desc">Thank you for the network proxy and acceleration support that keeps AWMC's connections stable and fast.</div>
+    <div class="thanks-link">qiyunip.com ↗</div>
+  </a>
 </div>
 
 ## Other Ways to Help
