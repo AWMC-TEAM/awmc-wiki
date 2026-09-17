@@ -55,12 +55,23 @@ AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支
     <div class="thanks-desc">感谢 SpeedOnline 的 CDN 加速支持，让谱面与图片的加载又快又稳。</div>
     <div class="thanks-link">console.cdn.speedonline.cloud ↗</div>
   </a>
+  <a class="thanks-card" href="https://mai.chongxi.us/" target="_blank" rel="noopener">
+    <div class="thanks-name">舞萌状态 API</div>
+    <div class="thanks-desc">感谢 mai.chongxi.us 长期以来提供的舞萌服务器状态数据支持。</div>
+    <div class="thanks-link">mai.chongxi.us ↗</div>
+  </a>
   <a class="thanks-card" href="https://www.qiyunip.com/index/index/cps/id/46589983" target="_blank" rel="noopener">
     <div class="thanks-name">齐云代理</div>
     <div class="thanks-desc">感谢齐云代理提供的网络代理与加速支持，让 AWMC 的连接更稳、更快。</div>
     <div class="thanks-link">qiyunip.com ↗</div>
   </a>
 </div>
+
+::: info 舞萌状态 API 提示
+感谢 [mai.chongxi.us](https://mai.chongxi.us/) 长期提供舞萌状态 API。
+
+为节省成本，且华立总体服务器趋于稳定，该 API 即将下线，后续将提供兼容接口供 UptimeKuma 协议开发者使用。
+:::
 
 ## 我们提供什么
 
