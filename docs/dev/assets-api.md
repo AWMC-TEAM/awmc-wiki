@@ -1,20 +1,22 @@
 # 🖼️ Assets 静态资源 & 谱面资源 API
 
-AWMC 提供两类公开资源接口：**assets.awmc.cc** 放图片等静态资源，**download.wmc.pub**（谱面下载站）放谱面的原始文件与打包。
+AWMC 提供两类公开资源接口：**assets.awmc.team** 放图片等静态资源，**download.wmc.pub**（谱面下载站）放谱面的原始文件与打包。
 
 两者都**免鉴权**：`download.wmc.pub` 自 2026-09-29 起，**单曲**（maidata / 音源 / 曲绘 / PV，以及这首曲子的 zip、adx）**不再要求人机验证**，拿到链接就能下；只有版本包、全版本包、删除曲包这些大包仍要先过验证码。
+
+> 旧域名 `assets.awmc.cc` 已迁移到 **`assets.awmc.team`**，示例与集成请统一用新域名。
 
 ## 1. 资源根地址
 
 | 根地址 | 内容 |
 |---|---|
-| `https://assets.awmc.cc` | 曲绘等静态图片资源 |
+| `https://assets.awmc.team` | 曲绘等静态图片资源 |
 | `https://download.wmc.pub` | 谱面文件、谱面索引、单曲打包 |
 
-## 2. assets.awmc.cc
+## 2. assets.awmc.team
 
 <ApiDemo
-  baseUrl="https://assets.awmc.cc"
+  baseUrl="https://assets.awmc.team"
   :isImage="true"
   :options="[
     {

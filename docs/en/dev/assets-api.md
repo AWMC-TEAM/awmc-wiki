@@ -1,20 +1,22 @@
 # 🖼️ Assets & Chart Resource API
 
-AWMC exposes two kinds of public resource APIs: **assets.awmc.cc** serves images and other static assets, and **download.wmc.pub** (the chart download site) serves chart files and packages.
+AWMC exposes two kinds of public resource APIs: **assets.awmc.team** serves images and other static assets, and **download.wmc.pub** (the chart download site) serves chart files and packages.
 
 Both are **unauthenticated**. Since 2026-09-29, **single-chart** resources on `download.wmc.pub` (maidata / audio / jacket / PV, plus that chart's zip and adx) **no longer require the human verification step** — a link is enough. Only the big packages (version packs, all-versions pack, deleted-song pack) still ask for a captcha.
+
+> The old `assets.awmc.cc` domain has moved to **`assets.awmc.team`**; please use the new domain in examples and integrations.
 
 ## 1. Resource root paths
 
 | Root path | Contents |
 |---|---|
-| `https://assets.awmc.cc` | Jackets and other static images |
+| `https://assets.awmc.team` | Jackets and other static images |
 | `https://download.wmc.pub` | Chart files, chart index, single-chart packages |
 
-## 2. assets.awmc.cc
+## 2. assets.awmc.team
 
 <ApiDemo
-  baseUrl="https://assets.awmc.cc"
+  baseUrl="https://assets.awmc.team"
   :isImage="true"
   :options="[
     {
