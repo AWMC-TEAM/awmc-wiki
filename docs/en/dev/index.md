@@ -86,4 +86,6 @@ You can quickly access different module documentation via the following links:
 
 ::: tip Suggestion
 If you encounter any issues during development, feel free to submit an Issue on [GitHub](https://github.com/Michaelwucoc/awmc-wiki) or contact our team.
+
+You are also welcome to join the developer QQ group: [1067350296](https://qm.qq.com/q/TJUgWpUAcS).
 :::

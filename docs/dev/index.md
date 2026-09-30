@@ -85,4 +85,6 @@ chartPreviewBaseUrl: https://v.awmc.cc
 
 ::: tip 建议
 如果你在开发过程中遇到任何问题，欢迎通过 [GitHub](https://github.com/Michaelwucoc/awmc-wiki) 提交 Issue 或联系我们的团队。
+
+也欢迎加入开发者交流群：[1067350296](https://qm.qq.com/q/TJUgWpUAcS)，一起聊接口、排坑和协作。
 :::
