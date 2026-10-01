@@ -7,7 +7,7 @@ apiBaseUrl: https://status.awmc.cc
 ::: danger ⚠️ Deprecated
 AWMC has **discontinued** this Status API. The endpoints under `status.awmc.cc` are no longer maintained and may return a redirect or become unavailable at any time.
 
-This page is kept as a historical archive only. **Do not integrate it into new projects**, and please migrate existing integrations to another data source.
+This page is kept as a historical archive only. **Do not integrate it into new projects** — maimai server status data now comes from the community status page [mai.chongxi.us](https://mai.chongxi.us/), so please migrate existing integrations there.
 :::
 
 AWMC TEAM uses [Uptime Kuma](https://status.awmc.cc) to monitor the operational status of all services. We provide public API endpoints for developers to access real-time service status data.

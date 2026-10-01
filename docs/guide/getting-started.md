@@ -40,4 +40,6 @@ AWMC 还提供以下服务，欢迎体验喵～
 | 🆔 AWMC NET. | 免绑定查分成绩库，无需水鱼/落雪即可查询 B50 | [net.wmc.pub](https://net.wmc.pub) |
 | 🔌 开放 API | 供第三方开发者接入的公共接口 | [开发指南](/dev/) |
 
+舞萌服务器线路状态已交由社区站点 [mai.chongxi.us](https://mai.chongxi.us) 提供，AWMC 不再自建状态站。
+
 其他的等我写吧

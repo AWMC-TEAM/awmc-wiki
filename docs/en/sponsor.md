@@ -142,7 +142,7 @@ Sponsoring isn't the only way to help. These matter just as much:
 
 ## Related Links
 
-- [Service Status](https://up.wmc.pub) | [Status API (Deprecated)](/en/dev/status-api)
+- [Maimai Status (Community)](https://mai.chongxi.us) | [Service Status](https://up.wmc.pub)
 - [Developer Guide](/en/dev/) | [Getting Started](/en/guide/getting-started)
 - Contact us: <a href="mailto:awmc@awmc.cc">awmc@awmc.cc</a>
 

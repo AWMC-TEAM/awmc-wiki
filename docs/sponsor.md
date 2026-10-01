@@ -149,7 +149,7 @@ Bot 会读取爱发电开放数据，生成**当前自然月**的赞助榜，展
 
 ## 相关链接
 
-- [服务状态页](https://up.wmc.pub) | [状态 API（已废弃）](/dev/status-api)
+- [舞萌状态站（社区）](https://mai.chongxi.us) | [服务状态页](https://up.wmc.pub)
 - [开发指南](/dev/) | [快速开始](/guide/getting-started)
 - 联系我们：<a href="mailto:awmc@awmc.cc">awmc@awmc.cc</a>
 

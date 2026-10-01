@@ -13,7 +13,7 @@ chartPreviewBaseUrl: https://v.awmc.cc
 ## 📊 Status API <Badge type="danger" text="已废弃" /> (原基准地址: `{{ $frontmatter.apiBaseUrl }}`)
 
 ::: danger ⚠️ 该接口已废弃 (Deprecated)
-AWMC 已停止提供状态 API，接口不再维护，请勿接入。
+AWMC 已停止提供状态 API，接口不再维护，请勿接入。舞萌服务器状态数据请使用社区状态站 [mai.chongxi.us](https://mai.chongxi.us/)。
 :::
 
 ::: info 💡 服务概述

@@ -43,4 +43,6 @@ AWMC also provides the following services - feel free to explore!
 | 🆔 AWMC NET. | Bind-free score lookup - query B50 without Water Fish/Lxns | [net.wmc.pub](https://net.wmc.pub) |
 | 🔌 Open API | Public interfaces for third-party developers | [Developer Guide](/en/dev/) |
 
+Maimai server line status is now provided by the community site [mai.chongxi.us](https://mai.chongxi.us); AWMC no longer runs its own status page.
+
 More content coming soon.
