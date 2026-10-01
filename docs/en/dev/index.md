@@ -13,7 +13,7 @@ Welcome to the AWMC Developer Center. We provide developers with various APIs an
 ## Status API <Badge type="danger" text="Deprecated" /> (Former base URL: `{{ $frontmatter.apiBaseUrl }}`)
 
 ::: danger ⚠️ This API is deprecated
-AWMC has discontinued the Status API. It is no longer maintained — please do not integrate it. For maimai server status data, use the community status page [mai.chongxi.us](https://mai.chongxi.us/).
+AWMC has discontinued the Status API. It is no longer maintained — please do not integrate it. For maimai server status data, see the community project [mai.chongxi.us](https://mai.chongxi.us/) (no affiliation with AWMC).
 :::
 
 ::: info Service Overview

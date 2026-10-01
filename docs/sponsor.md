@@ -57,7 +57,7 @@ AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支
   </a>
   <a class="thanks-card" href="https://mai.chongxi.us/" target="_blank" rel="noopener">
     <div class="thanks-name">舞萌状态 API</div>
-    <div class="thanks-desc">感谢 mai.chongxi.us 长期以来提供的舞萌服务器状态数据支持。</div>
+    <div class="thanks-desc">社区独立项目（与 AWMC 无关联），提供更多维度的舞萌服务器状态监控与玩家自主上报。</div>
     <div class="thanks-link">mai.chongxi.us ↗</div>
   </a>
   <a class="thanks-card" href="https://www.qiyunip.com/index/index/cps/id/46589983" target="_blank" rel="noopener">
@@ -67,10 +67,13 @@ AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支
   </a>
 </div>
 
-::: info 舞萌状态 API 提示
-感谢 [mai.chongxi.us](https://mai.chongxi.us/) 长期提供舞萌状态 API。
+::: info 关于舞萌状态站
+AWMC 自身的舞萌状态站与状态 API 已停止维护（详见[状态 API 说明](/dev/status-api)）。后续舞萌服务器状态数据可参考社区项目 [mai.chongxi.us](https://mai.chongxi.us/)：
 
-为节省成本，且华立总体服务器趋于稳定，该 API 即将下线，后续将提供兼容接口供 UptimeKuma 协议开发者使用。
+- **与 AWMC 没有任何关联**，由社区独立开发与维护；
+- 提供更多维度的监控数据，并支持玩家自主上报状态。
+
+感谢该项目长期以来为我们提供的舞萌服务器状态数据支持。
 :::
 
 ## 我们提供什么

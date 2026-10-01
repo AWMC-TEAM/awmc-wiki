@@ -130,6 +130,15 @@ AWMC keeps growing thanks to the partners standing beside us. Thank you for maki
   </a>
 </div>
 
+::: info About the maimai Status Site
+AWMC's own status site and Status API are no longer maintained (see [Status API](/en/dev/status-api)). For maimai server status data, see the community project [mai.chongxi.us](https://mai.chongxi.us/):
+
+- It has **no affiliation with AWMC** and is independently developed and maintained by the community.
+- It offers more monitoring dimensions and supports player self-reporting.
+
+Thanks to this project for the maimai server status data it has long provided to us.
+:::
+
 ## Other Ways to Help
 
 Sponsoring isn't the only way to help. These matter just as much:
