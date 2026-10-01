@@ -10,10 +10,14 @@ chartPreviewBaseUrl: https://v.awmc.cc
 <br>
 Welcome to the AWMC Developer Center. We provide developers with various APIs and tools to help you build your own maimai applications or integration services.
 
-## Status API (Base URL: `{{ $frontmatter.apiBaseUrl }}`)
+## Status API <Badge type="danger" text="Deprecated" /> (Former base URL: `{{ $frontmatter.apiBaseUrl }}`)
+
+::: danger ⚠️ This API is deprecated
+AWMC has discontinued the Status API. It is no longer maintained — please do not integrate it.
+:::
 
 ::: info Service Overview
-Real-time monitoring of the operational status of maimai services provided by AWMC.
+Real-time monitoring of the operational status of maimai services provided by AWMC (historical archive).
 :::
 
 - **Authentication**: <Badge type="tip" text="No Auth Required" /> (Public access for all users)
@@ -76,7 +80,7 @@ Public REST API for the Chart Preview platform, supporting chart queries, commen
 
 You can quickly access different module documentation via the following links:
 
-- [**Status API**](/en/dev/status-api) - Get real-time service status, heartbeat records, and announcements.
+- [**Status API**](/en/dev/status-api) - (Deprecated) Formerly provided real-time service status, heartbeat records, and announcements.
 - [**AWMC Public API**](/en/dev/awmc-api) - User queries, charge queue, score upload (DivingFish / Lxns).
 - [**AWMCNET Bot API**](/en/dev/awmcnet-api) - Score mirroring, player queries, and chunked snapshot sync.
 - [**Assets Static Resource API**](/en/dev/assets-api) - Jacket art, resource gallery, and other static file retrieval.

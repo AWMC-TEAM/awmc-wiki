@@ -10,10 +10,14 @@ chartPreviewBaseUrl: https://v.awmc.cc
 <br>
 欢迎来到 AWMC 开发者中心。我们为开发者提供了多种接口和工具，帮助你构建属于自己的舞萌应用或集成服务。
 
-## 📊 Status API (基准地址: `{{ $frontmatter.apiBaseUrl }}`)
+## 📊 Status API <Badge type="danger" text="已废弃" /> (原基准地址: `{{ $frontmatter.apiBaseUrl }}`)
+
+::: danger ⚠️ 该接口已废弃 (Deprecated)
+AWMC 已停止提供状态 API，接口不再维护，请勿接入。
+:::
 
 ::: info 💡 服务概述
-实时监控 AWMC 所提供的舞萌服务的运行状态。
+实时监控 AWMC 所提供的舞萌服务的运行状态（历史存档）。
 :::
 
 - **鉴权方式**：<Badge type="tip" text="无需鉴权" /> (对所有用户公开)
@@ -75,7 +79,7 @@ chartPreviewBaseUrl: https://v.awmc.cc
 
 你可以通过以下链接快速访问不同模块的开发文档：
 
-- [**舞萌状态 API**](/dev/status-api) - 获取服务实时在线状态、心跳记录及公告。
+- [**舞萌状态 API**](/dev/status-api) - （已废弃）原用于获取服务实时在线状态、心跳记录及公告。
 - [**AWMC 公共 API**](/dev/awmc-api) - 用户查询、发票充值队列、成绩上传（水鱼 / 落雪）。
 - [**AWMCNET Bot API**](/dev/awmcnet-api) - 成绩镜像、玩家查询与分块快照同步。
 - [**Assets 静态资源 API**](/dev/assets-api) - 曲绘、资源图库等静态文件获取。

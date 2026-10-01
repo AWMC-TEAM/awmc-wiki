@@ -117,7 +117,7 @@ export default defineConfig({
             {
               text: '📊 舞萌状态',
               items: [
-                {text: '舞萌状态API', link: '/dev/status-api'},
+                {text: '舞萌状态API（已废弃）', link: '/dev/status-api'},
               ]
             },
             {
@@ -208,7 +208,7 @@ export default defineConfig({
             {
               text: '📊 Status',
               items: [
-                { text: 'Status API', link: '/en/dev/status-api' }
+                { text: 'Status API (Deprecated)', link: '/en/dev/status-api' }
               ]
             },
             {

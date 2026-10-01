@@ -4,6 +4,12 @@ apiBaseUrl: https://status.awmc.cc
 
 # 📊 Status API (Uptime Kuma)
 
+::: danger ⚠️ 已废弃 (Deprecated)
+AWMC 已**停止提供**本状态 API。`status.awmc.cc` 下的相关接口不再维护，随时可能返回重定向或不可用。
+
+本页内容仅作历史存档保留，**请勿在新项目中接入**；已有接入请尽快切换到其他数据源。
+:::
+
 AWMC TEAM 使用 [Uptime Kuma](https://status.awmc.cc) 监控所有服务的运行状态。我们提供了公开的 API 端点，方便开发者获取实时的服务状态数据。
 
 ::: info 💡 免密钥访问
