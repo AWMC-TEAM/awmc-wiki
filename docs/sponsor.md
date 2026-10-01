@@ -78,7 +78,6 @@ AWMC 的一路前行，离不开合作伙伴的帮助。感谢以下伙伴的支
 | 服务 | 说明 |
 | --- | --- |
 | [AWMC Bot](/guide/bot/intro) | 舞萌 DX 成绩查询、 rating 推算、谱面查询等 |
-| [舞萌状态站](https://status.awmc.cc) | 20 秒刷新的全线路服务器监控（移动 / 电信 / 联通） |
 | [开放 API](/dev/) | 供第三方开发者接入的公共接口 |
 | [谱面预览](/dev/chart-preview) | 在线谱面查看与评价分析 |
 
@@ -150,7 +149,7 @@ Bot 会读取爱发电开放数据，生成**当前自然月**的赞助榜，展
 
 ## 相关链接
 
-- [状态站](https://status.awmc.cc) | [状态 API](/dev/status-api)
+- [服务状态页](https://up.wmc.pub) | [状态 API（已废弃）](/dev/status-api)
 - [开发指南](/dev/) | [快速开始](/guide/getting-started)
 - 联系我们：<a href="mailto:awmc@awmc.cc">awmc@awmc.cc</a>
 

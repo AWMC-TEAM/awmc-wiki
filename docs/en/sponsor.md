@@ -25,7 +25,6 @@ Thank you for loving AWMC! :heart:
 | Service | Description |
 | --- | --- |
 | [AWMC Bot](/en/guide/bot/intro) | maimai DX score lookup, rating calculation, chart search & more |
-| [maimai Status Page](https://status.awmc.cc) | Server monitoring across all ISPs (CMCC / CT / CU), refreshed every 20s |
 | [Public API](/en/dev/) | Open interfaces for third-party developers |
 | [Chart Preview](/en/dev/chart-preview) | Online chart viewing and analysis |
 
@@ -143,7 +142,7 @@ Sponsoring isn't the only way to help. These matter just as much:
 
 ## Related Links
 
-- [Status Page](https://status.awmc.cc) | [Status API](/en/dev/status-api)
+- [Service Status](https://up.wmc.pub) | [Status API (Deprecated)](/en/dev/status-api)
 - [Developer Guide](/en/dev/) | [Getting Started](/en/guide/getting-started)
 - Contact us: <a href="mailto:awmc@awmc.cc">awmc@awmc.cc</a>
 

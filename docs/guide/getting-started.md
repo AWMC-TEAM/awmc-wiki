@@ -35,7 +35,6 @@ AWMC 还提供以下服务，欢迎体验喵～
 
 | 服务 | 说明 | 入口 |
 | --- | --- | --- |
-| 📊 舞萌状态站 | 20 秒刷新的全线路服务器监控 | [status.awmc.cc](https://status.awmc.cc) |
 | 🎵 谱面下载站 | 舞萌 DX 谱面资源下载 | [download.wmc.pub](https://download.wmc.pub) |
 | 🎶 谱面预览 | 在线谱面查看与评价分析 | [v.awmc.cc](https://v.awmc.cc) |
 | 🆔 AWMC NET. | 免绑定查分成绩库，无需水鱼/落雪即可查询 B50 | [net.wmc.pub](https://net.wmc.pub) |

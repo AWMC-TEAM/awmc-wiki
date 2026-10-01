@@ -38,7 +38,6 @@ AWMC also provides the following services - feel free to explore!
 
 | Service | Description | Link |
 | --- | --- | --- |
-| 📊 maimai Status | Real-time multi-line server monitoring, refreshed every 20 seconds | [status.awmc.cc](https://status.awmc.cc) |
 | 🎵 Chart Download | Download maimai DX chart resources | [download.wmc.pub](https://download.wmc.pub) |
 | 🎶 Chart Preview | Online chart preview and review analysis | [v.awmc.cc](https://v.awmc.cc) |
 | 🆔 AWMC NET. | Bind-free score lookup - query B50 without Water Fish/Lxns | [net.wmc.pub](https://net.wmc.pub) |
