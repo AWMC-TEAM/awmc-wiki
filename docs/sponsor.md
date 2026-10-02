@@ -33,12 +33,12 @@ AWMC 的全部服务由社区成员利用业余时间维护，**不接受任何�
 :::
 
 <p style="text-align:center;margin:1.5rem 0">
-  <a href="https://afdian.com/a/AWMC_TEAM" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
+  <a href="https://afdian.com/a/AWMC_TEAM?tab=shop" target="_blank" rel="noopener" class="sponsor-btn sponsor-btn-primary">
     💛 前往爱发电赞助
   </a>
 </p>
 
-当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://afdian.com/a/AWMC_TEAM)实时展示为准。
+当前目标进度、赞助档位与赞助者情况，均以[爱发电页面](https://afdian.com/a/AWMC_TEAM?tab=shop)实时展示为准。
 
 ## 🙏 特别鸣谢
 

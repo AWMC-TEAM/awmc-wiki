@@ -8,7 +8,7 @@
 
 ::: tip ☕ 支持 AWMC
 AWMC 的全部服务永久免费，但维持运转需要真实成本。如果 AWMC 帮到了你，欢迎
-[赞助支持我们](https://afdian.com/a/AWMC_TEAM)，每一份心意都会让服务更稳定喵～
+[赞助支持我们](https://afdian.com/a/AWMC_TEAM?tab=shop)，每一份心意都会让服务更稳定喵～
 :::
 
 ::: danger ⚠️ QQ 机器人限制

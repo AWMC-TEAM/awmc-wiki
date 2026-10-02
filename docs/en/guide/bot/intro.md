@@ -2,7 +2,7 @@
 
 ::: tip ☕ Support AWMC
 All AWMC services are free forever, but keeping them online costs real money. If
-AWMC has helped you, please consider [sponsoring us](https://afdian.com/a/AWMC_TEAM) —
+AWMC has helped you, please consider [sponsoring us](https://afdian.com/a/AWMC_TEAM?tab=shop) —
 every bit of support keeps the services stable. Thank you meow~ 🐾
 :::
 
