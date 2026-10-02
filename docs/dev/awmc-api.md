@@ -180,6 +180,10 @@ apiBaseUrl: https://api.wmc.pub
 
 **字段白名单**：v2-3 上游严格校验请求字段，多余字段会返回 `1205`。网关已按接口过滤（旧客户端的 `qr_text`、`type` 等历史遗留字段会被自动剔除），调用方按本文字段表传参即可。
 
+::: tip 控制台可视化
+不想自己写轮询界面？登录 [api.wmc.pub 控制台](https://api.wmc.pub/dashboard.html)，侧边栏「**上传会话**」页面可直接查看会话状态（摘要卡 + 状态徽章 + 行内实时刷新，存在处理中会话时每 5 秒自动轮询）；对应 API 见 [§5.2](#_5-2-上传会话查询-需鉴权)。
+:::
+
 ### 充值 / 票券行为变更
 
 1. `POST /v1/charge` 不再「入队」，而是直接购买 Charge；Body 可用 `charge` 或 `chargeId`，**仅允许 2 / 3 / 5**（2倍票 / 3倍票 / 5倍票），分别扣 **10 / 15 / 25** Token，其它值返回 400。
@@ -642,7 +646,16 @@ GET https://api.wmc.pub/api/docs
 | GET | `/me/usage` | 本人调用明细分页 |
 | GET | `/me/usage/stats` | 本人日粒度统计；`days`=7/14/30 |
 
-### 5.2 失败率（半小时精度）
+### 5.2 上传会话查询（需鉴权）
+
+v2-3 上游下本人的上传会话（也可在**控制台侧边栏「上传会话」页面**可视化查看：状态徽章、实时刷新、自动轮询）：
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/me/upsert-sessions` | 本人会话分页（`limit` 默认 50 / `offset` / `status` 0-3），响应含 `summary` 状态汇总（pending/processing/completed/failed/billed） |
+| POST | `/me/upsert-sessions/refresh` | Body `sessionId`：向上游实时查询该会话并同步表内状态；`upsert_status=2` 时幂等结算；上游异常时仍返回表行 + `error` 字段 |
+
+### 5.3 失败率（半小时精度）
 
 | 方法 | 路径 | 鉴权 | 范围 |
 |------|------|------|------|

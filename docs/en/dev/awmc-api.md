@@ -177,6 +177,10 @@ On a **v2-3** upstream every write endpoint (scores / items / tickets / profile)
 
 **Field whitelist**: the v2-3 upstream strictly validates request fields; extra fields return `1205`. The gateway filters per endpoint (legacy junk like `qr_text`, `type` is stripped automatically) — just send the fields listed on this page.
 
+::: tip Console visualization
+Don't want to build your own polling UI? Sign in to the [api.wmc.pub console](https://api.wmc.pub/dashboard.html) — the sidebar "**Upsert Sessions**" page shows session status directly (summary tiles + status badges + per-row live refresh, auto-polling every 5s while any session is processing); see the corresponding API in [§5](#_5-usage-failure-rate).
+:::
+
 ### Charge / queue behavior change
 
 1. `POST /v1/charge` buys a Charge directly (not enqueue); **10 / 15 / 25** Tokens for `chargeId` **2 / 3 / 5**.
@@ -626,10 +630,26 @@ GET https://api.wmc.pub/api/docs
 
 ## 5. Usage & failure rate
 
+### 5.1 Usage
+
 | Method | Path | Auth | Scope |
 |--------|------|------|-------|
 | GET | `/me/usage` | Bearer | Personal log |
 | GET | `/me/usage/stats` | Bearer | Daily stats |
+
+### 5.2 Upsert sessions (v2-3 upstream)
+
+Your own upload sessions on a v2-3 upstream (also viewable in the console sidebar page "**Upsert Sessions**" with status badges, live refresh and auto-polling):
+
+| Method | Path | Auth | Scope |
+|--------|------|------|-------|
+| GET | `/me/upsert-sessions` | Bearer | Own sessions, paginated (`limit` default 50 / `offset` / `status` 0-3); response includes a `summary` (pending/processing/completed/failed/billed) |
+| POST | `/me/upsert-sessions/refresh` | Bearer | Body `sessionId`: live upstream check + table sync; idempotent settlement on `upsert_status=2`; upstream errors still return the row + `error` field |
+
+### 5.3 Failure rate
+
+| Method | Path | Auth | Scope |
+|--------|------|------|-------|
 | GET | `/usage/failure-rate` | None | Site-wide, 7d / 30m buckets |
 | GET | `/me/usage/failure-rate` | Bearer | Personal failure rate |
 
