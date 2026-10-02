@@ -2,6 +2,42 @@
 
 Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_TEAM?tab=feed).
 
+## October 2026
+
+### 2026/10/02
+
+<Badge type="tip" text="New Feature" />
+
+- **Account writes upgraded to the AWMC API v2-3 session model** — Scores, items and profile edits now run
+  as server-side sessions: the Bot creates and confirms the job automatically and polls the result, so no
+  manual confirmation is needed. A run takes about 1–2 minutes; timeouts are never replayed, and you can
+  inspect the outcome with `mai查任务 <session_id>`.
+- **Bulk scores** — `mai改成绩` / `mai删成绩` accept newline- or semicolon-separated input with up to 20
+  entries per run; **billing is per run, not per entry** (75 / 50 BREAK), and one run must use a single mode
+  (simple or pro).
+- **Editing hub `mai改资料`** — Lists every write command with its price and offers buttons that jump straight
+  into each command (aliases `资料修改` / `改资料` / `资料命令`).
+- **Bulk editing `mai批量编辑`** — Collect several edits in one conversation (mixed types: maps, items,
+  scores, profile fields) and run them as serial upload sessions; up to 3 items, **300 BREAK once**, failing
+  items are reported while the rest still run.
+- **One-click unlock `mai全解锁`** — Unlock all music / MASTER / Re:MASTER charts (already-owned tracks are
+  skipped), 200 BREAK per run.
+- **14 profile edit commands** — Added `mai改门`, `mai改rating`, `mai改里程`, `mai改地图库存`,
+  `mai改游玩次数`, `mai改段位`, `mai改阶级`, `mai改搭档`, `mai改角色`, `mai改亲密度`, `mai完成地图`,
+  `mai推进地图`, `mai改登录奖励`, `mai重置版本`; 50 BREAK each on success.
+- **Name input** — Gates, characters, partners, maps and login bonuses accept plain names; the Bot resolves
+  them to IDs and lists candidates when several resources share a name.
+- **Session lookup `mai查任务`** — Free inspection of an upload session's progress and result, surviving
+  disconnects.
+- **Hot-configurable pricing** — Bulk editing, unlock and profile-edit prices can be adjusted in the database
+  configuration (admin `BREAK配置`).
+
+<Badge type="warning" text="Upstream Change" />
+
+- **Gate status and event queries retired** — Upstream v2-3 removed the `get-kaleidx-scope` and
+  `get-game-event` read endpoints, so once the switch completes `mai门状态` / `maievent` report that the query
+  has been removed; use `mai道具` for account items. Gate state changes moved to `mai改门` (gates 1–6).
+
 ## September 2026
 
 ### 2026/09/08

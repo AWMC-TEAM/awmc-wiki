@@ -114,11 +114,18 @@ data corruption; you bear the risk yourself. See
 |------|------|
 | `mai预览` | Query account preview info (5 BREAK on successful query; no charge on failure) |
 | `mai道具` | Query the account item list (5 BREAK on successful query) |
-| `mai门状态` / `mai查门` / `查门` | Read-only display of Kaleidx Gate discovery, key, and clear status (5 BREAK on successful query) |
-| `maievent` / `mai活动` / `舞萌活动` | Query the account's current event |
-| `mai改成绩 [song difficulty achievement DX score FC FS]` | Interactive or one-line score edit; DX score 0-5 is star/simple mode, actual score auto-selects pro mode; 75 BREAK per successful entry |
-| `mai删成绩 [song difficulty]` | Interactive or one-line score deletion; 50 BREAK per successful entry |
+| `mai门状态` / `mai查门` / `查门` | Read-only display of Kaleidx Gate discovery, key, and clear status (5 BREAK on successful query). ⚠️ Upstream v2-3 removed this read endpoint |
+| `maievent` / `mai活动` / `舞萌活动` | Query the account's current event. ⚠️ Upstream v2-3 removed this read endpoint |
+| `mai改成绩 [song difficulty achievement DX score FC FS]` | Interactive or one-line score edit; DX score 0-5 is star/simple mode, actual score auto-selects pro mode; newline/semicolon-separated bulk up to 20 entries (same price); 75 BREAK per run |
+| `mai删成绩 [song difficulty]` | Interactive or one-line score deletion; bulk supported too; 50 BREAK per run |
 | `mai改道具 [itemKind itemId add/del]` | High-risk item mutation; 100 BREAK on success; bulk `upsert-all` is not exposed by the Bot |
+| `mai改资料` / `资料修改` / `改资料` | **Account editing hub**: one-click unlock, bulk editing, 14 profile edits and upload-session lookup (see [Command Reference](/en/guide/bot/commands#8-account-editing--bulk-operations-v2-3)) |
+| `mai批量编辑` / `批量编辑` / `批量改` | Collect several mixed-type edits in one conversation and run them serially; 300 BREAK per run |
+| `mai全解锁 [music/master/remaster] [version ID]` | Unlock all music / MASTER / Re:MASTER (already-owned tracks are skipped); 200 BREAK per run |
+| `mai改门` / `mai改rating` / `mai改里程` / `mai改地图库存` / `mai改游玩次数` | v2-3 profile edits; 50 BREAK each (parameters accept plain names) |
+| `mai改段位` / `mai改阶级` / `mai改搭档` / `mai改角色` / `mai改亲密度` | v2-3 profile edits; 50 BREAK each |
+| `mai完成地图` / `mai推进地图` / `mai改登录奖励` / `mai重置版本` | v2-3 profile edits; 50 BREAK each |
+| `mai查任务 <session_id>` | Inspect an upload session's progress and result (free; survives disconnects) |
 
 ---
 
