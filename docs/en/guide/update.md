@@ -4,6 +4,36 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 
 ## October 2026
 
+### 2026/10/11
+
+<Badge type="tip" text="New Feature" />
+
+- **Phigros lookup module (phi)** — Bind your TapTap cloud save to get the B30 score chart, an
+  account card, per-song info, the equivalent-rks calculator and progress comparison; the
+  commands are `phi绑定` / `phi解绑` / `phi更新` / `phi进步` / `phi查歌` / `phi随机` / `phi计算` /
+  `phi帮助`, and groups can toggle it with `开启phi` / `关闭phi`. See
+  [Phigros Lookup](/en/guide/bot/phigros).
+- **Task board `查进度`** — `mai查任务` was renamed to `查进度` (old aliases still work) and turned
+  into a colour board image: in-progress / completed / needs-check sections, the current step and
+  percentage, and an "about X seconds left" estimate based on historical timings.
+- **New mini-game "Guess the Member"** — The question shows three members and a chart; guess whose
+  achievement is highest. One bet per player, revealed together after 15 seconds, +1 BREAK per
+  correct bet (daily cap 50).
+- **Score-push recommendations upgraded to multi-route** — Candidates split into steady / challenge /
+  explore routes with independent net gains; added `吃分换批` / `吃分反馈` / `吃分撤销` / `吃分重看` /
+  `吃分练习`, and `今日吃分推荐` plus `我要上<score>分` now use the new engine.
+- **Werewolf and group polls** — A multiplayer werewolf game started in the group with private-chat
+  actions (4–16 players, sheriff rounds included), plus multi-option / song / range polls created in
+  the group; results appear on the console's "Poll results" page.
+- **Mini-game permission guidance** — On the official QQ the bot posts an image reminder when the
+  proactive-message permission is missing; after checking the settings the owner can send
+  `小游戏权限不再提醒 <revision>` to silence it.
+
+<Badge type="warning" text="Improvement" />
+
+- **Background upload tasks** — Diving-Fish / Lxns uploads now run as parallel per-channel tasks that
+  you can follow on the `查进度` board.
+
 ### 2026/10/02
 
 <Badge type="tip" text="New Feature" />

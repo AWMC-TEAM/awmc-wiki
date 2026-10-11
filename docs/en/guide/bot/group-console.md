@@ -48,8 +48,9 @@ and give the returned identity ID to a super admin, who can grant you access in 
 | Module | Description |
 |------|------|
 | Group overview | Today's activity, message counts and latest activity for your groups |
-| Feature switches | Enable / disable score lookup, guessing games, BREAK, queue, account, search, play count and more per group |
+| Feature switches | Enable / disable score lookup, guessing games, Phigros lookup, BREAK, queue, account, search, play count and more per group |
 | Group statistics | BREAK income/spending, feature usage share, member message ranking and usage logs for the last 1 / 7 / 30 / 90 days |
+| Poll results | List this group's (and server-wide) polls with bar / pie charts of the votes, and close them early; the ballot detail (voter / raw input) is admin-only |
 | Arcade queue | Add, edit and delete arcades; autofill store details from Nearcade; view report history |
 | Weather | Enable daily weather digest, set push time, severe-weather alerts and subscription interval |
 | Message templates | Custom query / report / predict templates for queue cards (super admin only) |

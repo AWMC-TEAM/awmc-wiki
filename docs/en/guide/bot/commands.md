@@ -243,7 +243,7 @@ into each command.
 | `mai推进地图 <map or ID…>` | Advance maps up to the first unclaimed challenge song | 50 BREAK per run |
 | `mai改登录奖励 <bonus or ID…>` | Set login bonuses to one stamp short | 50 BREAK per run |
 | `mai重置版本` | Reset to the game version currently used by the service | 50 BREAK per run |
-| `mai查任务 <session_id>` | Inspect an upload session's progress and result | Free |
+| `查进度 [<session_id>]` | Inspect an upload session's progress and result (aliases `mai查任务` / `查上传任务` / `查会话`) | Free |
 
 ### Bulk editing: several edits in one conversation
 
@@ -305,7 +305,7 @@ successful run costs 200 BREAK regardless of how many tracks are unlocked.
 - Clear upstream failures (rejected parameters, abnormal account state, …) do not charge BREAK;
   a failure during execution reports the concrete reason.
 - On timeout or network loss the Bot **never replays the write** (to avoid duplicates); use
-  `mai查任务` to check what actually happened.
+  `查进度` to check what actually happened.
 - Writes support **expired-QR continuation**: after the Bot reports an expired QR code, send a
   fresh one and the original operation continues.
 - Most edits create one play record and affect the displayed Rating; it recalculates after one
@@ -411,9 +411,12 @@ Bot: ⚠️ About to run gate edit: gate 紫色之门 (ID 3) → open   ← name
 User: 确认修改
 ```
 
-### Checking an upload session
+### Checking an upload session (`查进度`)
 
 ```text
-User: mai查任务 b26759bec50e42d89efe43186a98c40d
+User: 查进度
+Bot: Task board image: in-progress / completed / needs-check sections, plus steps and "about X seconds left"
+
+User: 查进度 b26759bec50e42d89efe43186a98c40d
 Bot: Upload session …: completed / processing (query again later, free)
 ```

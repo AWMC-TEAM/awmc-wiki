@@ -13,6 +13,11 @@ Account binding, B50 uploads, tickets, PC sync, score queries, and group
 interactions are now all merged into the same QueryBot. The command prefix is
 determined by the platform configuration; this page uses no prefix below.
 
+::: tip Phigros, too
+The Phigros (`phi`) commands bind your TapTap cloud save and cover the B30 chart, an account
+card, per-song info and progress comparison — they have [their own page](/en/guide/bot/phigros).
+:::
+
 ## 1. Account, Uploads & BREAK
 
 Before getting started, send `用户协议`, open the web page, read it, and copy
@@ -125,7 +130,7 @@ data corruption; you bear the risk yourself. See
 | `mai改门` / `mai改rating` / `mai改里程` / `mai改地图库存` / `mai改游玩次数` | v2-3 profile edits; 50 BREAK each (parameters accept plain names) |
 | `mai改段位` / `mai改阶级` / `mai改搭档` / `mai改角色` / `mai改亲密度` | v2-3 profile edits; 50 BREAK each |
 | `mai完成地图` / `mai推进地图` / `mai改登录奖励` / `mai重置版本` | v2-3 profile edits; 50 BREAK each |
-| `mai查任务 <session_id>` | Inspect an upload session's progress and result (free; survives disconnects) |
+| `查进度 [<session_id>]` | Inspect an upload session's progress and result (free; survives disconnects; aliases `mai查任务` / `查上传任务` / `查会话`) |
 
 ---
 
@@ -218,11 +223,19 @@ Difficulty can be prefixed, e.g. `白潘排名`, `我的白潘排名`.
 | `<level><plate>进度` | Level plate progress, e.g. `13将进度`, `14+极进度` |
 | `段位表 [rank]` | Rank course image; defaults to PRiSM PLUS, e.g. `段位表 真二段`; supports @user |
 | `<rank>段位表` | Reverse form, e.g. `真二段段位表` |
-| `我要上<score>分` | Score-push recommendations |
+| `我要上<score>分` | Score-push recommendations (multi-route; see "Score-Push Recommendations" under 2.12) |
 | `我要在<level>上<score>分` | Level-specific score-push recommendations |
 | `<level>分数列表` | Score list for that level |
+| `新歌列表` | Current-version song list, filtered by difficulty / level / chart type / play state; supports @user (aliases `新曲列表` / `B15列表`) |
+| `新曲统计` | New-song completion, average RA and pushable songs (aliases `新歌完成度` / `B15统计` / `b15统计`) |
 
 Achievement marks support: `ap` `fc` `fcp` `fs` `fsp` `ss` `sss` `sync`, etc.
+
+::: tip Examples (new songs)
+`新歌列表 紫 13+`, `新歌列表 DX 未游玩`, `新歌列表 13.5`. The feature follows the
+"current version" (B15) definition, which differs from historical-version filters such as
+`镜代b50`.
+:::
 
 ::: tip Rank course samples
 The rank course image shows LIFE rules, course level/constant, personal best
@@ -258,6 +271,8 @@ starting.
 | `重置二选一` | Force-end the current Extreme Two-Choice round |
 | `你想我猜` / `20问猜曲` | Milk thinks of a song; members ask "yes/no" questions to narrow it down and guess the title; fewer questions score higher, with combo and multiplier cards stacking |
 | `重置你想我猜` / `重置20问` | Force-end the current "You Guess" round |
+| `猜群友` | The question shows three members plus one chart; guess who has the highest achievement on it. Each player may bet once, answers stay silent for 15 seconds, then all are revealed at once |
+| `重置猜群友` | Force-end the current Guess-the-Member round |
 | `重置猜歌` | Force-end the current text-guess round (in group) |
 | `查看已有信息` / `查看提问列表` / `20问进度` / `提问列表` | View the Q&A records of the current "You Guess" round |
 | `舞萌开字母` / `开字母` | Multi-song letter board (default 8 titles); send letters or aliases during the round, or use `开歌`; timed settlement after full clear |
@@ -268,23 +283,25 @@ starting.
 | `开字母图片模式` / `图片模式` | Use an image board for the current or next Letter Board round |
 | `开字母自动模式` / `自动模式` | Restore automatic Letter Board mode selection by member count and load |
 | `查加倍卡` | View your multiplier cards |
-| `猜歌积分排行` | Total points leaderboard |
+| `猜歌积分排行` | This group's overall points leaderboard |
 | `本群猜歌排行` | View this group's guess participation and points ranking |
-| `猜歌积分日榜` / `猜歌积分周榜` / `猜歌积分月榜` / `猜歌积分年榜` / `猜歌积分赛季榜` | Period leaderboards |
-| `猜歌历史日榜` / `猜歌历史周榜` / `猜歌历史月榜` / `猜歌历史年榜` / `猜歌历史赛季榜` | Historical period boards |
-| `我的猜歌` / `猜歌数据` / `猜歌统计` | Personal guess-stats chart: nine modes, 30-day trend, points/count share donuts, mode cards, and recent details; `我的猜歌 @user` for others |
+| `猜歌积分日榜` / `猜歌积分周榜` / `猜歌积分月榜` / `猜歌积分年榜` / `猜歌积分赛季榜` | This group's per-period leaderboards |
+| `猜歌历史日榜` / `猜歌历史周榜` / `猜歌历史月榜` / `猜歌历史年榜` / `猜歌历史赛季榜` | This group's historical period boards |
+| `全服猜歌排行` / `全服猜歌总榜` | Server-wide overall points board (text) |
+| `全服猜歌日榜` / `全服猜歌周榜` / `全服猜歌月榜` / `全服猜歌年榜` / `全服猜歌赛季榜` | Server-wide per-period boards (text) |
+| `我的猜歌` / `猜歌数据` / `猜歌统计` | Personal guess-stats chart: mode mix, 30-day trend, points/count share donuts, mode cards, and recent details; `我的猜歌 @user` for others |
 
 ::: tip BREAK earnings
-Daily BREAK cap from mini-games: 40 / day globally; per game, 猜歌/猜曲绘/猜曲子/
-猜铺面/你想我猜 are capped at 20 each, 开字母/猜Rating/找内鬼 at 15 each, and
-极限二选一 at 10. Once a game's cap is reached that game stops awarding, and
+Daily BREAK cap from mini-games: **50** / day globally; per game, 猜歌/猜曲绘/猜曲子/
+猜铺面/你想我猜 are capped at 20 each, 开字母/猜Rating/找内鬼 at 15 each, 极限二选一
+at 10, and 猜群友 at 50. Once a game's cap is reached that game stops awarding, and
 once the global cap is reached all games stop awarding; reset at midnight.
 During an active double-BREAK card, earnings are doubled and these caps are
 waived.
 :::
 
 ::: tip My guess stats
-- Nine modes: 猜歌 / 猜曲绘 / 猜曲子 / 猜铺面 / 开字母 / 猜 Rating / 找内鬼 / 二选一 / 你想我猜
+- Modes: 猜歌 / 猜曲绘 / 猜曲子 / 猜铺面 / 开字母 / 猜 Rating / 找内鬼 / 二选一 / 你想我猜 / 猜群友
 - The chart includes a 30-day trend, adaptive mode cards, points/count share donuts, and recent details; updates live after settlement
 - `@user` views that member's group stats, e.g. `我的猜歌 @张三`; without an at, shows yourself
 - In-group `我的AWMC` automatically attaches the group guess-stats image (failure does not block the account status flow)
@@ -309,7 +326,8 @@ jacket / audio / chart guessing in the same group.
 
 ::: warning Answer rate limit
 The same user can submit only one answer globally every **2.5 seconds**
-(猜歌 / 曲绘 / 曲子 / 铺面 / 猜 Rating / 找内鬼). Over limit:
+(猜歌 / 曲绘 / 曲子 / 铺面 / 猜 Rating / 找内鬼 / 猜群友); the interval is configurable with
+`MAIMAIDX_GUESS_ANSWER_COOLDOWN_SECONDS` (`0` disables the limit). Over limit:
 
 `嘿嘿，你的答案被我吃掉啦！(x.x秒后才能发送新的答案）`
 :::
@@ -370,6 +388,24 @@ guessing modes and Letter Board in the same group.
 - A wrong guess does not end the round; timeout reveals the answer; fewer questions score higher, and points stack with combo and multiplier cards
 :::
 
+::: tip Guess the Member (猜群友)
+Requires a group admin to send `开启mai猜歌`; mutually exclusive with the other guessing
+modes in the same group.
+
+- Send `猜群友` to start: the question shows **three members** plus a chart, and asks whose
+  achievement on that chart is the highest
+- **One bet per player**: answers stay silent during the round (a repeat only earns a short
+  notice); after 15 seconds all bets are revealed at once
+- Settlement groups the bets by option, marks the correct option ✅, and credits each winner
+  individually (the earliest correct bet counts as a ×2 first answer, with the same combo
+  rules as the other modes); each correct bet pays a flat +1 BREAK
+  (`groupmate_break_per_win` is configurable; point multipliers and bonus cards do **not**
+  inflate BREAK)
+- Visitors without qbind can play and appear on the board, but receive no BREAK
+- Questions avoid the group's recently used charts and only use Expert or above;
+  `重置猜群友` force-ends the round
+:::
+
 ### 2.7 Play Count (PC)
 
 | Command | Description |
@@ -379,6 +415,7 @@ guessing modes and Letter Board in the same group.
 | `pc排行` / `pc全部排行` / `PC全部排行` | All synced users' PC total ranking (text list titled "PC全部排行（共 N 人）") |
 | `pc数 <song>` | PC for a specific song |
 | `pc50` | B50 sorted by play count (`pc:xx` on the card corner) |
+| `pc等级 [level]` | PC ranking for one level only (`14+` / `13+` / `15`); without an argument it shows usage and shortcut buttons (aliases `等级pc` / `PC等级`) |
 | `pca50` | Your Rating B50's 50 songs re-sorted by PC (image) |
 | `游玩排行50` / `游玩PC50` / `PC游玩50` / `pc游玩50` | Top 50 most-played charts library-wide (not limited to Rating B50, image) |
 
@@ -553,8 +590,30 @@ Also supports `13将 未完成`, `13将 2` pagination, and `13将 @user` for oth
 | `日报` / `周报` / `月报` | 1/7/30-day score report images |
 | `年报` | One-year score report |
 | `对比存档 <old ID> <new ID>` | Compare two snapshots |
-| `今日吃分推荐` | Personalized push suggestions based on history (text) |
 | `牌子统计` | Plate achievement stats |
+
+#### Score-Push Recommendations (multi-route)
+
+`今日吃分推荐` (aliases `吃分推荐` / `今日推分推荐`) and `我要上<score>分` are now both
+produced by the **multi-route** engine: it splits candidates into the **steady / challenge /
+explore** routes, gives each one an **independent net gain** (they do not add up), and renders a
+chart showing the current → target achievement and the reasoning.
+
+| Command | Description |
+|------|------|
+| `今日吃分推荐` / `吃分推荐` | Generate multi-route score-push advice (data storage must be enabled; billed as `today_gain_recommend`) |
+| `吃分换批` | Get another batch in the same session (seen charts never repeat; **no extra generation fee**) |
+| `吃分反馈 <number> <不喜欢/卡住/跳过>` | Rate; affects later filtering |
+| `吃分撤销` | Undo feedback in this session (other categories of the same chart are unaffected) |
+| `吃分重看` | Explicitly restart the session (long-term feedback is kept) |
+| `吃分练习` | Open the bottleneck-practice page, separate from direct pushing |
+| `我要上<score>分` / `我要在<level>上<score>分` | Target-score pushing (old entry points, delegated to the multi-route engine, works in private chat) |
+
+::: tip Group assistance
+Recommendations blend in **group assistance** (a baseline built from members who share data) by
+default, which improves ranking for rarely-played charts; without sharing or with too few
+samples it silently falls back to your personal baseline.
+:::
 
 #### Group Interaction Extras
 
@@ -563,9 +622,20 @@ Also supports `13将 未完成`, `13将 2` pagination, and `13将 @user` for oth
 | `群聊rating排行榜` | In-group Rating ranking |
 | `群吃分榜` / `群寸止榜` / `群锁血榜` | In-group leaderboards |
 | `开启mai猜歌` / `关闭mai猜歌` | **Group admin**: toggle guessing |
+| `开启狼人杀` / `关闭狼人杀` | **Group admin**: toggle Werewolf (shares the guessing switch) |
+| `开启phi` / `关闭phi` | **Group admin**: toggle Phigros lookup (see [Phigros](/en/guide/bot/phigros)) |
 | `开启别名推送` / `关闭别名推送` | **Group admin**: alias push for this group |
 | `排卡帮助` / `排卡教程` | View arcade queue-card feature usage |
 | `排卡列表` | View configured arcade queue-card lists |
+| `小游戏权限不再提醒 <revision>` | **Owner / group admin**: stop the official-QQ "mini-game permission" reminder with the revision from the latest reminder (alias `游戏权限不再提醒`) |
+
+::: tip Mini-game permissions on the official QQ
+To start mini-games (guessing, Guess the Member, Werewolf, …) in an official QQ group, the
+owner must grant the bot the "proactive / receive message" permission. When it is missing the
+bot posts an image reminder at round start; after checking the settings the owner can send
+`小游戏权限不再提醒 <revision>` (or tap the "don't remind again" button) to silence it for that
+revision. The reminder returns automatically when the permission state changes.
+:::
 
 #### Admin Rendering & Precache Status
 
@@ -594,6 +664,8 @@ users don't need them.
 | `发布公告` / `编辑公告` / `删除公告` | Manage bot announcements |
 | `创建卡密` / `查询卡密` / `作废卡密` / `卡密列表` / `卡密统计` | Manage BREAK card codes |
 | `锐评模型配置` | View or adjust LLM roast runtime config |
+| `向量检索配置` | View or adjust the title vector-search (embedding) configuration: `开` / `关` / `URL <address>` / `模型 <name>` (aliases `曲名向量配置` / `embedding配置`) |
+| `命令排行 [command]` | Server-wide command usage ranking for the last 7 days (Top 20); with a command name, that command's 7-day detail (image) |
 | `关闭BREAK计费` / `开启BREAK计费` | Temporarily toggle BREAK billing |
 | `群成员记录` | View official QQ group member mapping records |
 | `后台身份` | View the identity recognized by the group management backend |
@@ -607,6 +679,69 @@ users don't need them.
 
 The bot reacts to QQ pokes. If the bot is an admin, it may trigger a random
 **mute** (up to 1 day). Poke with caution.
+
+### 2.13 Werewolf (狼人杀)
+
+A multiplayer werewolf game started in the group, with actions in both the group and private
+chat. State lives in memory only (**a bot restart dissolves the round**); treat the live
+`狼人杀帮助` text as authoritative.
+
+| Command | Description |
+|------|------|
+| `狼人杀` | Start a round and return the game ID |
+| `狼人杀加入` / `狼人杀报名` | Join (private-chat `加入 <game ID>` works too) |
+| `狼人杀开始` / `狼人杀开局` | **Initiator / admin**: start early once the player count is met |
+| `狼人杀延长` / `延长报名` / `延长` | Extend the join window by 30 seconds (2 times globally) |
+| `退出狼人杀` / `退出报名` | Leave during the join window (after the start you play the round out; alias `不玩了`) |
+| `狼人杀状态` / `狼人杀战况` | View the phase, survivors and countdown |
+| `狼人杀名单` / `狼人杀玩家` | View the round roster |
+| `结束狼人杀` / `解散狼人杀` | **Initiator / admin**: force-end the round |
+| `狼人杀帮助` / `狼人杀说明` | View the live rule text |
+| `开启狼人杀` / `关闭狼人杀` | **Group admin**: per-group switch (shares the guessing switch) |
+
+**Private-chat actions**: `身份` (resend your role), `刀 <number>`, `查验 <number>`,
+`救` / `毒 <number>` / `不用`, `守 <number>`, `开枪 <number>` / `不开枪`,
+`投票 <number>` / `弃权`, `说 <text>`. With 9+ players there is also the sheriff role
+(`上警` / `退水` / `投警 <number>` / `警徽流 <number>` / `撕警徽`).
+
+::: tip Rules at a glance
+- 4–16 players; roles are derived as "wolves ≈ ⌊players / 3⌋, one seer, one witch, the rest
+  villagers", with guard / idiot / hunter added in larger rounds (the live broadcast is
+  authoritative).
+- The day has three parts: **rotating speeches** (a fixed slot each, only the current
+  speaker may talk in the group; `结束发言` hands over early) → **open chat** → **voting
+  window** (group muted, votes by private message; you may vote any time from day start).
+- The night defaults to two parts: 🛡️guard / 🐺wolves / 🔮seer act in the same window, then
+  🧪the witch uses her potions.
+- Every phase starts with a 5-second grace window; speaking in the group when it is not your
+  turn (or after death) is **recalled and charged BREAK** (10 alive / 100 dead, configurable).
+- Rewards split a pool that scales with the player count (100 at 4 players, capped at 600);
+  a wolf win multiplies by 1.2, plus survival and MVP bonuses; the switch and parameters are
+  hot-configurable by an admin.
+:::
+
+### 2.14 Voting (投票)
+
+A group admin can open a poll in the group; results live in the console's "投票结果" page
+(bar / pie charts plus the admin-only detail).
+
+| Command | Description |
+|------|------|
+| `创建投票 <title> <optionA/optionB/...>` | **Group admin**: multi-option poll (at least 2 options) |
+| `创建曲目投票 <title> [candidate1/candidate2/...]` | **Group admin**: song poll; leave candidates empty = open submission (reply a title to vote) |
+| `创建范围投票 <title> 难度13~14 [duration]` | **Group admin**: song poll limited to a constant range (alias `创建定数投票`) |
+| `投票 <id> [content]` | Vote / change vote; without content it shows details and buttons (alias `参与投票`) |
+| `投票结果 <id>` | View the anonymous tally of that poll |
+| `投票列表` | List open polls (alias `进行中的投票`) |
+| `关闭投票 <id>` | Settle early (alias `结束投票`) |
+
+- A duration can be written as `30分钟` / `2小时`; the default is 60 minutes. Polls settle
+  and announce automatically at the deadline.
+- Creating / closing requires **group owner or admin**; a plugin admin can put "全服" in the
+  title to create a **server-wide poll** (visible in every group, votes aggregated globally,
+  with the announcement sent to the creating group).
+- The console's "投票结果" page lists polls with vote charts and the **admin-only ballot
+  detail**.
 
 ---
 

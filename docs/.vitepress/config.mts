@@ -87,6 +87,7 @@ export default defineConfig({
                 { text: '指令帮助', link: '/guide/bot/advanced' },
                 { text: '术语解释', link: '/guide/bot/explain' },
                 { text: '指令调用', link: '/guide/bot/commands'},
+                { text: 'Phigros 查分', link: '/guide/bot/phigros' },
                 { text: '授权获取', link: '/guide/bot/verify'},
                 { text: '群管理后台', link: '/guide/bot/group-console'},
               ]
@@ -178,6 +179,7 @@ export default defineConfig({
                 { text: 'Command Reference', link: '/en/guide/bot/advanced' },
                 { text: 'Terminology', link: '/en/guide/bot/explain' },
                 { text: 'Commands', link: '/en/guide/bot/commands' },
+                { text: 'Phigros Lookup', link: '/en/guide/bot/phigros' },
                 { text: 'Authorization', link: '/en/guide/bot/verify' },
                 { text: 'Group Console', link: '/en/guide/bot/group-console' }
               ]
