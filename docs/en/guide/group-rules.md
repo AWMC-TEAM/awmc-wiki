@@ -39,6 +39,20 @@ There is also a **developer group** `1067350296` for API integration and collabo
   makes others uncomfortable.
 - **Impersonating** staff, administrators, the Bot or other members is forbidden.
 
+::: danger Cross-group call-outs and out-of-context reposting (permanent ban)
+**Do not** take chat records from the group — messages from the owner, administrators, bot
+operators or members — and screenshot, forward or repost them **out of context** to other
+groups or platforms in order to call someone out, stir drama, provoke or retaliate.
+
+**Do not** publicly insult, mock, call out or gang up on a member's words in other groups or
+platforms.
+
+Breaking this rule means an **immediate permanent ban** — no warning, and no "it was just a
+joke" or "I only showed a friend" excuse. Keep in-group discussions inside the group. If you
+genuinely need to raise something with the admin team, **message them privately** with the full
+context instead of spreading cropped fragments.
+:::
+
 ## 3. Talk sensibly
 
 - Helping others is encouraged, but **nobody is obliged to answer**.
@@ -86,7 +100,11 @@ The following are **strictly forbidden**; serious cases lead to immediate remova
    messages count as advertising;
 7. **Other people's account credentials** — `SGWCMAID`, official QR links, score-fetcher
    tokens and the like may not be requested, forwarded or displayed;
-8. Anything illegal, pornographic, gambling-related, violent, politically sensitive, harmful to
+8. **Cross-group call-outs and out-of-context reposting** — screenshotting in-group chat
+   records (including messages from the owner, admins and members) and reposting them out of
+   context to other groups or platforms; publicly insulting, mocking or ganging up on members
+   in other groups;
+9. Anything illegal, pornographic, gambling-related, violent, politically sensitive, harmful to
    minors, or otherwise against the platform's rules.
 
 ::: danger A note on "sensitive details"
@@ -115,12 +133,15 @@ Administrators act according to **severity** and **repeat count**. The usual lad
 | Normal violation (spam, unverified reposts, mild advertising) | Warning, recorded |
 | Repeat or clear violation (advertising, lottery chains, sharing credentials) | **Mute for 10 minutes to 24 hours** |
 | Serious violation (abuse, cracking/cheating content, operation-affecting details, API abuse) | **Removal from the group (kick)** |
+| Reposting in-group messages out of context / publicly insulting members in other groups | **Immediate permanent ban**, no warning |
 | Extreme or persistent (doxxing, fraud, organised abuse, harassment after removal) | **Removal and permanent ban**, plus a platform report if needed |
 
 Notes:
 
 - Obvious violations — advertising, cracking/cheating, doxxing, sharing credentials — may be
   muted or removed **without prior warning**;
+- **Out-of-context call-outs and cross-group insults** are **zero tolerance**: breaking them
+  leads to an immediate permanent ban, applying to every AWMC group the person is in;
 - **Harassment** (repeatedly @-mentioning the owner or admins, unwanted DMs, continuing after a
   reminder) is **muted for 1 day by default** — "I was just asking questions" is not an
   exemption; ask on the forum instead;
@@ -140,6 +161,9 @@ Notes:
   harassment** — just state the facts clearly and do not spam.
 - "No harassment" here means unwanted, repeated pestering that continues after a reminder; it
   does not cover ordinary questions or appeals.
+- Permanent bans may also be appealed **once**: message an administrator with the full context,
+  and a confirmed mistake will be reversed. This does not change the "no prior warning"
+  principle.
 
 ## 8. Come and play
 
