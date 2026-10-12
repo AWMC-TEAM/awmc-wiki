@@ -40,17 +40,21 @@ There is also a **developer group** `1067350296` for API integration and collabo
 - **Impersonating** staff, administrators, the Bot or other members is forbidden.
 
 ::: danger Cross-group call-outs and out-of-context reposting (permanent ban)
-**Do not** take chat records from the group — messages from the owner, administrators, bot
-operators or members — and screenshot, forward or repost them **out of context** to other
-groups or platforms in order to call someone out, stir drama, provoke or retaliate.
+**Do not** take in-group chat records — messages from the owner, administrators, bot operators
+or members — and screenshot, forward or repost them **out of context** to other groups or
+platforms for the purpose of public accusation, opinion manipulation, provocation or
+retaliation.
 
-**Do not** publicly insult, mock, call out or gang up on a member's words in other groups or
+**Do not** publicly insult, mock, single out or gang up on a member's words in other groups or
 platforms.
 
-Breaking this rule means an **immediate permanent ban** — no warning, and no "it was just a
-joke" or "I only showed a friend" excuse. Keep in-group discussions inside the group. If you
-genuinely need to raise something with the admin team, **message them privately** with the full
-context instead of spreading cropped fragments.
+Anyone breaking this rule will be **permanently banned as soon as it is discovered**, with no
+separate warning. None of the following is a valid excuse: claiming it was a joke, claiming it
+was shared privately, or claiming the consequences were not foreseen.
+
+In-group discussions should be resolved within the group. If you genuinely need to raise
+something with the admin team, submit it **by private message** with the full context; do not
+circulate cropped fragments.
 :::
 
 ## 3. Talk sensibly
@@ -148,6 +152,23 @@ Notes:
 - Mute length and whether to remove are at the administrator's discretion; repeated small
   violations escalate;
 - Records are kept, and repeat violations across several groups count as the same person.
+
+### Cross-service consequences
+
+Violations in the groups are **not limited to group-level action**. For serious or repeated
+violations, the AWMC team may restrict or ban the account across **all AWMC services**,
+including but not limited to:
+
+| Service | Possible effect |
+| --- | --- |
+| **AWMC Bot** | Restriction or ban of score lookup, upload, group features and account commands |
+| **AWMC API** | Key revocation, quota restriction or access ban |
+| **AWMC KOA** | Restriction or ban of the related features and permissions |
+| **Events and competitions** | Disqualification, voided results or revoked prizes |
+
+The scope and duration of cross-service action are decided by the AWMC team based on the
+severity of the violation. See the [Terms of Service & Privacy Policy](/en/guide/bot/terms) for
+the account restriction rules.
 
 ## 7. Responsibility and appeals
 
