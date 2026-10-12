@@ -9,6 +9,12 @@ long term, please take two minutes to read the rules below.
 These rules apply to all official groups listed below, and to any other group where the AWMC
 Bot is present. **Joining a group means you have read and accepted this page.**
 
+::: info Rule updates are not announced
+These rules may be adjusted at any time. **Updates are not announced separately** and are not
+notified individually; the current content of this page is authoritative. Staying in the group
+means you accept the latest version.
+:::
+
 ## 1. Groups and their purpose
 
 | Group | Number | Purpose | Join link |
@@ -38,6 +44,20 @@ There is also a **developer group** `1067350296` for API integration and collabo
 - Do not make jokes about someone's privacy, appearance or identity, and avoid humour that
   makes others uncomfortable.
 - **Impersonating** staff, administrators, the Bot or other members is forbidden.
+
+### Display name requirements
+
+Your group display name must be **readable and usable as a name**. The following are forbidden:
+
+| Type | Description |
+| --- | --- |
+| `OPENID` and similar identifiers | Platform-internal IDs, `OPENID` or `Ref_ID` values returned by the bot, tokens and other meaningless strings |
+| Garbled or invisible characters | Garbled text, meaningless character dumps, blank names, zero-width characters and other names used to hide one's identity |
+| Posing as the bot or staff | Names imitating the bot, administrators, the owner or the official team, including near-identical forms of identity-like names such as `AWMC`, `Bot` or `管理员` |
+| Impersonating others | Using someone else's name, avatar or identity markers in a way that causes confusion |
+
+Administrators may require you to change a non-compliant name; if it is **still unchanged after
+a reminder**, it is handled under section 6.
 
 ::: danger Cross-group call-outs and out-of-context reposting (permanent ban)
 **Do not** take in-group chat records — messages from the owner, administrators, bot operators
@@ -133,6 +153,7 @@ Administrators act according to **severity** and **repeat count**. The usual lad
 | Situation | Action |
 | --- | --- |
 | Minor, first offence (off-topic spam, mildly uncivil) | Verbal reminder, message recall |
+| Non-compliant display name (`OPENID`, garbled, posing as bot or others) | Asked to rename; **removal if unchanged after the reminder** |
 | Harassing the admin team (chasing answers with @-mentions, unwanted DMs) | **Mute for 1 day** |
 | Normal violation (spam, unverified reposts, mild advertising) | Warning, recorded |
 | Repeat or clear violation (advertising, lottery chains, sharing credentials) | **Mute for 10 minutes to 24 hours** |
@@ -144,6 +165,10 @@ Notes:
 
 - Obvious violations — advertising, cracking/cheating, doxxing, sharing credentials — may be
   muted or removed **without prior warning**;
+- **Non-compliant display names** (`OPENID`, garbled text, posing as the bot or staff,
+  impersonating others) are handled **with a chance to fix it first**: rename on request, and
+  removal follows refusal or a repeat offence. Using a fake identity for scams or solicitation
+  is treated as a serious violation directly;
 - **Out-of-context call-outs and cross-group insults** are **zero tolerance**: breaking them
   leads to an immediate permanent ban, applying to every AWMC group the person is in;
 - **Harassment** (repeatedly @-mentioning the owner or admins, unwanted DMs, continuing after a
@@ -185,6 +210,8 @@ the account restriction rules.
 - Permanent bans may also be appealed **once**: message an administrator with the full context,
   and a confirmed mistake will be reversed. This does not change the "no prior warning"
   principle.
+- These rules may be adjusted at any time and **updates are not announced**; the current content
+  of this page is authoritative, and staying in the group means accepting the latest version.
 
 ## 8. Come and play
 
