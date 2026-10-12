@@ -251,7 +251,7 @@ Phigros（`phi`）系列指令绑定 TapTap 云存档，可查 B30、资料卡�
 ### 2.6 猜歌
 
 ::: info 私聊触发小游戏
-如需游玩猜歌、猜谱面等群游戏，请在私聊中按提示添加群聊 [AWMC 官方群](https://qm.qq.com/q/ZIJWblUc4E) 后再发起。
+如需游玩猜歌、猜谱面等群游戏，请在私聊中按提示加入 [2 群（游戏群）993795066](https://qm.qq.com/q/PF5t1VXPi0) 后再发起（1 群为保证交流体验不解锁小游戏）。
 :::
 
 | 指令 | 说明 |
@@ -705,5 +705,5 @@ BOT 对 QQ 的拍一拍会做出反馈。若 BOT 是管理，可能触发随机�
 
 ## 交流与反馈
 
-- **QQ 群**：[1072033605](https://qm.qq.com/q/7157yt6n6w)
+- **QQ 群**：[1 群 1072033605](https://qm.qq.com/q/Gj3QmfEyY0)（主群）· [2 群 993795066](https://qm.qq.com/q/PF5t1VXPi0)（游戏）· [群规](/guide/group-rules)
 - **官网**：https://awmc.cc

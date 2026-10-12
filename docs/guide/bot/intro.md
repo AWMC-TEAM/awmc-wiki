@@ -22,9 +22,10 @@ AWMC 的全部服务永久免费，但维持运转需要真实成本。如果 AW
 配置了 `/` 等前缀，请在指令前补上对应前缀。
 
 ::: tip 交流与反馈
-加入 QQ 群参与交流：[1072033605](https://qm.qq.com/q/7157yt6n6w)。
+加入 QQ 群参与交流：[1 群 1072033605](https://qm.qq.com/q/Gj3QmfEyY0)（主群，不解锁游戏）、[2 群 993795066](https://qm.qq.com/q/PF5t1VXPi0)（游戏群）；进群前请先看[交流群群规](/guide/group-rules)。
 
-遇到异常时请保留 Bot 返回的 `Ref_ID`，管理员可据此查看脱敏后的完整请求链路。
+遇到异常时请保留 Bot 返回的 `Ref_ID`，并到[论坛 AWMC Bot 版块](https://bbs.wmc.pub/forums/awmc-bot.17/)发帖反馈；
+请勿在群里反复 @ 群主或管理团队催问（无端骚扰按[群规](/guide/group-rules)可禁言 1 日）。
 :::
 
 ::: danger 凭据安全

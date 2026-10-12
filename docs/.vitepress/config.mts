@@ -80,6 +80,12 @@ export default defineConfig({
               ]
             },
             {
+              text: '📜 社区规范',
+              items: [
+                { text: '交流群群规', link: '/guide/group-rules' }
+              ]
+            },
+            {
               text: '🤖 AWMC BOT',
               items: [
                 {text: '服务协议与隐私政策', link: '/guide/bot/terms'},
@@ -169,6 +175,12 @@ export default defineConfig({
                 { text: 'What is AWMC?', link: '/en/guide/introduction' },
                 { text: 'Getting Started', link: '/en/guide/getting-started' },
                 { text: 'Changelog', link: '/en/guide/update' }
+              ]
+            },
+            {
+              text: '📜 Community Rules',
+              items: [
+                { text: 'Group Rules', link: '/en/guide/group-rules' }
               ]
             },
             {

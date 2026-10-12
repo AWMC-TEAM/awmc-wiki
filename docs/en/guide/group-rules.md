@@ -1,0 +1,153 @@
+# Community Group Rules
+
+::: tip In one line
+The AWMC x RankHub community groups are a place to talk about **maimai DX** and
+**AWMC / RankHub** services. To keep the conversation pleasant and the service running for the
+long term, please take two minutes to read the rules below.
+:::
+
+These rules apply to all official groups listed below, and to any other group where the AWMC
+Bot is present. **Joining a group means you have read and accepted this page.**
+
+## 1. Groups and their purpose
+
+| Group | Number | Purpose | Join link |
+| --- | --- | --- | --- |
+| Group 1 | `1072033605` | [Main] General chat and help | [Join](https://qm.qq.com/q/Gj3QmfEyY0) |
+| Group 2 | `993795066` | [Games] In-group mini-games | [Join](https://qm.qq.com/q/PF5t1VXPi0) |
+| Group 3 | `1094792527` | [No Bot] Chat only, no bot features | [Join](https://qm.qq.com/q/a1eRQGxoBO) |
+| Group 4 | `1048450426` | General chat, overflow | [Join](https://qm.qq.com/q/WEOuqtw00O) |
+
+::: warning Want to play games? Go to Group 2
+To keep Group 1 pleasant for conversation, **Group 1 does not host in-group mini-games**
+(song guessing, guess-the-member, werewolf, polls, etc.). Join **Group 2 (Games)** to play.
+:::
+
+Seats are limited: please **join only the groups you actually need**, and do not join several
+just to idle. Administrators may remove long-inactive placeholder members.
+
+There is also a **developer group** `1067350296` for API integration and collaboration, see the
+[Developer Center](/en/dev/). These rules apply there as well.
+
+## 2. Respect each other
+
+- Be civil. Insults, personal attacks, threats, discrimination, regional slurs, call-outs and
+  doxxing are **forbidden**.
+- Disagreement is normal — argue the point, not the person, and do not chase people around
+  the group.
+- Do not make jokes about someone's privacy, appearance or identity, and avoid humour that
+  makes others uncomfortable.
+- **Impersonating** staff, administrators, the Bot or other members is forbidden.
+
+## 3. Talk sensibly
+
+- Helping others is encouraged, but **nobody is obliged to answer**.
+- If a question gets no reply for a long time, check whether it is clearly written and gives
+  enough background (platform, version, full error text, reproduction steps). The more
+  specific the question, the easier it is to answer.
+- Read the [documentation](/en/guide/introduction) and the
+  [command reference](/en/guide/bot/advanced) before asking; do not keep re-posting something
+  the docs already answer.
+- For bugs, account problems, wrong data or feature requests, post on the
+  [forum](https://bbs.wmc.pub/forums/awmc-bot.17/) instead of @-mentioning the group owner or
+  the admin team in the group.
+- Avoid pushing unrelated topics for long stretches.
+
+::: warning Having a problem? Post on the forum, do not @ the owner or admins
+The group owner and the admin team **are not a support desk**. For bugs, account issues,
+wrong data or feature requests, check the [documentation](/en/guide/introduction) and the
+[command reference](/en/guide/bot/advanced) first; if that does not help, ask on the
+**forum**:
+
+👉 **[AWMC Bot board · bbs.wmc.pub/forums/awmc-bot.17](https://bbs.wmc.pub/forums/awmc-bot.17/)**
+
+Include a clear description, the steps to reproduce, and the `Ref_ID` the bot returned.
+Repeatedly @-mentioning the owner, admins or bot operators to chase an answer, or pestering
+the admin team and members in private messages, counts as **harassment**: you will be
+reminded first, and muted for **1 day** if it continues. Repeat offences escalate under
+section 6.
+:::
+
+## 4. Forbidden content
+
+The following are **strictly forbidden**; serious cases lead to immediate removal:
+
+1. **Unverified information** — rumours, leaks, "I heard that...", unconfirmed screenshots and
+   hearsay;
+2. **Repost-for-lottery, vote-begging, like-for-like chains** — any invitation, vote, boost,
+   bargain or group-buy link;
+3. **Cracking, modifying or cheating in maimai DX** — including modded cabinets, private
+   servers, account theft, boosting, and buying or sharing accounts;
+4. **Any detail that could affect the operation of the maimai DX China servers**;
+5. **Advertising and promotion of any kind** — third-party products, services, communities,
+   sites, streams, commissions and traffic farming. What may be shared is limited to content
+   from **mainstream social platforms** and **AWMC / RankHub services**;
+6. **DM solicitation** — advertising, group invites or sales sent to members in private
+   messages count as advertising;
+7. **Other people's account credentials** — `SGWCMAID`, official QR links, score-fetcher
+   tokens and the like may not be requested, forwarded or displayed;
+8. Anything illegal, pornographic, gambling-related, violent, politically sensitive, harmful to
+   minors, or otherwise against the platform's rules.
+
+::: danger A note on "sensitive details"
+Please do not discuss or spread any **non-public detail** about the maimai DX servers,
+interfaces or operations. This is not topic censorship — it protects the service everyone here
+is using. Once such content spreads, everyone pays the price.
+:::
+
+## 5. Message order
+
+- **No spam**: repeating the same message, flooding with meaningless stickers or images,
+  voice spam, or mass @-mentions.
+- Quote only the necessary part of a message; do not repeat long quotes.
+- Use bot commands appropriately, and avoid flooding with long commands (full help pages,
+  batch queries). **Abusing the bot API** to scrape data or hog resources is forbidden.
+- Send questions and discussion in separate short messages; keep one topic per message.
+
+## 6. Enforcement
+
+Administrators act according to **severity** and **repeat count**. The usual ladder:
+
+| Situation | Action |
+| --- | --- |
+| Minor, first offence (off-topic spam, mildly uncivil) | Verbal reminder, message recall |
+| Harassing the admin team (chasing answers with @-mentions, unwanted DMs) | **Mute for 1 day** |
+| Normal violation (spam, unverified reposts, mild advertising) | Warning, recorded |
+| Repeat or clear violation (advertising, lottery chains, sharing credentials) | **Mute for 10 minutes to 24 hours** |
+| Serious violation (abuse, cracking/cheating content, operation-affecting details, API abuse) | **Removal from the group (kick)** |
+| Extreme or persistent (doxxing, fraud, organised abuse, harassment after removal) | **Removal and permanent ban**, plus a platform report if needed |
+
+Notes:
+
+- Obvious violations — advertising, cracking/cheating, doxxing, sharing credentials — may be
+  muted or removed **without prior warning**;
+- **Harassment** (repeatedly @-mentioning the owner or admins, unwanted DMs, continuing after a
+  reminder) is **muted for 1 day by default** — "I was just asking questions" is not an
+  exemption; ask on the forum instead;
+- Mute length and whether to remove are at the administrator's discretion; repeated small
+  violations escalate;
+- Records are kept, and repeat violations across several groups count as the same person.
+
+## 7. Responsibility and appeals
+
+- Everything you post must comply with the **terms of service and community guidelines of the
+  platform you are using**. The group is not responsible for any ban or restriction resulting
+  from a platform rules violation.
+- Data and risks arising from use of the AWMC Bot are handled under the
+  [Terms of Service & Privacy Policy](/en/guide/bot/terms).
+- If you disagree with a decision, **message an administrator privately**. Administrators will
+  review it; a mistaken action will be reversed with an apology. **A normal appeal is not
+  harassment** — just state the facts clearly and do not spam.
+- "No harassment" here means unwanted, repeated pestering that continues after a reminder; it
+  does not cover ordinary questions or appeals.
+
+## 8. Come and play
+
+- Add the AWMC Bot: [click to add](https://bot.q.qq.com/s/uYVc4fV6nK), then bind your account
+  to look up scores, queue cards and play guessing games.
+- New here? Start with [Getting Started](/en/guide/getting-started); the full command list is
+  in the [Command Reference](/en/guide/bot/advanced).
+- Group owners and admins can send `群管理` to open the
+  [group console](/en/guide/bot/group-console).
+- If the bot misbehaves, keep the `Ref_ID` it returns — administrators can use it to look up
+  the request chain.

@@ -22,7 +22,8 @@ AWMC BOT is a bot developed on the **Koishi / NoneBot** framework, running on th
 * Group chat utility features
 * Entertainment and interactive features
 
-Official group: 1072033605
+Official groups: Group 1 `1072033605` (main), Group 2 `993795066` (games), Group 3 `1094792527` (no bot), Group 4 `1048450426`.
+See the [Community Group Rules](/en/guide/group-rules) for the group list, each group's purpose and the enforcement rules.
 
 
 

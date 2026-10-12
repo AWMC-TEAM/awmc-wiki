@@ -13,10 +13,12 @@ no prefix; if your platform configures a prefix such as `/`, prepend it to each
 command.
 
 ::: tip Contact & Feedback
-Join the QQ group for discussion: [1072033605](https://qm.qq.com/q/7157yt6n6w).
+Join the QQ groups: [Group 1 · 1072033605](https://qm.qq.com/q/Gj3QmfEyY0) (main, no games) and [Group 2 · 993795066](https://qm.qq.com/q/PF5t1VXPi0) (games). Please read the [Group Rules](/en/guide/group-rules) before joining.
 
-If something goes wrong, keep the `Ref_ID` returned by the Bot; admins can use
-it to inspect the redacted full request chain.
+If something goes wrong, keep the `Ref_ID` the Bot returns and post on the
+[AWMC Bot forum board](https://bbs.wmc.pub/forums/awmc-bot.17/). Please do not chase the group
+owner or admins with repeated @-mentions in the group — unwanted pestering can get you muted
+for 1 day under the [Group Rules](/en/guide/group-rules).
 :::
 
 ::: danger Credential safety

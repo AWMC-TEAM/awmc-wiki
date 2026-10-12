@@ -250,8 +250,8 @@ failing the rank is still determined by the arcade result.
 
 ::: info Group games in private chat
 To play group games such as song guessing or chart guessing, follow the bot
-prompt to join the [AWMC official group](https://qm.qq.com/q/ZIJWblUc4E) before
-starting.
+prompt to join [Group 2 · 993795066](https://qm.qq.com/q/PF5t1VXPi0) (games)
+before starting. Group 1 does not unlock mini-games, to keep it readable.
 :::
 
 | Command | Description |
@@ -747,5 +747,5 @@ A group admin can open a poll in the group; results live in the console's "投�
 
 ## Contact & Feedback
 
-- **QQ Group**: [1072033605](https://qm.qq.com/q/7157yt6n6w)
+- **QQ Groups**: [Group 1 · 1072033605](https://qm.qq.com/q/Gj3QmfEyY0) (main) · [Group 2 · 993795066](https://qm.qq.com/q/PF5t1VXPi0) (games) · [Rules](/en/guide/group-rules)
 - **Website**: https://awmc.cc

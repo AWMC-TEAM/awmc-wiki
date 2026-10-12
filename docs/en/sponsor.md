@@ -147,7 +147,7 @@ Sponsoring isn't the only way to help. These matter just as much:
 - 📝 **Improve docs** — use "Edit this page on GitHub" at the top of any page
 - 🔌 **Build plugins** — create your own tools on our [public API](/en/dev/)
 - 📢 **Spread the word** — tell other maimai players about AWMC
-- 💬 **Join the community** — QQ group `1072033605`
+- 💬 **Join the community** — QQ groups: [Group 1 · 1072033605](https://qm.qq.com/q/Gj3QmfEyY0) (main) · [Group 2 · 993795066](https://qm.qq.com/q/PF5t1VXPi0) (games) · [Rules](/en/guide/group-rules)
 
 ## Related Links
 
