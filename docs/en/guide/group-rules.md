@@ -120,16 +120,27 @@ The following are **strictly forbidden**; serious cases lead to immediate remova
 5. **Advertising and promotion of any kind** — third-party products, services, communities,
    sites, streams, commissions and traffic farming. What may be shared is limited to content
    from **mainstream social platforms** and **AWMC / RankHub services**;
-6. **DM solicitation** — advertising, group invites or sales sent to members in private
+6. **Other services and bots of the same kind** — do not bring up other score-lookup bots,
+   status sites, group-management tools or similar services in the group, in any form:
+   recommending them, comparing them, reviewing them, recruiting for them or driving traffic to
+   them. The group is for using and troubleshooting AWMC / RankHub itself;
+7. **DM solicitation** — advertising, group invites or sales sent to members in private
    messages count as advertising;
-7. **Other people's account credentials** — `SGWCMAID`, official QR links, score-fetcher
+8. **Other people's account credentials** — `SGWCMAID`, official QR links, score-fetcher
    tokens and the like may not be requested, forwarded or displayed;
-8. **Cross-group call-outs and out-of-context reposting** — screenshotting in-group chat
+9. **Cross-group call-outs and out-of-context reposting** — screenshotting in-group chat
    records (including messages from the owner, admins and members) and reposting them out of
    context to other groups or platforms; publicly insulting, mocking or ganging up on members
    in other groups;
-9. Anything illegal, pornographic, gambling-related, violent, politically sensitive, harmful to
-   minors, or otherwise against the platform's rules.
+10. Anything illegal, pornographic, gambling-related, violent, politically sensitive, harmful to
+    minors, or otherwise against the platform's rules.
+
+::: info Where rule 6 draws the line
+Rule 6 targets **other services and bots of the same kind**; it is not a ban on every external
+name. Parts of the AWMC Bot's own functionality — such as 水鱼 / 落雪 uploads, TapTap cloud
+saves, arcade data sources and the like — are normal usage topics and may be asked about and
+answered freely.
+:::
 
 ::: danger A note on "sensitive details"
 Please do not discuss or spread any **non-public detail** about the maimai DX servers,
@@ -156,6 +167,7 @@ Administrators act according to **severity** and **repeat count**. The usual lad
 | Non-compliant display name (`OPENID`, garbled, posing as bot or others) | Asked to rename; **removal if unchanged after the reminder** |
 | Harassing the admin team (chasing answers with @-mentions, unwanted DMs) | **Mute for 1 day** |
 | Normal violation (spam, unverified reposts, mild advertising) | Warning, recorded |
+| Bringing up other services or bots of the same kind (including recommending or driving traffic) | Reminder and message recall; repeat or clear traffic-driving goes to the next tier |
 | Repeat or clear violation (advertising, lottery chains, sharing credentials) | **Mute for 10 minutes to 24 hours** |
 | Serious violation (abuse, cracking/cheating content, operation-affecting details, API abuse) | **Removal from the group (kick)** |
 | Reposting in-group messages out of context / publicly insulting members in other groups | **Immediate permanent ban**, no warning |
@@ -174,6 +186,10 @@ Notes:
 - **Harassment** (repeatedly @-mentioning the owner or admins, unwanted DMs, continuing after a
   reminder) is **muted for 1 day by default** — "I was just asking questions" is not an
   exemption; ask on the forum instead;
+- **Bringing up other services and bots of the same kind** (rule 6): a passing mention is
+  handled with a **reminder and message recall**; recommending, comparing, recruiting or
+  driving traffic, or continuing after a reminder, leads to a **mute of 10 minutes to 24
+  hours**; clear promotion of another service is treated as advertising;
 - Mute length and whether to remove are at the administrator's discretion; repeated small
   violations escalate;
 - Records are kept, and repeat violations across several groups count as the same person.
