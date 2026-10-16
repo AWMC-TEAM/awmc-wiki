@@ -34,7 +34,7 @@ apiBaseUrl: https://api.wmc.pub
 以下操作**极可能对账号产生不可逆转的严重后果**，请勿随意调用：
 
 1. **改门**：`POST /v1/kaleidx-scope/upsert`（修改 Kaleidx Scope Gate 状态）。
-2. **未验证收藏品写入**：通过 `POST /v1/item/upsert` 或 `POST /v1/user/upsert-all` 发送 **`itemKind` 为 `4`、`8`** 的道具数据。
+2. **未验证收藏品写入**：通过 `POST /v1/item/upsert` 或 `POST /v1/user/upsert-all` 发送 **`itemKind` 为 `4`、`8`、`15` 等未充分验证的收藏品**数据。
 
 网关不会替你拦截这些请求；调用即视为自行承担风险。
 :::
@@ -173,6 +173,8 @@ apiBaseUrl: https://api.wmc.pub
 ```
 
 `upsert_message.result`（完成时）含 `verified`、`uploadedMusicCount`、`skippedMusicCount`、`noOp` 等结果字段；失败时读 `upsert_message.error`。**创建成功 ≠ 上传完成**，请务必轮询到终态。
+
+失败终态里 `errorCode` 为 **`5006` / `5007` / `5104`** 时特殊：上游**已把数据写入、只是核对没跑完**（保存验证失败 / 上传中断），**结果可能已落库**——请先核对账号数据（或重查同一 `session_id`）再决定是否重发。
 
 **`?sync=1` 同步模式**：给任何会话制写接口加查询参数 `?sync=1`（如 `POST /v1/music/upsert?sync=1`），网关会代为轮询直到终态（默认预算 180 秒）后**同步返回最终结果**——行为与旧版 v2 的同步语义一致，适合不想实现轮询的简单客户端。
 
@@ -519,7 +521,7 @@ v2 时代的单件写法 `{ "itemKind": 2, "itemId": 11, "operation": "add" }`�
       method: 'POST',
       path: '/v1/item/upsert',
       paramsIn: 'json',
-      description: '消耗 20 Token。【高风险】itemKind 为 4/8 时极可能对账号造成不可逆严重后果。v2-3 支持批量 itemList（旧样式 itemKind/itemId/operation 自动转换）。',
+      description: '消耗 20 Token。【高风险】itemKind 为 4/8/15 等时极可能对账号造成不可逆严重后果。v2-3 支持批量 itemList（旧样式 itemKind/itemId/operation 自动转换）。',
       params: [
         { name: 'qrcode', type: 'string', required: '必填', desc: '二维码', value: '' },
         { name: 'itemList', type: 'array', required: '新契约', desc: '[{itemKind, itemId, stock, isValid}]', value: [{ itemKind: 2, itemId: 11, stock: 1, isValid: true }] }
@@ -674,6 +676,7 @@ v2-3 上游下本人的上传会话（也可在**控制台侧边栏「上传会�
 | **4001** 等 | 上游业务错误（如用户正在登录中），见 `returnMessage` |
 | **5004 / 5009** | 谱面不存在 / DX 分超出谱面上限 |
 | **5101 / 5106** | 会话不存在或已清理 / 会话未在 60 秒内确认（v2-3；网关自动确认下罕见） |
+| **5006 / 5007 / 5104** | 上游保存验证失败 / 上传中断（v2-3 会话终态）——**数据可能已落库**，请先核对账号数据，勿盲目重发 |
 | **500 / 502** | 转发或解码失败 |
 
 ::: tip 建议

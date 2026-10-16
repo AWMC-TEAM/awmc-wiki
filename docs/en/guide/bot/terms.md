@@ -235,7 +235,8 @@ If you have questions, please contact:
 
 * Contact: MILK
 * QQ: 3801477277
-* Email: [awmc@awmc.cc](mailto:awmc@awmc.cc)
+* Email: [3801477277@qq.com](mailto:3801477277@qq.com)
+* Forum: [Contact page](https://bbs.wmc.pub/misc/contact)
 * Status Page: https://up.wmc.pub/
 
 The final interpretation of this agreement belongs to AWMC TEAM.

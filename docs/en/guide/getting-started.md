@@ -12,8 +12,10 @@ You can contact our team by sending an email via the icon above.
 
 ## 🚀 AWMC Bot in Three Minutes
 
-To quickly set up the bot service, please visit:
-[AWMC BOT](./bot/intro.md)
+Welcome to **add AWMC Bot**, or invite it into your own group — query scores, queue cards and
+guess songs together. For a step-by-step setup guide, see [AWMC BOT](./bot/intro.md).
+
+👉 [Add AWMC Bot](https://bot.q.qq.com/s/uYVc4fV6nK)
 
 1. **Add the bot** — Click the link above, or have a group owner invite the bot to a group.
    For the best group experience (song guessing, queue cards, etc.), allow the bot to read all

@@ -84,7 +84,7 @@ phi查分 best19
   the picture.
 - Cover art is downloaded from a public CDN on demand and cached; if the download fails, the
   render degrades to a first-character placeholder block instead of failing.
-- The save freshness is checked on every lookup: a save older than the auto-refresh window
+- The save freshness is checked on every `phi查分`: a save older than the auto-refresh window
   (12 hours by default) is re-fetched first (see the next section).
 
 ## 4. Refreshing the Save and Progress
@@ -94,9 +94,9 @@ phi更新
 phi进步
 ```
 
-- **Auto refresh**: whenever a lookup (`phi查分` / `phi资料` / `phi进步`, …) finds the save
-  older than `phi_auto_update_hours` (12 hours by default), it re-fetches it first, so a
-  manual update is usually unnecessary.
+- **Auto refresh**: `phi查分` re-fetches the save first when it is older than
+  `phi_auto_update_hours` (12 hours by default), so a manual update is usually unnecessary;
+  `phi资料` / `phi进步` read the most recent save and snapshots as-is.
 - Use `phi更新` right after playing, when you want to see the new scores immediately.
 - Every **successful** fetch writes a snapshot into the `phigros_snapshot` table;
   `phi进步` compares the **two most recent** snapshots and reports the rks change, the B30

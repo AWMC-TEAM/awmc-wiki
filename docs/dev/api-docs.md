@@ -8,7 +8,7 @@
 - `POST /v1/music/upsert`：上传/覆盖成绩（文档内详细说明精确/模糊模式、`dxScore` 含义）
 - `POST /v1/music/delete`：按 `musicId` + `level` 删除成绩
 
-注意：`POST /v1/user/music` 是**查询**全部成绩，不是上传。文字版说明见 [AWMC 公共 API · 成绩写入](/dev/awmc-api#34-成绩写入传歌曲--详细说明)。
+注意：`POST /v1/user/music` 是**查询**全部成绩，不是上传。文字版说明见 [AWMC 公共 API · 成绩写入](/dev/awmc-api#_3-4-成绩写入-传歌曲-—-详细说明)。
 :::
 
 ::: tip AWMCNET 成绩同步

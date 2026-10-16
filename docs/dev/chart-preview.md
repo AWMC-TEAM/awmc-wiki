@@ -23,7 +23,7 @@ chartPreviewBaseUrl: https://v.awmc.cc
 | 参数 | 说明 |
 |------|------|
 | `song` | 乐曲 ID，以**落雪乐曲 ID**为准。 |
-| `kind` | 谱面类型：`standard` 为标准谱，`dx` 为 DX 谱。 |
+| `kind` | 谱面类型：`standard` 为标准谱，`dx` 为 DX 谱，`utage` 为宴会场（UTAGE）谱。 |
 | `diff` | 难度分级。常见对应关系为：`2` Basic、`3` Advance、`4` Expert、`5` Master、`6` Re:Master。具体以对应乐曲的 `maidata.txt` 为准。 |
 
 ## 交互示例
@@ -41,7 +41,7 @@ chartPreviewBaseUrl: https://v.awmc.cc
       description: '在浏览器中打开谱面预览；参数通过 Query 传递。',
       params: [
         { name: 'song', type: 'number', required: '必填', desc: '曲 ID（落雪乐曲 ID）', value: '417' },
-        { name: 'kind', type: 'string', required: '必填', desc: 'standard 标准谱；dx 为 DX 谱', value: 'standard' },
+        { name: 'kind', type: 'string', required: '必填', desc: 'standard 标准谱；dx 为 DX 谱；utage 为宴会场谱', value: 'standard' },
         { name: 'diff', type: 'number', required: '必填', desc: '难度档位，参见上文与 maidata.txt', value: '5' }
       ]
     }

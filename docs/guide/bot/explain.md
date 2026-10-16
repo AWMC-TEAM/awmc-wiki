@@ -10,7 +10,7 @@
 
 舞萌DX通过一个特殊的公式来计算每首歌获得的Rating。
 
-从大到小排列，其中前35个<abbr title="非当前版本更新的歌曲">旧版本歌曲</abbr>和前15个<abbr title="国服现行版本为舞萌DX 2025">新版本歌曲</abbr>组成了B50。
+从大到小排列，其中前35个<abbr title="非当前版本更新的歌曲">旧版本歌曲</abbr>和前15个<abbr title="国服现行版本为舞萌DX 2026">新版本歌曲</abbr>组成了B50。
 
 将它们的Rating相加，便得出<abbr title="国服在舞萌DX 2025后翻译为DX评分">DX Rating</abbr>。
 

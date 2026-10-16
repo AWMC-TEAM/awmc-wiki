@@ -253,7 +253,8 @@ export default defineConfig({
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Michaelwucoc/awmc-wiki' },
-      { icon: 'maildotru', link: 'mailto:awmc@awmc.cc' }
+      { icon: 'maildotru', link: 'mailto:3801477277@qq.com' },
+      { icon: 'discourse', link: 'https://bbs.wmc.pub/misc/contact' }
     ],
     footer: {
       message: 'Released under the MIT License.',

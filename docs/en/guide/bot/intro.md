@@ -250,20 +250,21 @@ uploads, but the score checker itself may need time to process.
 | `我的AWMC` | Balance, check-in streak, today's usage, recent transactions, and invoice `returnCode` stats |
 | `AWMC帮助` | View BREAK rules |
 
-The base check-in reward is 1-2 BREAK by default; consecutive check-ins add up
-to 2 more. Specific groups, Thursdays, and the group's first check-in of the
-day may apply extra multipliers; the actual result follows what the Bot returns.
+The base check-in reward is 1-2 BREAK by default; the consecutive check-in bonus
+adds up to 3 more (capped from day 5). Specific groups, Thursdays, and the group's
+first check-in of the day may apply extra multipliers; the actual result follows
+what the Bot returns.
 
 ### 2. Default pricing
 
 | Feature | Default rule |
 |---|---|
 | Score API | First actual request per day free, then 1 BREAK; cache hits are free |
-| B50 analysis | Token base price ×3, min 6, max 60; 6 BREAK reserved before the call, refund/settle difference on success, full refund on failure |
+| B50 analysis | Billed by Token usage: base price min 3, max 30; 14 BREAK reserved before the call, refund/settle the difference on success, full refund on failure (both ×2 during LLM peak hours) |
 | Song guessing | Normal correct guess gives 1 BREAK by default; Guess Rating / B50 Impostor settle by rank and difficulty |
 | Score upload | First success per day free, then Diving Fish 2, Lxns 2, both 3 |
-| Tickets | First success per day free, then 20 / 30 BREAK |
-| Lottery | 2 BREAK per draw by default; 1-10 draws |
+| Tickets | Charged per success by multiplier (2x 20, 3x 30, 5x 50 BREAK); failure is free |
+| Lottery | 2 BREAK per draw by default; 1-1000 draws |
 
 ### 3. Group interaction
 
@@ -333,15 +334,17 @@ required to use account features.
 
 ## IX. Tickets
 
-Send `发票 2` or `fp 2` to request a 2x ticket; 2x and 3x are currently
+Send `发票 2` or `fp 2` to request a 2x ticket; 2x, 3x, and 5x are currently
 supported:
 
-| Multiplier | Price after daily first-free |
+| Multiplier | Price (per success) |
 |---:|---:|
 | 2x | 20 BREAK |
 | 3x | 30 BREAK |
+| 5x | 50 BREAK |
 
-Charges only apply after the ticket actually succeeds and is confirmed.
+Tickets are charged per multiplier on each success, with no daily first-free
+allowance; charges only apply after the ticket actually succeeds and is confirmed.
 `mai查票` or `查票` views ticket status by type, stock, and expiry; the reply
 never shows the maimai account UID or raw API data.
 

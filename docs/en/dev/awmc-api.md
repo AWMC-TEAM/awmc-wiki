@@ -34,7 +34,7 @@ Redeem in the console or via `POST /redeem`.
 These actions **may cause irreversible, severe damage to an account**. Do not call them casually:
 
 1. **Gate edits**: `POST /v1/kaleidx-scope/upsert` (Kaleidx Scope Gate state).
-2. **Unverified collectibles**: writing **`itemKind` `4` / `8`** via `POST /v1/item/upsert` or `POST /v1/user/upsert-all`.
+2. **Unverified collectibles**: writing **`itemKind` `4` / `8` / `15` and other poorly verified collectible types** via `POST /v1/item/upsert` or `POST /v1/user/upsert-all`.
 
 The gateway does **not** block these requests; you accept the risk by calling them.
 :::
@@ -170,6 +170,8 @@ On a **v2-3** upstream every write endpoint (scores / items / tickets / profile)
 ```
 
 `upsert_message.result` (on completion) contains `verified`, `uploadedMusicCount`, `skippedMusicCount`, `noOp`; on failure read `upsert_message.error`. **Session created ≠ upload complete** — always poll to a terminal state.
+
+One failure case is special: when the terminal `errorCode` is **`5006` / `5007` / `5104`**, the upstream **already wrote the data and only its verification pass didn't finish** (save-verification failure / upload interruption), so the **result may already be persisted** — check the account data (or re-query the same `session_id`) before resending.
 
 **`?sync=1` mode**: append `?sync=1` to any session-based write (e.g. `POST /v1/music/upsert?sync=1`) and the gateway polls on your behalf until the terminal state (default budget 180s) and **returns the final result synchronously** — same semantics as legacy v2, for simple clients that don't want to implement polling.
 
@@ -512,7 +514,7 @@ The v2-era single-item style `{ "itemKind": 2, "itemId": 11, "operation": "add" 
       method: 'POST',
       path: '/v1/item/upsert',
       paramsIn: 'json',
-      description: 'Costs 20 Tokens. HIGH RISK for itemKind 4/8. v2-3 supports batch itemList (legacy itemKind/itemId/operation auto-converted).',
+      description: 'Costs 20 Tokens. HIGH RISK for itemKind 4/8/15 and similar. v2-3 supports batch itemList (legacy itemKind/itemId/operation auto-converted).',
       params: [
         { name: 'qrcode', type: 'string', required: 'Required', desc: 'QR', value: '' },
         { name: 'itemList', type: 'array', required: 'New', desc: '[{itemKind, itemId, stock, isValid}]', value: [{ itemKind: 2, itemId: 11, stock: 1, isValid: true }] }
@@ -665,6 +667,7 @@ Your own upload sessions on a v2-3 upstream (also viewable in the console sideba
 | **4001** etc. | Upstream business errors (see `returnMessage`) |
 | **5004 / 5009** | Chart not found / DX score over chart max |
 | **5101 / 5106** | Session missing or cleaned / not confirmed within 60s (v2-3; rare with gateway auto-confirm) |
+| **5006 / 5007 / 5104** | Upstream save-verification failure / upload interruption (v2-3 session terminal) — the **result may already be persisted**; verify the account data first, don't blindly resend |
 | **500 / 502** | Forwarding or decode failure |
 
 ::: tip Tips

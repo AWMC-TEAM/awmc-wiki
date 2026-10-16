@@ -23,7 +23,7 @@ Specify the song and chart via **Query** parameters. The full URL looks like:
 | Parameter | Description |
 |-----------|-------------|
 | `song` | Song ID, based on **Lxns song ID**. |
-| `kind` | Chart type: `standard` for Standard chart, `dx` for DX chart. |
+| `kind` | Chart type: `standard` for Standard chart, `dx` for DX chart, `utage` for UTAGE chart. |
 | `diff` | Difficulty level. Common mappings: `2` Basic, `3` Advance, `4` Expert, `5` Master, `6` Re:Master. Refer to the corresponding song's `maidata.txt` for specifics. |
 
 ## Interactive Demo
@@ -41,7 +41,7 @@ Click "Open in new tab" in the component below to open the preview page with the
       description: 'Open chart preview in browser; parameters are passed via Query.',
       params: [
         { name: 'song', type: 'number', required: 'Required', desc: 'Song ID (Lxns song ID)', value: '417' },
-        { name: 'kind', type: 'string', required: 'Required', desc: 'standard for Standard chart; dx for DX chart', value: 'standard' },
+        { name: 'kind', type: 'string', required: 'Required', desc: 'standard for Standard chart; dx for DX chart; utage for UTAGE chart', value: 'standard' },
         { name: 'diff', type: 'number', required: 'Required', desc: 'Difficulty level, see above and maidata.txt', value: '5' }
       ]
     }

@@ -49,7 +49,7 @@ Bot 回复的链接可能被群内其他成员看到。请打开后尽快使用�
 | 群总览 | 查看你名下各群的今日活跃、消息量与最近活跃时间 |
 | 功能开关 | 一键开启 / 关闭本群的成绩查询、猜歌、Phigros 查分、BREAK、排卡、账号、搜索、游玩次数等功能 |
 | 群数据统计 | 查看近 1 / 7 / 30 / 90 天的 BREAK 收支、功能调用占比、成员消息排行与使用流水 |
-| 投票结果 | 查看本群（与全服）投票的列表、票数条形图 / 饼图，并可提前关闭；明细（投票人 / 原始输入）仅管理端可见 |
+| 投票结果 | **超级管理员**功能（路径 `{PUBLIC_URL}/votes`）：查看本群（与全服）投票的列表、票数条形图 / 饼图，并可提前关闭；明细（投票人 / 原始输入）也在此页 |
 | 机厅排卡 | 添加、编辑、删除机厅；从 Nearcade 自动补全店铺资料；查看上报历史 |
 | 天气 | 开启每日天气摘要推送，设置推送时间、恶劣天气提醒与订阅周期 |
 | 消息模板 | 自定义排卡的查询 / 上报 / 预测文案（仅超级管理员） |
@@ -85,6 +85,11 @@ MAIMAIDX_GROUP_CONSOLE_FAST_LOGIN=false
 MAIMAIDX_GROUP_CONSOLE_ADMIN_TOKEN=
 # 群后台专用论坛 OAuth 回调地址；留空则使用 {PUBLIC_URL}/api/login/callback
 MAIMAIDX_GROUP_CONSOLE_OAUTH_REDIRECT=
+# 管理 WebUI 并入群后台同一监听（需同时开启 MAIMAIDX_ADMIN_WEB_ENABLED）：
+# 开启后 /maimaidx/admin（含投票结果页）也走 8100，管理 WebUI 不再单独监听 8099
+MAIMAIDX_ADMIN_WEB_MOUNT_GROUP_CONSOLE=false
+# 管理 WebUI 未并入群后台时的独立监听端口（默认 8099）
+MAIMAIDX_ADMIN_WEB_PORT=8099
 ```
 
 其它相关配置：

@@ -10,7 +10,7 @@ Full name: Best 50.
 
 maimai DX uses a special formula to calculate the Rating earned from each song.
 
-Sorted from highest to lowest, the top 35 <abbr title="Songs not updated in the current version">old version songs</abbr> and top 15 <abbr title="The current CN server version is maimai DX 2025">new version songs</abbr> make up the B50.
+Sorted from highest to lowest, the top 35 <abbr title="Songs not updated in the current version">old version songs</abbr> and top 15 <abbr title="The current CN server version is maimai DX 2026">new version songs</abbr> make up the B50.
 
 Adding their Ratings together gives you the <abbr title="Translated as 'DX Rating' in CN server after maimai DX 2025">DX Rating</abbr>.
 

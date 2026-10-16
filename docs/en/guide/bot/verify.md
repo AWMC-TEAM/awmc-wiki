@@ -10,7 +10,7 @@ If you add the bot to a group without prior approval, the bot will not provide m
 Official arcade player groups (with an official designation) can apply for free authorization:
 ![](/images/official_arcade_example.png)
 
-Please [send us an email](mailto:awmc@awmc.cc) with the following information:
+Please [send us an email](mailto:3801477277@qq.com); you can also leave a message on the [forum contact page](https://bbs.wmc.pub/misc/contact). Include the following information:
 
 > Subject: Group number + "Arcade Authorization Request"
 > 

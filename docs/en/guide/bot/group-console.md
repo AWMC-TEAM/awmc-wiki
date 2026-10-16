@@ -50,7 +50,7 @@ and give the returned identity ID to a super admin, who can grant you access in 
 | Group overview | Today's activity, message counts and latest activity for your groups |
 | Feature switches | Enable / disable score lookup, guessing games, Phigros lookup, BREAK, queue, account, search, play count and more per group |
 | Group statistics | BREAK income/spending, feature usage share, member message ranking and usage logs for the last 1 / 7 / 30 / 90 days |
-| Poll results | List this group's (and server-wide) polls with bar / pie charts of the votes, and close them early; the ballot detail (voter / raw input) is admin-only |
+| Poll results | **Super-admin** feature (at `{PUBLIC_URL}/votes`): list this group's (and server-wide) polls with bar / pie charts of the votes, and close them early; the ballot detail (voter / raw input) is on the same page |
 | Arcade queue | Add, edit and delete arcades; autofill store details from Nearcade; view report history |
 | Weather | Enable daily weather digest, set push time, severe-weather alerts and subscription interval |
 | Message templates | Custom query / report / predict templates for queue cards (super admin only) |
@@ -86,6 +86,12 @@ MAIMAIDX_GROUP_CONSOLE_FAST_LOGIN=false
 MAIMAIDX_GROUP_CONSOLE_ADMIN_TOKEN=
 # Dedicated forum OAuth redirect; defaults to {PUBLIC_URL}/api/login/callback
 MAIMAIDX_GROUP_CONSOLE_OAUTH_REDIRECT=
+# Mount the admin WebUI onto the console's listener (requires MAIMAIDX_ADMIN_WEB_ENABLED):
+# when on, /maimaidx/admin (including its poll-results page) is served on 8100 and
+# the admin WebUI no longer listens separately on 8099
+MAIMAIDX_ADMIN_WEB_MOUNT_GROUP_CONSOLE=false
+# Standalone admin WebUI port when NOT mounted onto the console (default 8099)
+MAIMAIDX_ADMIN_WEB_PORT=8099
 ```
 
 Related settings:

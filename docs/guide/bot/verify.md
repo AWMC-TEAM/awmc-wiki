@@ -9,7 +9,7 @@
 官方机厅玩家群（需要有官方字样）可申请免费授权：
 ![](/images/official_arcade_example.png)
 
-请[发送邮件](mailto:awmc@awmc.cc)给我们，按照如下要求填写:
+请[发送邮件](mailto:3801477277@qq.com)给我们；也可以在[论坛联系我们页](https://bbs.wmc.pub/misc/contact)留言。按照如下要求填写:
 
 > 主题: 群号 + "机厅授权申请"
 > 

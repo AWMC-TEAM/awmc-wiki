@@ -153,13 +153,13 @@ arcade results are authoritative".
 | `我的AWMC` | View BREAK, check-in streak, call stats, recent transactions, invoice success/failure rate and `returnCode=0` stats; auto-attaches the group song-guess chart in groups |
 | `AWMC帮助` | View pricing and reward details |
 | `转账BREAK @用户 数量` | Transfer BREAK |
-| `BREAK抽奖 [1-10]` | Lottery; default 2 BREAK per draw |
-| `发票` / `fp <2/3>` | Request 2x or 3x tickets |
+| `BREAK抽奖 [1-1000]` | Lottery; default 2 BREAK per draw |
+| `发票` / `fp <2/3/5>` | Request 2x, 3x, or 5x tickets |
 | `mai查票` / `查票` | Format and query valid tickets (type, stock, expiry); never shows the account UID |
 
-Invoices are charged by multiplier: 20 BREAK for 2x, 30 BREAK for 3x. Charges
-only apply after the external service actually succeeds and the credit is
-confirmed.
+Invoices are charged by multiplier on each success: 20 BREAK for 2x, 30 BREAK for
+3x, 50 BREAK for 5x. Charges only apply after the external service actually
+succeeds and the credit is confirmed.
 
 ## 7. Score & Item Writes
 

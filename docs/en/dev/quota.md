@@ -4,7 +4,7 @@ title: Quotas and Rate Limits
 
 # Quotas and Rate Limits
 
-AWMC API applies both **personal** and **global** quotas to Token-consuming endpoints. Windows are 1 hour, 5 hours, and 1 day. Each window starts when its first request is accepted. Usage is measured in the endpoint's Token cost:
+AWMC API applies both **personal** and **global** quotas to Token-consuming endpoints. Windows are **15 minutes, 1 hour, and 5 hours**, and each window starts at its first **successful** request. Usage is counted in **successful requests** (failed requests don't consume quota):
 
 - **Read**: user data, scores, tickets, items, and Gate status queries. Read limits are higher by default.
 - **Write**: `upsert`, delete, clear operations, and `POST /v1/charge` ticket purchases.
@@ -37,6 +37,6 @@ The response contains `windows.read` and `windows.write`, with `scope`, `window`
 
 ## Administrator controls
 
-The dashboard's **Quotas & errors** page supports conservative, normal, loose, adaptive, and custom modes, per-category/window baselines, a global switch, and a global window multiplier. User editing supports six personal read/write overrides and a bypass-global switch. Personal limits always remain active.
+The dashboard's **Quotas & errors** page supports conservative, normal, loose, adaptive, and custom modes — the conservative / normal / loose multipliers are 50% / 100% / 150% of baseline — plus per-category/window baselines, a global switch, and a global window multiplier. User editing supports six personal read/write overrides and a bypass-global switch. Personal limits always remain active.
 
 The same page shows a 7-day, 30-minute chart of server internal errors. `httpStatus = 0` (forwarding failures) and HTTP `>= 500` are included.

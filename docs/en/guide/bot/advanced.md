@@ -92,7 +92,7 @@ See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaim
 | `我的AWMC` | View BREAK, check-in streak, and usage stats, including invoice success/failure rate and `returnCode=0`, null/missing counts; auto-attaches the group song-guess data chart in groups |
 | `BREAK统计` / `BREAK收支` | View today's, last 7 days', and last 30 days' BREAK income, spending, and net change for all users |
 | `转账BREAK @用户 数量` | Transfer BREAK to another user |
-| `BREAK抽奖 [1-10]` | Default 2 BREAK per draw |
+| `BREAK抽奖 [1-1000]` | Default 2 BREAK per draw |
 | `BREAK抽奖 帮助` | View pool, probabilities, costs, and examples |
 | `发红包 [total] [count]` | Send a BREAK luck red packet in the group (alias `BREAK红包`); sending just `发红包` follows prompts |
 | `抢红包` | Claim the current group red packet, once per user (alias `领红包`) |
@@ -105,7 +105,7 @@ See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaim
 | `抽奖池` / `贡献榜` | View the current welfare pool and today's contributions |
 | `领取福利` / `领福利` | Claim eligible welfare pool rewards |
 | `贡献总榜` / `首富榜` | View cumulative contribution ranking |
-| `mai发票` / `发票` / `fp <2/3/5>` | Request 2x, 3x, or 5x tickets; first successful one each day is free, then multiplier × 10 BREAK (20 / 30 / 50) |
+| `mai发票` / `发票` / `fp <2/3/5>` | Request 2x, 3x, or 5x tickets; charged per success at multiplier × 10 BREAK (20 / 30 / 50); no charge on failure |
 | `mai查票` / `查票` | Query valid tickets; formatted by type, stock, and expiry, without showing the account UID |
 
 ### 1.6 Account Advanced Operations (Billing / High Risk)
@@ -283,9 +283,9 @@ before starting. Group 1 does not unlock mini-games, to keep it readable.
 | `猜曲绘` / `猜曲绘1`～`猜曲绘4` | Jacket guessing; specify difficulty 1-4 |
 | `猜曲子` | Audio guessing |
 | `猜铺面` / `猜谱面` | Chart-video guessing (muted early phase, ending BGM; correct-answer chime and countdown) |
-| `猜Rating` | Random difficulty 1-5; guess the total Rating of an anonymous B50 within 60 seconds |
+| `猜Rating` | Random difficulty 1-4; guess the total Rating of an anonymous B50 within 60 seconds |
 | `猜Rating1`～`猜Rating5` | Specify difficulty; higher levels show fewer cards and fewer clues |
-| `猜Rating3 90` | Difficulty 3 with a 90-second answer window (10-300 seconds supported) |
+| `猜Rating3 90` | Difficulty 3 with a 90-second answer window (30-300 seconds supported) |
 | `重置猜rating` | Force-end the current Guess Rating round |
 | `找内鬼` / `找假卡` | Find the one card whose song RA was altered among five B50 cards |
 | `重置找内鬼` | Force-end the current B50 Impostor round |
@@ -360,7 +360,7 @@ Requires a group admin to send `开启mai猜歌`; mutually exclusive with other
 guessing modes and Letter Board in the same group.
 
 - Randomly selects a group member → hides their B50 identity and scores by difficulty → guess the Rating with a number within 60 seconds → answers can be changed → closest wins
-- `猜Rating` picks a random difficulty; `猜Rating1`～`猜Rating5` pick one explicitly; append a 10-300 second timer, e.g. `猜Rating3 90`
+- `猜Rating` picks a random difficulty (1-4); `猜Rating1`～`猜Rating5` pick one explicitly; append a 30-300 second timer, e.g. `猜Rating3 90`
 - The selected B50 owner cannot submit a valid answer, enter the ranking, or receive rewards
 - Settlement: countdown ends → reveal true Rating + nickname → distribute points / BREAK → show the full B50 image
 
@@ -495,7 +495,7 @@ tags, constant changes, preview links, etc.
 | `我的AWMC` | View account status and usage stats (including invoice returnCode stats); attaches guess-stats chart in groups |
 | `AWMC帮助` | View the BREAK system help |
 | `转账BREAK @用户 数量` | Transfer BREAK to another user |
-| `BREAK抽奖 [1-10]` | Default 2 BREAK per draw; 1-10 draws at once |
+| `BREAK抽奖 [1-1000]` | Default 2 BREAK per draw; 1-1000 draws at once |
 
 ::: tip BREAK guide
 
@@ -503,8 +503,8 @@ Suggestions go to the [AWMC forum](https://bbs.wmc.pub/forums/awmc.19/); after
 AI integration, the bot modifies itself and updates automatically.
 
 1. Check-in earns BREAK (available again **24 h after the last successful check-in**); consecutive check-ins earn more.
-2. "Roast" is charged at token base price ×3, with 6 BREAK reserved before the call; success refunds/settles the difference, failure refunds everything.
-3. BREAK lottery supports up to 10 draws.
+2. "Roast" is billed by actual Token usage (base price min 3, max 30 BREAK; ×2 during LLM peak hours), with 14 BREAK reserved before the call; success refunds/settles the difference, failure refunds everything.
+3. BREAK lottery supports up to 1000 draws.
 4. A normal correct song guess gives 1 BREAK by default; Guess Rating / B50 Impostor settle by round rank and difficulty.
 5. "Today's maimai" adds BREAK based on luck value.
 6. Chatting with the group owner may earn some BREAK.
@@ -515,7 +515,8 @@ AI integration, the bot modifies itself and updates automatically.
 > first free one (cache hits are free). Normal correct song guesses give 1
 > BREAK by default; Guess Rating / B50 Impostor settle by game rules. Score
 > uploads and tickets are only settled after the external operation actually
-> succeeds, and each has its own daily first-success-free allowance.
+> succeeds; uploads have a daily first-success-free allowance, while tickets are
+> always charged by price.
 
 ### 2.11 Class Schedule
 
@@ -574,7 +575,7 @@ Advanced query-bot commands and variants; daily users can skip this section.
 | `对战战绩` | `headtohead` `h2h` `对决战绩` | `对战战绩@friend` | Head-to-Head comparison chart |
 | `目标rating` | `rating沙盘` `目标分` `推分沙盘` | `目标rating 16000` / `目标rating 15500@user` | Rating sandbox text plan |
 | `底力分析` | — | `底力分析` | B50 tag radar chart + bar chart, for reference only |
-| `锐评一下` | `分析b50` `B50分析` | `锐评一下` | LLM roast of your B50; charged by actual tokens, 10 BREAK reserved before the call, success refunds/settles the difference, failure refunds in full |
+| `锐评一下` | `分析b50` `B50分析` | `锐评一下` | LLM roast of your B50; charged by actual tokens, 14 BREAK reserved before the call, success refunds/settles the difference, failure refunds in full |
 
 #### Floor
 

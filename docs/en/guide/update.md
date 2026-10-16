@@ -119,13 +119,31 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 
 ## September 2026
 
-### 2026/09/08
+### 2026/09/25
 
-<Badge type="tip" text="Docs" />
+<Badge type="tip" text="New Feature" />
 
-- **Level-filtered B50 notes** — Added usage for filtering B50 by level/constant (`13+b50`, `紫13+b50`, `14.0b50`, etc.), and clarified that `ab50` cancels B35/B15 grouping and directly takes the top 50 by Rating from the filtered results.
-- **"Single-song-level B50" meaning** — Clarified that this feature filters the specified level or constant from the user's full scores, recalculates per-song Rating, and forms a conditional B50; it is not a single-song query, nor a list of the whole song library at that level.
-- **Command list completion** — Compared against source code and added `同步b50`, `年报`, class schedules, Diving Fish OAuth, queue cards, welfare pool, `dx2025b50`, `锐评风格`, plus admin commands for card codes, announcements, and QQ platform configuration.
+- **AI image generation** — Added `画图 <description>`, 358 BREAK by default; supports `-p` /
+  `--reference` to generate from a reference image, plus the `-q auto` quality option. Failed,
+  timed-out or rejected runs are not charged the final fee.
+- **Official QQ image-generation messages** — Fixed `@机器人 画图 <description>` not triggering in
+  official QQ group chats; a reference image can be attached to the same message.
+- **Reference-image compatibility** — When the QQ CDN returns an unexpected `Content-Type`, the
+  image is still read as long as the actual payload is valid; official QQ `file` / `attachment`
+  image attachments are supported too, and the safe-URL, size and Pillow checks still run.
+- **Content safety** — Image generation and BREAK charging are preceded by a local sensitive-content
+  screen: illegal, politically sensitive and minor-sexual requests are rejected without charging;
+  the model service still applies its own moderation.
+- **Guest mode for guessing and letter games** — Users who have not completed `qbind` can join
+  these mini-games and appear on the leaderboards, but earn no BREAK.
+- **Stats and rankings** — Added command-usage stats, a BREAK income/expense chart and ranking
+  images; official QQ groups show user identity labels; the lottery supports up to 1000 draws,
+  and today's-luck BREAK rewards are configurable and off by default.
+
+<Badge type="warning" text="Optimization" />
+
+- **Upload performance** — Uploads to AWMCNET, Diving Fish and Lxns now run concurrently, and
+  duration estimation uses the median.
 
 ### 2026/09/10
 
@@ -152,6 +170,14 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 - **Queue & weather enhancements** — Queue cards now support Nearcade store autofill,
   configurable query / report / predict templates, daily weather digests and severe-weather
   alerts; the group console manages arcades and weather in one place.
+
+### 2026/09/08
+
+<Badge type="tip" text="Docs" />
+
+- **Level-filtered B50 notes** — Added usage for filtering B50 by level/constant (`13+b50`, `紫13+b50`, `14.0b50`, etc.), and clarified that `ab50` cancels B35/B15 grouping and directly takes the top 50 by Rating from the filtered results.
+- **"Single-song-level B50" meaning** — Clarified that this feature filters the specified level or constant from the user's full scores, recalculates per-song Rating, and forms a conditional B50; it is not a single-song query, nor a list of the whole song library at that level.
+- **Command list completion** — Compared against source code and added `同步b50`, `年报`, class schedules, Diving Fish OAuth, queue cards, welfare pool, `dx2025b50`, `锐评风格`, plus admin commands for card codes, announcements, and QQ platform configuration.
 
 ## August 2026
 
@@ -289,6 +315,18 @@ See [Command Reference · Song Guessing](/en/guide/bot/advanced#26-song-guessing
 - Billing requires HTTP 2xx and upstream `code === 0`; charge enqueue binds mai `userId`, and the queue is filtered/redacted per account
 - Legacy paths (`/v1/get_preview`, `/v1/upload_b50`, manual score APIs, etc.) are removed — see [developer docs](/en/dev/awmc-api)
 
+### 2026/07/16
+AWMC Version `V26.8.5` [AWMC V2]
+
+<Badge type="tip" text="New Feature" />
+
+- Sending QR text directly in the group now auto-syncs
+- QR photos sent directly are recognized and synced automatically
+
+::: tip Suggestions
+Feel free to suggest changes on the [AWMC forum](https://bbs.wmc.pub/forums/awmc.19/). After AI integration, the bot modifies itself automatically; once approved, it is available and the docs update.
+:::
+
 ### 2026/07/15
 AWMC Version `RELEASE-20260715 V26.8.1` [AWMC V2]
 
@@ -307,16 +345,6 @@ AWMC Version `RELEASE-20260715 V26.8.1` [AWMC V2]
 
 - Fixed successful ticket operations being incorrectly reported as `FinishedException()`
 - Fixed the same false-success-error pattern in account, map, queue, and LXNS B50 flows
-
-### 2026/07/16
-<Badge type="tip" text="New Feature" />
-
-- Sending QR text directly in the group now auto-syncs
-- QR photos sent directly are recognized and synced automatically
-
-::: tip Suggestions
-Feel free to suggest changes on the [AWMC forum](https://bbs.wmc.pub/forums/awmc.19/). After AI integration, the bot modifies itself automatically; once approved, it is available and the docs update.
-:::
 
 ### 2026/07/05
 <Badge type="tip" text="New Feature" />

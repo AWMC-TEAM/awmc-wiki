@@ -153,7 +153,7 @@ Sponsoring isn't the only way to help. These matter just as much:
 
 - [Maimai Status (Community)](https://mai.chongxi.us) | [Service Status](https://up.wmc.pub)
 - [Developer Guide](/en/dev/) | [Getting Started](/en/guide/getting-started)
-- Contact us: <a href="mailto:awmc@awmc.cc">awmc@awmc.cc</a>
+- Contact us: <a href="mailto:3801477277@qq.com">3801477277@qq.com</a>, or leave a message on the [forum contact page](https://bbs.wmc.pub/misc/contact)
 
 ---
 
