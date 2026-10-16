@@ -66,13 +66,21 @@ https://wq.wahlap.net/qrcode/img/MAID....png
 https://wq.wahlap.net/qrcode/req/MAID....html
 ```
 
-All API commands that use account QR credentials check the cache lifetime.
-When the cache expires, stale credentials are never reused; send the latest
-SGWCMAID, official QR link, or QR image, and re-run the original command after
-verification refresh succeeds.
+All API commands that use account QR credentials check the cache lifetime
+(**QR generation time + 10 minutes**). When the cache expires, stale credentials are never
+reused; send the latest SGWCMAID, official QR link, or QR image, and re-run the original
+command after verification refresh succeeds.
 
 The Bot re-asks at most 3 times when credentials are invalid, expired, return
 500/empty, or the identity does not match.
+
+Admins can tune the QR-related live configuration with `BREAK配置`; the common keys are:
+
+| Key | Description |
+|---|---|
+| `one_time_qrcode` | `1` = **single-use QR**: each QR serves exactly one command that needs it, later commands require a new one (default `0`, reused for 10 minutes) |
+| `qrcode_freeze_enabled` / `qrcode_freeze_seconds` | Freeze a user after 3 consecutive QR failures, and for how long |
+| `checkin_cooldown_mode` | Check-in cooldown: default `24h`; set it to `daily` to restore the old 00:00 reset |
 
 ## 3. Score-Tracker Binding & Uploads
 
@@ -141,7 +149,7 @@ arcade results are authoritative".
 
 | Command | Description |
 |---|---|
-| `AWMC签到` / `签到` | Daily check-in |
+| `AWMC签到` / `签到` | Check in; available again 24 h after the last successful check-in |
 | `我的AWMC` | View BREAK, check-in streak, call stats, recent transactions, invoice success/failure rate and `returnCode=0` stats; auto-attaches the group song-guess chart in groups |
 | `AWMC帮助` | View pricing and reward details |
 | `转账BREAK @用户 数量` | Transfer BREAK |
@@ -325,7 +333,7 @@ The following commands are limited to the Bot's super admins or plugin admins:
 | `查看AWMC <user>` | View a user's BREAK profile |
 | `设置BREAK <user> <amount>` | Set the balance directly |
 | `增减BREAK <user> <amount>` | Increase or decrease the balance |
-| `BREAK配置 [key value]` | View or modify BREAK default parameters |
+| `BREAK配置 [key value]` | View or modify BREAK default parameters (prices, `one_time_qrcode`, `pick_sensitive_words`, …; applied immediately, ≤30 s across processes) |
 | `迁移Koishi 检查 <database>` | Read-only precheck for Koishi account migration |
 | `迁移Koishi 确认 <database>` | Confirm migration of accounts, Tokens, and agreement records |
 | `发票统计` / `ticket统计` / `returnCode统计` | Global invoice success/failure and `returnCode=0` stats; add days, e.g. `发票统计 7` |
@@ -333,6 +341,9 @@ The following commands are limited to the Bot's super admins or plugin admins:
 | `存储迁移 检查 <source> <target>` | Precheck data migration |
 | `存储迁移 确认 <source> <target>` | Confirm migration |
 | `存储同步` | Immediately sync the configured remote storage backend |
+| `mai配额设置 <category> <window=limit,…>` | Set shared AWMC API quota, e.g. `mai配额设置 read 15m=200,1h=600,5h=2000`; `on` / `off` toggles the global limit |
+| `mai配额重置` | Clear every quota window's usage (with a hot reload) |
+| `更新定数表` | Rebuild rating / plate table backgrounds after a catalogue update (the Bot reminds you when signatures change) |
 
 ::: tip Unified storage (MySQL / YAML)
 Packing can be skipped when the working set is unchanged; unchanged MySQL files

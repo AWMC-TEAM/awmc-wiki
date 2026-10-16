@@ -4,6 +4,55 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 
 ## October 2026
 
+### 2026/10/16
+
+<Badge type="tip" text="New Feature" />
+
+- **Five new song-search dimensions** — `等级查歌 <level>` (e.g. `13+`),
+  `谱式查歌 <SD/DX>`, `分类查歌 <category>`, `版本查歌 <version>` and
+  `拟合定数查歌 <value/range>`. Category and version misses list every selectable value, and
+  candidates are tappable on official QQ.
+- **Song-search quick line + audition** — the `查歌` intro image is followed by a **quick
+  line** (artist / charter / category / version / chart type / BPM / level / constant /
+  fitted constant) with difficulty-coloured blocks for per-difficulty rows. On official QQ
+  each value is a **tappable link** that fills the matching lookup command into the input
+  box, plus a 「🎵 试听」 button. New `试听 <song ID>`: a ~60 s snippet cut from around 20 %,
+  trimmed and cached on first use.
+- **New game "Pick one"** — say something like `吃拉面还是米饭`, `是去 A 还是 B` or
+  `吃 A 还是 B 还是 C 呢？` (2–4 options) and the Bot picks one at random. Sentences where
+  `还是` means "still" (`我还是不去了吧`) do not trigger; when an option contains a sensitive
+  word the reply omits the option text (`# 🎲 🎯 就决定是你了：第 N 个`).
+- **Gate guide** — fixed "棱镜塔攻略" not replying; all ten gate links now point at the
+  KALEIDXSCOPE subsite (`kaleidxscope.awmc.team`), added the "glitch gate", and completed
+  the in-game / archive aliases (蓝色之门, 白色之门, …, 最终相).
+
+<Badge type="warning" text="Improvement" />
+
+- **Check-in now has a 24-hour cooldown** — no midnight reset; you can check in again 24 h
+  after the last success, with the remaining wait shown in the reply. The duplicate
+  check-in penalty is off by default. Admins can restore the old mode with
+  `BREAK配置 checkin_cooldown_mode daily`.
+- **Single-use QR switch (admin)** — with `BREAK配置 one_time_qrcode 1` a QR serves exactly one
+  command that needs it; `BREAK配置 pick_sensitive_words <word>` extends the "Pick one"
+  sensitive-word list. Default `0` (10-minute reuse).
+- **Score-gain recommendations v2** — peer bands now use the Diving Fish server-wide
+  distribution, thresholds recalibrated from live data; a "generating" notice is sent first.
+- **Official QQ interaction** — fixed indices and enumerated actions moved into tappable body
+  text, song titles are tappable links; guess games answer via callback buttons (anti
+  bandwagon) with a slimmer keyboard.
+- **Image generation** — the wait notice now uses the real average duration; timeout raised
+  from 180 s to 300 s (live-configurable).
+- **Leaderboards** — display names unified to forum nicknames, refreshed in sharded batches.
+
+### 2026/10/15
+
+<Badge type="warning" text="Server-wide Compensation" />
+
+- **Downtime compensation** — the production host was down from Oct 15 13:53 to Oct 16 00:18
+  (about 10.4 h, no check-in possible). Compensated with: a make-up check-in for Oct 15
+  (balance and streak repaired), +300 BREAK for everyone, a 30-hour double-BREAK card and
+  3 hours of FREEDOM. Re-running the script does not double-credit.
+
 ### 2026/10/11
 
 <Badge type="tip" text="New Feature" />

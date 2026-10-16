@@ -246,7 +246,7 @@ uploads, but the score checker itself may need time to process.
 
 | Command | Description |
 |---|---|
-| `AWMC签到` / `签到` | Daily check-in for BREAK |
+| `AWMC签到` / `签到` | Check in for BREAK; available again 24 h after the last successful check-in |
 | `我的AWMC` | Balance, check-in streak, today's usage, recent transactions, and invoice `returnCode` stats |
 | `AWMC帮助` | View BREAK rules |
 

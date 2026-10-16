@@ -32,6 +32,8 @@ official Wahlap `img/MAID...png` and `req/MAID...html` links.
 | `mai状态` / `mymai` | View full account status; interactively refreshes when the QR cache expires |
 | `舞萌状态` / `mais` | "Server failure rate" line chart (all account operations: tickets, `maiu` uploads, bindings, etc.; `returnCode=0` counts as failure; empty periods omitted) + live server status |
 | `maiping` | Test AWMC API connectivity |
+| `mai上报 <type>` | Manually report an arcade status to isMaiDown: `断网` / `无法登录` / `NET打不开` / `二维码` / `上传失败` / `小黑屋` / `恢复正常` |
+| `mai配额` / `配额` / `限额` | View shared AWMC API quota usage (read / write per window) |
 | `mai地图` | Query provinces/regions played by the account (when supported) |
 | `mai查询opt <version>` | Query the Mai2 option file download URL, e.g. `mai查询opt 1.40` |
 | `成绩趋势 [days]` | View the AWMC NET server-side Rating trend, default 30 days (aliases `rating趋势` / `mai趋势` / `awmc趋势`) |
@@ -84,7 +86,7 @@ See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaim
 
 | Command | Description |
 |------|------|
-| `AWMC签到` / `签到` | Daily check-in for BREAK |
+| `AWMC签到` / `签到` | Check in for BREAK; available again **24 h after the last successful check-in** (no midnight reset) |
 | `AWMC补签` / `补签` | Make up yesterday's check-in; max 3 times per month, costing 30 / 60 / 90 BREAK in order, no bonus rewards |
 | `AWMC帮助` / `BREAK帮助` | View the BREAK system help |
 | `我的AWMC` | View BREAK, check-in streak, and usage stats, including invoice success/failure rate and `returnCode=0`, null/missing counts; auto-attaches the group song-guess data chart in groups |
@@ -151,15 +153,27 @@ data corruption; you bear the risk yourself. See
 | `我的排名` | Your Rating ranking |
 | `赞助` / `赞助榜` / `本月赞助` | View this month's sponsor leaderboard (amounts hidden by default; see [Sponsor](/en/sponsor)) |
 
+**Pick one** — just say something like `吃拉面还是米饭`, `是去 A 还是 B`, or
+`吃 A 还是 B 还是 C 呢？` (2–4 options) and the Bot picks one at random, replying with
+the result and the candidate list. Sentences where `还是` means "still" do not trigger
+(e.g. `我还是不去了吧`). When an option contains a sensitive word, the reply omits the
+option text: `# 🎲 🎯 就决定是你了：第 N 个`.
+
 ### 2.2 Song Search
 
 | Command | Description |
 |------|------|
 | `查歌 <keyword>` | Search by title / alias |
 | `定数查歌 <constant>` | Search by constant |
+| `等级查歌 <level>` | Search by level, e.g. `等级查歌 13+` |
+| `谱式查歌 <SD/DX>` | Search by chart type; `标准` / `dx` spellings also work |
+| `分类查歌 <category>` | Search by category substring; lists all categories when nothing matches |
+| `版本查歌 <version>` | Search by version, e.g. `版本查歌 舞萌DX 2024` |
+| `拟合定数查歌 <value/range>` | Match fitted constant at display precision (2 decimals); alias `拟合查歌` |
 | `bpm查歌 <bpm>` | Search by BPM |
 | `曲师查歌 <artist>` | Search by artist |
 | `谱师查歌 <charter>` | Search by charter |
+| `试听 <song ID>` | Audio snippet (about 60 s, cut from around 20 %; trimmed and cached on first use) |
 | `<alias>是什么歌` | Look up a song by alias |
 | `id <song ID>` | Song details |
 | `谱面<ID><difficulty>` | Chart preview, difficulty: green / yellow / red / purple / white |
@@ -169,6 +183,15 @@ data corruption; you bear the risk yourself. See
 | `来个<level>` | Random song at a level |
 | `来个dx<level>` / `来个sd<level>` | Random DX / standard song |
 | `来个<difficulty><level>` | Random song with difficulty and level, e.g. `来个紫14+` |
+
+::: tip Song-search quick line
+The `查歌` intro image is followed by a **quick line** listing artist / charter / category /
+version / chart type / BPM / level / constant / fitted constant, with difficulty-coloured
+blocks for per-difficulty rows. On official QQ every value is a **tappable link** that fills
+the matching lookup command (`曲师查歌`, `版本查歌`, `等级查歌`, …) into the input box, plus a
+「🎵 试听」 button. OneBot and compatibility mode fall back to plain text; use `试听 <song ID>`
+to audition.
+:::
 
 ### 2.3 Aliases
 
@@ -468,7 +491,7 @@ tags, constant changes, preview links, etc.
 
 | Command | Description |
 |------|------|
-| `AWMC签到` | Daily check-in for BREAK |
+| `AWMC签到` | Check in for BREAK; available again 24 h after the last successful check-in |
 | `我的AWMC` | View account status and usage stats (including invoice returnCode stats); attaches guess-stats chart in groups |
 | `AWMC帮助` | View the BREAK system help |
 | `转账BREAK @用户 数量` | Transfer BREAK to another user |
@@ -479,7 +502,7 @@ tags, constant changes, preview links, etc.
 Suggestions go to the [AWMC forum](https://bbs.wmc.pub/forums/awmc.19/); after
 AI integration, the bot modifies itself and updates automatically.
 
-1. Daily check-in earns BREAK; consecutive check-ins earn more.
+1. Check-in earns BREAK (available again **24 h after the last successful check-in**); consecutive check-ins earn more.
 2. "Roast" is charged at token base price ×3, with 6 BREAK reserved before the call; success refunds/settles the difference, failure refunds everything.
 3. BREAK lottery supports up to 10 draws.
 4. A normal correct song guess gives 1 BREAK by default; Guess Rating / B50 Impostor settle by round rank and difficulty.
