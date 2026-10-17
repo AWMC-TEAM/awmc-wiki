@@ -103,6 +103,13 @@ Charged on **HTTP 2xx** and upstream business success. Suggest **180s** client t
 | POST | `/v1/upsert/continue` | 0 | Confirm an upload session. **Tolerant idempotent**: if already auto-confirmed by the gateway, returns current state without error |
 | POST | `/v1/upsert/check` | 0 | Poll session status (idempotent read); `upsert_status=2` **triggers settlement** (see §2.3) |
 
+#### rival sessionless reads (rival-direct patched upstream)
+
+| Method | Path | Cost | Notes |
+|--------|------|------|-------|
+| POST | `/v1/rival/data` | 2 | Rival profile (player name etc.; no `qrcode` / `keychip` needed, see §3.9) |
+| POST | `/v1/rival/music` | 4 | Rival full score summary (per-chart details; no FC/FS fields, see §3.9) |
+
 #### Resource queries (v2-3 upstream; no account params, sync)
 
 | Method | Path | Cost | Notes |
@@ -624,6 +631,65 @@ Examples: play count / rating. Other endpoints (`maimile`, `character`, `map-*`,
   ]"
 />
 
+### 3.9 rival sessionless reads (rival-direct patched upstream)
+
+> **Since 2026-10-17** the upstream rival endpoints are verified **sessionless**:
+> no QR code (`qrcode`) and no `keychip` — pull rival profile and scores directly
+> by **friend code** (= userid). Requires the rival-direct patched upstream
+> (stock v2-3 lacks these endpoints; legacy v2 upstream returns 410).
+>
+> **Official protocol limitation**: rival scores carry **achievement + DX score
+> only** — no FC / FS / sync status fields; responses may contain `musicId=0`
+> phantom rows and `achievement=0` empty rows, which callers should filter out.
+
+<ApiDemo 
+  :options="[
+    {
+      title: 'Rival profile',
+      method: 'POST',
+      path: '/v1/rival/data',
+      paramsIn: 'json',
+      description: 'Costs 2 Tokens. rivalId is the target friend code; userId (puller) is optional and defaults to rivalId (self-pull).',
+      params: [
+        { name: 'rivalId', type: 'integer', required: 'Required', desc: 'Target friend code (= userid, 8-16 digits)', value: '' },
+        { name: 'userId', type: 'integer', required: 'Optional', desc: 'Puller uid, defaults to rivalId (self-pull)', value: '' }
+      ],
+      response: { returnCode: 1, code: 0, businessData: { userId: 13225939, userRivalData: { rivalId: 13225939, rivalName: 'SomePlayer' } } }
+    },
+    {
+      title: 'Rival score summary',
+      method: 'POST',
+      path: '/v1/rival/music',
+      paramsIn: 'json',
+      description: 'Costs 4 Tokens. Each song contains userRivalMusicDetailList (level / achievement 1/10000 scale / deluxscoreMax); the server returns everything in one shot in practice, nextIndex=0 means done.',
+      params: [
+        { name: 'rivalId', type: 'integer', required: 'Required', desc: 'Target friend code (= userid)', value: '' },
+        { name: 'userId', type: 'integer', required: 'Optional', desc: 'Puller uid, defaults to rivalId (self-pull)', value: '' },
+        { name: 'nextIndex', type: 'integer', required: 'Optional', desc: 'Pagination cursor (default 0)', value: 0 },
+        { name: 'maxCount', type: 'integer', required: 'Optional', desc: 'Page size (default 50, 1-100)', value: 50 },
+        { name: 'includeUtage', type: 'boolean', required: 'Optional', desc: 'Include Utage level 10 (default false)', value: false }
+      ],
+      response: { returnCode: 1, code: 0, businessData: { userId: 13225939, rivalId: 13225939, nextIndex: 0, userRivalMusicList: [ { musicId: 18, userRivalMusicDetailList: [ { level: 3, achievement: 997601, deluxscoreMax: 529 } ], length: 1 } ] } }
+    }
+  ]"
+/>
+
+**Field notes**
+
+- `achievement`: 1/10000-scale integer (`997601` = 99.7601%); `deluxscoreMax` is the DX score.
+- `level`: `0`–`4` = BASIC–Re:MASTER; Utage is `10` (only returned with `includeUtage: true`).
+- `musicId >= 10000` is a DX chart, `< 10000` standard.
+- Billed against the **read quota**; upstream failures (e.g. after a WAHLAP key rotation before the EXE baseline is updated) return `SdgbError` with `errorCode` 5110–5113.
+
+**curl example**
+
+```bash
+curl -X POST https://api.wmc.pub/v1/rival/music \
+  -H "Authorization: Bearer <your-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"rivalId": 13225939}'
+```
+
 ## 4. Public JSON catalog
 
 ```http
@@ -667,6 +733,7 @@ Your own upload sessions on a v2-3 upstream (also viewable in the console sideba
 | **4001** etc. | Upstream business errors (see `returnMessage`) |
 | **5004 / 5009** | Chart not found / DX score over chart max |
 | **5101 / 5106** | Session missing or cleaned / not confirmed within 60s (v2-3; rare with gateway auto-confirm) |
+| **5110–5113** | rival sessionless direct-call failure (network / non-200 HTTP / response decryption failure / malformed response; decryption failures usually mean a WAHLAP key rotation — update the upstream EXE baseline and re-patch) |
 | **5006 / 5007 / 5104** | Upstream save-verification failure / upload interruption (v2-3 session terminal) — the **result may already be persisted**; verify the account data first, don't blindly resend |
 | **500 / 502** | Forwarding or decode failure |
 

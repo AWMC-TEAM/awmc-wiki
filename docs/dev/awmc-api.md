@@ -106,6 +106,13 @@ apiBaseUrl: https://api.wmc.pub
 | POST | `/v1/upsert/continue` | 0 | 确认上传会话。**宽容幂等**：会话已被网关自动确认时直接返回当前状态，不会报错 |
 | POST | `/v1/upsert/check` | 0 | 轮询上传会话状态（幂等只读可重试）；`upsert_status=2` 时**触发结算**（见 §2.3） |
 
+#### rival 免会话读取（rival-direct 补丁上游）
+
+| 方法 | 路径 | 消耗 | 说明 |
+|------|------|------|------|
+| POST | `/v1/rival/data` | 2 | 读取对手资料（游戏名等；无需 `qrcode` / `keychip`，见 §3.9） |
+| POST | `/v1/rival/music` | 4 | 拉取对手全部成绩汇总（每曲含每谱明细；无 FC/FS 字段，见 §3.9） |
+
 #### 资源查询（v2-3 上游，无需账号参数、同步返回）
 
 | 方法 | 路径 | 消耗 | 说明 |
@@ -631,6 +638,66 @@ v2 时代的单件写法 `{ "itemKind": 2, "itemId": 11, "operation": "add" }`�
   ]"
 />
 
+### 3.9 rival 免会话成绩读取（rival-direct 补丁上游）
+
+> **2026-10-17 起**，上游 rival 接口经实测为**免会话直连**：不需要
+> 二维码（`qrcode`）也不用 `keychip`，直接按**好友码**（即 userid）拉取
+> 对手资料与成绩。需要 rival-direct 补丁版上游（原版 v2-3 无这些端点，
+> 旧 v2 上游返回 410）。
+>
+> **官方协议天生限制**：rival 成绩只有**达成率 + DX 分**，没有 FC / FS /
+> 同步状态字段；响应可能含 `musicId=0` 幽灵条目与 `achievement=0` 空成
+> 绩，调用方需过滤。
+
+<ApiDemo 
+  :options="[
+    {
+      title: '对手资料',
+      method: 'POST',
+      path: '/v1/rival/data',
+      paramsIn: 'json',
+      description: '消耗 2 Token。rivalId 即目标好友码；userId（拉取方）可省略，缺省 = rivalId（自拉）。',
+      params: [
+        { name: 'rivalId', type: 'integer', required: '必填', desc: '目标好友码（= userid，8~16 位数字）', value: '' },
+        { name: 'userId', type: 'integer', required: '可选', desc: '拉取方 uid，缺省 = rivalId（自拉）', value: '' }
+      ],
+      response: { returnCode: 1, code: 0, businessData: { userId: 13225939, userRivalData: { rivalId: 13225939, rivalName: '某某玩家' } } }
+    },
+    {
+      title: '对手成绩汇总',
+      method: 'POST',
+      path: '/v1/rival/music',
+      paramsIn: 'json',
+      description: '消耗 4 Token。每曲含 userRivalMusicDetailList（level / achievement 万分制 / deluxscoreMax）；服务端实测一次返回全量，nextIndex=0 表示结束。',
+      params: [
+        { name: 'rivalId', type: 'integer', required: '必填', desc: '目标好友码（= userid）', value: '' },
+        { name: 'userId', type: 'integer', required: '可选', desc: '拉取方 uid，缺省 = rivalId（自拉）', value: '' },
+        { name: 'nextIndex', type: 'integer', required: '可选', desc: '分页游标（默认 0）', value: 0 },
+        { name: 'maxCount', type: 'integer', required: '可选', desc: '每页上限（默认 50，1–100）', value: 50 },
+        { name: 'includeUtage', type: 'boolean', required: '可选', desc: '附带宴场 level 10（默认 false）', value: false }
+      ],
+      response: { returnCode: 1, code: 0, businessData: { userId: 13225939, rivalId: 13225939, nextIndex: 0, userRivalMusicList: [ { musicId: 18, userRivalMusicDetailList: [ { level: 3, achievement: 997601, deluxscoreMax: 529 } ], length: 1 } ] } }
+    }
+  ]"
+/>
+
+**字段说明**
+
+- `achievement`：万分制整数（`997601` = 99.7601%）；`deluxscoreMax` 为 DX 分。
+- `level`：`0`–`4` = BASIC–Re:Master；宴场为 `10`（仅 `includeUtage: true` 时返回）。
+- `musicId >= 10000` 为 DX 谱面，`< 10000` 为标准谱。
+- 计费按 **read 配额**；上游失败（如密钥轮换后未更新 EXE 基线）返回 `errorCode` 5110–5113 的 `SdgbError`。
+
+**curl 示例**
+
+```bash
+curl -X POST https://api.wmc.pub/v1/rival/music \
+  -H "Authorization: Bearer <你的令牌>" \
+  -H "Content-Type: application/json" \
+  -d '{"rivalId": 13225939}'
+```
+
+
 ## 4. 公开 JSON 目录
 
 ```http
@@ -676,6 +743,7 @@ v2-3 上游下本人的上传会话（也可在**控制台侧边栏「上传会�
 | **4001** 等 | 上游业务错误（如用户正在登录中），见 `returnMessage` |
 | **5004 / 5009** | 谱面不存在 / DX 分超出谱面上限 |
 | **5101 / 5106** | 会话不存在或已清理 / 会话未在 60 秒内确认（v2-3；网关自动确认下罕见） |
+| **5110–5113** | rival 免会话直连失败（网络 / HTTP 非 200 / 响应解密失败 / 响应异常；解密失败多为 WAHLAP 密钥轮换，需更新上游 EXE 基线后重打补丁） |
 | **5006 / 5007 / 5104** | 上游保存验证失败 / 上传中断（v2-3 会话终态）——**数据可能已落库**，请先核对账号数据，勿盲目重发 |
 | **500 / 502** | 转发或解码失败 |
 
