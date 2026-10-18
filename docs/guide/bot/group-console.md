@@ -21,7 +21,7 @@
 - 你已被超级管理员在群后台中**授权**为本群管理；
 - 你是插件超级管理员。
 
-默认情况下，还需要先完成 [论坛账号绑定（qbind）](/guide/bot/intro#八、论坛账号绑定qbind)，
+默认情况下，还需要先完成 [论坛账号绑定（qbind）](/guide/bot/intro#八、论坛账号绑定-qbind)，
 后台会使用论坛身份确认「打开链接的是你本人」。
 
 发送 `群管理` 后，Bot 会返回一条**一次性登录链接**（5 分钟内有效，只能用一次）：
@@ -101,5 +101,5 @@ MAIMAIDX_ADMIN_WEB_PORT=8099
 群后台的数据保存在 `data/group_console/` 下，排卡与天气数据在
 `data/group_console/queue.db`，不会写入事件循环热路径。
 
-相关入口：[指令帮助](/guide/bot/advanced#212-高级功能) · [使用说明](/guide/bot/intro) ·
+相关入口：[指令帮助](/guide/bot/advanced#_2-12-高级功能) · [使用说明](/guide/bot/intro) ·
 [赞助支持](/sponsor)

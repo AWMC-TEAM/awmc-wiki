@@ -13,6 +13,10 @@ Account binding, B50 uploads, tickets, PC sync, score queries, and group
 interactions are now all merged into the same QueryBot. The command prefix is
 determined by the platform configuration; this page uses no prefix below.
 
+::: info Version and availability
+This page follows the current source code; production deployment has not been verified, so not every feature is necessarily live. Availability, prices and limits depend on the deployed configuration and Bot prompts. Prices below are source-code defaults.
+:::
+
 ::: tip Phigros, too
 The Phigros (`phi`) commands bind your TapTap cloud save and cover the B30 chart, an account
 card, per-song info and progress comparison — they have [their own page](/en/guide/bot/phigros).
@@ -81,7 +85,7 @@ official Wahlap `img/MAID...png` and `req/MAID...html` links.
 Issuing tickets carries risks; proceed with caution. AWMC TEAM is not
 responsible for any negative effects tickets may cause.
 
-See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaimer), Section 10.
+See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#_10-disclaimer), Section 10.
 :::
 
 | Command | Description |
@@ -98,15 +102,26 @@ See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaim
 | `抢红包` | Claim the current group red packet, once per user (alias `领红包`) |
 | `红包状态` | View red packet claim details (aliases `红包记录` / `查看红包`) |
 | `收回红包` | Withdraw a red packet after 90 seconds; unclaimed balance returns (alias `重置红包`) |
-| `兑换卡密 [code]` | Redeem BREAK / double / FREEDOM card codes, auto-redeemed in group and private chat (aliases `redeem` / `兑换码`) |
+| `兑换卡密 [code]` | Redeem BREAK / double / FREEDOM / PASS card codes, auto-redeemed in group and private chat (aliases `redeem` / `兑换码`) |
 | `我的卡密` | View active card-code bonuses (aliases `卡密状态` / `我的加成`) |
-| `卡密商店` / `BREAK商店` | View currently redeemable or purchasable card codes |
+| `卡密商店` | Open the configured external card-code shop; unavailable if no URL is configured |
+| `商店` / `BREAK商店` | View the built-in BREAK shop and current prices |
+| `商店购买 <双倍/FREEDOM/PASS> [quantity]` | Buy bonuses with BREAK; aliases `BREAK购买` / `购买`. Requires `qbind`; quantity defaults to 1, integer 1–720. Double / FREEDOM use hours; PASS uses charges |
+| `使用PASS` / `用PASS` | Explain automatic PASS usage; does not manually consume a charge |
+| `小游戏上限` | Show daily mini-game BREAK caps, plus today’s usage for bound users |
 | `查看加成` / `加成总览` / `加成列表` | View active check-in bonuses (including admin-configured weekly / group / date / streak campaigns) |
-| `抽奖池` / `贡献榜` | View the current welfare pool and today's contributions |
-| `领取福利` / `领福利` | Claim eligible welfare pool rewards |
-| `贡献总榜` / `首富榜` | View cumulative contribution ranking |
-| `mai发票` / `发票` / `fp <2/3/5>` | Request 2x, 3x, or 5x tickets; charged per success at multiplier × 10 BREAK (20 / 30 / 50); no charge on failure |
-| `mai查票` / `查票` | Query valid tickets; formatted by type, stock, and expiry, without showing the account UID |
+| `mai发票` / `发票` / `fp <2/3/5>` | Request 2x, 3x, or 5x tickets; success costs multiplier × 10 BREAK (20 / 30 / 50); a submitted request that fails has a default 100 BREAK penalty, detailed below |
+| `mai查票` / `查票` | Query valid tickets; 1 BREAK per successful query, no charge on failure; formatted by type, stock and expiry, without showing the account UID |
+
+::: warning Ticket charges and penalties
+A ticket request that fails after submission incurs a default fixed **100 BREAK** penalty. Pre-submission QR validation / balance-check failures and local API quota rejections are exempt. Existing unused multiplier tickets block issuance and instead invoke the separate **20 BREAK** unused-ticket penalty (`one_time_qrcode` mode skips this stock check). Penalties are deducted only when the balance covers them; they do not create a negative balance. Do not stockpile tickets: use issued tickets on a cabinet.
+:::
+
+::: info Shop and disabled features
+Default prices are **300 BREAK/hour** for double BREAK, **1000 BREAK/hour** for FREEDOM, and **150 BREAK/charge** for PASS; admins can change them, so check `商店`. Purchases are not free under FREEDOM. PASS automatically spends one charge to bypass an exhausted **local AWMC team API quota** for one request; it cannot bypass public server quotas or mini-game reward caps.
+
+The welfare-pool commands `抽奖池` / `贡献榜`, `领取福利` / `领福利`, and `贡献总榜` / `首富榜` are temporarily disabled. They are separate from the still-available `BREAK抽奖`.
+:::
 
 ### 1.6 Account Advanced Operations (Billing / High Risk)
 
@@ -114,7 +129,7 @@ See [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaim
 `mai改成绩`, `mai删成绩`, and `mai改道具` directly modify maimai account data.
 `mai改道具` has not been tested on a real account and may cause irreversible
 data corruption; you bear the risk yourself. See
-[AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#10-disclaimer), Section 10.
+[AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms#_10-disclaimer), Section 10.
 :::
 
 | Command | Description |
@@ -123,23 +138,30 @@ data corruption; you bear the risk yourself. See
 | `mai道具` | Query the account item list (5 BREAK on successful query) |
 | `mai门状态` / `mai查门` / `查门` | Read-only display of Kaleidx Gate discovery, key, and clear status (5 BREAK on successful query). ⚠️ Upstream v2-3 removed this read endpoint |
 | `maievent` / `mai活动` / `舞萌活动` | Query the account's current event. ⚠️ Upstream v2-3 removed this read endpoint |
-| `mai改成绩 [song difficulty achievement DX score FC FS]` | Interactive or one-line score edit; DX score 0-5 is star/simple mode, actual score auto-selects pro mode; newline/semicolon-separated bulk up to 20 entries (same price); 75 BREAK per run |
-| `mai删成绩 [song difficulty]` | Interactive or one-line score deletion; bulk supported too; 50 BREAK per run |
+| `mai改成绩 [song difficulty achievement DX score FC FS]` | Interactive or one-line score edit; DX score 0-5 is star/simple mode, actual score auto-selects pro mode; newline/semicolon-separated bulk up to 20 entries; 258 BREAK per successfully edited chart |
+| `mai删成绩 [song difficulty]` | Interactive or one-line score deletion; bulk supported too; 50 BREAK per successfully deleted chart |
 | `mai改道具 [itemKind itemId add/del]` | High-risk item mutation; 100 BREAK on success; bulk `upsert-all` is not exposed by the Bot |
-| `mai改资料` / `资料修改` / `改资料` | **Account editing hub**: one-click unlock, bulk editing, 14 profile edits and upload-session lookup (see [Command Reference](/en/guide/bot/commands#8-account-editing--bulk-operations-v2-3)) |
-| `mai批量编辑` / `批量编辑` / `批量改` | Collect several mixed-type edits in one conversation and run them serially; 300 BREAK per run |
+| `mai改资料` / `资料修改` / `改资料` | **Account editing hub**: one-click unlock, bulk editing, 14 profile edits and upload-session lookup (see [Command Reference](/en/guide/bot/commands#_8-account-editing-bulk-operations-v2-3)) |
+| `mai批量编辑` / `批量编辑` / `批量改` | Collect several mixed-type edits in one conversation and run them serially; adds each operation’s existing price and charges only confirmed successes; removing pending entries or cancelling is free |
 | `mai全解锁 [music/master/remaster] [version ID]` | Unlock all music / MASTER / Re:MASTER (already-owned tracks are skipped); 200 BREAK per run |
 | `mai改门` / `mai改rating` / `mai改里程` / `mai改地图库存` / `mai改游玩次数` | v2-3 profile edits; 50 BREAK each (parameters accept plain names) |
 | `mai改段位` / `mai改阶级` / `mai改搭档` / `mai改角色` / `mai改亲密度` | v2-3 profile edits; 50 BREAK each |
-| `mai完成地图` / `mai推进地图` / `mai改登录奖励` / `mai重置版本` | v2-3 profile edits; 50 BREAK each |
-| `查进度 [<session_id>]` | Inspect an upload session's progress and result (free; survives disconnects; aliases `mai查任务` / `查上传任务` / `查会话`) |
+| `mai重置版本` | v2-3 version reset; 50 BREAK on success |
+| `mai完成地图` / `mai推进地图` / `mai改登录奖励` | Temporarily disabled because upstream save verification keeps failing (5006), including their bulk-edit entry points |
+| `查进度` / `查任务` | Free progress lookup for your uploads, bulk tasks and background sync; aliases `mai查任务` / `查上传任务` / `查会话`. Admins may append `<session_id>` for an exact session lookup |
+
+::: tip Quick and automatic updates
+`导` / `u` / `更` / `更新` (or `mai对手同步`) quickly sync scores without scanning. `mai自动更新 [hours]` defaults to 3 hours, 30 BREAK/hour, a sync every 15 minutes, and a maximum of 12 hours; payment is collected after confirmation. Use `查自动更新` for status and `自动更新关闭` to stop early (no refund).
+
+Requires `mai绑定`; Diving Fish / Lxns require OAuth. Quick / automatic updates do not refresh FC/FS or PC; scan a QR for a complete update. Prices, intervals and availability depend on the Bot configuration; see [Quick and automatic updates](/en/guide/bot/commands#quick-update).
+:::
 
 ---
 
 ## 2. Query & Group Interaction
 
 > Regular-user query bot commands only; no admin commands. Advanced variants,
-> data analysis, and group-admin features are in [2.12 Advanced Features](#212-advanced-features).
+> data analysis, and group-admin features are in [2.12 Advanced Features](#_2-12-advanced-features).
 
 ### 2.1 Basics
 
@@ -216,9 +238,9 @@ to audition.
 | `合作a50` | Duo all-best-50 comparison |
 | `我有多菜` | Rating comparison chart |
 | `我在群里有多菜` | In-group Rating comparison |
-| `minfo` | Personal play info |
-| `ginfo` | Group play info |
-| `分数线` | Score line query |
+| `minfo <song ID/title/alias> [@user]` | Personal per-song scores for yourself or the selected user |
+| `ginfo [绿/黄/红/紫/白]<song ID/title/alias>` | Global chart sample statistics, not group statistics; defaults to purple MASTER |
+| `分数线 <绿/黄/红/紫/白><song ID> <target achievement>` | E.g. `分数线 紫799 100`; numeric target strictly between 0 and 101, without `%`. Use `分数线 帮助` for help |
 | `友人对战` | Random in-group friend battle (add a number to tighten the Rating gap, e.g. `友人对战 300`) |
 | `友人对战排行` | In-group friend battle records ranking (aliases `友人排行` / `友人对战排名`) |
 | `b50鸟率` / `B50鸟率` / `b50鳥率` | B50 "bird" (SSS+) rate stats (image) |
@@ -287,7 +309,7 @@ before starting. Group 1 does not unlock mini-games, to keep it readable.
 | `猜Rating1`～`猜Rating5` | Specify difficulty; higher levels show fewer cards and fewer clues |
 | `猜Rating3 90` | Difficulty 3 with a 90-second answer window (30-300 seconds supported) |
 | `重置猜rating` | Force-end the current Guess Rating round |
-| `找内鬼` / `找假卡` | Find the one card whose song RA was altered among five B50 cards |
+| `找内鬼` / `找假卡` | Find the card from another member that does not belong to the selected owner’s B50 |
 | `重置找内鬼` | Force-end the current B50 Impostor round |
 | `舞萌极限二选一` / `极限二选一` / `二选一` | Join the five-round left/right song comparison; answer each round with `左` or `右` |
 | `加入` / `参赛` | Join the current Extreme Two-Choice round |
@@ -320,7 +342,7 @@ Daily BREAK cap from mini-games: **50** / day globally; per game, 猜歌/猜曲�
 at 10, and 猜群友 at 50. Once a game's cap is reached that game stops awarding, and
 once the global cap is reached all games stop awarding; reset at midnight.
 During an active double-BREAK card, earnings are doubled and these caps are
-waived.
+waived. Send `小游戏上限` for current caps and your progress.
 :::
 
 ::: tip My guess stats
@@ -384,11 +406,12 @@ champion's error is ≤ 200.
 Requires a group admin to send `开启mai猜歌`; mutually exclusive with other
 guessing modes and Letter Board in the same group.
 
-- The system randomly draws five B50 cards from a group member and changes the song RA on one of them to a wrong value
+- Mixes four cards from the selected owner’s B50 with one from another member; the impostor song is absent from the owner’s B50. RA values are not tampered with
 - Send `1`～`5` within 45 seconds; answers can be changed; speed ranking uses the final-answer submission time
-- The selected B50 owner cannot submit a valid answer or enter the reward list
+- Neither the selected B50 owner nor the impostor card’s original owner can submit a valid answer or receive rewards
 - First correct: 10 points + 2 BREAK; second: 6 points + 1 BREAK; third and later correct players: 3 points
-- Settlement highlights the impostor card and shows both the real and altered RA
+- BREAK is awarded only with at least three valid submissions, excluding both owners; points are still awarded below that threshold
+- Settlement highlights the impostor card and reveals both owners
 :::
 
 ::: tip Extreme Two-Choice
@@ -437,8 +460,10 @@ modes in the same group.
 | `我的pc数` | Personal PC stats (total + top 15 songs) |
 | `pc排行` / `pc全部排行` / `PC全部排行` | All synced users' PC total ranking (text list titled "PC全部排行（共 N 人）") |
 | `pc数 <song>` | PC for a specific song |
-| `pc50` | B50 sorted by play count (`pc:xx` on the card corner) |
-| `pc等级 [level]` | PC ranking for one level only (`14+` / `13+` / `15`); without an argument it shows usage and shortcut buttons (aliases `等级pc` / `PC等级`) |
+| `pc50` | Top 50 charts by play count from all synced cabinet PC records, not just Rating B50; B35/B15 are layout sections only |
+| `<category>pc50` | Category PC top 50: `术力口pc50` / `东方pc50` / `舞萌pc50` / `其他pc50` / `中二pc50` / `流行pc50` / `宴谱pc50` |
+| `<level>pc50` | Filter by current chart level, e.g. `13pc50` / `14+pc50`; supports @user |
+| `pc等级 [level]` | PC ranking for one current level (1–15, optional `+`, must exist in the song library); without an argument it shows usage and shortcut buttons (aliases `等级pc` / `PC等级`) |
 | `pca50` | Your Rating B50's 50 songs re-sorted by PC (image) |
 | `游玩排行50` / `游玩PC50` / `PC游玩50` / `pc游玩50` | Top 50 most-played charts library-wide (not limited to Rating B50, image) |
 
@@ -514,9 +539,9 @@ AI integration, the bot modifies itself and updates automatically.
 > Score queries charge 1 BREAK per actual score-API request after the daily
 > first free one (cache hits are free). Normal correct song guesses give 1
 > BREAK by default; Guess Rating / B50 Impostor settle by game rules. Score
-> uploads and tickets are only settled after the external operation actually
-> succeeds; uploads have a daily first-success-free allowance, while tickets are
-> always charged by price.
+> uploads are settled after success, with a daily first-success-free allowance.
+> Tickets cost their price on success; a submitted request that fails has a default
+> 100 BREAK penalty. See [ticket charges and penalties](#_1-5-break-tickets) for unused-ticket blocks and exceptions.
 
 ### 2.11 Class Schedule
 
@@ -607,6 +632,7 @@ Also supports `13将 未完成`, `13将 2` pagination, and `13将 @user` for oth
 
 | Command | Description |
 |------|------|
+| `开启存储数据` / `开启数据存储` | Enable automatic storage and attempt an immediate full sync |
 | `立即存储数据` | Manually save a snapshot |
 | `关闭存储数据` | Disable auto storage |
 | `存储历史` | View historical archive IDs |
@@ -667,7 +693,7 @@ revision. The reminder returns automatically when the permission state changes.
 |------|------|
 | `猜歌预制状态` / `猜歌预制` / `预制状态` | **Admin**: inspect guess-audio/chart precache task status |
 | `渲染状态` / `查询渲染` / `渲染任务` | **Admin**: inspect image and video rendering progress |
-| `发加倍卡` | **Group admin**: grant song-guess multiplier cards |
+| `发加倍卡 @user [count] [hours]` | **Group admin**: defaults to 1 card / 24 hours; also accepts `发加倍卡 全体 [count] [hours]`. A correct answer consumes one card for ×2 points, distinct from shop double-BREAK cards. On official QQ, “all” covers recorded members only |
 | `迁移数据` | **Admin**: migrate guess data |
 
 #### Admin & Platform Configuration
@@ -677,7 +703,7 @@ users don't need them.
 
 | Command | Description |
 |------|------|
-| `设置入群欢迎词 <text>` / `开启入群欢迎` / `关闭入群欢迎` / `查看入群欢迎` | Manage group welcome messages |
+| `设置入群欢迎词 <text>` / `开启入群欢迎` / `关闭入群欢迎` / `查看入群欢迎` | **Plugin admin**: manage welcome messages |
 | `群绑定QQ <QQ number>` / `解绑群QQ` / `群绑定状态` | Manage official QQ group and historical QQ group mappings |
 | `强制绑定QQ <QQ number>` | Admin-assisted user QQ binding |
 | `设置QQ菜单` / `QQ菜单` | Push or query the official QQ menu |
@@ -685,6 +711,7 @@ users don't need them.
 | `我的id` / `platformid` | Query the current platform user ID (available to regular users) |
 | `锐评风格 设置 <description>` / `锐评风格 重置` | Save or clear personal roast style; view with `锐评风格 查看` |
 | `更新maimai数据` / `更新别名库` | Update the song library or alias library |
+| `更新定数表` / `更新完成表` | **Plugin admin**: rebuild constant / completion table resources |
 | `发布公告` / `编辑公告` / `删除公告` | Manage bot announcements |
 | `创建卡密` / `查询卡密` / `作废卡密` / `卡密列表` / `卡密统计` | Manage BREAK card codes |
 | `锐评模型配置` | View or adjust LLM roast runtime config |

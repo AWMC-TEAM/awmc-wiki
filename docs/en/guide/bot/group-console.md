@@ -103,5 +103,5 @@ Related settings:
 Console data lives under `data/group_console/`; queue and weather data are stored in
 `data/group_console/queue.db` and never run on the event-loop hot path.
 
-Related pages: [Command Reference](/en/guide/bot/advanced#212-advanced-features) ·
+Related pages: [Command Reference](/en/guide/bot/advanced#_2-12-advanced-features) ·
 [Basic Tutorial](/en/guide/bot/intro) · [Sponsor](/en/sponsor)

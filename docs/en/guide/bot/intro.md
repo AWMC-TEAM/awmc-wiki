@@ -263,7 +263,7 @@ what the Bot returns.
 | B50 analysis | Billed by Token usage: base price min 3, max 30; 14 BREAK reserved before the call, refund/settle the difference on success, full refund on failure (both ×2 during LLM peak hours) |
 | Song guessing | Normal correct guess gives 1 BREAK by default; Guess Rating / B50 Impostor settle by rank and difficulty |
 | Score upload | First success per day free, then Diving Fish 2, Lxns 2, both 3 |
-| Tickets | Charged per success by multiplier (2x 20, 3x 30, 5x 50 BREAK); failure is free |
+| Tickets | Success: 2x 20, 3x 30, 5x 50 BREAK; failure after submission: default 100 BREAK penalty; see [billing conditions](/en/guide/bot/commands#_6-break-tickets) |
 | Lottery | 2 BREAK per draw by default; 1-1000 draws |
 
 ### 3. Group interaction
@@ -343,12 +343,12 @@ supported:
 | 3x | 30 BREAK |
 | 5x | 50 BREAK |
 
-Tickets are charged per multiplier on each success, with no daily first-free
-allowance; charges only apply after the ticket actually succeeds and is confirmed.
-`mai查票` or `查票` views ticket status by type, stock, and expiry; the reply
-never shows the maimai account UID or raw API data.
+Successful tickets are charged by multiplier, with no daily first-free allowance. Failure after actual submission has a default 100 BREAK penalty; pre-submit QR validation / balance failures and local quota rejection do not incur it. See the [command reference](/en/guide/bot/commands#_6-break-tickets) for unused-ticket blocking and other conditions; live configuration takes precedence.
+`mai查票` or `查票` views ticket type, stock, and expiry, at a default 1 BREAK per successful query; replies never show the account UID or raw API data.
 
 ::: danger Risk warning
+Issued tickets cannot be undone and must be used on the cabinet; do not stockpile them.
+
 Tickets, uploads, and QR-related features may affect official maimai account
 safety. Read the [AWMC BOT Terms of Service & Privacy Policy](/en/guide/bot/terms)
 in full before use, and bear the risk yourself.

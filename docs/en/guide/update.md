@@ -85,6 +85,10 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 
 ### 2026/10/02
 
+::: warning Historical record, not the current command reference
+The entries below preserve the features and prices at the time. Current source bills scores per chart and mixed-type batches by the sum of individual prices; map completion, map advancement, and login-bonus edits are temporarily disabled. Users must still confirm operation risks; only the server-session confirmation is automatic. See the [current command reference](/en/guide/bot/commands) for usage and deployment-version requirements.
+:::
+
 <Badge type="tip" text="New Feature" />
 
 - **Account writes upgraded to the AWMC API v2-3 session model** — Scores, items and profile edits now run
@@ -304,7 +308,7 @@ AWMC Version `V26.8.7` [AWMC V2]
 - Guess-stats chart layout: trend legend/title on separate lines; radar labels pushed out to avoid overlap
 
 ::: tip Docs
-See [Command Reference · Song Guessing](/en/guide/bot/advanced#26-song-guessing).
+See [Command Reference · Song Guessing](/en/guide/bot/advanced#_2-6-song-guessing).
 :::
 
 ### 2026/07/18
