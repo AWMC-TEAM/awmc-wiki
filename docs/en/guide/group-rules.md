@@ -39,6 +39,7 @@ There is also a **developer group** `1067350296` for API integration and collabo
 
 - Be civil. Insults, personal attacks, threats, discrimination, regional slurs, call-outs and
   doxxing are **forbidden**.
+- **Insults or verbal abuse directed at the bot, management team, project creators or persons in charge will result in a permanent account ban.**
 - Disagreement is normal — argue the point, not the person, and do not chase people around
   the group.
 - Do not make jokes about someone's privacy, appearance or identity, and avoid humour that
@@ -170,6 +171,7 @@ Administrators act according to **severity** and **repeat count**. The usual lad
 | Bringing up other services or bots of the same kind (including recommending or driving traffic) | Reminder and message recall; repeat or clear traffic-driving goes to the next tier |
 | Repeat or clear violation (advertising, lottery chains, sharing credentials) | **Mute for 10 minutes to 24 hours** |
 | Serious violation (abuse, cracking/cheating content, operation-affecting details, API abuse) | **Removal from the group (kick)** |
+| Insults or verbal abuse directed at the bot, management team, project creators or persons in charge | **Permanent account ban** |
 | Reposting in-group messages out of context / publicly insulting members in other groups | **Immediate permanent ban**, no warning |
 | Extreme or persistent (doxxing, fraud, organised abuse, harassment after removal) | **Removal and permanent ban**, plus a platform report if needed |
 

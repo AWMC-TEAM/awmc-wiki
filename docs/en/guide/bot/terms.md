@@ -154,6 +154,7 @@ Users must not:
 * Spread illegal or harmful information
 * Abuse APIs or attack the Service
 * Interfere with normal bot operation
+* Direct insults or verbal abuse at the bot, management team, project creators or persons in charge; such behavior will result in a **permanent account ban**
 
 
 
@@ -175,6 +176,10 @@ We reserve the right to restrict or ban users under the following circumstances:
 
 * Abnormal requests (e.g., API abuse)
 * Suspicious automated behavior
+
+### 9.4 Insults and Verbal Abuse
+
+Insults or verbal abuse directed at the bot, management team, project creators or persons in charge will result in a **permanent account ban**.
 
 ### Enforcement Measures Include:
 
