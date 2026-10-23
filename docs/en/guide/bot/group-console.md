@@ -47,7 +47,7 @@ and give the returned identity ID to a super admin, who can grant you access in 
 
 | Module | Description |
 |------|------|
-| Group overview | Today's activity, message counts and latest activity for your groups |
+| Group overview | Today's activity, message counts and latest activity for your groups; empty group names are filled from the platform, and "Sync group name" refreshes them manually |
 | Feature switches | Enable / disable score lookup, guessing games, Phigros lookup, BREAK, queue, account, search, play count and more per group |
 | Group statistics | BREAK income/spending, feature usage share, member message ranking and usage logs for the last 1 / 7 / 30 / 90 days |
 | Poll results | **Super-admin** feature (at `{PUBLIC_URL}/votes`): list this group's (and server-wide) polls with bar / pie charts of the votes, and close them early; the ballot detail (voter / raw input) is on the same page |
@@ -58,7 +58,33 @@ and give the returned identity ID to a super admin, who can grant you access in 
 
 Key actions in the console are written to an audit log for traceability.
 
-## 3. FAQ
+## 3. Admin Command Quick Reference {#admin-quick-ref}
+
+Besides the console, these commands can be sent directly in the group (group owner / admin
+required; follow the links for details):
+
+| What you want | Send | Details |
+|----------|------|------|
+| Toggle guessing mini-games (猜歌, 开字母, maidle, 猜群友 …) | `开启mai猜歌` / `关闭mai猜歌` | [Song Guessing](/en/guide/bot/advanced#_2-6-song-guessing) |
+| Toggle Werewolf | `开启狼人杀` / `关闭狼人杀` | [Werewolf](/en/guide/bot/advanced#_2-13-werewolf-狼人杀) |
+| Toggle Phigros lookup | `开启phi` / `关闭phi` | [Phigros](/en/guide/bot/phigros) |
+| Toggle alias push | `开启别名推送` / `关闭别名推送` | [Group Interaction Extras](/en/guide/bot/advanced#group-interaction-extras) |
+| Quiz new members on join | `入群验证 开启` | [Join verification](/en/guide/bot/advanced#group-moderation) |
+| Auto-approve join requests by keyword | `自动审批 开启` + `自动审批 关键词 添加 <word>` | [Auto-approval](/en/guide/bot/advanced#group-moderation) |
+| Kick / kick and blacklist | `mai踢 @member` / `mai踢 @member -b` | [Kicking](/en/guide/bot/advanced#group-moderation) |
+| Subscribe to arcade weather | `subweather <alias>` | [Arcade Queue](/en/guide/bot/advanced#arcade-queue) |
+| Start a group poll | `创建投票 <title> <A/B>` | [Voting](/en/guide/bot/advanced#_2-14-voting-投票) |
+| Give guessing bonus cards | `发加倍卡 @user [count] [hours]` | [Admin Rendering](/en/guide/bot/advanced#admin-rendering-precache-status) |
+| Silence the "mini-game permission" reminder | `小游戏权限不再提醒 <version>` | [Group Interaction Extras](/en/guide/bot/advanced#group-interaction-extras) |
+| Force-end a stuck game | `重置猜歌` / `重置maidle` / `重置猜群友` … | [Song Guessing](/en/guide/bot/advanced#_2-6-song-guessing) |
+
+::: tip Make the Bot an admin first
+Join approval, kicking, muting and auto-recalling credentials all require the Bot to be a
+**group admin**. To let it reply without @ and run guessing games, also allow it to "view all
+messages" — see [Adding the Bot to your group](/en/guide/bot/intro#add-to-group).
+:::
+
+## 4. FAQ
 
 | Message | Fix |
 |------|----------|
@@ -68,7 +94,7 @@ Key actions in the console are written to an audit log for traceability.
 | "Set arcade latitude/longitude in group management first" | Open the console, add an arcade under "Arcade queue" and fill in coordinates |
 | The link does not open or errors | Use the newest link from the bot; links are single-use and expire after 5 minutes. Resend `群管理` if needed |
 
-## 4. Deployment Notes (for admins)
+## 5. Deployment Notes (for admins)
 
 The console runs as a standalone HTTP service on port `8100` by default and must be exposed
 through an HTTPS reverse proxy.

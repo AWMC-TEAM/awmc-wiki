@@ -36,6 +36,7 @@ official Wahlap `img/MAID...png` and `req/MAID...html` links.
 | `mai状态` / `mymai` | View full account status; interactively refreshes when the QR cache expires |
 | `舞萌状态` / `mais` | "Server failure rate" line chart (all account operations: tickets, `maiu` uploads, bindings, etc.; `returnCode=0` counts as failure; empty periods omitted) + live server status |
 | `maiping` | Test AWMC API connectivity |
+| `状态页` / `服务状态` / `系统状态` | Show overall status, ongoing maintenance and incidents from the AWMC status page ([up.wmc.pub](https://up.wmc.pub)); when the status page announces Bot maintenance, the Bot enters maintenance mode automatically |
 | `mai上报 <type>` | Manually report an arcade status to isMaiDown: `断网` / `无法登录` / `NET打不开` / `二维码` / `上传失败` / `小黑屋` / `恢复正常` |
 | `mai配额` / `配额` / `限额` | View shared AWMC API quota usage (read / write per window) |
 | `mai地图` | Query provinces/regions played by the account (when supported) |
@@ -316,6 +317,9 @@ before starting. Group 1 does not unlock mini-games, to keep it readable.
 | `重置二选一` | Force-end the current Extreme Two-Choice round |
 | `你想我猜` / `20问猜曲` | Milk thinks of a song; members ask "yes/no" questions to narrow it down and guess the title; fewer questions score higher, with combo and multiplier cards stacking |
 | `重置你想我猜` / `重置20问` | Force-end the current "You Guess" round |
+| `maidle` / `舞萌dle` | maimai Dle: the whole group guesses one song together; every guess returns a 7-column comparison board. `maidle 困难` (hard) gives no first-character / jacket hints |
+| `猜 <title/alias/#ID>` / `dle <title>` | Submit a guess during maidle (10 guesses shared by the group) |
+| `重置maidle` / `结束maidle` | End the current maidle and reveal the answer; `maidle帮助` shows the rules |
 | `猜群友` | The question shows three members plus one chart; guess who has the highest achievement on it. Each player may bet once, answers stay silent for 15 seconds, then all are revealed at once |
 | `重置猜群友` | Force-end the current Guess-the-Member round |
 | `重置猜歌` | Force-end the current text-guess round (in group) |
@@ -338,8 +342,8 @@ before starting. Group 1 does not unlock mini-games, to keep it readable.
 
 ::: tip BREAK earnings
 Daily BREAK cap from mini-games: **50** / day globally; per game, 猜歌/猜曲绘/猜曲子/
-猜铺面/你想我猜 are capped at 20 each, 开字母/猜Rating/找内鬼 at 15 each, 极限二选一
-at 10, and 猜群友 at 50. Once a game's cap is reached that game stops awarding, and
+猜铺面/你想我猜 are capped at 20 each, 开字母/猜Rating/找内鬼 at 15 each, maidle at 20,
+极限二选一 at 10, and 猜群友 at 50. Once a game's cap is reached that game stops awarding, and
 once the global cap is reached all games stop awarding; reset at midnight.
 During an active double-BREAK card, earnings are doubled and these caps are
 waived. Send `小游戏上限` for current caps and your progress.
@@ -450,6 +454,27 @@ modes in the same group.
 - Visitors without qbind can play and appear on the board, but receive no BREAK
 - Questions avoid the group's recently used charts and only use Expert or above;
   `重置猜群友` force-ends the round
+:::
+
+::: tip maimai Dle (maidle)
+A group admin must first send `开启mai猜歌`; mutually exclusive with the other guessing games
+and 开字母 **in the same group**. It plays like Wordle:
+
+- Send `maidle` to start; the answer is drawn from the full song list (no 宴会場). Sending
+  `maidle` again during a round re-sends the board
+- Guess with `猜 <title>` (or `猜 <alias>` / `猜 #ID`). Each guess compares **7 columns**:
+  version / genre / BPM / artist / Master constant / chart type / charter
+  - 🟩 green = match; 🟨 yellow = close (adjacent version, BPM ±10, constant ±0.5, shared artist / charter)
+  - ▲ / ▼ = the answer is newer / higher, or older / lower, than your guess
+- **10 guesses for the whole group**, at least 6 seconds between two guesses from the same
+  player; unknown titles, ambiguous aliases and repeated songs don't use a guess
+- Normal mode: after 6 misses the first character of the title is revealed, and a blurred
+  jacket appears for the very last guess; `maidle 困难` has no hints
+- Earlier hits score more: 12 points on guess 1 down to 2 points on guess 10, +3 per tier in
+  hard mode; the solver also earns the regular correct-guess BREAK
+- When someone solves it, every other player who made a valid guess gets an **assist reward**
+  of 2 points + 1 BREAK; nothing is paid if nobody solves it
+- About 4 minutes without a guess ends the round and reveals the answer; `重置maidle` ends it early
 :::
 
 ### 2.7 Play Count (PC)
@@ -595,11 +620,11 @@ Advanced query-bot commands and variants; daily users can skip this section.
 
 | Main command | Aliases | Example | Description |
 |------|------|----------|------|
-| `弱项处方` | `弱项处方单` `底力处方` `练习推荐` | `弱项处方` / `弱项处方@user` | Weakness prescription image |
+| `弱项处方` | `弱项处方单` `底力处方` `练习推荐` | `弱项处方` / `弱项处方@user` | Finds weak spots from your actual scores and builds an eight-card training panel; the practice range is anchored to your B50 constants |
 | `b50风险` | `B50风险` `b50风险预警` `风险预警` | `b50风险` / `b50风险@user` | B50 risk warning image |
 | `对战战绩` | `headtohead` `h2h` `对决战绩` | `对战战绩@friend` | Head-to-Head comparison chart |
 | `目标rating` | `rating沙盘` `目标分` `推分沙盘` | `目标rating 16000` / `目标rating 15500@user` | Rating sandbox text plan |
-| `底力分析` | — | `底力分析` | B50 tag radar chart + bar chart, for reference only |
+| `底力分析` | — | `底力分析` / `底力分析@user` | One "score panorama" image: compares your achievement per chart tag against charts of the same constant band, colouring strengths / weaknesses relative to your overall level; tags with too few samples are marked as insufficient evidence. For reference only |
 | `锐评一下` | `分析b50` `B50分析` | `锐评一下` | LLM roast of your B50; charged by actual tokens, 14 BREAK reserved before the call, success refunds/settles the difference, failure refunds in full |
 
 #### Floor
@@ -686,6 +711,27 @@ bot posts an image reminder at round start; after checking the settings the owne
 `小游戏权限不再提醒 <revision>` (or tap the "don't remind again" button) to silence it for that
 revision. The reminder returns automatically when the permission state changes.
 :::
+
+#### Arcade Queue (排卡) {#arcade-queue}
+
+A group admin first enables the queue in the [Group Console](/en/guide/bot/group-console) and
+adds arcades with aliases under "Arcade queue". Members then send **arcade alias + suffix**;
+for an arcade with alias `xjj`:
+
+| Message | Description |
+|------|------|
+| `xjj几` / `xjjj` | Current head count, cabinet count, last report time and estimated wait |
+| `xjj3` | Report the current head count as 3 |
+| `xjj+1` / `xjj-1` | Add to / subtract from the current count |
+| `predict xjj` | Forecast the near-term trend from recent reports (says so when samples are too few) |
+| `weather xjj` | Weather at the arcade (needs latitude / longitude set in the console) |
+| `subweather xjj` / `unsubweather xjj` | **Group admin**: subscribe / unsubscribe the daily weather digest; `subweather list` shows subscriptions |
+| `排卡列表` | List all arcades in this group with current counts |
+
+- Wait time assumes about 17 minutes per round per cabinet; for reference only.
+- A count above 99, or a jump of more than 50 from the last report, is treated as a typo and ignored.
+- With a Nearcade shop / game ID set in the console, reports sync to [Nearcade](https://nearcade.cn)
+  and queries prefer Nearcade data.
 
 #### Admin Rendering & Precache Status
 
@@ -793,6 +839,58 @@ A group admin can open a poll in the group; results live in the console's "投�
   with the announcement sent to the creating group).
 - The console's "投票结果" page lists polls with vote charts and the **admin-only ballot
   detail**.
+
+### 2.15 Join Verification, Auto-Approval & Kicking (group admins) {#group-moderation}
+
+These commands only work in groups and need the **group owner / an admin** (or a manager
+granted in the Group Console). The Bot must be a group admin to approve, kick or mute.
+
+#### Join verification (入群验证)
+
+When enabled, the Bot posts a question for each new member, who simply **replies with the
+answer in the group**. Timing out or using up all attempts removes the member.
+
+| Command | Description |
+|------|------|
+| `入群验证` / `入群验证 状态` | Show this group's verification settings (aliases `群验证` / `人机验证`) |
+| `入群验证 开启` / `入群验证 关闭` | Turn verification on / off |
+| `入群验证 题目 算术` / `入群验证 题目 验证码` | Question type: arithmetic, or a 4-character code |
+| `入群验证 兼容模式 开启` / `关闭` | Compatibility mode (on by default) sends plain-text questions on every platform; turning it off may leave some clients unable to answer |
+
+- 90 seconds and 3 attempts by default; other commands from that member are ignored while verifying.
+- On failure the member is kicked; if the Bot lacks the official kick permission (error 11253)
+  it **mutes them for 30 days** instead and asks admins to remove them manually.
+
+#### Auto-approval (自动审批)
+
+Handles join requests by keyword (matched against the verification message the applicant
+typed). When enabled, the Bot scans pending requests in the background.
+
+| Command | Description |
+|------|------|
+| `自动审批` / `自动审批 查看` | Show settings (aliases `加群自动审批` / `入群审批设置`) |
+| `自动审批 开启` / `自动审批 关闭` | Turn auto-approval on / off |
+| `自动审批 关键词 添加 <word>` | Add an approval keyword, e.g. `自动审批 关键词 添加 舞萌` |
+| `自动审批 关键词 删除 <word>` / `清空` / `查看` | Manage the keyword list |
+| `自动审批 严格模式 开启` / `关闭` | Strict: requests without a keyword are **rejected**; lenient (default): left for an admin |
+| `自动审批 频率 <seconds>` | Scan interval, default 30 s, range 15–600 s |
+| `自动审批 播报 开启` / `关闭` | Announce auto-approved members in the group |
+| `群审批` | Process the pending list right now and report approved / rejected / pending counts (aliases `执行群审批` / `处理入群申请`) |
+
+#### Kicking & group blacklist
+
+| Command | Description |
+|------|------|
+| `mai踢 @member` | Remove a member (aliases `踢人` / `移出成员`; with an @ you can also send `踢 @member`) |
+| `mai踢 @member -b` | Remove and blacklist, so they cannot request to join again |
+| `mai拉黑 <OpenID>` | Blacklist someone **no longer in the group** (aliases `拉黑` / `群黑名单`); use `mai踢 @member -b` for current members |
+| `mai解封 @member` / `mai解封 <OpenID>` | Remove from the blacklist (aliases `解封` / `移出黑名单`) |
+
+::: info No false triggers from chat
+`踢` only fires when followed by an @ or written as `踢 <OpenID>`; everyday phrases like
+"踢我" or "踢球" are ignored. On official QQ groups the kick / blacklist APIs need Tencent's
+permission; without it a kick falls back to a 30-day mute.
+:::
 
 ---
 

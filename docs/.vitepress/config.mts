@@ -46,7 +46,7 @@ export default defineConfig({
   ],
 
   sitemap: {
-    hostname: 'https://wiki.awmc.cc' // 开启 Sitemap 自动生成功能
+    hostname: 'https://wiki.awmc.team' // 开启 Sitemap 自动生成功能
   },
 
   locales: {
@@ -96,6 +96,12 @@ export default defineConfig({
                 { text: 'Phigros 查分', link: '/guide/bot/phigros' },
                 { text: '授权获取', link: '/guide/bot/verify'},
                 { text: '群管理后台', link: '/guide/bot/group-console'},
+              ]
+            },
+            {
+              text: '🎵 谱面下载站',
+              items: [
+                { text: 'AstroDX 导入教程', link: '/guide/astrodx' }
               ]
             },
             {
@@ -194,6 +200,12 @@ export default defineConfig({
                 { text: 'Phigros Lookup', link: '/en/guide/bot/phigros' },
                 { text: 'Authorization', link: '/en/guide/bot/verify' },
                 { text: 'Group Console', link: '/en/guide/bot/group-console' }
+              ]
+            },
+            {
+              text: '🎵 Chart Downloads',
+              items: [
+                { text: 'Importing into AstroDX', link: '/en/guide/astrodx' }
               ]
             },
             {

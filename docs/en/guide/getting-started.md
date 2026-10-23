@@ -40,11 +40,13 @@ AWMC also provides the following services - feel free to explore!
 
 | Service | Description | Link |
 | --- | --- | --- |
-| 🎵 Chart Download | Download maimai DX chart resources | [download.wmc.pub](https://download.wmc.pub) |
+| 🎵 Chart Download | Download maimai DX charts (ZIP / ADX) | [download.wmc.pub](https://download.wmc.pub) · [AstroDX import guide](/en/guide/astrodx) |
 | 🎶 Chart Preview | Online chart preview and review analysis | [v.awmc.cc](https://v.awmc.cc) |
 | 🆔 AWMC NET. | Bind-free score lookup - query B50 without Water Fish/Lxns | [net.wmc.pub](https://net.wmc.pub) |
 | 🔌 Open API | Public interfaces for third-party developers | [Developer Guide](/en/dev/) |
 
 AWMC no longer runs its own status page. For maimai server line status, see the community project [mai.chongxi.us](https://mai.chongxi.us) — an independent project with **no affiliation with AWMC**, offering more monitoring dimensions and player self-reporting.
 
-More content coming soon.
+::: tip Playing downloaded charts on your phone?
+ADX files from the download site import into AstroDX with one tap — see the [AstroDX import guide](/en/guide/astrodx).
+:::

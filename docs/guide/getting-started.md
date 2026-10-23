@@ -35,11 +35,13 @@ AWMC 还提供以下服务，欢迎体验喵～
 
 | 服务 | 说明 | 入口 |
 | --- | --- | --- |
-| 🎵 谱面下载站 | 舞萌 DX 谱面资源下载 | [download.wmc.pub](https://download.wmc.pub) |
+| 🎵 谱面下载站 | 舞萌 DX 谱面资源下载（ZIP / ADX） | [download.wmc.pub](https://download.wmc.pub) · [AstroDX 导入教程](/guide/astrodx) |
 | 🎶 谱面预览 | 在线谱面查看与评价分析 | [v.awmc.cc](https://v.awmc.cc) |
 | 🆔 AWMC NET. | 免绑定查分成绩库，无需水鱼/落雪即可查询 B50 | [net.wmc.pub](https://net.wmc.pub) |
 | 🔌 开放 API | 供第三方开发者接入的公共接口 | [开发指南](/dev/) |
 
 AWMC 不再自建状态站；舞萌服务器线路状态可参考社区项目 [mai.chongxi.us](https://mai.chongxi.us)（**与 AWMC 无任何关联**的独立项目，提供更多维度的监控数据并支持玩家自主上报）。
 
-其他的等我写吧
+::: tip 想在手机上玩下载的谱面？
+下载站的 ADX 文件可以一键导入 AstroDX，步骤见 [AstroDX 谱面导入教程](/guide/astrodx)。
+:::

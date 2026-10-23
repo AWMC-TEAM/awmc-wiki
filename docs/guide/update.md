@@ -4,6 +4,34 @@
 
 ## 2026 年 10 月
 
+### 2026/10/23
+
+<Badge type="tip" text="Wiki 更新" />
+
+- **新增 [AstroDX 谱面导入教程](/guide/astrodx)** — 从 [download.wmc.pub](https://download.wmc.pub)
+  下载 ADX / ZIP 后如何导入 AstroDX：一键导入、手动导入、批量版本包、`collections.zip` 分类收藏夹与常见问题。
+- **群管理指令补全** — [指令帮助](/guide/bot/advanced) 新增「2.15 入群验证、自动审批与踢人」与「机厅排卡」写法；
+  [群管理后台](/guide/bot/group-console) 新增「群主 / 管理员指令速查」。
+
+### 2026/10/22
+
+<Badge type="tip" text="功能追加" />
+
+- **新玩法「舞萌 Dle（maidle）」** — 发 `maidle` 开局，全群 10 次机会猜一首歌，每次作答对比版本 / 分类 / BPM /
+  曲师 / 紫谱定数 / 类型 / 谱师七项；`maidle 困难` 不给提示。猜中时其他有效作答者也有协助奖励。
+  规则见 [猜歌 · 舞萌 Dle](/guide/bot/advanced#_2-6-猜歌)。
+- **底力分析 / 弱项处方改为成绩驱动** — `底力分析` 输出单张全景成绩统计图，按同段定数对比强弱项；
+  `弱项处方` 生成八卡训练面板。
+- **状态页联动** — 新增 `状态页` / `服务状态` 查询 [up.wmc.pub](https://up.wmc.pub)；状态页发布 Bot 维护时自动进入维护模式。
+
+### 2026/10/19
+
+<Badge type="tip" text="功能追加" />
+
+- **群管理工具** — 新增 `入群验证`（新成员群内答题）、`自动审批`（按关键词处理入群申请）、
+  `mai踢 @某人 [-b]`（踢人 / 踢人并拉黑）与 `mai拉黑` / `mai解封`；未开通踢人权限时自动降级为禁言 30 天。
+  详见 [指令帮助 2.15](/guide/bot/advanced#group-moderation)。
+
 ### 2026/10/16
 
 <Badge type="tip" text="功能追加" />

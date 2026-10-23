@@ -34,7 +34,7 @@ Follow this order on your first use and you can query scores within five minutes
 
 1. **Add the bot** — Click "Add AWMC Bot" at the top of this page, or have a group owner
    invite the bot to your group. Before using group features, allow the bot to read all
-   messages in group settings (see [Section XI](/en/guide/bot/intro#xi-add-the-bot-to-your-own-group-group-owner-admin)).
+   messages in group settings (see [Section XI](/en/guide/bot/intro#add-to-group)).
 2. **Agree to the terms** — Send `用户协议`, read the web page, and reply with the full
    confirmation phrase.
 3. **Bind your maimai account** — Send `mai绑定` and submit a `SGWCMAID...` or official QR
@@ -405,7 +405,7 @@ mode; the Bot replies:
 
 Send「切换兼容模式」or「标准模式」to restore Markdown and quick buttons.
 
-## XI. Add the Bot to Your Own Group (Group Owner/Admin)
+## XI. Add the Bot to Your Own Group (Group Owner/Admin) {#add-to-group}
 
 The Bot supports joining other QQ groups. If you are a group owner or admin and
 want the Bot to reply without @, play guessing games normally, etc., follow
@@ -418,6 +418,10 @@ these steps:
 3. Allow the Bot to push messages proactively (required for guessing features);
 4. To let the Bot auto-recall messages, add the Bot as an admin in group
    management.
+
+Common owner / admin commands (game toggles, join verification, auto-approval, kicking,
+arcade queue, polls …) are collected in the
+[Group Console · Admin Command Quick Reference](/en/guide/bot/group-console#admin-quick-ref).
 
 If issues occur, contact the responsible admin. Midday and evening peaks may be
 slower; please be patient.
