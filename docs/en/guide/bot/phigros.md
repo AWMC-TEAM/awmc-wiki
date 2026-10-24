@@ -9,7 +9,9 @@ progress report between two cloud saves. 🐾
 Phigros data comes from the **TapTap cloud save** (protocol restored from the community
 phi-plugin). The binding is attached to your **score-lookup QQ**: on a regular QQ the current
 QQ is used directly, while the official QQ requires
-[forum account binding (qbind)](/en/guide/bot/intro) first — if you send `phi绑定` without it,
+[score-query QQ binding (qbind)](/en/guide/bot/intro#viii-forum-account-binding-qbind) first:
+send `qbind <QQ number>` and return the QQ email verification code (no forum registration required).
+Forum OAuth via `论坛绑定` remains an alternative — if you send `phi绑定` without qbind,
 the bot will tell you to run qbind.
 
 Command overview:
@@ -162,8 +164,10 @@ Check whether the group switched it off: ask the owner or an admin to send `开�
 see "Phigros module is currently disabled", an admin turned the whole module off.
 
 **It asks me to qbind first?**
-On the official QQ, Phigros binding requires a forum account binding (send `qbind`); after
-that, come back and run `phi绑定`.
+On the official QQ Bot, first send `qbind <QQ number>` and return the 6-digit code
+sent to `<QQ number>@qq.com` within 10 minutes. No forum registration is required;
+`论坛绑定` OAuth is the alternative (and the fallback if email binding is unavailable).
+Then run `phi绑定`. See the [qbind guide and rate limits](/en/guide/bot/intro#viii-forum-account-binding-qbind).
 
 **The save is not the latest one?**
 After playing you can run `phi更新`; normally any save older than 12 hours is re-fetched

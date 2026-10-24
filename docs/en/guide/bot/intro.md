@@ -279,36 +279,53 @@ internal interaction currency of the Bot and has no cash value.
 
 ## VIII. Forum Account Binding (qbind)
 
-qbind links your **score-query QQ** to your **AWMC forum account**; after
-binding you can use check-in, score query, B50, and other account features
-directly, and the first binding grants **3 BREAK**.
+qbind binds your **score-query QQ** on the official QQ Bot. The main path verifies
+your QQ email — **no forum registration is required**. After binding you can use
+check-in, score query, B50, and other account features. The first-binding BREAK
+reward follows the server configuration and the Bot's actual reply.
 
 ### 1. Start binding
 
-Send:
+Send your QQ number (not your email address):
 
 ```text
-qbind
+qbind 123456789
 ```
 
-Aliases: `论坛绑定` / `绑定qq` / `mai绑定qq` / `maiqbind` / `AWMC论坛绑定`.
+1. The Bot sends a **6-digit verification code** to `123456789@qq.com`;
+2. Check the inbox or spam folder, then send the code directly to the Bot within **10 minutes**;
+3. The code becomes invalid after **5 wrong attempts**. If it expires or the Bot restarts, request a new code.
 
-The Bot returns an AWMC forum OAuth authorization guide:
+A bare `qbind` shows instructions when email binding is enabled. Email binding
+requires the server's SMTP configuration; if unavailable, `qbind` falls back to forum OAuth.
 
-1. Open the link in a browser and log in to the forum;
-2. The forum email must be `yourQQ@qq.com` (e.g. QQ 123456 → `123456@qq.com`);
-3. After authorizing, send the authorization link back to the Bot to complete binding.
+::: warning Email rate limits
+Requests are limited to once per **60 seconds** for both the platform user and the QQ email.
+In a **rolling 24-hour window**, the same platform user can request **10 emails**
+and the same QQ email **5 emails**; the whole Bot allows **300 per rolling hour**. Wait for the Bot's retry notice; do not repeatedly request codes.
+:::
 
-> The authorization code is valid for 10 minutes and can only be used once; act
-> quickly.
-> After `qbind` is started, you can also send the authorization code or full
-> callback link directly (no need to re-send the `qbind` prefix).
+**Alternative: forum OAuth.** Send `论坛绑定` (also `论坛登录` / `AWMC论坛绑定`)
+to use forum authorization explicitly. `绑定qq` / `mai绑定qq` / `maiqbind` follow
+the same email-first routing as `qbind`.
+
+1. Open the authorization link in a browser and log in to the forum;
+2. The forum email must be `yourQQ@qq.com`;
+3. After authorizing, send the authorization code or full callback link directly to the Bot.
+
+The OAuth code is valid for 10 minutes and can only be used once. Once the flow
+has started, you do not need to repeat the `qbind` prefix.
 
 ### 2. Binding success
 
-On success the Bot replies "论坛绑定成功", showing the forum account, email, and
-score-query QQ, and tells you that check-in, score query, B50, and other
-features are now available.
+Email verification replies "绑定成功"; OAuth replies "论坛绑定成功".
+When the forum integration is configured, email binding also finds the forum account
+with the same QQ email or creates one automatically. **Forum association failures do
+not invalidate QQ binding**; check-in, score queries, B50, and Phigros can still use
+the verified score-query QQ. Features requiring a forum identity, such as the default
+group-console login, still need a successful association (or `论坛绑定` OAuth).
+For an automatically created forum account, choose **邮件链接登录** (email-link login)
+on the forum login page and enter your QQ number to sign in without a password.
 
 ### 3. Check binding status
 

@@ -4,8 +4,9 @@
 Use the search shortcut <kbd>/</kbd> (desktop) or the search button at the top (mobile) to find topics.
 :::
 
-::: tip Forum account binding (qbind)
-The full flow for binding your score-query QQ to your AWMC forum account is in
+::: tip QQ email binding (qbind)
+Send `qbind <QQ number>` and return the emailed verification code; no forum registration is needed.
+Forum OAuth (`论坛绑定`) remains an alternative. The full flow and rate limits are in
 [Basic Tutorial · Forum Account Binding (qbind)](/en/guide/bot/intro#viii-forum-account-binding-qbind).
 :::
 
@@ -143,8 +144,8 @@ data corruption; you bear the risk yourself. See
 | `mai删成绩 [song difficulty]` | Interactive or one-line score deletion; bulk supported too; 50 BREAK per successfully deleted chart |
 | `mai改道具 [itemKind itemId add/del]` | High-risk item mutation; 100 BREAK on success; bulk `upsert-all` is not exposed by the Bot |
 | `mai改资料` / `资料修改` / `改资料` | **Account editing hub**: one-click unlock, bulk editing, 14 profile edits and upload-session lookup (see [Command Reference](/en/guide/bot/commands#_8-account-editing-bulk-operations-v2-3)) |
-| `mai批量编辑` / `批量编辑` / `批量改` | Collect several mixed-type edits in one conversation and run them serially; adds each operation’s existing price and charges only confirmed successes; removing pending entries or cancelling is free |
-| `mai全解锁 [music/master/remaster] [version ID]` | Unlock all music / MASTER / Re:MASTER (already-owned tracks are skipped); 200 BREAK per run |
+| `mai批量编辑` / `批量编辑` / `批量改` | Collect mixed-type edits and run them serially; flat **1500 BREAK for the entire batch**, charged once on the first confirmed success; paid QR continuation is not charged again; cancelling before execution is free. **Untested, strongly discouraged: up to about 30 minutes and very likely to get stuck** |
+| `mai全解锁 [music/master/remaster] [version ID]` | Unlock all music / MASTER / Re:MASTER (already-owned tracks are skipped); **1500 BREAK per successful run**. **Untested, strongly discouraged: up to about 30 minutes and very likely to get stuck** |
 | `mai改门` / `mai改rating` / `mai改里程` / `mai改地图库存` / `mai改游玩次数` | v2-3 profile edits; 50 BREAK each (parameters accept plain names) |
 | `mai改段位` / `mai改阶级` / `mai改搭档` / `mai改角色` / `mai改亲密度` | v2-3 profile edits; 50 BREAK each |
 | `mai重置版本` | v2-3 version reset; 50 BREAK on success |
@@ -665,7 +666,7 @@ Also supports `13将 未完成`, `13将 2` pagination, and `13将 @user` for oth
 | `日报` / `周报` / `月报` | 1/7/30-day score report images |
 | `年报` | One-year score report |
 | `对比存档 <old ID> <new ID>` | Compare two snapshots |
-| `牌子统计` | Plate achievement stats |
+| `牌子统计` | Fetch all tracker scores live and render one long image of each version's nameplate requirements and your progress, with song jackets marked unplayed / played / SSS; falls back to text if rendering fails |
 
 #### Score-Push Recommendations (multi-route)
 

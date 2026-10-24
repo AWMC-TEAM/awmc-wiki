@@ -22,8 +22,13 @@ You need one of the following:
 - A super admin has **granted** you management rights for this group;
 - You are a plugin super admin.
 
-By default, you also need to complete [forum account binding (qbind)](/en/guide/bot/intro#viii-forum-account-binding-qbind)
-first — the console uses your forum identity to confirm that the person opening the link is you.
+By default, you also need a **linked forum identity**. Start with
+[qbind QQ email verification](/en/guide/bot/intro#viii-forum-account-binding-qbind):
+send `qbind <QQ number>` and return the emailed code. When forum integration is configured,
+the Bot also links an existing forum account by that email or creates one automatically.
+If that association fails, your QQ binding still works, but default console login needs
+you to finish `论坛绑定` OAuth — the console verifies who opens the link using the forum identity.
+Fast login, when enabled by the server, does not require this forum-binding check.
 
 After sending `群管理`, the bot returns a **one-time login link** (valid for 5 minutes, usable once):
 
@@ -89,7 +94,7 @@ messages" — see [Adding the Bot to your group](/en/guide/bot/intro#add-to-grou
 | Message | Fix |
 |------|----------|
 | "Group management console is not enabled" | The server has not enabled the feature; ask a bot admin to deploy it |
-| "Please complete qbind first" | Send `qbind` and finish forum binding |
+| "Please complete qbind first" | Send `qbind <QQ number>` and return the email code; if no forum identity was linked, complete `论坛绑定` OAuth before retrying |
 | "Could not confirm group management rights" | Send `后台身份` and give the returned ID to a super admin |
 | "Set arcade latitude/longitude in group management first" | Open the console, add an arcade under "Arcade queue" and fill in coordinates |
 | The link does not open or errors | Use the newest link from the bot; links are single-use and expire after 5 minutes. Resend `群管理` if needed |

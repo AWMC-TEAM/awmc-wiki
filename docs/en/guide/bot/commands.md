@@ -272,7 +272,13 @@ Account writes now use the **AWMC API v2-3 session model**: the Bot submits the
 request, the server executes it in the background (login → multi-round upload →
 server verification → logout), and the Bot automatically performs "create +
 immediate confirm" and polls the result. **No extra server-session confirmation is needed, but users must first confirm the summary, total, and risks.**
-A run usually takes 1–2 minutes.
+An individual upload session usually takes 1–2 minutes. This is not a duration guarantee for bulk operations.
+
+::: danger Bulk operations are untested — strongly discouraged
+`mai批量编辑` and `mai全解锁` have not been tested. Upstream processing may take
+**up to about 30 minutes** and is **very likely to get stuck**. Check `查任务` if the
+outcome is uncertain; never blindly resubmit a write.
+:::
 
 `mai改资料` (aliases `资料修改` / `改资料` / `资料命令`) is a **hub entry** that lists
 every write command with its current price and offers buttons that jump straight
@@ -280,8 +286,8 @@ into each command.
 
 | Command | Description | Price (charged on success) |
 |---|---|---|
-| `mai批量编辑` / `批量编辑` / `批量改` | Collect several edits in one conversation (mixed types) and run them serially | Sum of individual prices |
-| `mai全解锁 [music/master/remaster] [version ID]` | Unlock all music / MASTER / Re:MASTER | 200 BREAK per run |
+| `mai批量编辑` / `批量编辑` / `批量改` | Collect mixed-type edits and run them serially; untested, strongly discouraged | 1500 BREAK for the entire batch, once on the first confirmed success |
+| `mai全解锁 [music/master/remaster] [version ID]` | Unlock all music / MASTER / Re:MASTER; untested, strongly discouraged | 1500 BREAK per successful run |
 | `mai改门 <gate 1–6 or name> <found/key/both/off>` | Change Kaleidx Gate state | 50 BREAK per run |
 | `mai改rating <0~99999>` | Change the displayed Rating (does not raise the historical best) | 50 BREAK per run |
 | `mai改里程 <0~99999>` | Change maimile points | 50 BREAK per run |
@@ -317,8 +323,11 @@ mai批量编辑
 - Send one edit per message, **up to 3 items** (each item is one upload session, about 1–2 minutes).
 - Send several messages or multiple lines; `继续添加` continues entry, `查看列表` reviews it, and `删曲目 N` removes item N.
 - Send `完成并提交` (also `完成` / `提交`) to review the list and total, then `确认修改` to execute (`取消` to quit).
-- **Prices are added per service; only confirmed successful items are charged.** For example, Rating 50 + item 100 + one score 258 = 408 BREAK.
-- Explicit failures are reported before continuing; uncertain results or billing errors stop the batch. Check `查任务` before resubmitting. Expired-QR continuation resumes only unfinished items.
+- **The entire `mai批量编辑` batch costs a flat 1500 BREAK**, regardless of item count or type. The first confirmed successful item triggers the one-time charge; no confirmed success means no charge. Removing pending entries or cancelling before execution is free.
+- Expired-QR continuation resumes only unfinished items, never replays confirmed successes, and **does not charge again if the flat fee was already paid**.
+- Explicit failures are reported; uncertain outcomes require checking `查任务` before any resubmission. A billing error stops further operations: verify the ledger rather than retrying.
+- This flat fee applies only to `mai批量编辑`. Multi-chart `mai改成绩` / `mai删成绩` still cost **258 / 50 BREAK per successful chart**, respectively.
+- **Untested and strongly discouraged:** upstream bulk processing can take up to about 30 minutes and is very likely to get stuck.
 - Supported entries: `改门` / `改rating` / `改里程` / `改地图库存` / `改游玩次数` / `改段位` /
   `改阶级` / `改搭档` / `改角色` / `改亲密度` / `重置版本` / `改道具` / `改成绩` / `删成绩` / `全解锁`.
 - `改地图` / `推进地图` / `改登录奖励` are temporarily disabled, including through batch entry and QR continuation.
@@ -350,7 +359,9 @@ mai全解锁 remaster 25 # Re:MASTER within a version range
 
 The candidate list is generated upstream and **tracks the account already owns are
 skipped automatically** (nothing is uploaded when everything is skipped). A
-successful run costs 200 BREAK regardless of how many tracks are unlocked.
+successful run costs **1500 BREAK**, regardless of how many tracks are unlocked.
+**Untested and strongly discouraged:** upstream processing can take up to about
+30 minutes and is very likely to get stuck. Do not blindly repeat an uncertain write.
 
 ### Billing & failure handling
 
@@ -445,13 +456,14 @@ Bot: ✅ 2 scores written + server verification result + billing + Ref_ID
 
 ```text
 User: mai批量编辑
-Bot: 📝 Bulk edit mode (up to 3 items; sum of individual prices)
+Bot: 📝 Bulk edit mode (up to 3 items; flat 1500 BREAK for the entire batch)
+     ⚠️ Untested, strongly discouraged: up to about 30 minutes and very likely to get stuck
 User: 改rating 16000
-Bot: ✅ Added 1/3: displayed Rating → 16000 (50 BREAK)
+Bot: ✅ Added 1/3: displayed Rating → 16000
 User: 改道具 5 11479 add
 Bot: ✅ Added 2/3: item add: music unlock · itemId=11479
 User: 完成
-Bot: ⚠️ About to run 2 items serially (total 150 BREAK, 2 upload sessions) …
+Bot: ⚠️ About to run 2 items serially (1500 BREAK once on the first confirmed success) …
 User: 确认修改
 Bot: ✅ Bulk edit finished 2/2 + per-item results + billing + Ref_ID
 ```

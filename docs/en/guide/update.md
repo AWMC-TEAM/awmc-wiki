@@ -4,6 +4,31 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 
 ## October 2026
 
+### 2026/10/24
+
+<Badge type="warning" text="Command and pricing update" />
+
+- **Email-first qbind** — Send `qbind <QQ number>` and return the 6-digit code sent to
+  `<QQ number>@qq.com` within 10 minutes; no forum registration is required. Five wrong
+  attempts invalidate the code. Requests have a 60-second cooldown for both the platform
+  user and QQ email, with limits of 10 emails per platform user and 5 per QQ email in a
+  rolling 24-hour window, and 300 globally per rolling hour. `论坛绑定` explicitly uses forum OAuth; `qbind` falls back
+  to OAuth if email binding is unavailable. When configured, forum integration links or
+  creates an account by email; association failure does not invalidate QQ binding.
+- **Bulk-edit flat fee** — `mai批量编辑` now defaults to **1500 BREAK for the entire batch**,
+  charged once on the first confirmed success. No confirmed success means no charge;
+  expired-QR continuation skips completed items and does not charge the paid fee again.
+  This does **not** change multi-chart `mai改成绩` / `mai删成绩`: those still charge
+  **258 / 50 BREAK per successful chart**.
+- **One-click unlock** — `mai全解锁` now defaults to **1500 BREAK per successful run**.
+  **Both bulk editing and one-click unlock are untested and strongly discouraged:**
+  upstream processing may take up to about **30 minutes** and is very likely to get stuck.
+  Check `查任务` for uncertain outcomes; do not blindly resubmit writes. See the
+  [current command reference](/en/guide/bot/commands#_8-account-editing-bulk-operations-v2-3).
+- **Plate overview** — `牌子统计` fetches all tracker scores live and produces one long
+  image showing each version's nameplate requirements, personal progress and song-jacket
+  markers for unplayed / played / SSS. Rendering failures fall back to text.
+
 ### 2026/10/16
 
 <Badge type="tip" text="New Feature" />
@@ -86,7 +111,7 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 ### 2026/10/02
 
 ::: warning Historical record, not the current command reference
-The entries below preserve the features and prices at the time. Current source bills scores per chart and mixed-type batches by the sum of individual prices; map completion, map advancement, and login-bonus edits are temporarily disabled. Users must still confirm operation risks; only the server-session confirmation is automatic. See the [current command reference](/en/guide/bot/commands) for usage and deployment-version requirements.
+The entries below preserve the features and prices at the time, not today's prices. Current source charges score edits/deletions per chart (258 / 50 BREAK), mixed-type `mai批量编辑` a flat 1500 BREAK once on the first confirmed success, and one-click unlock 1500 BREAK per successful run. Bulk editing and unlock are untested, strongly discouraged, may take up to about 30 minutes and are very likely to get stuck. Map completion, map advancement, and login-bonus edits remain temporarily disabled. Users must still confirm operation risks; only the server-session confirmation is automatic. See the [current command reference](/en/guide/bot/commands) for usage and deployment-version requirements.
 :::
 
 <Badge type="tip" text="New Feature" />
