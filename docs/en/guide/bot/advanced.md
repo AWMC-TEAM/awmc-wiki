@@ -245,8 +245,7 @@ to audition.
 | `分数线 <绿/黄/红/紫/白><song ID> <target achievement>` | E.g. `分数线 紫799 100`; numeric target strictly between 0 and 101, without `%`. Use `分数线 帮助` for help |
 | `友人对战` | Random in-group friend battle (add a number to tighten the Rating gap, e.g. `友人对战 300`) |
 | `友人对战排行` | In-group friend battle records ranking (aliases `友人排行` / `友人对战排名`) |
-| `b50鸟率` / `B50鸟率` / `b50鳥率` | B50 "bird" (SSS+) rate stats (image) |
-| `b50鸟加率` / `B50鸟加率` / `b50鳥加率` / `b50鸟+率` | B50 "bird plus" (SSS+ full combo) rate stats (image) |
+| `b50鸟加率` / `B50鸟加率` / `b50鳥加率` / `b50鸟+率` | B50 "bird plus" (SSS+) rate stats (text list) |
 
 #### Group Single-Song Ranking
 
