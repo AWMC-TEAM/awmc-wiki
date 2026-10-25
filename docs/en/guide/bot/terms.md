@@ -12,6 +12,13 @@ By using AWMCBOT and binding your data, you agree that we may store, process, or
 
 If you do not agree, please stop using the Service immediately.
 
+::: warning Changes to this agreement are made without notice
+**This agreement may be changed at any time, and changes are made without notice** — not every
+user is told individually. The current text of this page is authoritative; continued use of the
+Service (including @-mentioning or DMing the bot in a group) means you accept the changed
+version. If you object to a change, stop using the Service.
+:::
+
 
 
 ## 2. Service Description
@@ -230,9 +237,11 @@ We encourage responsible consumption - any purchase or sponsorship should be mad
 
 ## 13. Agreement Updates
 
-This agreement may be updated. Updates will be published via announcements without separate notice.
+**This agreement may be changed at any time, and changes are made without notice.** There is no
+obligation to notify each user individually.
 
-Continued use indicates agreement to the updated terms.
+The current text of this page is authoritative. **Continued use of the Service means you accept
+the changed agreement**; if you do not accept it, stop using the Service.
 
 ## 14. Contact Us
 
@@ -247,9 +256,9 @@ If you have questions, please contact:
 The final interpretation of this agreement belongs to AWMC TEAM.
 
 Please make sure you have carefully read the above agreement before using our
-Service. When the agreement is updated, you will be asked to review and confirm
-it again. If you agree to the above terms, enter the following text when the
-bot asks for confirmation:
+Service. Changes are made without notice, though for major changes you **may** be
+asked to review and confirm it again. If you agree to the above terms, enter the
+following text when the bot asks for confirmation:
 
 ```
 我已认真阅读网页中的服务说明，并已了解AWMC服务可能带来的风险。我了解因使用本服务，造成舞萌DX官方账号遭到封禁，责任和AWMC无关。我确认发送二维码可能会对我的账号产生安全影响，并愿意接受这样的风险。在阅读说明后，我同意上述协议。

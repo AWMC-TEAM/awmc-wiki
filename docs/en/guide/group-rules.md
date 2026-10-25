@@ -9,10 +9,10 @@ long term, please take two minutes to read the rules below.
 These rules apply to all official groups listed below, and to any other group where the AWMC
 Bot is present. **Joining a group means you have read and accepted this page.**
 
-::: info Rule updates are not announced
-These rules may be adjusted at any time. **Updates are not announced separately** and are not
-notified individually; the current content of this page is authoritative. Staying in the group
-means you accept the latest version.
+::: info These rules may change without notice
+These rules may be adjusted at any time. **Changes are not announced** and are not notified
+individually; the current content of this page is authoritative. Staying in the group means you
+accept the latest version.
 :::
 
 ## 1. Groups and their purpose
@@ -34,6 +34,31 @@ just to idle. Administrators may remove long-inactive placeholder members.
 
 There is also a **developer group** `1067350296` for API integration and collaboration, see the
 [Developer Center](/en/dev/). These rules apply there as well.
+
+::: danger No bots allowed in the groups — kicked on sight, no warning
+**No third-party bot may join any official group.** This includes, but is not limited to:
+
+- bots you self-host on frameworks or protocol backends such as **OneBot / NapCat / SL
+  (Shamrock, Lagrange, etc.)**;
+- ready-made **check-in, push notification, lottery, song-request or AI chat** bots;
+- any bot a member drags in "just to play around";
+- **alt accounts dressed up as bots**, or bots renamed to look like a normal human member.
+
+A bot found in a group is **kicked immediately** — no reminder, no grace period, no
+explanation. If you want to keep using one, host it in a **private group** instead.
+
+**The AWMC Bot itself, and official bots maintained by the admin team, are exempt.**
+
+How it is judged:
+
+- What counts is whether it is an auto-replying bot account, not what it calls itself;
+- Whoever invited the bot is responsible for clearing its leftovers (welcome messages, scheduled
+  posts) after it is kicked; leaving them in place is treated as **advertising**;
+- Inviting the **same bot back repeatedly** after it was kicked escalates against the inviter
+  under section 6;
+- A bot that only posts a few messages and then goes quiet still counts — "it hasn't spoken yet"
+  is no excuse.
+:::
 
 ## 2. Respect each other
 
@@ -166,6 +191,7 @@ Administrators act according to **severity** and **repeat count**. The usual lad
 | --- | --- |
 | Minor, first offence (off-topic spam, mildly uncivil) | Verbal reminder, message recall |
 | Non-compliant display name (`OPENID`, garbled, posing as bot or others) | Asked to rename; **removal if unchanged after the reminder** |
+| Third-party bot joining a group (self-hosted OneBot / NapCat / SL bots, check-in or push bots) | **Kicked on sight (removal)**, no separate warning |
 | Harassing the admin team (chasing answers with @-mentions, unwanted DMs) | **Mute for 1 day** |
 | Normal violation (spam, unverified reposts, mild advertising) | Warning, recorded |
 | Bringing up other services or bots of the same kind (including recommending or driving traffic) | Reminder and message recall; repeat or clear traffic-driving goes to the next tier |
@@ -183,6 +209,9 @@ Notes:
   impersonating others) are handled **with a chance to fix it first**: rename on request, and
   removal follows refusal or a repeat offence. Using a fake identity for scams or solicitation
   is treated as a serious violation directly;
+- **Third-party bots** get no grace period: kicked on sight, whether or not it has said anything
+  and whoever invited it. Inviting the same bot back after a kick escalates against the inviter
+  as a **repeat violation**;
 - **Out-of-context call-outs and cross-group insults** are **zero tolerance**: breaking them
   leads to an immediate permanent ban, applying to every AWMC group the person is in;
 - **Harassment** (repeatedly @-mentioning the owner or admins, unwanted DMs, continuing after a
@@ -228,7 +257,7 @@ the account restriction rules.
 - Permanent bans may also be appealed **once**: message an administrator with the full context,
   and a confirmed mistake will be reversed. This does not change the "no prior warning"
   principle.
-- These rules may be adjusted at any time and **updates are not announced**; the current content
+- These rules may be adjusted at any time and **changes are not announced**; the current content
   of this page is authoritative, and staying in the group means accepting the latest version.
 
 ## 8. Come and play
