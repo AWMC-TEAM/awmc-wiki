@@ -96,6 +96,7 @@ export default defineConfig({
                 { text: 'Phigros 查分', link: '/guide/bot/phigros' },
                 { text: '授权获取', link: '/guide/bot/verify'},
                 { text: '群管理后台', link: '/guide/bot/group-console'},
+                { text: '运行状态自检', link: '/guide/bot/botstatus'},
               ]
             },
             {
