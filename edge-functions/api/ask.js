@@ -7,9 +7,13 @@
 //   AI_API_KEY   必填，模型服务的 API Key（未配置时接口返回 503，前端会退化为「去 ChatGPT / Claude 问」）
 //   AI_BASE_URL  选填，OpenAI 兼容接口地址，默认 https://api.deepseek.com/v1
 //   AI_MODEL     选填，模型名，默认 deepseek-chat
+//
+// 排查：浏览器直接打开 GET /api/ask 会返回配置与文档加载情况（不含密钥）。
 
 const DEFAULT_BASE_URL = 'https://api.deepseek.com/v1'
 const DEFAULT_MODEL = 'deepseek-chat'
+// 本站自身地址取不到 llms-full.txt 时（例如请求走的是平台内部域名），退回到正式域名
+const CANONICAL_ORIGIN = 'https://wiki.awmc.team'
 
 const MAX_QUESTION_CHARS = 500
 const MAX_HISTORY_MESSAGES = 6
@@ -35,6 +39,36 @@ const SYSTEM_PROMPT = `你是 AWMC 文档站（wiki.awmc.team）的问答助手�
 4. 在回答末尾用 Markdown 链接列出你参考的文档页面（使用 <docs> 中给出的页面地址，去掉末尾的 .md）。
 5. 使用与用户提问相同的语言回答。`
 
+// 兼容 https://api.deepseek.com、.../v1、.../v1/chat/completions 等写法
+function resolveConfig(env) {
+  const apiKey = ((env && env.AI_API_KEY) || '').trim()
+  const baseUrl = ((env && env.AI_BASE_URL) || DEFAULT_BASE_URL)
+    .trim()
+    .replace(/\/+$/, '')
+    .replace(/\/chat\/completions$/, '')
+  const model = ((env && env.AI_MODEL) || DEFAULT_MODEL).trim()
+  return { apiKey, baseUrl, model }
+}
+
+export async function onRequestGet({ request, env }) {
+  const { apiKey, baseUrl, model } = resolveConfig(env)
+  const origin = new URL(request.url).origin
+  let docs
+  try {
+    const chunks = await loadCorpus(origin)
+    docs = { ok: true, chunks: chunks.length, source: corpusCache.source }
+  } catch (e) {
+    docs = { ok: false, error: String(e && e.message ? e.message : e) }
+  }
+  return json({
+    configured: Boolean(apiKey),
+    baseUrl,
+    model,
+    endpoint: `${baseUrl}/chat/completions`,
+    docs
+  })
+}
+
 export async function onRequestPost({ request, env }) {
   const url = new URL(request.url)
 
@@ -47,7 +81,7 @@ export async function onRequestPost({ request, env }) {
     }
   }
 
-  const apiKey = env && env.AI_API_KEY
+  const { apiKey, baseUrl, model } = resolveConfig(env)
   if (!apiKey) return json({ error: 'not_configured' }, 503)
 
   const ip =
@@ -81,15 +115,7 @@ export async function onRequestPost({ request, env }) {
 
   const pagePath = typeof body.page === 'string' ? body.page : ''
 
-  let context
-  try {
-    context = await buildContext(url.origin, question, history, pagePath)
-  } catch (e) {
-    return json({ error: 'docs_unavailable' }, 502)
-  }
-
-  const baseUrl = ((env && env.AI_BASE_URL) || DEFAULT_BASE_URL).replace(/\/+$/, '')
-  const model = (env && env.AI_MODEL) || DEFAULT_MODEL
+  const context = await buildContext(url.origin, question, history, pagePath)
 
   let upstream
   try {
@@ -115,7 +141,11 @@ export async function onRequestPost({ request, env }) {
   }
 
   if (!upstream.ok || !upstream.body) {
-    return json({ error: 'upstream_error', status: upstream.status }, 502)
+    let detail = ''
+    try {
+      detail = (await upstream.text()).slice(0, 300)
+    } catch {}
+    return json({ error: 'upstream_error', status: upstream.status, detail }, 502)
   }
 
   return new Response(sseToText(upstream.body), {
@@ -188,11 +218,20 @@ async function loadCorpus(origin) {
   if (corpusCache && corpusCache.origin === origin && now - corpusCache.loadedAt < CORPUS_TTL_MS) {
     return corpusCache.chunks
   }
-  const res = await fetch(`${origin}/llms-full.txt`)
-  if (!res.ok) throw new Error(`llms-full.txt ${res.status}`)
-  const chunks = splitCorpus(await res.text())
-  corpusCache = { origin, loadedAt: now, chunks }
-  return chunks
+  const errors = []
+  for (const source of [...new Set([origin, CANONICAL_ORIGIN])]) {
+    try {
+      const res = await fetch(`${source}/llms-full.txt`)
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const chunks = splitCorpus(await res.text())
+      if (!chunks.length) throw new Error('empty')
+      corpusCache = { origin, source, loadedAt: now, chunks }
+      return chunks
+    } catch (e) {
+      errors.push(`${source}/llms-full.txt: ${e && e.message ? e.message : e}`)
+    }
+  }
+  throw new Error(errors.join('; '))
 }
 
 // llms-full.txt 由若干个页面组成，每个页面以 `---\nurl: ...\n---` 开头
@@ -275,7 +314,11 @@ function rankChunks(chunks, query) {
 }
 
 async function buildContext(origin, question, history, pagePath) {
-  const chunks = await loadCorpus(origin)
+  // 文档取不到时也照常回答（只是没有检索结果），不让整个问答挂掉
+  let chunks = []
+  try {
+    chunks = await loadCorpus(origin)
+  } catch {}
   const parts = []
   let used = 0
 
