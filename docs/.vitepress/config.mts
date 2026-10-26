@@ -1,4 +1,26 @@
 import { defineConfig } from 'vitepress'
+import llmstxt from 'vitepress-plugin-llms'
+import type { Plugin } from 'vite'
+
+// 页面里的 `{{ $frontmatter.xxx }}` 由 Vue 渲染时才替换，给 LLM 的 .md 里会原样留下模板。
+// 在 llmstxt 收集原文之前先把它们换成 frontmatter 里的实际值（渲染结果不变）。
+function inlineFrontmatterVars(): Plugin {
+  return {
+    name: 'awmc:inline-frontmatter-vars',
+    enforce: 'pre',
+    transform(code, id) {
+      if (!id.endsWith('.md') || !code.includes('$frontmatter.')) return null
+      const fm = code.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+      if (!fm) return null
+      const vars: Record<string, string> = {}
+      for (const line of fm[1].split(/\r?\n/)) {
+        const m = line.match(/^([A-Za-z_]\w*):\s*['"]?([^'"#]+?)['"]?\s*$/)
+        if (m) vars[m[1]] = m[2]
+      }
+      return code.replace(/\{\{\s*\$frontmatter\.(\w+)\s*\}\}/g, (all, key) => vars[key] ?? all)
+    }
+  }
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -44,6 +66,24 @@ export default defineConfig({
       `if(location.hostname.endsWith('awmc.cc')){document.addEventListener('DOMContentLoaded',function(){var t=setInterval(function(){var f=document.querySelector('.VPFooter');if(!f)return;clearInterval(t);var d=document.createElement('div');d.style.cssText='margin-top:8px;text-align:center;font-size:12px';d.innerHTML='<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" style="color:var(--vp-c-text-2);text-decoration:none">晋ICP备2025069504号-7</a><span style="margin:0 4px;color:var(--vp-c-text-3)">|</span><img src="/images/gongan.png" alt="" style="width:14px;height:14px;vertical-align:middle;margin-right:2px"/><a href="https://beian.mps.gov.cn/#/query/webSearch?code=14070302000140" target="_blank" rel="noopener" style="color:var(--vp-c-text-2);text-decoration:none">晋公网安备14070302000140号</a>';f.querySelector('.container').appendChild(d)},200)})}`
     ]
   ],
+
+  // 给 LLM 用的纯文本版本：/llms.txt、/llms-full.txt，以及每个页面对应的 .md 原文。
+  // 英文页是中文页的镜像，只生成单页 .md（供英文页的「复制 / 在 AI 中打开」使用），
+  // 不放进 llms.txt / llms-full.txt，免得同样的内容喂两遍。
+  vite: {
+    plugins: [
+      inlineFrontmatterVars(),
+      llmstxt({
+        domain: 'https://wiki.awmc.team',
+        title: 'AWMC Bot & Services',
+        description: 'AWMC Bot（舞萌 DX 查分 QQ 机器人）及其相关服务（谱面下载站、谱面预览、开发者 API）的官方帮助文档',
+        ignoreFilesPerOutput: {
+          llmsTxt: ['en/**', 'en/index.md'],
+          llmsFullTxt: ['en/**', 'en/index.md']
+        }
+      })
+    ]
+  },
 
   sitemap: {
     hostname: 'https://wiki.awmc.team' // 开启 Sitemap 自动生成功能
@@ -149,6 +189,12 @@ export default defineConfig({
                 { text: '谱面预览', link: '/dev/chart-preview' },
                 { text: '谱面评价与分析 API', link: '/dev/chart-preview-api' }
               ]
+            },
+            {
+              text: '🤖 AI 与 LLM',
+              items: [
+                { text: 'AI 问答与 llms.txt', link: '/dev/llms' }
+              ]
             }
           ]
         }
@@ -252,6 +298,12 @@ export default defineConfig({
               items: [
                 { text: 'Chart Preview', link: '/en/dev/chart-preview' },
                 { text: 'Chart Review & Analysis API', link: '/en/dev/chart-preview-api' }
+              ]
+            },
+            {
+              text: '🤖 AI & LLMs',
+              items: [
+                { text: 'Ask AI & llms.txt', link: '/en/dev/llms' }
               ]
             }
           ]
