@@ -10,6 +10,8 @@ interface Message {
   // 站内问答不可用时，给出「带着问题去 ChatGPT / Claude」的入口
   fallback?: string
   error?: boolean
+  // 站内问答失败的原因，显示成小字方便排查
+  reason?: string
 }
 
 const { lang } = useData()
@@ -102,9 +104,10 @@ async function ask(text?: string) {
       signal: controller.signal
     })
     const type = res.headers.get('content-type') || ''
-    if (!res.ok || !res.body || !type.startsWith('text/plain')) {
+    if (!res.ok || !res.body || type.includes('json') || type.includes('html')) {
       current.content = res.status === 429 ? t.value.rateLimited : t.value.unavailable
       current.fallback = question
+      current.reason = await failureReason(res)
       return
     }
     const reader = res.body.getReader()
@@ -123,12 +126,26 @@ async function ask(text?: string) {
     if ((e as Error).name !== 'AbortError') {
       current.content = current.content || t.value.unavailable
       current.fallback = question
+      current.reason = (e as Error).message
     }
   } finally {
     loading.value = false
     controller = null
     scrollToBottom()
   }
+}
+
+async function failureReason(res: Response) {
+  let reason = `HTTP ${res.status}`
+  try {
+    const data = await res.json()
+    if (data && data.error) {
+      reason += ` · ${data.error}`
+      if (data.status) reason += ` ${data.status}`
+      if (data.detail) reason += ` · ${String(data.detail).slice(0, 200)}`
+    }
+  } catch {}
+  return reason
 }
 
 function stop() {
@@ -179,6 +196,7 @@ function onKeydown(e: KeyboardEvent) {
           <div v-else class="ask-bubble">
             <div v-if="!m.content && loading" class="ask-thinking">{{ t.thinking }}</div>
             <div v-else class="ask-md" v-html="renderMarkdown(m.content)" />
+            <div v-if="m.reason" class="ask-reason">{{ m.reason }}</div>
             <div v-if="m.fallback" class="ask-fallback">
               <button v-for="p in aiProviders" :key="p.name" class="ask-text-btn" type="button" @click="openIn(p, m.fallback)">
                 {{ t.open(p.name) }} ↗
@@ -381,6 +399,13 @@ function onKeydown(e: KeyboardEvent) {
 .ask-md :deep(a) {
   color: var(--vp-c-brand-1);
   text-decoration: underline;
+}
+
+.ask-reason {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  overflow-wrap: anywhere;
 }
 
 .ask-fallback {
