@@ -1,14 +1,14 @@
 # AstroDX 谱面导入教程
 
 ::: tip 一句话
-在 [AWMC-MaiArchive 下载站](https://download.wmc.pub) 下载 **ADX** 格式的谱面，然后在手机文件管理器里点一下这个文件，
-选「用 AstroDX 打开」，就导入好了喵～
+在 [AWMC-MaiArchive 下载站](https://download.wmc.pub) 下载 **ADX** 格式的谱面：
+**安卓**在文件管理器里点一下这个文件，选「用 AstroDX 打开」；**iPhone / iPad** 在「文件」App 里把它移进
+「我的 iPhone → AstroDX」文件夹，再打开游戏，就导入好了喵～
 :::
 
 本页讲的是怎么把 [download.wmc.pub](https://download.wmc.pub) 上下载的谱面导入
-**AstroDX**（手机上的舞萌模拟器）。教程按 AstroDX 官方文档和下载站实际打出来的包整理；
-AstroDX 本身的安装、更新问题请以 [AstroDX 官方文档](https://astrodx.notion.site/AstroDX-73b5ccf4f9634eed9ee11468a47c0855)
-为准。
+**AstroDX**（手机上的舞萌模拟器，安卓和 iPhone / iPad 都能玩）。教程按 AstroDX 官方文档和下载站实际打出来的包整理；
+AstroDX 本身的安装、更新问题请以 [AstroDX 官方 Wiki](https://wiki.astrodx.com/cn) 为准。
 
 ## 〇、先看这里：三分钟上手
 
@@ -16,8 +16,10 @@ AstroDX 本身的安装、更新问题请以 [AstroDX 官方文档](https://astr
 2. **用系统浏览器打开下载站** — 在 [download.wmc.pub](https://download.wmc.pub) 搜索曲目，点开下载弹窗。
    QQ / 微信内置浏览器下不了文件，请点右上角「在浏览器打开」。
 3. **选择「ADX · 无背景视频」** — 体积小，导入快（想要背景视频就选「ADX · 含背景视频」）。
-4. **用 AstroDX 打开** — 在文件管理器的「下载」目录里点这个 `.adx` 文件，选择
-   「打开方式 → AstroDX」，游戏会自动装好这首歌。
+4. **交给 AstroDX** —
+   - 安卓：在文件管理器的「下载」目录里点这个 `.adx` 文件，选择「打开方式 → AstroDX」，游戏会自动装好这首歌；
+   - iPhone / iPad：在「文件」App 里把 `.adx` 移动到「我的 iPhone（我的 iPad）→ AstroDX」文件夹，
+     再打开游戏，等进度条走完即可，详见 [iPhone / iPad 导入](#ios-import)。
 
 单曲下载**不需要人机验证**；按版本批量下载、多选下载才需要验证。
 
@@ -25,11 +27,14 @@ AstroDX 本身的安装、更新问题请以 [AstroDX 官方文档](https://astr
 
 ### 1. 安装 AstroDX
 
-- **安卓**：到 [AstroDX GitHub Releases](https://github.com/2394425147/maipaddx/releases) 下载最新的
+- **安卓**：到 [AstroDX GitHub Releases](https://github.com/2394425147/astrodx/releases) 下载最新的
   `.apk` 安装。官方推荐使用最新版本，即使它是 pre-release（预发布）版本。手机提示「禁止安装未知应用」时，到系统设置里给
   浏览器打开「允许安装未知应用」即可。
-- **iOS**：AstroDX 不在 App Store 上架。获取方式请看 AstroDX 官方 Discord 的公告
-  （[sht.moe/astrodx](https://sht.moe/astrodx)），本 Wiki 不提供安装包。
+- **iPhone / iPad**：AstroDX **已在 App Store 上架**，免费下载：
+  [App Store · AstroDX](https://apps.apple.com/app/astrodx/id6754203760)（开发者 Kumoumi Interactive）。
+  中国区 App Store 也能直接搜到，不用换外区账号。需要 iOS / iPadOS 15.0 及以上。
+  以前那套 TestFlight 抢名额的流程已经不需要了，官方现在推荐用 App Store 的稳定版。
+  本 Wiki 不提供 `.ipa` 安装包，AstroDX 官方也不发 ipa，请只从 App Store 下载。
 
 安装后**先打开一次游戏**，让它完成初始化，再开始导入。刚装好时游戏里没有任何歌曲，这是正常的。
 
@@ -55,7 +60,10 @@ AstroDX 能直接打开 `.adx` 并自动安装。
 
 ## 二、方法一：ADX 一键导入（推荐）
 
-AstroDX 官方推荐用 ADX 文件导入（需要 Beta 2 Patch 4 及以上版本）。
+AstroDX 官方推荐用 ADX 文件导入（需要 Beta 2 Patch 4 及以上版本）。下载站的 `.adx` 可以直接用，
+**不需要**再自己压缩或改后缀。
+
+### 安卓
 
 1. 在下载站下载 **ADX** 格式的谱面；
 2. 打开手机自带的「文件管理」，进入「下载」(Download) 目录；
@@ -73,6 +81,32 @@ AstroDX 官方推荐用 ADX 文件导入（需要 Beta 2 Patch 4 及以上版本
   `.adx` 文件再选 AstroDX 打开；
 - 或者把 `.adx` 后缀改回 `.zip`，按下面的 [方法二](#manual-import) 手动导入。
 :::
+
+### iPhone / iPad {#ios-import}
+
+iOS 上不用「打开方式」，而是**把 `.adx` 放进 AstroDX 的文件夹，游戏下次打开时自动安装**。
+这是 [AstroDX 官方 iOS 教程](https://wiki.astrodx.com/en/install/ios) 给的方法。
+
+1. **先打开一次 AstroDX**，然后退出。首次启动后，「文件」App 的「我的 iPhone」（iPad 上是「我的 iPad」）里
+   才会出现带 AstroDX 图标的 `AstroDX` 文件夹；
+2. 用 **Safari** 打开下载站，下载 **ADX** 格式的谱面，弹出「要下载……吗？」时点「下载」；
+3. 打开系统自带的 **「文件」App**，找到刚下载的 `.adx`。Safari 默认存到「iCloud 云盘 → 下载」，
+   关了 iCloud 云盘的话在「我的 iPhone → 下载」；也可以点 Safari 地址栏的下载图标，再点文件旁的放大镜直接定位；
+4. **长按** `.adx` 文件 → **移动** → 选「我的 iPhone」→ **`AstroDX`** → 点右上角「移动」
+   （从 iCloud 云盘移过来时是「拷贝」，效果一样）；
+5. 打开 AstroDX，屏幕上会出现安装进度条，走完后到选曲界面就能看到这首歌。
+
+::: warning 放在 AstroDX 文件夹里，不是 levels 里
+`.adx` 要直接放进 `AstroDX/` 这一层，**不要**放进里面的 `levels/` 文件夹，否则游戏不会安装它。
+如果游戏原本就开在后台、移进去之后没出现进度条，从多任务界面把 AstroDX 划掉再重新打开。
+:::
+
+::: tip 一次导入很多首
+「文件」App 右上角「⋯ → 选择」可以一次勾选多个 `.adx`，一起「移动」到 `AstroDX` 文件夹，
+下次打开游戏会一次性全部装好。
+:::
+
+和安卓一样，导入后的文件夹名是 `[DX] 曲名.曲师`，**再导入同名的歌会直接覆盖旧版本**。
 
 ## 三、方法二：手动导入 ZIP {#manual-import}
 
@@ -94,6 +128,9 @@ Android/data/com.Reflektone.AstroDX/files/
 ```
 
 一首歌至少要有 **`maidata.txt` 和音乐文件** 才会被识别。
+
+iPhone / iPad 上是「文件」App 里的 **我的 iPhone（我的 iPad）→ `AstroDX`**，里面同样有 `levels/` 和 `collections/`，
+结构和上面一样，不需要任何额外工具。
 
 ::: warning 安卓 11 及以上打不开 Android/data？
 从安卓 11 起，系统限制了普通应用访问 `Android/data`。可以：
@@ -117,6 +154,12 @@ Android/data/com.Reflektone.AstroDX/files/
 3. 把下载的 `.zip` 解压到这个文件夹里，确认里面直接就是 `maidata.txt`、`track.mp3` 等文件；
 4. 重新打开 AstroDX，在选曲界面找到这首歌。
 
+::: info iPhone / iPad 手动导入
+iOS 上其实更推荐 [ADX 导入](#ios-import)。一定要手动的话：在「文件」App 里**点一下** `.zip` 就会解压，
+得到一个和压缩包同名的文件夹；确认里面直接就是 `maidata.txt`、`track.mp3` 等文件后，
+长按这个文件夹 → 移动 → 我的 iPhone → `AstroDX` → **`levels`**，再重新打开游戏。
+:::
+
 ::: tip 别随便改名或移动
 AstroDX 按**文件夹路径**记录成绩和偏移设置。导入后再改名、移动或删除歌曲文件夹，这首歌的
 成绩记录就会丢失。
@@ -136,6 +179,13 @@ AstroDX 按**文件夹路径**记录成绩和偏移设置。导入后再改名�
 1. 把外层的 `舞萌DX 2024.adx` 改名为 `舞萌DX 2024.zip`（ZIP 格式不用改），解压到手机任意位置；
 2. 得到每首歌的 `.adx` 后，**逐个点按 → 用 AstroDX 打开**；
    如果是 `.zip`，就按方法二逐个新建文件夹再解压到 `levels/`。
+
+iPhone / iPad 上：
+
+1. 在「文件」App 里把外层的 `舞萌DX 2024.adx` 重命名为 `舞萌DX 2024.zip`
+   （看不到后缀的话先打开「显示所有文件扩展名」，见下方 [常见问题](#ios-rename)），然后**点一下**解压；
+2. 进入解压出来的文件夹，「⋯ → 选择 → 全选」，把里面所有 `[DX] 曲名.adx` 一起**移动**到「我的 iPhone → `AstroDX`」；
+3. 打开 AstroDX，等进度条把整批歌装完。
 
 ::: warning 注意
 外层的大包**不能直接用 AstroDX 打开**，它是「装着多个安装包的压缩包」，不是 AstroDX 认识的结构。
@@ -157,9 +207,15 @@ collections/
 ```
 
 1. 点下载站的「索引下载」，下载 `collections.zip`（免人机验证，体积很小）；
-2. 解压，把里面的 `collections/` 文件夹放进 `Android/data/com.Reflektone.AstroDX/files/`，
-   也就是和 `levels/` **放在同一层**（已有 `collections/` 时合并进去即可）；
+2. 解压，把里面的 `collections/` 文件夹放进 `Android/data/com.Reflektone.AstroDX/files/`
+   （iPhone / iPad 是「我的 iPhone → `AstroDX`」），也就是和 `levels/` **放在同一层**（已有 `collections/` 时合并进去即可）；
 3. 重新打开 AstroDX，选曲界面就会出现这些收藏夹。
+
+::: tip iPhone / iPad 合并 collections
+在「文件」App 里点一下 `collections.zip` 即可解压。`AstroDX` 里已经有 `collections/` 时，
+不要整个文件夹移过去替换，而是打开解压出来的 `collections/`，全选里面的子文件夹，再移动到已有的
+`AstroDX/collections/` 里，这样你原来的收藏夹不会被覆盖。
+:::
 
 收藏夹只是一份「曲目清单」，不包含歌曲本身。**你导入了哪些歌，收藏夹里就显示哪些。**
 索引同时兼容两种文件夹名：ZIP 手动导入的 `[DX] 曲名` 和 ADX 导入的 `[DX] 曲名.曲师`，
@@ -191,10 +247,30 @@ AstroDX 不会读压缩包，需要先解压，并确认是「`levels/` → 歌�
 
 AstroDX 目前不支持从 SD 卡读取歌曲，只能放在手机内部存储的上述目录里。
 
+### iPhone：「我的 iPhone」里找不到 AstroDX 文件夹
+
+先从 App Store 安装并**打开一次** AstroDX，再回到「文件」App 的「我的 iPhone」（iPad 上是「我的 iPad」）。
+左上角显示的是「iCloud 云盘」的话，点返回切到「浏览」页，在「位置」里选「我的 iPhone」。
+
+### iPhone：改不了后缀 / 看不到 .adx、.zip 后缀 {#ios-rename}
+
+在「文件」App 右上角点 **⋯ → 显示选项**（iOS 26 上也可以点四个方块的「显示选项」按钮），打开
+**「显示所有文件扩展名」**，之后长按文件 → 重命名就能改后缀。实在改不了后缀时，按 AstroDX 官方的说法，
+把文件命名成 `名字.adx.zip` 也能被识别。下载站单曲的 `.adx` 本来就是对的后缀，不用改。
+
+### iPhone：在微信 / QQ 里收到的 .adx 怎么导入？
+
+在聊天里点开文件 → 右上角「⋯」→「用其他应用打开」→ **存储到「文件」**，保存位置直接选
+「我的 iPhone → AstroDX」，再打开游戏即可。从电脑传文件可以用 AirDrop（Mac）或
+[LocalSend](https://localsend.org/)（Windows / Linux），收到后同样移进 `AstroDX` 文件夹。
+
 ## 相关链接
 
 - 谱面下载站：[download.wmc.pub](https://download.wmc.pub)
 - 在线谱面预览：[谱面预览](/dev/chart-preview)
-- AstroDX 官方安卓教程（中文）：[AstroDX 安卓安装教程](https://astrodx.notion.site/AstroDX-73b5ccf4f9634eed9ee11468a47c0855)
+- AstroDX 官方 Wiki：[wiki.astrodx.com](https://wiki.astrodx.com/cn)
+- AstroDX App Store 页面：[AstroDX](https://apps.apple.com/app/astrodx/id6754203760)
+- AstroDX 官方安卓教程（中文）：[安卓安装教程](https://wiki.astrodx.com/cn/install/android)
+- AstroDX 官方 iOS / iPadOS 教程（英文，比中文版新）：[iOS/iPadOS](https://wiki.astrodx.com/en/install/ios)
 - AstroDX ADX 包结构说明：[ADX Archive Details](https://astrodx.notion.site/ADX-Archive-Details-a8346048819a40b18f0a6c014c19b0b3)
 - AstroDX 收藏夹格式说明：[Collection Manifest Details](https://astrodx.notion.site/Collection-Manifest-Details-8f966de6971748e0ac01c0a0a6054594)

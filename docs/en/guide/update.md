@@ -4,6 +4,15 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 
 ## October 2026
 
+### 2026/10/26
+
+<Badge type="tip" text="Wiki update" />
+
+- **[AstroDX import guide](/en/guide/astrodx) now covers iPhone / iPad** — AstroDX is on the App Store
+  (including the China mainland store; iOS / iPadOS 15.0+), so TestFlight is no longer needed. Added iOS
+  steps for moving `.adx` files into the `AstroDX` folder in the Files app, plus iOS notes for manual
+  import, version packs, `collections.zip` and the FAQ.
+
 ### 2026/10/24
 
 <Badge type="warning" text="Command and pricing update" />

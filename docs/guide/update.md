@@ -4,6 +4,14 @@
 
 ## 2026 年 10 月
 
+### 2026/10/26
+
+<Badge type="tip" text="Wiki 更新" />
+
+- **[AstroDX 谱面导入教程](/guide/astrodx) 补充 iPhone / iPad** — AstroDX 已在 App Store 上架（国区可下载，iOS / iPadOS 15.0 及以上），
+  不再需要 TestFlight；新增 iOS 上用「文件」App 把 `.adx` 移进 `AstroDX` 文件夹的导入步骤，以及手动导入、批量包、
+  `collections.zip` 和常见问题的 iOS 写法。
+
 ### 2026/10/24
 
 <Badge type="tip" text="Bot 指令同步" />
