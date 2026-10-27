@@ -5,18 +5,11 @@ export const askAiOpen = ref(false)
 
 export interface AiProvider {
   name: string
-  // 预填提问内容的网页聊天入口，prompt 拼在末尾
   url: string
+  mode: 'clipboard' | 'prefill'
 }
 
-export const aiProviders: AiProvider[] = [
-  { name: 'ChatGPT', url: 'https://chatgpt.com/?hints=search&prompt=' },
-  { name: 'Claude', url: 'https://claude.ai/new?q=' }
-]
-
-export function openInProvider(provider: AiProvider, prompt: string) {
-  window.open(provider.url + encodeURIComponent(prompt), '_blank', 'noopener')
-}
+export { aiProviders, openInProvider } from './providers.mjs'
 
 // 当前页面对应的 LLM 版 Markdown 地址（由 vitepress-plugin-llms 在构建时生成）
 export function markdownUrlOf(pathname: string, origin = location.origin) {

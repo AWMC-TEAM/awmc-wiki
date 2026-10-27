@@ -1,35 +1,43 @@
 # 🖼️ Assets & Chart Resource API
 
-AWMC exposes two kinds of public resource APIs: **assets.awmc.team** serves images and other static assets, and **download.wmc.pub** (the chart download site) serves chart files and packages.
+AWMC serves static images, the chart index, chart files and single-chart packages through one public entry point: **[download.wmc.pub](https://download.wmc.pub)** (the chart download site).
 
-Both are **unauthenticated**. Since 2026-09-29, **single-chart** resources on `download.wmc.pub` (maidata / audio / jacket / PV, plus that chart's zip and adx) **no longer require the human verification step** — a link is enough. Only the big packages (version packs, all-versions pack, deleted-song pack) still ask for a captcha.
+Public endpoints are **unauthenticated**. Since 2026-09-29, **single-chart** resources (maidata / audio / jacket / PV, plus that chart's zip and adx) **no longer require human verification**. Version packs, the all-versions pack, the deleted-song pack and custom multi-chart downloads still require a captcha.
 
-> The old `assets.awmc.cc` domain has moved to **`assets.awmc.team`**; please use the new domain in examples and integrations.
+> The old asset domains are retired. Replacing the hostname is not enough: `/covers/:id` is not supported here. Use the cover route or single-chart file routes below. File requests may redirect to an object-storage CDN; allow redirects.
+>
+> Verified against MaiArchive source and read-only production HTTP on 2026-10-27: the cover, chart info and file index were accessible. Response examples show selected fields; use the live file index for filenames and sizes.
 
 ## 1. Resource root paths
 
 | Root path | Contents |
 |---|---|
-| `https://assets.awmc.team` | Jackets and other static images |
-| `https://download.wmc.pub` | Chart files, chart index, single-chart packages |
+| `https://download.wmc.pub` | Jackets and static images, chart files, chart index, single-chart packages |
 
-## 2. assets.awmc.team
+## 2. Cover images
+
+Address covers by version and song folder, not by the old jacket ID or a `.png` suffix. Use `versionFolder` / `folderName` from 3.1, or `versionFolder` / `songFolder` from 3.3; URL-encode each folder segment separately.
 
 <ApiDemo
-  baseUrl="https://assets.awmc.team"
+  baseUrl="https://download.wmc.pub"
   :isImage="true"
+  :encodePathParams="true"
   :options="[
     {
-      title: 'Covers',
+      title: 'Cover image',
       method: 'GET',
-      path: '/covers/:id',
-      description: 'Fetch the jacket image for a given ID (include the .png suffix).',
+      path: '/cdn/v1/img/:versionFolder/:songFolder',
+      description: 'Fetch a cover. Optional w selects the nearest supported thumbnail width; check Content-Type for the actual image format.',
       params: [
-        { name: 'id', type: 'string', required: 'Required', desc: 'Jacket ID (with suffix)', value: '0.png' }
+        { name: 'versionFolder', type: 'string', required: 'Required', desc: 'Version folder name', value: 'BUDDiES' },
+        { name: 'songFolder', type: 'string', required: 'Required', desc: 'Song folder name', value: 'Apollo [DX]' },
+        { name: 'w', type: 'number', required: 'Optional', desc: 'Thumbnail width (160 / 240 / 320 / 360 / 480)', value: '480' }
       ]
     }
   ]"
 />
+
+Example: `https://download.wmc.pub/cdn/v1/img/BUDDiES/Apollo%20%5BDX%5D?w=480`. For the original jacket inside the chart package, see 3.5.
 
 ## 3. download.wmc.pub — chart resources
 
@@ -91,13 +99,17 @@ A full chart index: filter by keyword, version, chart type, genre, deleted chart
         { name: 'shortid', type: 'string', required: 'Required', desc: 'Chart ID (with leading zeros)', value: '011661' }
       ],
       response: {
-        shortid: '011661',
-        title: 'Apollo',
-        artist: 'TJ.hangneil',
-        version: 'BUDDiES',
-        bpm: 339,
-        levels: { 5: { raw: '14.7', num: 14.7 } },
-        files: [{ name: 'maidata.txt', size: 11828, url: 'https://download.wmc.pub/s/011661/maidata.txt' }]
+        chart: {
+          shortid: '011661',
+          title: 'Apollo',
+          artist: 'TJ.hangneil',
+          version: 'BUDDiES',
+          versionFolder: 'BUDDiES',
+          folderName: 'Apollo [DX]',
+          bpm: 339,
+          levels: { 5: { raw: '14.7', num: 14.7 } }
+        },
+        files: [{ name: 'maidata.txt', size: 11823, url: 'https://download.wmc.pub/s/011661/maidata.txt' }]
       }
     }
   ]"
@@ -123,7 +135,7 @@ A full chart index: filter by keyword, version, chart type, genre, deleted chart
         files: [
           {
             name: 'maidata.txt',
-            size: 11828,
+            size: 11823,
             mime: 'text/plain; charset=utf-8',
             url: 'https://download.wmc.pub/s/011661/maidata.txt',
             downloadUrl: 'https://download.wmc.pub/s/011661/maidata.txt?dl=1'
@@ -195,6 +207,8 @@ You can also address files by folder: `GET /f/<versionFolder>/<songFolder>/<file
 
 ### 3.5 Jacket preview
 
+> Verified on 2026-10-27: `/s/011661/bg.png`, `/s/011661/track.mp3` and the directory-based original-image route return **302** to `oss.awmc.cc`. Following with Node fetch and browser fetch from the Wiki, using `Range: bytes=0-31`, returned **206**, with `image/png` / `audio/mpeg` and `Access-Control-Allow-Origin: *` on the final response. `maidata.txt` returned **200** text directly; not every file redirects. Some probes (urllib HEAD / one-byte Range) triggered Cloudflare **403 / 1010**. Record the client, method and final response when diagnosing; HEAD or the initial 302 alone does not establish a failed download. For display, the thumbnail route in section 2 is also available.
+
 <ApiDemo
   baseUrl="https://download.wmc.pub"
   :isImage="true"
@@ -203,7 +217,7 @@ You can also address files by folder: `GET /f/<versionFolder>/<songFolder>/<file
       title: 'Jacket bg.png',
       method: 'GET',
       path: '/s/:shortid/bg.png',
-      description: 'The square jacket shipped inside the chart package. For the framed cover image use /cdn/v1/img/<version>/<song>?w=600.',
+      description: 'Original jacket in the chart package; check the file index for the actual filename (it may be bg.jpg). For a thumbnail see section 2: /cdn/v1/img/<version>/<song>?w=480.',
       params: [
         { name: 'shortid', type: 'string', required: 'Required', desc: 'Chart ID', value: '011661' }
       ]
@@ -237,7 +251,7 @@ You can also address files by folder: `GET /f/<versionFolder>/<songFolder>/<file
 ## 4. Usage notes
 
 - **No auth**: every endpoint above is anonymous; JSON responses and files both send `Access-Control-Allow-Origin: *`, so they can be fetched directly from a web page.
-- **Caching**: files carry `ETag` and `Cache-Control: public`; the list API supports `ETag` + 304. Cache on your side too — chart data only changes with version updates (roughly monthly).
+- **Caching and redirects**: directly served files generally carry `ETag` and `Cache-Control: public`; the list API supports `ETag` + 304. Redirect responses may use `no-store`; respect the final response headers. Keep using the public entry point rather than hard-coding an object-storage target.
 - **Rate limits**: file endpoints are limited per IP (about 600 requests/minute). For bulk work, pace yourself instead of opening hundreds of parallel connections.
-- **File formats**: images are `.png` / `.jpg`, audio is `.mp3` or `.ogg`, PV is `.mp4`, and charts are plain text `maidata.txt`.
+- **File formats**: original jackets are `.png` / `.jpg`; thumbnails may also return WebP (check `Content-Type`). Audio is `.mp3` or `.ogg`, PV is `.mp4`, and charts are plain text `maidata.txt`.
 - **Source of truth**: see [download.wmc.pub](https://download.wmc.pub) for live state. For chart preview and rating analysis, see the [Chart Preview API](/en/dev/chart-preview-api).

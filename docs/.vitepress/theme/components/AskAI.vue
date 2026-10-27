@@ -7,7 +7,7 @@ import { renderMarkdown } from '../ai/renderMarkdown'
 interface Message {
   role: 'user' | 'assistant'
   content: string
-  // 站内问答不可用时，给出「带着问题去 ChatGPT / Claude」的入口
+  // 站内问答不可用时，给出复制提问或预填至外部 AI 的入口
   fallback?: string
   error?: boolean
   // 站内问答失败的原因，显示成小字方便排查
@@ -33,6 +33,10 @@ const t = computed(() =>
         unavailable: 'The built-in assistant is unavailable right now. You can ask the same question here:',
         rateLimited: 'Too many questions, please try again in a few minutes. Or ask here:',
         open: (name: string) => `Ask in ${name}`,
+        copyOpen: (name: string) => `Copy prompt & open ${name}`,
+        promptCopied: 'Prompt copied. Paste it into the AI page; log in first if needed.',
+        promptCopyFailed: 'Could not copy automatically. Copy the text below and paste it into the AI page.',
+        manualPrompt: 'Prompt to copy manually',
         prompt: (q: string, page: string, full: string) =>
           `I have a question about AWMC (a maimai DX score-query QQ bot and related services). Please answer based on its documentation.\nCurrent page: ${page}\nFull docs: ${full}\n\nQuestion: ${q}`
       }
@@ -49,6 +53,10 @@ const t = computed(() =>
         unavailable: '站内 AI 暂时不可用，可以带着这个问题去这些地方问：',
         rateLimited: '提问太频繁了，请过几分钟再试。也可以去这些地方问：',
         open: (name: string) => `去 ${name} 问`,
+        copyOpen: (name: string) => `复制提问并打开 ${name}`,
+        promptCopied: '提问已复制，请在 AI 页面粘贴；如需登录，请先登录。',
+        promptCopyFailed: '自动复制失败，请手动复制下方内容，在 AI 页面粘贴。',
+        manualPrompt: '手动复制提问',
         prompt: (q: string, page: string, full: string) =>
           `我有一个关于 AWMC（舞萌 DX 查分 QQ 机器人及相关服务）的问题，请根据它的文档回答。\n当前页面：${page}\n完整文档：${full}\n\n问题：${q}`
       }
@@ -56,6 +64,9 @@ const t = computed(() =>
 
 const messages = ref<Message[]>([])
 const input = ref('')
+const launchState = ref<'idle' | 'copied' | 'copy_failed'>('idle')
+const manualPrompt = ref('')
+let launchSequence = 0
 const loading = ref(false)
 const listEl = ref<HTMLElement>()
 const inputEl = ref<HTMLTextAreaElement>()
@@ -77,8 +88,15 @@ function fallbackPrompt(question: string) {
   return t.value.prompt(question, markdownUrlOf(route.path), `${location.origin}/llms-full.txt`)
 }
 
-function openIn(provider: AiProvider, question: string) {
-  openInProvider(provider, fallbackPrompt(question))
+async function openIn(provider: AiProvider, question: string) {
+  const sequence = ++launchSequence
+  const prompt = fallbackPrompt(question)
+  launchState.value = 'idle'
+  manualPrompt.value = ''
+  const result = await openInProvider(provider, prompt)
+  if (sequence !== launchSequence) return
+  if (result !== 'opened') launchState.value = result
+  if (result === 'copy_failed') manualPrompt.value = prompt
 }
 
 async function ask(text?: string) {
@@ -153,8 +171,11 @@ function stop() {
 }
 
 function clear() {
+  ++launchSequence
   stop()
   messages.value = []
+  launchState.value = 'idle'
+  manualPrompt.value = ''
 }
 
 function onKeydown(e: KeyboardEvent) {
@@ -199,11 +220,16 @@ function onKeydown(e: KeyboardEvent) {
             <div v-if="m.reason" class="ask-reason">{{ m.reason }}</div>
             <div v-if="m.fallback" class="ask-fallback">
               <button v-for="p in aiProviders" :key="p.name" class="ask-text-btn" type="button" @click="openIn(p, m.fallback)">
-                {{ t.open(p.name) }} ↗
+                {{ p.mode === 'clipboard' ? t.copyOpen(p.name) : t.open(p.name) }} ↗
               </button>
             </div>
           </div>
         </div>
+      </div>
+
+      <div v-if="launchState !== 'idle'" class="ask-launch-status">
+        <p role="status">{{ launchState === 'copied' ? t.promptCopied : t.promptCopyFailed }}</p>
+        <textarea v-if="manualPrompt" :value="manualPrompt" :aria-label="t.manualPrompt" readonly rows="4" />
       </div>
 
       <form class="ask-form" @submit.prevent="ask()">
@@ -425,6 +451,24 @@ function onKeydown(e: KeyboardEvent) {
 
 .ask-text-btn:hover {
   background: var(--vp-c-brand-soft);
+}
+
+.ask-launch-status {
+  padding: 8px 16px;
+  font-size: 12px;
+  color: var(--vp-c-text-2);
+}
+
+.ask-launch-status p { margin: 0; }
+.ask-launch-status textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-1);
+  resize: vertical;
 }
 
 .ask-form {

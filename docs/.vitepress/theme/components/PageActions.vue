@@ -17,6 +17,10 @@ const t = computed(() =>
         more: 'More options',
         view: 'View as Markdown',
         open: (name: string) => `Open in ${name}`,
+        copyOpen: (name: string) => `Copy prompt & open ${name}`,
+        promptCopied: 'Prompt copied. Paste it into the AI page; log in first if needed.',
+        promptCopyFailed: 'Could not copy automatically. Copy the text below and paste it into the AI page.',
+        manualPrompt: 'Prompt to copy manually',
         prompt: (url: string) => `Read from ${url} so I can ask questions about it.`
       }
     : {
@@ -27,6 +31,10 @@ const t = computed(() =>
         more: '更多选项',
         view: '查看 Markdown 原文',
         open: (name: string) => `在 ${name} 中打开`,
+        copyOpen: (name: string) => `复制提问并打开 ${name}`,
+        promptCopied: '提问已复制，请在 AI 页面粘贴；如需登录，请先登录。',
+        promptCopyFailed: '自动复制失败，请手动复制下方内容，在 AI 页面粘贴。',
+        manualPrompt: '手动复制提问',
         prompt: (url: string) => `请阅读 ${url} ，这是 AWMC（舞萌 DX 查分机器人及相关服务）的一篇文档，接下来我会就它提问。`
       }
 )
@@ -36,6 +44,9 @@ const visible = computed(() => frontmatter.value.layout !== 'home' && frontmatte
 const menuOpen = ref(false)
 const copyState = ref<'idle' | 'copied' | 'failed'>('idle')
 const root = ref<HTMLElement>()
+const launchState = ref<'idle' | 'copied' | 'copy_failed'>('idle')
+const manualPrompt = ref('')
+let launchSequence = 0
 
 const markdownUrl = () => markdownUrlOf(route.path)
 
@@ -56,9 +67,16 @@ function viewMarkdown() {
   menuOpen.value = false
 }
 
-function openIn(provider: AiProvider) {
-  openInProvider(provider, t.value.prompt(markdownUrl()))
+async function openIn(provider: AiProvider) {
+  const sequence = ++launchSequence
+  const prompt = t.value.prompt(markdownUrl())
+  launchState.value = 'idle'
+  manualPrompt.value = ''
   menuOpen.value = false
+  const result = await openInProvider(provider, prompt)
+  if (sequence !== launchSequence) return
+  if (result !== 'opened') launchState.value = result
+  if (result === 'copy_failed') manualPrompt.value = prompt
 }
 
 function onClickOutside(e: MouseEvent) {
@@ -94,9 +112,13 @@ onUnmounted(() => document.removeEventListener('click', onClickOutside))
           <span class="pa-icon" aria-hidden="true">📄</span>{{ t.view }}<span class="pa-ext" aria-hidden="true">↗</span>
         </button>
         <button v-for="p in aiProviders" :key="p.name" class="pa-item" role="menuitem" type="button" @click="openIn(p)">
-          <span class="pa-icon" aria-hidden="true">💬</span>{{ t.open(p.name) }}<span class="pa-ext" aria-hidden="true">↗</span>
+          <span class="pa-icon" aria-hidden="true">💬</span>{{ p.mode === 'clipboard' ? t.copyOpen(p.name) : t.open(p.name) }}<span class="pa-ext" aria-hidden="true">↗</span>
         </button>
       </div>
+    </div>
+    <div v-if="launchState !== 'idle'" class="pa-launch-status">
+      <p role="status">{{ launchState === 'copied' ? t.promptCopied : t.promptCopyFailed }}</p>
+      <textarea v-if="manualPrompt" :value="manualPrompt" :aria-label="t.manualPrompt" readonly rows="4" />
     </div>
   </div>
 </template>
@@ -108,6 +130,24 @@ onUnmounted(() => document.removeEventListener('click', onClickOutside))
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
+}
+
+.pa-launch-status {
+  flex-basis: 100%;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+}
+
+.pa-launch-status p { margin: 0; }
+.pa-launch-status textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-1);
+  resize: vertical;
 }
 
 .pa-btn {

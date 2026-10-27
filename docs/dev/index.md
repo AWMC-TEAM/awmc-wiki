@@ -1,7 +1,7 @@
 ---
 apiBaseUrl: https://status.awmc.cc
 awmcApiBaseUrl: https://api.wmc.pub
-assetsApiBaseUrl: https://assets.awmc.team
+assetsApiBaseUrl: https://download.wmc.pub
 chartPreviewBaseUrl: https://v.awmc.cc
 ---
 
@@ -50,11 +50,11 @@ AWMC 已停止提供状态 API，接口不再维护，请勿接入。舞萌服�
 ## 🖼️ Assets 静态资源 API (基准地址: `{{ $frontmatter.assetsApiBaseUrl }}`)
 
 ::: info 💡 静态资源
-提供了曲绘、UI 元素等游戏相关的高清静态资源，方便在您的应用中展示。
+通过 download.wmc.pub 统一获取曲绘封面、谱面索引、单曲原始文件与打包；旧资源域名及 `/covers/:id` 不再作为接入方式。
 :::
 
 - **鉴权方式**：<Badge type="tip" text="无需鉴权" /> (公开访问)
-- **资源类型**：`.png` 格式的曲绘图。
+- **资源类型**：曲绘图片（格式以 `Content-Type` 为准）、谱面文本、音源、PV 与单曲包；批量包仍需人机验证。
 - **详细文档**：[点击查看 Assets 静态资源 API 详情](/dev/assets-api)
 
 ## 🎵 谱面预览 (入口: `{{ $frontmatter.chartPreviewBaseUrl }}`)

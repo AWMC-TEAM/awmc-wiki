@@ -1,35 +1,43 @@
 # 🖼️ Assets 静态资源 & 谱面资源 API
 
-AWMC 提供两类公开资源接口：**assets.awmc.team** 放图片等静态资源，**download.wmc.pub**（谱面下载站）放谱面的原始文件与打包。
+AWMC 的静态图片、谱面索引、原始文件与单曲打包，统一从 **[download.wmc.pub](https://download.wmc.pub)**（谱面下载站）访问。
 
-两者都**免鉴权**：`download.wmc.pub` 自 2026-09-29 起，**单曲**（maidata / 音源 / 曲绘 / PV，以及这首曲子的 zip、adx）**不再要求人机验证**，拿到链接就能下；只有版本包、全版本包、删除曲包这些大包仍要先过验证码。
+公开接口**免鉴权**：自 2026-09-29 起，**单曲**（maidata / 音源 / 曲绘 / PV，以及这首曲子的 zip、adx）**不再要求人机验证**；版本包、全版本包、删除曲包及自定义多选等批量下载仍需验证码。
 
-> 旧域名 `assets.awmc.cc` 已迁移到 **`assets.awmc.team`**，示例与集成请统一用新域名。
+> 旧资源域名已停用，不能只替换域名继续使用 `/covers/:id`；请改用下面的实际封面路径或单曲文件入口。文件请求可能重定向到对象存储 CDN，请允许跟随重定向。
+>
+> 已于 2026-10-27 对照 MaiArchive 源码与生产只读 HTTP 核验：封面、单曲信息与文件清单可访问；示例响应仅展示部分字段，文件与大小以实时清单为准。
 
 ## 1. 资源根地址
 
 | 根地址 | 内容 |
 |---|---|
-| `https://assets.awmc.team` | 曲绘等静态图片资源 |
-| `https://download.wmc.pub` | 谱面文件、谱面索引、单曲打包 |
+| `https://download.wmc.pub` | 曲绘等静态图片、谱面文件、谱面索引、单曲打包 |
 
-## 2. assets.awmc.team
+## 2. 曲绘封面
+
+封面按版本目录与曲目目录访问，不使用旧曲绘 ID 或 `.png` 后缀。目录名取自 3.1 的 `versionFolder` / `folderName`，或 3.3 的 `versionFolder` / `songFolder`；构造 URL 时分别编码每段目录名。
 
 <ApiDemo
-  baseUrl="https://assets.awmc.team"
+  baseUrl="https://download.wmc.pub"
   :isImage="true"
+  :encodePathParams="true"
   :options="[
     {
-      title: '曲绘',
+      title: '曲绘封面',
       method: 'GET',
-      path: '/covers/:id',
-      description: '获取指定 ID 的曲绘图片（需带上 .png 后缀）。',
+      path: '/cdn/v1/img/:versionFolder/:songFolder',
+      description: '获取曲目封面。w 可选，缩略图宽度会选取最接近的支持档位；实际格式以 Content-Type 为准。',
       params: [
-        { name: 'id', type: 'string', required: '必填', desc: '曲绘 ID (含后缀)', value: '0.png' }
+        { name: 'versionFolder', type: 'string', required: '必填', desc: '版本目录名', value: 'BUDDiES' },
+        { name: 'songFolder', type: 'string', required: '必填', desc: '曲目目录名', value: 'Apollo [DX]' },
+        { name: 'w', type: 'number', required: '可选', desc: '缩略图宽度（160 / 240 / 320 / 360 / 480）', value: '480' }
       ]
     }
   ]"
 />
+
+例如：`https://download.wmc.pub/cdn/v1/img/BUDDiES/Apollo%20%5BDX%5D?w=480`。谱面包内原始曲绘见 3.5。
 
 ## 3. download.wmc.pub — 谱面资源
 
@@ -94,13 +102,17 @@ AWMC 提供两类公开资源接口：**assets.awmc.team** 放图片等静态资
         { name: 'shortid', type: 'string', required: '必填', desc: '曲目 ID（含前导零）', value: '011661' }
       ],
       response: {
-        shortid: '011661',
-        title: 'Apollo',
-        artist: 'TJ.hangneil',
-        version: 'BUDDiES',
-        bpm: 339,
-        levels: { 5: { raw: '14.7', num: 14.7 } },
-        files: [{ name: 'maidata.txt', size: 11828, url: 'https://download.wmc.pub/s/011661/maidata.txt' }]
+        chart: {
+          shortid: '011661',
+          title: 'Apollo',
+          artist: 'TJ.hangneil',
+          version: 'BUDDiES',
+          versionFolder: 'BUDDiES',
+          folderName: 'Apollo [DX]',
+          bpm: 339,
+          levels: { 5: { raw: '14.7', num: 14.7 } }
+        },
+        files: [{ name: 'maidata.txt', size: 11823, url: 'https://download.wmc.pub/s/011661/maidata.txt' }]
       }
     }
   ]"
@@ -126,7 +138,7 @@ AWMC 提供两类公开资源接口：**assets.awmc.team** 放图片等静态资
         files: [
           {
             name: 'maidata.txt',
-            size: 11828,
+            size: 11823,
             mime: 'text/plain; charset=utf-8',
             url: 'https://download.wmc.pub/s/011661/maidata.txt',
             downloadUrl: 'https://download.wmc.pub/s/011661/maidata.txt?dl=1'
@@ -198,6 +210,8 @@ AWMC 提供两类公开资源接口：**assets.awmc.team** 放图片等静态资
 
 ### 3.5 曲绘预览
 
+> 2026-10-27 实测：`/s/011661/bg.png`、`/s/011661/track.mp3` 与目录形式的原图入口返回 **302**，目标为 `oss.awmc.cc`。Node fetch 及从 Wiki 页面发起的浏览器 fetch 跟随并请求 `Range: bytes=0-31` 后均得到 **206**，类型分别为 `image/png` / `audio/mpeg`，最终响应带 `Access-Control-Allow-Origin: *`；`maidata.txt` 则直接返回 **200** 文本，不是所有文件都跳转。部分客户端探测（urllib HEAD / 单字节 Range）触发了 Cloudflare **403 / 1010**，排查时应记录客户端、方法与最终响应，不能仅凭 HEAD 或首跳 302 判断下载失败。展示封面也可使用第 2 节的缩略封面入口。
+
 <ApiDemo
   baseUrl="https://download.wmc.pub"
   :isImage="true"
@@ -206,7 +220,7 @@ AWMC 提供两类公开资源接口：**assets.awmc.team** 放图片等静态资
       title: '曲绘 bg.png',
       method: 'GET',
       path: '/s/:shortid/bg.png',
-      description: '谱面包内自带的曲绘（正方形版）。想要带框的封面图可用 /cdn/v1/img/<版本>/<曲目>?w=600。',
+      description: '谱面包内原始曲绘；实际文件名以清单为准（也可能是 bg.jpg）。缩略封面见第 2 节 /cdn/v1/img/<版本>/<曲目>?w=480。',
       params: [
         { name: 'shortid', type: 'string', required: '必填', desc: '曲目 ID', value: '011661' }
       ]
@@ -240,7 +254,7 @@ AWMC 提供两类公开资源接口：**assets.awmc.team** 放图片等静态资
 ## 4. 使用说明
 
 - **无需鉴权**：以上接口都可匿名直接调用；JSON 响应与文件都带 `Access-Control-Allow-Origin: *`，可以直接在网页里 fetch。
-- **缓存**：文件带 `ETag` 与 `Cache-Control: public`，列表接口带 `ETag` + 304，建议客户端也缓存一份（曲目数据约每月随版本更新一次）。
+- **缓存与重定向**：直接返回的文件通常带 `ETag` 与 `Cache-Control: public`，列表接口支持 `ETag` + 304；跳转响应可能为 `no-store`，请以最终响应头为准。不要硬编码对象存储目标地址，继续使用本站公开入口。
 - **限流**：文件接口按 IP 限速（约 600 请求/分钟）；量大的时候请错峰、复用连接，别并发几百个。
-- **文件格式**：图片是 `.png` / `.jpg`，音源是 `.mp3` 或 `.ogg`，PV 是 `.mp4`，谱面是纯文本 `maidata.txt`。
+- **文件格式**：原始曲绘是 `.png` / `.jpg`，缩略封面还可能返回 WebP（以 `Content-Type` 为准）；音源是 `.mp3` 或 `.ogg`，PV 是 `.mp4`，谱面是纯文本 `maidata.txt`。
 - **更新来源**：页面与数据的实时状态以 [download.wmc.pub](https://download.wmc.pub) 为准；谱面预览与评价分析见 [谱面预览 API](/dev/chart-preview-api)。

@@ -1,7 +1,7 @@
 ---
 apiBaseUrl: https://status.awmc.cc
 awmcApiBaseUrl: https://api.wmc.pub
-assetsApiBaseUrl: https://assets.awmc.team
+assetsApiBaseUrl: https://download.wmc.pub
 chartPreviewBaseUrl: https://v.awmc.cc
 ---
 
@@ -51,11 +51,11 @@ score packages in one request.
 ## Assets Static Resource API (Base URL: `{{ $frontmatter.assetsApiBaseUrl }}`)
 
 ::: info Static Resources
-Provides game-related HD static resources such as jacket art and UI elements for use in your applications.
+Use download.wmc.pub for cover images, the chart index, single-chart files and packages. The old asset domains and `/covers/:id` are no longer integration endpoints.
 :::
 
 - **Authentication**: <Badge type="tip" text="No Auth Required" /> (Public access)
-- **Resource Type**: `.png` format jacket art images.
+- **Resource types**: Cover images (check `Content-Type`), chart text, audio, PV and single-chart packages; bulk packages still require human verification.
 - **Documentation**: [View Assets Static Resource API Details](/en/dev/assets-api)
 
 ## Chart Preview (Entry: `{{ $frontmatter.chartPreviewBaseUrl }}`)

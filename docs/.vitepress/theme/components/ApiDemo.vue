@@ -11,6 +11,11 @@ const props = defineProps({
     default: 'GET'
   },
   path: String,
+  // 新目录式 API 可按路径段编码；默认关闭以兼容已有 filename?dl=1 示例。
+  encodePathParams: {
+    type: Boolean,
+    default: false
+  },
   baseUrl: String,
   description: String,
   params: {
@@ -148,7 +153,8 @@ const getFullUrl = () => {
     Object.keys(paramValues.value).forEach(key => {
       // 匹配 :key
       if (url.includes(`:${key}`)) {
-        url = url.replace(`:${key}`, paramValues.value[key])
+        const rawValue = paramValues.value[key]
+        url = url.replace(`:${key}`, props.encodePathParams ? encodeURIComponent(rawValue) : rawValue)
       } else {
         if (paramsIn === 'query') query.append(key, paramValues.value[key])
       }

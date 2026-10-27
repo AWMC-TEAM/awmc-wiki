@@ -1,13 +1,41 @@
 {
   "openapi": "3.1.0",
-  "info": { "title": "AWMC Assets API", "version": "1.0.0", "description": "公开静态资源接口，无需 API Key。" },
-  "servers": [{ "url": "https://assets.awmc.cc" }],
+  "info": {
+    "title": "AWMC Assets API",
+    "version": "2.0.0",
+    "description": "公开资源统一通过 download.wmc.pub 访问，无需 API Key。目录名逐段 URL 编码；文件入口可能 302 到对象存储 CDN，请跟随重定向，不要硬编码最终地址。"
+  },
+  "servers": [{ "url": "https://download.wmc.pub" }],
   "paths": {
-    "/covers/{id}": {
+    "/cdn/v1/img/{versionFolder}/{songFolder}": {
       "get": {
-        "summary": "获取曲绘", "description": "ID 需要包含 .png 后缀。",
-        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string", "example": "0.png" } }],
-        "responses": { "200": { "description": "PNG image", "content": { "image/png": { "schema": { "type": "string", "contentEncoding": "binary" } } } }, "404": { "description": "Asset not found" } }
+        "summary": "获取曲目封面",
+        "description": "版本与曲目目录名来自谱面索引或文件清单；图片格式以 Content-Type 为准。旧 /covers/{id} 不适用。",
+        "parameters": [
+          { "name": "versionFolder", "in": "path", "required": true, "schema": { "type": "string", "example": "BUDDiES" } },
+          { "name": "songFolder", "in": "path", "required": true, "schema": { "type": "string", "example": "Apollo [DX]" } },
+          { "name": "w", "in": "query", "required": false, "description": "缩略图宽度，会选取最接近的支持档位。", "schema": { "type": "integer", "enum": [160, 240, 320, 360, 480], "example": 480 } }
+        ],
+        "responses": {
+          "200": { "description": "曲目封面", "content": { "image/jpeg": { "schema": { "type": "string", "contentEncoding": "binary" } }, "image/png": { "schema": { "type": "string", "contentEncoding": "binary" } }, "image/webp": { "schema": { "type": "string", "contentEncoding": "binary" } } } },
+          "404": { "description": "资源不存在" }
+        }
+      }
+    },
+    "/s/{shortid}/{filename}": {
+      "get": {
+        "summary": "获取单曲文件",
+        "description": "先用 /s/{shortid} 查询实际文件名。谱面文本可能直接返回，音源、曲绘等文件可能 302 到对象存储 CDN；允许跟随跳转。",
+        "parameters": [
+          { "name": "shortid", "in": "path", "required": true, "schema": { "type": "string", "example": "011661" } },
+          { "name": "filename", "in": "path", "required": true, "schema": { "type": "string", "example": "bg.png" } },
+          { "name": "dl", "in": "query", "required": false, "description": "1 表示请求下载而非预览，最终响应行为以 CDN 为准。", "schema": { "type": "integer", "enum": [1] } }
+        ],
+        "responses": {
+          "200": { "description": "文件内容" },
+          "302": { "description": "跳转至对象存储 CDN", "headers": { "Location": { "description": "文件的当前 CDN 地址", "schema": { "type": "string", "format": "uri" } } } },
+          "404": { "description": "曲目或文件不存在" }
+        }
       }
     }
   }
