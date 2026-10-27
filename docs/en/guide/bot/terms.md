@@ -153,6 +153,24 @@ We encourage **responsible consumption** - support us within your means and avoi
 
 
 
+### 7.7 BREAK Community Benefits and Official Rewards
+
+1. **Distribution arrangements**
+
+   We reserve the right to determine the recipients, eligibility requirements, form, amount, and timing of official credit rewards, community benefits, and compensation. These rewards do not constitute a general promise to all users and are subject to the applicable event rules or official arrangements.
+
+2. **Handling violations**
+
+   For users who violate this agreement, the social user agreement, or the community group communication rules, we reserve the right to decline to grant BREAK, revoke reward eligibility, and suspend or permanently ban accounts in accordance with the applicable agreements.
+
+3. **Eligibility and notifications**
+
+   Some users may not receive a particular reward because they do not meet its eligibility requirements. Unless otherwise required by applicable laws and regulations or provided in the event rules, we will not send separate individual notifications before distributing rewards, and users who do not receive a reward may not receive a separate notification either.
+
+4. **No refunds for complimentary benefits**
+
+   All amounts, balances, BREAK, credits, and feature benefits granted free of charge are non-refundable and cannot be withdrawn or redeemed for cash. This provision applies only to complimentary benefits and does not affect users' rights relating to paid benefits or any other statutory rights.
+
 ## 8. User Code of Conduct
 
 Users must not:
