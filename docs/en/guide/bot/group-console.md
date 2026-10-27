@@ -93,46 +93,11 @@ messages" — see [Adding the Bot to your group](/en/guide/bot/intro#add-to-grou
 
 | Message | Fix |
 |------|----------|
-| "Group management console is not enabled" | The server has not enabled the feature; ask a bot admin to deploy it |
+| "Group management console is not enabled" | The feature is not available yet; contact a bot admin |
 | "Please complete qbind first" | Send `qbind <QQ number>` and return the email code; if no forum identity was linked, complete `论坛绑定` OAuth before retrying |
 | "Could not confirm group management rights" | Send `后台身份` and give the returned ID to a super admin |
 | "Set arcade latitude/longitude in group management first" | Open the console, add an arcade under "Arcade queue" and fill in coordinates |
 | The link does not open or errors | Use the newest link from the bot; links are single-use and expire after 5 minutes. Resend `群管理` if needed |
-
-## 5. Deployment Notes (for admins)
-
-The console runs as a standalone HTTP service on port `8100` by default and must be exposed
-through an HTTPS reverse proxy.
-
-```text
-MAIMAIDX_GROUP_CONSOLE_ENABLED=true
-# Public HTTPS URL, must end with /group-console
-MAIMAIDX_GROUP_CONSOLE_PUBLIC_URL=https://console.example.com/group-console
-# Bind address: 127.0.0.1 / ::1 / localhost, or explicit 0.0.0.0 behind a reverse proxy
-MAIMAIDX_GROUP_CONSOLE_HOST=127.0.0.1
-MAIMAIDX_GROUP_CONSOLE_PORT=8100
-# Fast one-time login; off by default because group links may be visible to others
-MAIMAIDX_GROUP_CONSOLE_FAST_LOGIN=false
-# Emergency super-admin token; prefer forum UID/QQ + OAuth for daily use
-MAIMAIDX_GROUP_CONSOLE_ADMIN_TOKEN=
-# Dedicated forum OAuth redirect; defaults to {PUBLIC_URL}/api/login/callback
-MAIMAIDX_GROUP_CONSOLE_OAUTH_REDIRECT=
-# Mount the admin WebUI onto the console's listener (requires MAIMAIDX_ADMIN_WEB_ENABLED):
-# when on, /maimaidx/admin (including its poll-results page) is served on 8100 and
-# the admin WebUI no longer listens separately on 8099
-MAIMAIDX_ADMIN_WEB_MOUNT_GROUP_CONSOLE=false
-# Standalone admin WebUI port when NOT mounted onto the console (default 8099)
-MAIMAIDX_ADMIN_WEB_PORT=8099
-```
-
-Related settings:
-
-- `MAIMAIDX_QUEUE_NEARCADE_TOKEN`: Nearcade search / sync token;
-- `MAIMAIDX_QUEUE_WEATHER_PROVIDER`: weather source (`openmeteo` / `qweather` / `both`);
-- `MAIMAIDX_QUEUE_WEATHER_QWEATHER_KEY` and friends: QWeather JWT settings.
-
-Console data lives under `data/group_console/`; queue and weather data are stored in
-`data/group_console/queue.db` and never run on the event-loop hot path.
 
 Related pages: [Command Reference](/en/guide/bot/advanced#_2-12-advanced-features) ·
 [Basic Tutorial](/en/guide/bot/intro) · [Sponsor](/en/sponsor)

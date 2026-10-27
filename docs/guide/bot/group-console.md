@@ -86,45 +86,11 @@ Bot 回复的链接可能被群内其他成员看到。请打开后尽快使用�
 
 | 提示 | 解决办法 |
 |------|----------|
-| 「群管理后台尚未启用」 | 服务器未开启该功能，请联系 Bot 管理员部署开启 |
+| 「群管理后台尚未启用」 | 该功能尚未开放，请联系 Bot 管理员 |
 | 提示先绑定查分 QQ / 论坛账号 | 发送 `qbind 你的QQ号` 用邮箱验证码绑定；若仍缺论坛身份，发送 `论坛绑定` 完成 OAuth |
 | 「未能确认群管理权限」 | 发送 `后台身份`，把返回的身份 ID 交给超级管理员授权 |
 | 「请先在群管理设置机厅经纬度」 | 进入后台，在「机厅排卡」中添加机厅并填写经纬度 |
 | 链接打不开或报错 | 确认是从 Bot 刚返回的新链接打开；链接 5 分钟且仅一次有效，过期请重新发送 `群管理` |
-
-## 五、给部署者的配置说明
-
-群管理后台是独立监听的 Web 服务，默认端口 `8100`，必须通过 HTTPS 反向代理对外提供。
-
-```text
-# 是否启用群管理后台
-MAIMAIDX_GROUP_CONSOLE_ENABLED=true
-# 对外 HTTPS 地址，必须以 /group-console 结尾
-MAIMAIDX_GROUP_CONSOLE_PUBLIC_URL=https://console.example.com/group-console
-# 监听地址：仅允许 127.0.0.1 / ::1 / localhost，或显式 0.0.0.0（必须经反向代理）
-MAIMAIDX_GROUP_CONSOLE_HOST=127.0.0.1
-MAIMAIDX_GROUP_CONSOLE_PORT=8100
-# 快速登录（一次性链接直接登录）；默认关闭，群内链接可被其他成员看到
-MAIMAIDX_GROUP_CONSOLE_FAST_LOGIN=false
-# 超级管理员紧急登录 Token；日常建议使用论坛 UID/QQ + OAuth
-MAIMAIDX_GROUP_CONSOLE_ADMIN_TOKEN=
-# 群后台专用论坛 OAuth 回调地址；留空则使用 {PUBLIC_URL}/api/login/callback
-MAIMAIDX_GROUP_CONSOLE_OAUTH_REDIRECT=
-# 管理 WebUI 并入群后台同一监听（需同时开启 MAIMAIDX_ADMIN_WEB_ENABLED）：
-# 开启后 /maimaidx/admin（含投票结果页）也走 8100，管理 WebUI 不再单独监听 8099
-MAIMAIDX_ADMIN_WEB_MOUNT_GROUP_CONSOLE=false
-# 管理 WebUI 未并入群后台时的独立监听端口（默认 8099）
-MAIMAIDX_ADMIN_WEB_PORT=8099
-```
-
-其它相关配置：
-
-- `MAIMAIDX_QUEUE_NEARCADE_TOKEN`：Nearcade 机厅搜索 / 同步 Token；
-- `MAIMAIDX_QUEUE_WEATHER_PROVIDER`：天气数据源（`openmeteo` / `qweather` / `both`）；
-- `MAIMAIDX_QUEUE_WEATHER_QWEATHER_KEY` 等：和风天气 JWT 相关配置。
-
-群后台的数据保存在 `data/group_console/` 下，排卡与天气数据在
-`data/group_console/queue.db`，不会写入事件循环热路径。
 
 相关入口：[指令帮助](/guide/bot/advanced#_2-12-高级功能) · [使用说明](/guide/bot/intro) ·
 [赞助支持](/sponsor)

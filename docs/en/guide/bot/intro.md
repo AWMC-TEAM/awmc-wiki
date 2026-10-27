@@ -296,8 +296,8 @@ qbind 123456789
 2. Check the inbox or spam folder, then send the code directly to the Bot within **10 minutes**;
 3. The code becomes invalid after **5 wrong attempts**. If it expires or the Bot restarts, request a new code.
 
-A bare `qbind` shows instructions when email binding is enabled. Email binding
-requires the server's SMTP configuration; if unavailable, `qbind` falls back to forum OAuth.
+A bare `qbind` shows instructions when email binding is enabled. If email binding
+is unavailable, `qbind` falls back to forum OAuth; follow the Bot's prompts.
 
 ::: warning Email rate limits
 Requests are limited to once per **60 seconds** for both the platform user and the QQ email.

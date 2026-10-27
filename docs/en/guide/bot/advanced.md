@@ -375,8 +375,8 @@ jacket / audio / chart guessing in the same group.
 
 ::: warning Answer rate limit
 The same user can submit only one answer globally every **2.5 seconds**
-(猜歌 / 曲绘 / 曲子 / 铺面 / 猜 Rating / 找内鬼 / 猜群友); the interval is configurable with
-`MAIMAIDX_GUESS_ANSWER_COOLDOWN_SECONDS` (`0` disables the limit). Over limit:
+(猜歌 / 曲绘 / 曲子 / 铺面 / 猜 Rating / 找内鬼 / 猜群友); follow the Bot's prompts for the
+current interval. Over limit:
 
 `嘿嘿，你的答案被我吃掉啦！(x.x秒后才能发送新的答案）`
 :::
