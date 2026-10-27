@@ -52,14 +52,18 @@ const SCOPE_REFUSAL = '本站 AI 仅回答与 AWMC 及本站文档相关的实�
 const SCOPE_UNAVAILABLE = '暂时无法审核提问范围，请稍后重试。这不是对问题内容的拒绝。\n\nScope screening is temporarily unavailable. Please try again; your question has not been classified as off-topic.'
 
 async function checkQuestionScope(config, question, history, pagePath) {
+  let timer
   try {
+    // 不依赖部分边缘运行时未实现的 AbortSignal.timeout 静态方法。
+    const controller = new AbortController()
+    timer = setTimeout(() => controller.abort(), 15000)
     const response = await fetch(`${config.baseUrl}/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${config.apiKey}`
       },
-      signal: AbortSignal.timeout(15000),
+      signal: controller.signal,
       body: JSON.stringify({
         model: config.model,
         stream: false,
@@ -81,26 +85,32 @@ async function checkQuestionScope(config, question, history, pagePath) {
         ]
       })
     })
-    if (!response.ok) return 'unavailable'
+    if (!response.ok) return { decision: 'unavailable', reason: `upstream_http_${response.status}` }
     const result = await response.json()
     const choice = result.choices?.[0]
-    if (choice?.finish_reason && choice.finish_reason !== 'stop') return 'unavailable'
-    const decision = choice?.message?.content?.trim()
-    if (decision === 'ALLOW') return 'allow'
-    if (decision === 'REFUSE') return 'refuse'
-    return 'unavailable'
-  } catch {
-    // 超时或判定失败仍不放行，但不能冒充模型明确拒答。
-    return 'unavailable'
+    if (choice?.finish_reason && choice.finish_reason !== 'stop') {
+      return { decision: 'unavailable', reason: 'incomplete_output' }
+    }
+    const decision = typeof choice?.message?.content === 'string' ? choice.message.content.trim() : ''
+    if (decision === 'ALLOW') return { decision: 'allow' }
+    if (decision === 'REFUSE') return { decision: 'refuse' }
+    return { decision: 'unavailable', reason: 'invalid_output' }
+  } catch (error) {
+    // 只返回脱敏错误类别，不泄露密钥、上游响应正文或用户内容。
+    const reason = error?.name === 'AbortError' ? 'timeout' : 'request_error'
+    return { decision: 'unavailable', reason }
+  } finally {
+    clearTimeout(timer)
   }
 }
 
-function textResponse(content) {
+function textResponse(content, headers = {}) {
   return new Response(content, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'no-store',
-      'X-Content-Type-Options': 'nosniff'
+      'X-Content-Type-Options': 'nosniff',
+      ...headers
     }
   })
 }
@@ -131,6 +141,10 @@ export async function onRequestGet({ request, env }) {
     baseUrl,
     model,
     endpoint: `${baseUrl}/chat/completions`,
+    scopeRuntime: {
+      abortSignalTimeout: typeof globalThis.AbortSignal?.timeout === 'function',
+      abortController: typeof globalThis.AbortController === 'function'
+    },
     docs
   })
 }
@@ -185,8 +199,10 @@ export async function onRequestPost({ request, env }) {
 
   // 拒答用正常文本响应，避免前端将它当作故障并引导去其他 AI。
   const scope = await checkQuestionScope({ apiKey, baseUrl, model }, question, history, pagePath)
-  if (scope === 'refuse') return textResponse(SCOPE_REFUSAL)
-  if (scope !== 'allow') return textResponse(SCOPE_UNAVAILABLE)
+  if (scope.decision === 'refuse') return textResponse(SCOPE_REFUSAL)
+  if (scope.decision !== 'allow') {
+    return textResponse(SCOPE_UNAVAILABLE, { 'X-AWMC-Scope-Error': scope.reason })
+  }
 
   const context = await buildContext(url.origin, question, history, pagePath)
   if (!context) {

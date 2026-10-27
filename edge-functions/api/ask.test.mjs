@@ -7,10 +7,12 @@ const moduleUrl = `data:text/javascript;base64,${Buffer.from(source).toString('b
 
 async function runRequest({
     question, decision = 'REFUSE', history = [], classificationError = false, emptyDocs = false,
-    reasoningTokens = 0, finishReason = 'stop', classificationStatus = 200
+    reasoningTokens = 0, finishReason = 'stop', classificationStatus = 200, missingTimeoutApi = false
 }) {
     const { onRequestPost } = await import(`${moduleUrl}#${crypto.randomUUID()}`)
     const originalFetch = globalThis.fetch
+    const originalTimeout = AbortSignal.timeout
+    if (missingTimeoutApi) AbortSignal.timeout = undefined
     const calls = []
     globalThis.fetch = async (url, options) => {
         if (!options?.body) {
@@ -40,6 +42,7 @@ async function runRequest({
         return { response, text: await response.text(), calls }
     } finally {
         globalThis.fetch = originalFetch
+        AbortSignal.timeout = originalTimeout
     }
 }
 
@@ -92,6 +95,12 @@ for (const question of ['怎么用 bot', 'How to use b50', '怎么绑定舞萌�
     })
 }
 
+test('scope screening works without the optional AbortSignal.timeout static API', async () => {
+    const { text, calls } = await runRequest({ question: '怎么用 bot', decision: 'ALLOW', missingTimeoutApi: true })
+    assert.equal(text, '使用 `mai绑定`。')
+    assert.equal(calls.length, 2)
+})
+
 test('a truncated ALLOW is not accepted as a completed scope decision', async () => {
     const { text, calls } = await runRequest({ question: '怎么用 bot', decision: 'ALLOW', finishReason: 'length' })
     assert.match(text, /暂时无法审核/)
@@ -99,7 +108,8 @@ test('a truncated ALLOW is not accepted as a completed scope decision', async ()
 })
 
 test('upstream scope HTTP errors are reported as unavailable, not off-topic', async () => {
-    const { text, calls } = await runRequest({ question: '怎么用 bot', classificationStatus: 503 })
+    const { response, text, calls } = await runRequest({ question: '怎么用 bot', classificationStatus: 503 })
+    assert.equal(response.headers.get('X-AWMC-Scope-Error'), 'upstream_http_503')
     assert.match(text, /暂时无法审核/)
     assert.doesNotMatch(text, /不接受无关话题/)
     assert.equal(calls.length, 1)
