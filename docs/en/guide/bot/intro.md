@@ -28,6 +28,10 @@ fails, please manually recall it immediately and do not forward credentials to
 others.
 :::
 
+::: info Version and availability
+This page follows the current source code; production deployment has not been verified. Availability, prices and limits depend on deployed configuration and Bot prompts. Prices below are source-code defaults.
+:::
+
 ## 0. Quick Start
 
 Follow this order on your first use and you can query scores within five minutes:
@@ -341,8 +345,19 @@ Aliases: `查绑定qq` / `我的qbind` / `论坛绑定状态` / `论坛账号状
 
 | Command | Description |
 |---|---|
-| `qunbind` | Unbind forum/score-query QQ (aliases: `解绑qq` / `QQ解绑` / `解绑qbind` / `解绑论坛` / `论坛解绑`) |
+| `qunbind` | Quote the forum / score-query QQ unbinding fee without charging yet (aliases: `解绑qq` / `QQ解绑` / `解绑qbind` / `解绑论坛` / `论坛解绑`) |
+| `qunbind 确认` | Confirm payment and remove the score-query QQ and forum identity binding |
 | `取消论坛绑定` | Cancel an in-progress binding flow (aliases: `论坛绑定取消` / `取消qbind`) |
+
+::: warning Unbind before changing QQ
+An existing binding blocks a direct `qbind` change. Send `qunbind` for a quote, then `qunbind 确认`. Fees are counted from the **old score-query QQ** transaction history: **100 BREAK** for its first unbinding, **200 BREAK** each time thereafter, deducted from that QQ’s balance. FREEDOM and free windows do not waive this fee; insufficient balance leaves the binding intact. After unbinding, account features such as check-in and score queries require `qbind` again. `取消论坛绑定` only cancels a pending flow; it does not unbind an account.
+:::
+
+### 5. View or change your forum username
+
+Send `nickname` for your username and next allowed rename time, or `nickname <new name>` to rename it. Aliases: `论坛改名` / `修改论坛用户名` / `改论坛用户名` / `论坛用户名`. A successfully associated forum identity is required, not just a QQ mapping. This handler has no separate BREAK charge.
+
+An automatically generated username can be changed immediately for the first time; later changes are normally limited to once every 30 days. The forum’s returned limit and next allowed time take precedence. Names must contain 3–25 characters, cannot be all digits, generated usernames or platform OpenIDs, and cannot contain emoji or prohibited special characters. The forum may reject a name, for example if it is already taken. Staff accounts, OneBot users, or forums without Bot rename support must use forum account settings instead.
 
 ::: info
 In OneBot mode, the message QQ is the score-query QQ; qbind / forum OAuth is not

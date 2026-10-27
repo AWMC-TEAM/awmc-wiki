@@ -22,7 +22,7 @@ const t = computed(() =>
   en.value
     ? {
         title: 'Ask AI',
-        subtitle: 'Answers are generated from this wiki and may be inaccurate',
+        subtitle: 'AWMC docs only · No roleplay or calculations · Answers may be inaccurate',
         placeholder: 'Ask a question about AWMC…',
         send: 'Send',
         stop: 'Stop',
@@ -38,7 +38,7 @@ const t = computed(() =>
       }
     : {
         title: '问 AI',
-        subtitle: '回答基于本站文档自动生成，仅供参考',
+        subtitle: '仅限 AWMC 文档问答 · 不接受角色扮演或算数 · 仅供参考',
         placeholder: '问点关于 AWMC 的问题…',
         send: '发送',
         stop: '停止',

@@ -54,6 +54,8 @@ official Wahlap `img/MAID...png` and `req/MAID...html` links.
 |------|------|
 | `mai绑定` / `maibind` | Bind or claim a maimai DX account; interactive guide when no argument is given |
 | `mai解绑` | Unbind the maimai account; Diving Fish / Lxns upload configs are kept |
+| `qunbind` / `qunbind 确认` | Unbind score-query QQ / forum identity: request a quote, then confirm payment. Per old score-query QQ: 100 BREAK first time, 200 thereafter; FREEDOM does not waive it. Unbind before changing QQ; see [qbind](/en/guide/bot/intro#viii-forum-account-binding-qbind) |
+| `nickname [new name]` | View forum username / next rename time, or rename it; aliases `论坛改名` / `修改论坛用户名` / `改论坛用户名` / `论坛用户名`. Requires an associated forum identity; OneBot users must use forum account settings |
 | `更新pc数` | Sync PC data using a valid cache or the latest QR |
 | `不同意共享我的数据` | Disable anonymized score / Rating / trend public sharing (enabled by default) |
 | `同意共享我的数据` | Re-enable data sharing |
@@ -188,6 +190,8 @@ option text: `# 🎲 🎯 就决定是你了：第 N 个`.
 | Command | Description |
 |------|------|
 | `查歌 <keyword>` | Search by title / alias |
+| `查图` | Identify songs from cabinet photos, screenshots or jackets; aliases `识图查歌` / `图片查歌` / `截图查歌`. Attach an image, reply to one, or send it when prompted |
+| `下载曲目 <song ID>` | Return available ZIP / ADX / chart / audio links from the download site; aliases `下载谱面` / `search download`. Reports missing songs or connection failures |
 | `定数查歌 <constant>` | Search by constant |
 | `等级查歌 <level>` | Search by level, e.g. `等级查歌 13+` |
 | `谱式查歌 <SD/DX>` | Search by chart type; `标准` / `dx` spellings also work |
@@ -207,6 +211,12 @@ option text: `# 🎲 🎯 就决定是你了：第 N 个`.
 | `来个<level>` | Random song at a level |
 | `来个dx<level>` / `来个sd<level>` | Random DX / standard song |
 | `来个<difficulty><level>` | Random song with difficulty and level, e.g. `来个紫14+` |
+
+::: warning Image lookup and download limits
+Image lookup accepts PNG / JPEG / WebP up to 12 MiB, with an 8-second per-user cooldown. Uncertain results return candidates. A confident result generates song details using search billing: default **1 BREAK feature fee + 1 BREAK image fee**. Daily-first-query, FREEDOM and other exemptions follow the Bot settlement; it is not unconditionally free.
+
+Both commands obey the group search switch and are blocked during guessing games. The download handler currently has no separate charge. Recognition is for reference only.
+:::
 
 ::: tip Song-search quick line
 The `查歌` intro image is followed by a **quick line** listing artist / charter / category /
@@ -696,6 +706,8 @@ samples it silently falls back to your personal baseline.
 |------|------|
 | `群聊rating排行榜` | In-group Rating ranking |
 | `群吃分榜` / `群寸止榜` / `群锁血榜` | In-group leaderboards |
+| `我的群吃分榜 [days]` | Your in-group Rating-gain position and up to five members on each side; aliases `我的吃分榜` / `我的群内吃分榜`. Defaults to 7 days, clamped to 1–90 (e.g. `我的群吃分榜 30`). Requires a group score-query QQ mapping, the score feature enabled, and storage enabled with at least two snapshots in the period |
+| `boss` / `Boss` / `BOSS` / `全服boss` / `全服Boss` / `全服BOSS` | Group-only, no-argument server-wide guessing Boss overview; available to regular users when enabled. Disabled by source default, not evidence of a live release |
 | `开启mai猜歌` / `关闭mai猜歌` | **Group admin**: toggle guessing |
 | `开启狼人杀` / `关闭狼人杀` | **Group admin**: toggle Werewolf (shares the guessing switch) |
 | `开启phi` / `关闭phi` | **Group admin**: toggle Phigros lookup (see [Phigros](/en/guide/bot/phigros)) |
@@ -703,6 +715,10 @@ samples it silently falls back to your personal baseline.
 | `排卡帮助` / `排卡教程` | View arcade queue-card feature usage |
 | `排卡列表` | View configured arcade queue-card lists |
 | `小游戏权限不再提醒 <revision>` | **Owner / group admin**: stop the official-QQ "mini-game permission" reminder with the revision from the latest reminder (alias `游戏权限不再提醒`) |
+
+::: info Server-wide Boss availability
+Both the Boss feature and automatic settlement are disabled by source default (`raid_enabled=0`, `raid_auto_settle=0`). When disabled, the Bot replies “全服 Boss 暂未开放”. The overview handler has no separate charge. Reward availability and settlement follow actual Bot announcements and prompts; automatic rewards must not be assumed enabled.
+:::
 
 ::: tip Mini-game permissions on the official QQ
 To start mini-games (guessing, Guess the Member, Werewolf, …) in an official QQ group, the
