@@ -13,7 +13,7 @@ Every page has an **✨ Ask AI** button in the bottom-right corner (doc pages al
 ::: tip Scope
 The built-in AI only answers practical questions directly related to AWMC and the services documented here. Unrelated topics, casual chat, roleplay, calculations, and general-purpose writing, translation or coding tasks are refused—even when mixed with a valid question or AWMC keywords. Asking how a command, pricing rule or chart-import procedure works is supported.
 
-Requests are screened before an answer is generated. Failed or uncertain screening does not allow generation, and refusals do not offer external-AI fallback buttons. The assistant also does not generate an answer without available documentation.
+Requests are screened before an answer is generated. Failed or uncertain screening does not allow generation; it asks you to retry instead of calling your question off-topic. Neither explicit refusals nor screening failures offer external-AI fallback buttons. The assistant also does not generate an answer without available documentation.
 :::
 
 ::: warning Note

@@ -49,7 +49,9 @@ const SCOPE_PROMPT = `你是 AWMC 文档问答的范围审核器，不是聊天�
 
 const SCOPE_REFUSAL = '本站 AI 仅回答与 AWMC 及本站文档相关的实际问题；不接受无关话题、角色扮演、算数或其他代做任务。\n\nThis AI can only answer practical questions about AWMC and this wiki; unrelated topics, roleplay, calculations and other general-purpose tasks are not supported.'
 
-async function isQuestionInScope(config, question, history, pagePath) {
+const SCOPE_UNAVAILABLE = '暂时无法审核提问范围，请稍后重试。这不是对问题内容的拒绝。\n\nScope screening is temporarily unavailable. Please try again; your question has not been classified as off-topic.'
+
+async function checkQuestionScope(config, question, history, pagePath) {
   try {
     const response = await fetch(`${config.baseUrl}/chat/completions`, {
       method: 'POST',
@@ -62,7 +64,8 @@ async function isQuestionInScope(config, question, history, pagePath) {
         model: config.model,
         stream: false,
         temperature: 0,
-        max_tokens: 16,
+        // 推理模型会把 reasoning tokens 计入额度；16 会在输出判定前耗尽。
+        max_tokens: 512,
         messages: [
           { role: 'system', content: SCOPE_PROMPT },
           {
@@ -78,12 +81,17 @@ async function isQuestionInScope(config, question, history, pagePath) {
         ]
       })
     })
-    if (!response.ok) return false
+    if (!response.ok) return 'unavailable'
     const result = await response.json()
-    return result.choices?.[0]?.message?.content?.trim() === 'ALLOW'
+    const choice = result.choices?.[0]
+    if (choice?.finish_reason && choice.finish_reason !== 'stop') return 'unavailable'
+    const decision = choice?.message?.content?.trim()
+    if (decision === 'ALLOW') return 'allow'
+    if (decision === 'REFUSE') return 'refuse'
+    return 'unavailable'
   } catch {
-    // 超时、判定失败或格式不符都不放行，不回退为通用聊天。
-    return false
+    // 超时或判定失败仍不放行，但不能冒充模型明确拒答。
+    return 'unavailable'
   }
 }
 
@@ -176,9 +184,9 @@ export async function onRequestPost({ request, env }) {
     : ''
 
   // 拒答用正常文本响应，避免前端将它当作故障并引导去其他 AI。
-  if (!(await isQuestionInScope({ apiKey, baseUrl, model }, question, history, pagePath))) {
-    return textResponse(SCOPE_REFUSAL)
-  }
+  const scope = await checkQuestionScope({ apiKey, baseUrl, model }, question, history, pagePath)
+  if (scope === 'refuse') return textResponse(SCOPE_REFUSAL)
+  if (scope !== 'allow') return textResponse(SCOPE_UNAVAILABLE)
 
   const context = await buildContext(url.origin, question, history, pagePath)
   if (!context) {

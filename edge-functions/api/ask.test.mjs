@@ -5,7 +5,10 @@ import test from 'node:test'
 const source = await readFile(new URL('./ask.js', import.meta.url), 'utf8')
 const moduleUrl = `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`
 
-async function runRequest({ question, decision = 'REFUSE', history = [], classificationError = false, emptyDocs = false }) {
+async function runRequest({
+    question, decision = 'REFUSE', history = [], classificationError = false, emptyDocs = false,
+    reasoningTokens = 0, finishReason = 'stop', classificationStatus = 200
+}) {
     const { onRequestPost } = await import(`${moduleUrl}#${crypto.randomUUID()}`)
     const originalFetch = globalThis.fetch
     const calls = []
@@ -17,7 +20,12 @@ async function runRequest({ question, decision = 'REFUSE', history = [], classif
         calls.push(payload)
         if (payload.stream === false) {
             if (classificationError) throw new Error('offline')
-            return new Response(JSON.stringify({ choices: [{ message: { content: decision } }] }))
+            // Reproduce the real reasoning-model response: budget exhausted before a visible decision.
+            const truncated = payload.max_tokens <= reasoningTokens
+            return new Response(JSON.stringify({ choices: [{
+                message: { content: truncated ? null : decision },
+                finish_reason: truncated ? 'length' : finishReason
+            }] }), { status: classificationStatus })
         }
         return new Response('data: {"choices":[{"delta":{"content":"使用 `mai绑定`。"}}]}\n\ndata: [DONE]\n')
     }
@@ -62,7 +70,8 @@ test('approved documentation questions still stream an answer', async () => {
 for (const decision of ['', 'ALLOW because AWMC', 'allow', '{"allow":true}']) {
     test(`unexpected scope output fails closed: ${JSON.stringify(decision)}`, async () => {
         const { text, calls } = await runRequest({ question: '怎么绑定？', decision })
-        assert.match(text, /仅回答/)
+        assert.match(text, /暂时无法审核/)
+        assert.doesNotMatch(text, /不接受无关话题/)
         assert.equal(calls.length, 1)
     })
 }
@@ -70,7 +79,29 @@ for (const decision of ['', 'ALLOW because AWMC', 'allow', '{"allow":true}']) {
 test('scope service failure never falls through to generation or external AI fallback', async () => {
     const { response, text, calls } = await runRequest({ question: '怎么绑定？', classificationError: true })
     assert.equal(response.status, 200)
-    assert.match(text, /仅回答/)
+    assert.match(text, /暂时无法审核/)
+    assert.doesNotMatch(text, /不接受无关话题/)
+    assert.equal(calls.length, 1)
+})
+
+for (const question of ['怎么用 bot', 'How to use b50', '怎么绑定舞萌账号？']) {
+    test(`reasoning tokens leave room for a visible scope decision: ${question}`, async () => {
+        const { text, calls } = await runRequest({ question, decision: 'ALLOW', reasoningTokens: 41 })
+        assert.equal(text, '使用 `mai绑定`。')
+        assert.equal(calls.length, 2)
+    })
+}
+
+test('a truncated ALLOW is not accepted as a completed scope decision', async () => {
+    const { text, calls } = await runRequest({ question: '怎么用 bot', decision: 'ALLOW', finishReason: 'length' })
+    assert.match(text, /暂时无法审核/)
+    assert.equal(calls.length, 1)
+})
+
+test('upstream scope HTTP errors are reported as unavailable, not off-topic', async () => {
+    const { text, calls } = await runRequest({ question: '怎么用 bot', classificationStatus: 503 })
+    assert.match(text, /暂时无法审核/)
+    assert.doesNotMatch(text, /不接受无关话题/)
     assert.equal(calls.length, 1)
 })
 
