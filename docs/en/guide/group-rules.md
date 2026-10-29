@@ -1,8 +1,8 @@
 # Community Group Rules
 
 ::: tip In one line
-The AWMC x RankHub community groups are a place to talk about **maimai DX** and
-**AWMC / RankHub** services. To keep the conversation pleasant and the service running for the
+The AWMC community groups are a place to talk about **maimai DX** and
+**AWMC** services. To keep the conversation pleasant and the service running for the
 long term, please take two minutes to read the rules below.
 :::
 
@@ -145,11 +145,11 @@ The following are **strictly forbidden**; serious cases lead to immediate remova
 4. **Any detail that could affect the operation of the maimai DX China servers**;
 5. **Advertising and promotion of any kind** — third-party products, services, communities,
    sites, streams, commissions and traffic farming. What may be shared is limited to content
-   from **mainstream social platforms** and **AWMC / RankHub services**;
+   from **mainstream social platforms** and **AWMC services**;
 6. **Other services and bots of the same kind** — do not bring up other score-lookup bots,
    status sites, group-management tools or similar services in the group, in any form:
    recommending them, comparing them, reviewing them, recruiting for them or driving traffic to
-   them. The group is for using and troubleshooting AWMC / RankHub itself;
+   them. The group is for using and troubleshooting AWMC itself;
 7. **DM solicitation** — advertising, group invites or sales sent to members in private
    messages count as advertising;
 8. **Other people's account credentials** — `SGWCMAID`, official QR links, score-fetcher
