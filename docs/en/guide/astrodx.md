@@ -175,34 +175,54 @@ AstroDX stores scores and offsets by **folder path**. Renaming, moving or deleti
 after import loses its records.
 :::
 
-## 4. Importing a whole version / many songs
+## 4. Importing a version / all versions / many songs {#batch-import}
 
-"批量下载" (bulk download) on the site packs a version, all versions, or a hand-picked selection
+"批量下载" (bulk download) on the site downloads a version, all versions, or a hand-picked selection
 ("自定义下载歌曲"). Bulk downloads require a captcha.
 
-A bulk pack is **one big archive containing one small package per song**:
+### 1. What you get
 
-- with **ADX** you get `舞萌DX 2024.adx` containing many `[DX] Title.adx` files;
-- with **ZIP** you get `舞萌DX 2024.zip` containing many `[DX] Title.zip` files.
+- **One version**: one **version pack** named after the version, e.g. `BUDDiES.adx` / `BUDDiES.zip`;
+- **All versions**: not one giant file but **one version pack per version** — over twenty of them. The
+  download dialog lists every pack: "全部开始下载" (start all) makes the browser download them one by one
+  (allow "download multiple files" when asked), or "复制全部链接" (copy all links) to paste into IDM / aria2 / Motrix;
+- **Hand-picked selection**: one archive with the songs you picked.
 
-To import:
+Each version pack is **one archive containing one small package per song**:
 
-1. Rename the outer `舞萌DX 2024.adx` to `舞萌DX 2024.zip` (not needed for ZIP) and extract it anywhere on your phone;
-2. **Tap each inner `.adx` → open with AstroDX**; for inner `.zip` files, use Method 2 for each one.
+- with **ADX**, `BUDDiES.adx` contains many `[DX] Title.adx` files;
+- with **ZIP**, `BUDDiES.zip` contains many `[DX] Title.zip` files.
 
-On iPhone / iPad:
-
-1. In Files, rename the outer `舞萌DX 2024.adx` to `舞萌DX 2024.zip` (turn on "Show All Filename
-   Extensions" first if you can't see extensions — see the [FAQ](#ios-rename)), then **tap** it to extract;
-2. Open the extracted folder, "⋯ → Select → Select All", and **move** every `[DX] Title.adx` into
-   "On My iPhone → `AstroDX`" in one go;
-3. Open AstroDX and let the progress bar install the whole batch.
-
-::: warning Note
-The outer pack **cannot be opened by AstroDX directly** — it is an archive of packages, not a
-structure AstroDX understands. A version can be hundreds of MB to several GB (more with video), so
-check free space and use Wi-Fi.
+::: warning Don't use mobile data
+All versions with background video is over 30 GB, without video still 7–8 GB; a single version is
+hundreds of MB to several GB. Use Wi-Fi or a wired connection and check free space (extracting needs a second copy).
 :::
+
+### 2. Extract them in bulk
+
+The outer version pack **cannot be opened by AstroDX directly** — extract it first to get the per-song packages.
+
+::: tip Rename .adx version packs first
+An `.adx` is really a `.zip`. 7-Zip / Bandizip on a PC open it as is, but **phones and macOS's built-in
+unzip need the extension changed to `.zip`** (e.g. `BUDDiES.adx` → `BUDDiES.zip`). ZIP packs need no renaming.
+:::
+
+- **Windows**: select all the packs → right-click → 7-Zip "Extract to \*\\" (Bandizip: "Extract to each folder");
+  each pack goes into its own folder;
+- **macOS**: rename `.adx` to `.zip`, select all and double-click; or use Keka / The Unarchiver directly;
+- **iPhone / iPad**: in Files, rename each `.adx` pack to `.zip` (turn on "Show All Filename Extensions" first —
+  see the [FAQ](#ios-rename)), then **tap each one** to extract into a folder of the same name;
+- **Android**: install [ZArchiver](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver), rename `.adx`
+  packs to `.zip`, long-press to select them all → "Extract to ./name/".
+
+### 3. Import into AstroDX
+
+You now have one `[DX] Title.adx` (or `.zip`) per song; import them like single songs:
+
+- **Android**: **tap each `.adx` → open with AstroDX**; for `.zip` files, use Method 2 for each one;
+- **iPhone / iPad**: open the extracted folder, "⋯ → Select → Select All", and **move** every `[DX] Title.adx`
+  into "On My iPhone → `AstroDX`", then open AstroDX and let the progress bar install the batch. For all
+  versions, move one version at a time and open the game after each.
 
 ## 5. Category collections (collections.zip)
 
@@ -253,8 +273,8 @@ folder — its scores go with it.
 ### Download does nothing / fails halfway
 
 - Use a system browser (Chrome, Edge, Safari …), not QQ / WeChat;
-- Bulk downloads are packed on the server; "状态与健康" at the top of the site shows the queue —
-  please be patient at peak times;
+- Version packs are normally pre-built and start right away; a version that was just updated is
+  re-packed first, and "状态与健康" at the top of the site shows the queue — please be patient;
 - Retry single songs directly; if it still fails, report it on the
   [forum](https://bbs.wmc.pub/misc/contact) with the song title and format.
 

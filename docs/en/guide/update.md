@@ -4,6 +4,15 @@ Subsequent changelogs are posted on [Afdian Updates](https://afdian.com/a/AWMC_T
 
 ## October 2026
 
+### 2026/10/29
+
+<Badge type="tip" text="Wiki update" />
+
+- **[AstroDX guide · bulk import](/en/guide/astrodx#batch-import) rewritten** — "all versions" on the download
+  site is now one version pack per version (over twenty; start all or copy the links into IDM / aria2);
+  version packs are named after the version (e.g. `BUDDiES.adx`); added bulk-extract steps for PC,
+  iPhone and Android, and a warning against using mobile data.
+
 ### 2026/10/26
 
 <Badge type="tip" text="Wiki update" />

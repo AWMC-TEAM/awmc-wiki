@@ -4,6 +4,14 @@
 
 ## 2026 年 10 月
 
+### 2026/10/29
+
+<Badge type="tip" text="Wiki 更新" />
+
+- **[AstroDX 谱面导入教程 · 批量导入](/guide/astrodx#batch-import) 重写** — 下载站的「全版本」改为每个版本一个版本包
+  （二十多个，可全部开始下载或复制链接给 IDM / aria2）；版本包的真实文件名是版本名（如 `BUDDiES.adx`）；
+  新增电脑 / iPhone / 安卓批量解压步骤，并提醒不要用手机流量下载。
+
 ### 2026/10/26
 
 <Badge type="tip" text="Wiki 更新" />
