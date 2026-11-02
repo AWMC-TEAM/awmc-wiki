@@ -246,7 +246,8 @@ export default defineConfig({
                 { text: 'Commands', link: '/en/guide/bot/commands' },
                 { text: 'Phigros Lookup', link: '/en/guide/bot/phigros' },
                 { text: 'Authorization', link: '/en/guide/bot/verify' },
-                { text: 'Group Console', link: '/en/guide/bot/group-console' }
+                { text: 'Group Console', link: '/en/guide/bot/group-console' },
+                { text: 'Status Self-check', link: '/guide/bot/botstatus' }
               ]
             },
             {

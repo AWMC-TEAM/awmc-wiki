@@ -20,9 +20,20 @@ Users must still confirm the operation summary and risks before submission. See 
 
 - The command prefix is determined by the platform configuration; this page writes no `/` by default.
 - Account and upload flows reference the triggering message; since the original message containing sensitive credentials is recalled first, group chat results use `@user` markers instead.
-- Interactive flows generally support `取消`, `cancel`, `q`, or `退出` to cancel.
+- Interactive flows generally support `取消`, `cancel`, `q`, `退出`, or `00` to cancel.
 - QR codes, official QR links, and Tokens are all sensitive credentials; the Bot tries to recall them first.
 - External calls generate a `Ref_ID`; if something goes wrong, provide it to an admin instead of sending a Token or UID.
+
+## AI Image Generation
+
+| Command | Description |
+|---|---|
+| `画图 <description>` | Text-to-image; costs 358 BREAK by default; failed runs refund the pre-charge |
+| `画图 <description> -p` / `--reference` | Image-to-image: send the command, then send a reference image when prompted |
+| `画图 <description> -q auto` | Specify the quality parameter; currently only `auto` is supported |
+
+In official QQ group chats you can directly send `@机器人 画图 <description>`; a reference image can also be attached to the same message.
+Prompts are at most 4000 characters and reference images default to at most 8 MB, supporting PNG, JPEG, WebP, and GIF. Content moderation runs before generation: illegal, politically sensitive, or minor-sexual requests are not charged; reference images still go through the safety checks.
 
 ## 2. Agreement & Account
 
@@ -35,7 +46,7 @@ Users must still confirm the operation summary and risks before submission. See 
 | `mai账号` | View the account feature help |
 | `mai绑定` / `maibind` | Interactive bind or claim of a maimai account |
 | `mai绑定 <QR code or link>` | Submit and bind in one step |
-| `mai解绑` | Unbind the maimai account; upload Tokens are kept |
+| `mai解绑` | Unbind the maimai account; also unbinds Diving Fish/Lxns inside this Bot (only AWMC NET scores remain); reply "确认删除" to confirm |
 | `mai状态` / `mymai` | View full account status; re-asks for the QR code when the cache is stale |
 | `舞萌状态` / `mais` | Server failure-rate line chart + live status (see [Command Help](/en/guide/bot/advanced#_1-1-help-info)) |
 | `maiping` | Check AWMC API connectivity |
@@ -66,10 +77,12 @@ https://wq.wahlap.net/qrcode/img/MAID....png
 https://wq.wahlap.net/qrcode/req/MAID....html
 ```
 
-All API commands that use account QR credentials check the cache lifetime
-(**QR generation time + 10 minutes**). When the cache expires, stale credentials are never
-reused; send the latest SGWCMAID, official QR link, or QR image, and re-run the original
-command after verification refresh succeeds.
+All API commands that use account QR credentials check credential state: a QR
+code itself lives only **10 minutes** (generation time + 600 seconds) and is
+**single-use by default** — it is voided as soon as any operation consumes it.
+Expired or already-used credentials are never reused; send the latest SGWCMAID,
+official QR link, or QR image, and continue the original operation after the
+verification refresh succeeds.
 
 The Bot re-asks at most 3 times when credentials are invalid, expired, return
 500/empty, or the identity does not match.
@@ -78,7 +91,7 @@ Admins can tune the QR-related live configuration with `BREAK配置`; the common
 
 | Key | Description |
 |---|---|
-| `one_time_qrcode` | `1` = **single-use QR**: each QR serves exactly one command that needs it, later commands require a new one (default `0`, reused for 10 minutes) |
+| `one_time_qrcode` | `1` = **single-use (default)**: one QR serves exactly one operation that needs it, then a new one must be sent; `0` = reuse the cache within 600 seconds (no longer supported upstream, rollback switch only) |
 | `qrcode_freeze_enabled` / `qrcode_freeze_seconds` | Freeze a user after 3 consecutive QR failures, and for how long |
 | `checkin_cooldown_mode` | Check-in cooldown: default `24h`; set it to `daily` to restore the old 00:00 reset |
 
@@ -106,7 +119,7 @@ both. Failures, timeouts, and cancellations are never charged.
 ### QR-free quick updates & automatic updates {#quick-update}
 
 ::: warning Version and prerequisites
-This describes the current QueryBot source and requires a Bot release plus an upstream service supporting rival reads; it does not certify that every deployment has these features. Prices, durations, and capacity are configurable; follow the live Bot's prompts.
+This describes the current QueryBot source and requires a Bot release plus an upstream service supporting rival reads; it does not certify that every deployment has these features. Switches and frequency are configurable; follow the live Bot's prompts.
 Bind your maimai account with `mai绑定` first. For Diving Fish or Lxns uploads, complete `dfbind` / `lxbind` OAuth binding; Token-only bindings are not used by this quick-update path.
 :::
 
@@ -114,27 +127,29 @@ Bind your maimai account with `mai绑定` first. For Diving Fish or Lxns uploads
 |---|---|
 | `mai对手同步` / `rival同步` | Read the bound account's scores without a new QR; sync AWMCNET and any OAuth-bound trackers |
 | `导` / `u` / `更` / `更新` | Same action when the entire message is this shortcut; ignored during group games, so use the full command instead |
-| `mai自动更新 [hours]` / `自动更新 [hours]` | Enable timed background updates; default 3 hours; accepts `6`, `6小时`, or `6h` |
-| `查自动更新` / `mai查自动更新` | Show remaining time, next sync, count, and latest result |
-| `自动更新关闭` / `mai自动更新关闭` | End the period early; unused time is not refunded |
 | `查任务` / `查进度` | Inspect background upload tasks; queued does not mean the external tracker has finished |
 
 - Updates merge with existing snapshots: older records are preserved and achievements are replaced only when higher. A default **300-second** user cooldown starts only after a successful sync; failed pulls, quota rejection, or empty results do not start it, so you can retry immediately.
-- **FC/FS markers and PC counts are not refreshed.** Send a fresh QR for a complete update; this path is not a full QR upload.
-- Automatic updates use the same path, normally every **15 minutes**, also constrained by the quick-update cooldown.
-- Default duration is **1–12 hours**, up to **10 users** server-wide, with one active period per user.
-- Default price is **30 BREAK/hour** (90 for 3 hours), prepaid after replying `确认`; any other reply cancels. This is not success-only per-sync billing, and early closure is not refunded.
+- **FC/FS markers and PC counts are not refreshed** (existing FC/FS is kept via local snapshots, simply not extended). Send a fresh QR for a complete update; this path is not a full QR upload.
+- Quick updates are **free** and only spend the upstream separate "no QR" allowance (default 15m=20 / 1h=60 / 5h=200, adjustable with `mai配额设置 noqr ...`); it is not affected by the server-wide quota master switch. When the allowance runs out you are rejected — retry later or just send a QR.
+- Automatic updates now happen **during score queries** (B50 and similar score-image commands); no manual start is needed and **BREAK is no longer charged per hour**: when you query your own scores and local data is older than the default 6 hours, the latest scores are pulled without a QR before rendering; if the pull fails or times out (default 20 seconds) the old data is used as usual, so the query never fails.
+- Frequency guards stack: 3 triggers per user per day by default, at least 30 minutes between attempts, only between 10:00 and 24:00, and a 30-minute circuit breaker after 3 consecutive upstream failures; only active in `beta` / `full` mode.
+- The default is **`off`**, so a default deployment does not auto-update until an admin enables it.
+- The old commands still work, but only as compatibility forms that uniformly reply "automatic updates now run during score queries": `mai自动更新` / `自动更新` / `查自动更新` / `mai查自动更新` / `自动更新关闭` / `mai自动更新关闭`. Send `u` to update right now.
+- Admins can send `自动更新状态` to view the current mode, beta percentage, stale-data threshold, today's trigger count, circuit-breaker state, and whether the no-QR allowance is sufficient. Users picked for the beta see a rainbow balance and a tip in `我的AWMC`.
 
-Admins can adjust these with `BREAK配置 <key> <value>`:
+Admins can adjust these with `BREAK配置 <key> <value>` (`auto_refresh_mode` also accepts `关` / `内测` / `全量`):
 
 | Key | Default / purpose |
 |---|---|
 | `rival_sync_cooldown_seconds` | `300`, quick-update cooldown in seconds; `0` disables it |
-| `auto_update_enabled` | `1`, global automatic-update switch |
-| `auto_update_fee_per_hour` | `30`, BREAK per hour |
-| `auto_update_default_hours` / `auto_update_max_hours` | `3` / `12`, default / maximum period |
-| `auto_update_interval_minutes` | `15`, sync interval in minutes (also constrained by cooldown) |
-| `auto_update_max_sessions` | `10`, active-user limit |
+| `auto_refresh_mode` | `off`, pre-query auto-refresh switch: `off` / `beta` (percentage rollout) / `full` (everyone) |
+| `auto_refresh_beta_percent` | `10`, rollout percentage (stable hash of the QQ number; a separate `auto_refresh_beta_users` allowlist exists) |
+| `auto_refresh_stale_hours` | `6`, only trigger when local scores are older than this many hours |
+| `auto_refresh_daily_limit` | `3`, maximum triggers per user per day |
+| `auto_refresh_active_hours` | `10-24`, allowed trigger hours (Beijing time) |
+| `auto_refresh_timeout_seconds` | `20`, maximum seconds to wait before a score query; old data is used on timeout |
+| `auto_refresh_noqr_reserve_percent` | `30`, disable automatic updates when the no-QR allowance drops below this percentage, keeping it for manual `u` |
 
 ## 4. Direct QR & PC
 
@@ -147,10 +162,8 @@ score tracker is bound, only the PC is synced.
 | `更新pc数` | Sync PC using cached or latest QR |
 | `我的pc数` | View personal PC stats |
 | `pc数 <song>` | View PC for a specific chart |
-| `pc50` | B50 sorted by PC |
-| `pca50` | Rating B50 re-sorted by PC |
-| `游玩排行50` | Top 50 most-played charts library-wide |
-| `pc排行` | All synced users ranked by total PC |
+| `pc50` | Top 50 of every chart already synced from the cabinet by play count; filter by genre or level with `术曲pc50` / `14+pc50` |
+| `pc等级 [level]` | Only the PC ranking within the given level; without a level it shows usage and quick buttons |
 
 ::: tip Developers: AWMCNET chunked sync
 When QueryBot or another server syncs a large amount of scores to AWMCNET, the
@@ -186,7 +199,7 @@ arcade results are authoritative".
 | Command | Description |
 |---|---|
 | `AWMC签到` / `签到` | Check in; available again 24 h after the last successful check-in |
-| `我的AWMC` | View BREAK, check-in streak, call stats, recent transactions, invoice success/failure rate and `returnCode=0` stats; auto-attaches the group song-guess chart in groups |
+| `我的AWMC` | View BREAK, check-in streak, call stats, recent transactions, invoice success/failure rate and `returnCode=0` stats |
 | `AWMC帮助` | View pricing and reward details |
 | `转账BREAK @用户 数量` | Transfer BREAK |
 | `BREAK抽奖 [1-1000]` | Lottery; default 2 BREAK per draw |
@@ -260,7 +273,7 @@ written as `100.5%` or `0.995` (parsed as `99.5%`).
 
 ::: danger Item mutation risk
 `mai改道具` has **not been tested on a real account** and may cause data
-corruption or irreversible consequences, especially `itemKind=4/8`. The Bot
+corruption or irreversible consequences, especially `itemKind=4` (collection). The Bot
 shows an operation summary and requires you to send "我已知晓风险" before
 executing; continuing means you accept the risk yourself. The bulk `upsert-all`
 has no user command.
@@ -399,8 +412,12 @@ The following commands are limited to the Bot's super admins or plugin admins:
 | `存储迁移 检查 <source> <target>` | Precheck data migration |
 | `存储迁移 确认 <source> <target>` | Confirm migration |
 | `存储同步` | Immediately sync the configured remote storage backend |
-| `mai配额设置 <category> <window=limit,…>` | Set shared AWMC API quota, e.g. `mai配额设置 read 15m=200,1h=600,5h=2000`; `on` / `off` toggles the global limit |
-| `自动更新列表` / `mai自动更新列表` | List server-wide automatic-update periods; append `删除 <index>` to force-close one without a refund |
+| `mai配额设置 <category> <window=limit,…>` | Set the shared AWMC API team quota; categories are `read` / `write` / `noqr` (also accepts `读取` / `写入` / `无二维码`); examples `mai配额设置 read 15m=200,1h=600,5h=2000`, `mai配额设置 noqr 15m=20,1h=60,5h=200`; `on` / `off` only toggles the read/write master switch — **noqr is metered independently and unaffected** |
+| `自动更新状态` / `mai自动更新状态` | View pre-query automatic updates: mode, beta percentage and allowlist size, stale-data threshold, daily limit, trigger window, maximum wait, whether the no-QR allowance is sufficient, circuit-breaker state, and today's trigger count |
+| `全服发放 <BREAK amount / card type duration> <reason>` | Server-wide grant of BREAK or cards; previews the recipient count first, then send `全服发放 确认 <batch id>` within 5 minutes to credit; `取消` / `查询` also exist; already-credited users are not paid twice |
+| `boss结算 [period]` | Preview and freeze the server-wide Boss settlement roster for that period; `boss结算 确认 [period]` credits; resending after an interruption resumes the payout |
+| `查图模型配置` | View or modify the image-query vision model config: `开` / `关` / `URL <address>` / `模型 <name>` / `key <secret>` / `清空` (unset fields fall back to the critique model config) |
+| `刷新更新预告` | Immediately re-fetch the official release book and refresh the update-preview cache (ignoring the once-per-day limit) |
 | `mai配额重置` | Clear every quota window's usage (with a hot reload) |
 | `更新定数表` | Rebuild rating / plate table backgrounds after a catalogue update (the Bot reminds you when signatures change) |
 

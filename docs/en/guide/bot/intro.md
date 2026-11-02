@@ -232,10 +232,8 @@ most 3 times within 3 minutes.
 | `更新pc数` | Sync PC data using a valid cache or latest QR |
 | `我的pc数` | Total PC and top 15 most-played charts |
 | `pc数 <song>` | PC data for a specific song |
-| `pc50` | B50 sorted by play count |
-| `pca50` | Rating B50 re-sorted by PC |
-| `游玩排行50` | Top 50 most-played charts library-wide |
-| `pc排行` | All synced users' PC total ranking |
+| `pc50` | Top 50 by play count across all charts already synced from the cabinet; genre or level filters such as `术曲pc50` / `14+pc50` also work |
+| `pc等级 [level]` | Show only the PC ranking within the specified level |
 
 PC data comes from the maimai account sync; score charts like `b50`, `ab50`
 still use the Diving Fish or Lxns score checker as the source.
@@ -285,8 +283,8 @@ internal interaction currency of the Bot and has no cash value.
 
 qbind binds your **score-query QQ** on the official QQ Bot. The main path verifies
 your QQ email — **no forum registration is required**. After binding you can use
-check-in, score query, B50, and other account features. The first-binding BREAK
-reward follows the server configuration and the Bot's actual reply.
+check-in, score query, B50, and other account features. The first-binding reward
+defaults to **30 BREAK** (`forum_bind_welcome_reward` hot config, `0` = no reward).
 
 ### 1. Start binding
 

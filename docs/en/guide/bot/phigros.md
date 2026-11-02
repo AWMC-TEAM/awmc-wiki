@@ -75,9 +75,11 @@ phi查分 b40
 phi查分 best19
 ```
 
-- The default output is the **B30 chart**: the φ (perfect) songs plus the top 27 scores
-  (rank, constant, accuracy, grade, suggestions), stamped with the constant-data version
-  used for that render.
+- The default output is the **B30 chart**: 3 φ (perfect) songs plus the top 33 scores
+  sorted by rks (the first 27 count toward B30, and from the 28th on they go to the
+  OVER FLOW area; rank, constant, accuracy, grade, suggestions), stamped in the chart
+  corner with the version information used for that render (theme renders show the plugin
+  version, fallback renders show the constant-data version).
 - The list length is adjustable: `phi查分 b<N>` widens the list to 33–50 rows (values below
   33 are treated as 33); `phi查分 best<N>` shows exactly N rows (1–50).
 - The attached shortcut panel has 10 buttons: B30 lookup / profile / song search / random /
@@ -150,9 +152,9 @@ The B30 lookup is charged per call and can be changed live via `BREAK配置` (ef
 
 ## 7. Data and Song Library
 
-- The song library and constants follow the upstream phi-plugin data; 328 songs are currently
+- The song library and constants follow the upstream phi-plugin data; 327 songs are currently
   included (with Chapter 9, "Dome Alone"), synced by an admin when a new dataset is
-  released. The version badge on the chart shows which constant dataset was used.
+  released. The version badge on the chart shows the version information used for this render.
 - Cover art is cached under the bot's `data/phigros/ill` directory, so it is fetched only once.
 - Rendering uses the same template as phi-plugin; if the screenshot process crashes
   transiently it retries once and otherwise falls back to the built-in renderer.

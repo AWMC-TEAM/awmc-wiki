@@ -86,7 +86,7 @@ to disable this feature. After disabling, we will no longer use your related dat
 ### 4.3 Storage Duration
 
 * Binding data is retained for **12 months**
-* Data is deleted after user unbinds (unless otherwise required by law)
+* Identity binding data is deleted after unbinding; business records such as score snapshots and BREAK transaction logs are retained as business requires (unless otherwise required by law)
 
 ### 4.4 Data Security
 

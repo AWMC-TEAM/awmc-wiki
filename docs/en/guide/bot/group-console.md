@@ -53,13 +53,18 @@ and give the returned identity ID to a super admin, who can grant you access in 
 | Module | Description |
 |------|------|
 | Group overview | Today's activity, message counts and latest activity for your groups; empty group names are filled from the platform, and "Sync group name" refreshes them manually |
-| Feature switches | Enable / disable score lookup, guessing games, Phigros lookup, BREAK, queue, account, search, play count and more per group |
+| Quiet mode | Separate switch at the top; when on, the Bot ignores every command in this group — handy for temporary suspension |
+| Feature switches | One-click enable / disable this group's query, search, score query, 底力分析, 随机推荐, 今日运势, ranking, Phigros lookup, 猜歌, Werewolf, arcade queue / weather, join verification |
+| Trigger mode | Normal / @-bot only / explicit commands only; join verification, login and binding flows are unaffected (under "@ only", in-game answers do not need @) |
+| Optional modules | Individually disable 帮你选, 趣味回复, site links, 门攻略, 你画我猜, "怎么用" replies, 节日彩蛋, 开字母, 舞萌Dle, polls, server-wide Boss, group single-song ranking, 段位表, 谱面印象, 查图识曲, AI 生图, class schedule |
 | Group statistics | BREAK income/spending, feature usage share, member message ranking and usage logs for the last 1 / 7 / 30 / 90 days |
-| Poll results | **Super-admin** feature (at `{PUBLIC_URL}/votes`): list this group's (and server-wide) polls with bar / pie charts of the votes, and close them early; the ballot detail (voter / raw input) is on the same page |
+| Poll results | **Super-admin** feature (at `{PUBLIC_URL}/group-console/votes`, super admins only): list this group's (and server-wide) polls with bar / pie charts of the votes, and close them early; the ballot detail (voter / raw input) is on the same page |
 | Arcade queue | Add, edit and delete arcades; autofill store details from Nearcade; view report history |
 | Weather | Enable daily weather digest, set push time, severe-weather alerts and subscription interval |
 | Message templates | Custom query / report / predict templates for queue cards (super admin only) |
 | Member grants | Super admins can grant a `后台身份` group management rights (30 days by default) |
+
+Trigger mode and Optional modules are saved per group; EXEMPT modules (login, binding, join verification, agreement, announcements, etc.) are unaffected by any tier.
 
 Key actions in the console are written to an audit log for traceability.
 
@@ -73,7 +78,7 @@ required; follow the links for details):
 | Toggle guessing mini-games (猜歌, 开字母, maidle, 猜群友 …) | `开启mai猜歌` / `关闭mai猜歌` | [Song Guessing](/en/guide/bot/advanced#_2-6-song-guessing) |
 | Toggle Werewolf | `开启狼人杀` / `关闭狼人杀` | [Werewolf](/en/guide/bot/advanced#_2-13-werewolf-狼人杀) |
 | Toggle Phigros lookup | `开启phi` / `关闭phi` | [Phigros](/en/guide/bot/phigros) |
-| Toggle alias push | `开启别名推送` / `关闭别名推送` | [Group Interaction Extras](/en/guide/bot/advanced#group-interaction-extras) |
+| Toggle alias push (**off by default**; the console no longer offers this switch, so enable it only via the group command; per group) | `开启别名推送` / `关闭别名推送` | [Group Interaction Extras](/en/guide/bot/advanced#group-interaction-extras) |
 | Quiz new members on join | `入群验证 开启` | [Join verification](/en/guide/bot/advanced#group-moderation) |
 | Auto-approve join requests by keyword | `自动审批 开启` + `自动审批 关键词 添加 <word>` | [Auto-approval](/en/guide/bot/advanced#group-moderation) |
 | Kick / kick and blacklist | `mai踢 @member` / `mai踢 @member -b` | [Kicking](/en/guide/bot/advanced#group-moderation) |
@@ -98,6 +103,7 @@ messages" — see [Adding the Bot to your group](/en/guide/bot/intro#add-to-grou
 | "Could not confirm group management rights" | Send `后台身份` and give the returned ID to a super admin |
 | "Set arcade latitude/longitude in group management first" | Open the console, add an arcade under "Arcade queue" and fill in coordinates |
 | The link does not open or errors | Use the newest link from the bot; links are single-use and expire after 5 minutes. Resend `群管理` if needed |
+| "Too many requests" notice | The same identity must wait at least 15 seconds between `群管理` requests |
 
 Related pages: [Command Reference](/en/guide/bot/advanced#_2-12-advanced-features) ·
 [Basic Tutorial](/en/guide/bot/intro) · [Sponsor](/en/sponsor)
