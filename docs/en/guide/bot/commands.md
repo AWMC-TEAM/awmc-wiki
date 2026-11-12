@@ -24,6 +24,10 @@ Users must still confirm the operation summary and risks before submission. See 
 - QR codes, official QR links, and Tokens are all sensitive credentials; the Bot tries to recall them first.
 - External calls generate a `Ref_ID`; if something goes wrong, provide it to an admin instead of sending a Token or UID.
 
+## Description-based song search
+
+Send **`帮我找黑白封面的东方歌`**, or `找歌 <description>` / `语义查歌 <description>`, for candidate jackets, IDs and matching evidence. Combine jacket colours/monochrome with genre, artist, BPM and level/constant filters. Free-form visual clues require prebuilt descriptions and vectors; arbitrary sentences are not guaranteed to be understood. See [Song Search](/en/guide/bot/advanced#_2-2-song-search) for examples and limits.
+
 ## AI Image Generation
 
 | Command | Description |
@@ -222,7 +226,7 @@ If the outcome is uncertain, check `查任务` before attempting issuance again.
 | `mai改成绩` / `改分 <song> <difficulty> <achievement> <DX score> [FC] [FS] [simple/pro]` | Edit scores in one line |
 | `mai删成绩` / `删成绩` / `删分` | Interactive song and difficulty selection; 50 BREAK per chart on success |
 | `mai删成绩` / `删分 <song> <difficulty>` | Delete scores in one line |
-| `mai改道具` / `改道具` | High-risk interactive item mutation; 100 BREAK per successful action |
+| `mai改道具` / `改道具` | High-risk interactive item mutation; default 100 BREAK per successful action; the prompt and affordability check both read `awmc_item_upsert_cost` |
 | `mai改道具` / `改道具 <itemKind> <itemId> <add/del>` | Prefill parameters; risk confirmation is still required |
 
 ### Bulk scores (up to 20, charged per chart)

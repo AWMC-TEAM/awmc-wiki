@@ -149,7 +149,7 @@ data corruption; you bear the risk yourself. See
 | `maievent` / `mai活动` / `舞萌活动` | Query the account's current event (2 BREAK on a successful query against the v2 upstream). ⚠️ Upstream v2-3 removed this read endpoint |
 | `mai改成绩 [song difficulty achievement DX score FC FS]` | Interactive or one-line score edit; DX score 0-5 is star/simple mode, actual score auto-selects pro mode; newline/semicolon-separated bulk up to 20 entries; 258 BREAK per successfully edited chart |
 | `mai删成绩 [song difficulty]` | Interactive or one-line score deletion; bulk supported too; 50 BREAK per successfully deleted chart |
-| `mai改道具 [itemKind itemId add/del]` | High-risk item mutation; 100 BREAK on success; bulk `upsert-all` is not exposed by the Bot |
+| `mai改道具 [itemKind itemId add/del]` | High-risk item mutation; default 100 BREAK on success (`awmc_item_upsert_cost` is hot-configurable and shown dynamically); bulk `upsert-all` is not exposed by the Bot |
 | `mai改资料` / `资料修改` / `改资料` | **Account editing hub**: one-click unlock, bulk editing, 14 profile edits and upload-session lookup (see [Command Reference](/en/guide/bot/commands#_8-account-editing-bulk-operations-v2-3)) |
 | `mai批量编辑` / `批量编辑` / `批量改` | Collect mixed-type edits and run them serially; flat **1500 BREAK for the entire batch**, charged once on the first confirmed success; paid QR continuation is not charged again; cancelling before execution is free. **Untested, strongly discouraged: up to about 30 minutes and very likely to get stuck** |
 | `mai全解锁 [music/master/remaster] [version ID]` | Unlock all music / MASTER / Re:MASTER (already-owned tracks are skipped); **1500 BREAK per successful run**. **Untested, strongly discouraged: up to about 30 minutes and very likely to get stuck** |
@@ -197,6 +197,7 @@ option text: `# 🎲 🎯 就决定是你了：第 N 个`.
 | Command | Description |
 |------|------|
 | `查歌 <keyword>` | Search by title / alias |
+| `找歌 <description>` / `帮我找<description>` / `语义查歌 <description>` | Combine jacket, genre, artist, BPM, level/constant clues; returns jackets, IDs and matching evidence |
 | `查图` | Identify songs from cabinet photos, screenshots or jackets; aliases `识图查歌` / `图片查歌` / `截图查歌`. Attach an image, reply to one, or send it when prompted |
 | `下载曲目 <song ID>` | Return available ZIP / ADX / chart / audio links from the download site; aliases `下载谱面` / `search download`. Reports missing songs or connection failures |
 | `定数查歌 <constant>` | Search by constant |
@@ -218,6 +219,24 @@ option text: `# 🎲 🎯 就决定是你了：第 N 个`.
 | `来个<level>` | Random song at a level |
 | `来个dx<level>` / `来个sd<level>` | Random DX / standard song |
 | `来个<difficulty><level>` | Random song with difficulty and level, e.g. `来个紫14+` |
+
+::: tip Remember the jacket, not the title?
+Try **`帮我找黑白封面的东方歌`** (find a Touhou song with a black-and-white jacket). No space is needed after `帮我找`.
+
+```text
+找歌 蓝色封面的东方歌 BPM 160-200
+找歌 东方 紫谱定数 13.5以上
+找歌 红色封面 钢琴
+找歌 黑白封面 不要东方
+```
+
+- Genre, jacket colour/monochrome, explicit numeric ranges, `曲师<full artist name>` and `SD` / `DX` are combined filters. Level/constant matches any difficulty unless one is specified, e.g. `紫谱` (MASTER).
+- Colour and monochrome come from real local jacket pixels, not inferred song titles. Monochrome requires mostly neutral pixels and meaningful dark/light regions; missing art never counts as evidence.
+- Free-form visual clues use precomputed jacket descriptions and embeddings. They are possible matches, not probability estimates: verify the candidate art yourself.
+- Up to 6 candidates; shared SD/DX art is normally deduplicated. Tap a title/button or send `id <number>` for details.
+- Maximum 200 characters, 8-second per-user cooldown, 2 concurrent searches. Respects the group search switch and anti-cheating during guessing games/maidle. Quoted examples in ordinary chat do not trigger this command.
+- No separate semantic-search fee is introduced. Subsequent `id` details retain normal search/image billing. On embedding failure only locally supported matches are returned; admins must first build the jacket index.
+:::
 
 ::: warning Image lookup and download limits
 Image lookup accepts PNG / JPEG / WebP up to 12 MiB, with an 8-second per-user cooldown. Uncertain results return candidates. A confident result generates song details using search billing: default **1 BREAK feature fee + 1 BREAK image fee**. Daily-first-query, FREEDOM and other exemptions follow the Bot settlement; it is not unconditionally free.
@@ -326,6 +345,8 @@ before starting. Group 1 does not unlock mini-games, to keep it readable.
 
 | Command | Description |
 |------|------|
+| `结束人机验证挑战` / `重置人机验证挑战` / `结束人机挑战` / `重置人机挑战` | End the group's captcha challenge |
+| `人机验证挑战 [普通/困难/魔鬼]` / `人机挑战` / `验证码挑战` | Multiplayer visual counting quiz; default hard, arithmetic fallback if the image generator is unavailable; shares the guessing-game admission gate |
 | `猜歌` | Text guessing |
 | `猜曲绘` / `猜曲绘1`～`猜曲绘4` | Jacket guessing; specify difficulty 1-4 |
 | `猜曲子` | Audio guessing |
@@ -692,7 +713,7 @@ showing the current → target achievement and the reasoning.
 
 | Command | Description |
 |------|------|
-| `今日吃分推荐` / `吃分推荐` | Generate multi-route score-push advice (data storage must be enabled; billed as `today_gain_recommend`) |
+| `今日吃分推荐` / `吃分推荐` / `吃分推荐升级` / `多路线吃分` | Generate multi-route score-push advice (data storage must be enabled; billed as `today_gain_recommend`) |
 | `吃分换批` | Get another batch in the same session (seen charts never repeat; **no extra generation fee**) |
 | `吃分反馈 <number> <不喜欢/卡住/跳过>` | Rate; affects later filtering |
 | `吃分撤销 <number> <不喜欢/卡住/跳过>` | Undo the matching feedback in this session (other categories of the same chart are unaffected) |
@@ -907,7 +928,9 @@ answer in the group**. Timing out or using up all attempts removes the member.
 |------|------|
 | `入群验证` / `入群验证 状态` | Show this group's verification settings (aliases `群验证` / `人机验证`) |
 | `入群验证 开启` / `入群验证 关闭` | Turn verification on / off |
-| `入群验证 题目 算术` / `入群验证 题目 验证码` | Question type: arithmetic, or a 4-character code |
+| `入群验证 题目 图形` / `入群验证 题目 算术` / `入群验证 题目 验证码` | Visual counting, arithmetic or a 4-character code; new groups default to visual, saved groups retain their type |
+| `入群验证 难度 <简单/普通/困难>` | Set image challenge difficulty; arithmetic fallback if the generator is unavailable |
+| `入群验证 时限 <seconds>` / `入群验证 次数 <count>` | Answer timeout (30–600 s) and attempts (1–10) |
 | `入群验证 兼容模式 开启` / `关闭` | Compatibility mode (on by default) sends plain-text questions on every platform; turning it off may leave some clients unable to answer |
 
 - 90 seconds and 3 attempts by default; other commands from that member are ignored while verifying.
@@ -944,6 +967,38 @@ typed). When enabled, the Bot scans pending requests in the background.
 "踢我" or "踢球" are ignored. On official QQ groups the kick / blacklist APIs need Tencent's
 permission; without it a kick falls back to a 30-day mute.
 :::
+
+### 2.16 Couples and Shared Check-ins
+
+Requires agreement/account binding. Availability and prices are controlled by admin `couple_*` hot configuration.
+
+| Command | Description |
+|------|------|
+| `情侣帮助` / `情侣功能` / `情侣说明` | Full couple-feature help |
+| `绑定情侣 @user [message]` | Send an invitation; a QQ number can replace @; aliases `情侣绑定` / `情侣邀请` / `求交往` |
+| `同意绑定 [@user]` / `拒绝绑定 [@user]` | Accept/reject an invitation; specify a user when several are pending |
+| `取消邀请` | Cancel your outgoing invitation |
+| `我的情侣` / `我的对象` / `情侣信息` | Relationship duration, anniversary and shared check-ins |
+| `帮对象签到` / `代签` / `情侣代签` | Default once daily; reward belongs to the partner, who may disable proxy check-in |
+| `送对象 <amount>` | Transfer BREAK to your partner without a fee; default daily total cap 520 |
+| `纪念日 [YYYY-MM-DD]` | View/change the anniversary; one self-service edit per pair, append `确认` when prompted; old dates need admin review |
+| `情侣榜 [同心]` | Relationship-duration or shared-check-in ranking; hidden relationships are excluded |
+| `情侣设置 <option>` | `不接受邀请` / `接受邀请` / `禁止代签` / `允许代签` / `隐藏` / `公开` |
+| `解除情侣 确认` | End the relationship; default 7-day rebind cooldown for both users |
+
+Checking in on the same day grants the configured shared bonus (default 2 BREAK each); default binding cost is 0. Live configuration and confirmation prompts take precedence.
+
+### 2.17 Daily Pig Collection
+
+| Command | Description |
+|------|------|
+| `今日小猪` / `抽小猪` | View today's pig; prompts you to check in first if unclaimed, never rerolls it |
+| `我的猪圈 [page]` / `猪圈` | Owned pigs and counts |
+| `小猪图鉴 [page]` / `猪猪图鉴` | Full catalogue and collection progress |
+| `小猪排行` / `小猪榜` | Server-wide collection ranking and your position |
+| `小猪详情 <name>` | Details of a pig you have encountered, e.g. `小猪详情 小黑猪` |
+
+Included with check-in, once per Beijing calendar day. This differs from the 24-hour BREAK check-in cooldown. Repeats are allowed by default with no repeat-streak pity; admins can adjust `piggy_enabled`, `piggy_duplicate_cap_percent` and `piggy_duplicate_pity`. These viewing commands do not introduce another draw fee.
 
 ---
 

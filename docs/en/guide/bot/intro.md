@@ -50,6 +50,10 @@ Follow this order on your first use and you can query scores within five minutes
    [Group Console](/en/guide/bot/group-console) for feature switches, group stats, arcade
    queues and weather.
 
+::: tip Only remember the jacket?
+Try **`帮我找黑白封面的东方歌`** to combine jacket colour and Touhou genre clues. Results include candidate art and song IDs; tap one for details. Another example is `找歌 蓝色封面的东方歌 BPM 160-200`. Visual descriptions can be wrong; see [description-based song search](/en/guide/bot/advanced#_2-2-song-search) for limits.
+:::
+
 ## I. First-Time Setup
 
 ### 1. Read and confirm the user agreement
